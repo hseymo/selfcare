@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Fitness() {
     return (
@@ -12,6 +13,25 @@ export default function Fitness() {
                 imperdiet. Praesent euismod mi justo, faucibus scelerisque risus cursus
                 in. Sed rhoncus mollis diam, sit amet facilisis lectus blandit at.
             </p>
+            <aside>Menu
+                <ul className="nav nav-tabs">
+                    <li className="nav-item">
+                        <Link to='/'>Home</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to='/dashboard'>Dashboard</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to='/sleep'>Sleep</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to='/hydration'>Hydration</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to='/mindfulness'>Mindfulness</Link>
+                    </li>
+                </ul>
+            </aside>
         </div>
     );
 }
