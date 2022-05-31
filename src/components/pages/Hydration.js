@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default function Mindfulness() {
+export default function Hydration() {
     return (
         <div>
-            <h1>Mindfulness Page</h1>
+            <h1>Hydration Page</h1>
             <p>
                 Nunc pharetra finibus est at efficitur. Praesent sed congue diam.
                 Integer gravida dui mauris, ut interdum nunc egestas sed. Aenean sed

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import NavTabs from './NavTabs';
 import Dashboard from './pages/Dashboard';
-import Exercise from './pages/Exercise';
+import Exercise from './pages/Fitness';
 import Sleep from './pages/Sleep';
-import Water from './pages/Water';
+import Water from './pages/Hydration';
 import Mindfulness from './pages/Mindfulness'
+import Home from './pages/Home'
 
-export default function PortfolioContainer() {
+export default function SiteContainer() {
     const [currentPage, setCurrentPage] = useState('Dashboard');
 
     const renderPage = () => {
@@ -25,7 +26,7 @@ export default function PortfolioContainer() {
         if (currentPage === 'Mindfulness') {
             return <Mindfulness />;
         }
-        return <Dashboard />;
+        return <Home />;
     };
 
     const handlePageChange = (page) => setCurrentPage(page);

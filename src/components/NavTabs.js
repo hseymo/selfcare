@@ -6,21 +6,21 @@ function NavTabs({ currentPage, handlePageChange }) {
         <aside>Menu
             <ul className="nav nav-tabs">
                 <li className="nav-item">
-                    <Link to='/'>Dashboard</Link>
+                    <Link to='/dashboard'>Dashboard</Link>
                 </li>
                 <li className="nav-item">
-                    <Link to='/about'>Exercise</Link>
+                    <Link to='/fitness'>Fitness</Link>
                 </li>
                 <li className="nav-item">
-                    <Link to='/blog'>Sleep</Link>
+                    <Link to='/sleep'>Sleep</Link>
                 </li>
                 <li className="nav-item">
-                    <Link to='/contact'>Water</Link>
+                    <Link to='/hydration'>Hydration</Link>
                 </li>
                 <li className="nav-item">
-                    <Link to='/contact'>Mindfulness</Link>
+                    <Link to='/mindfulness'>Mindfulness</Link>
                 </li>
-                {loggedIn ? (
+                {/* {loggedIn ? (
                     <div>
                         <h3>Logged in as { }</h3>
                         <button type="button" onClick={() => setLoggedIn(!loggedIn)}>
@@ -34,7 +34,7 @@ function NavTabs({ currentPage, handlePageChange }) {
                             Log in
                         </button>
                     </div>
-                )}
+                )} */}
             </ul>
         </aside>
     );
