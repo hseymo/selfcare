@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 function NavTabs({ currentPage, handlePageChange }) {
@@ -20,24 +20,25 @@ function NavTabs({ currentPage, handlePageChange }) {
                 <li className="nav-item">
                     <Link to='/mindfulness'>Mindfulness</Link>
                 </li>
-                {/* {loggedIn ? (
-                    <div>
-                        <h3>Logged in as { }</h3>
-                        <button type="button" onClick={() => setLoggedIn(!loggedIn)}>
-                            Log out
-                        </button>
-                    </div>
-                ) : (
-                    <div>
-                        <h3>Please log in to continue</h3>
-                        <button type="button" onClick={() => setLoggedIn(!loggedIn)}>
-                            Log in
-                        </button>
-                    </div>
-                )} */}
             </ul>
         </aside>
     );
 }
 
 export default NavTabs;
+
+{/* {loggedIn ? (
+    <div>
+        <h3>Logged in as { }</h3>
+        <button type="button" onClick={() => setLoggedIn(!loggedIn)}>
+            Log out
+        </button>
+    </div>
+) : (
+    <div>
+        <h3>Please log in to continue</h3>
+        <button type="button" onClick={() => setLoggedIn(!loggedIn)}>
+            Log in
+        </button>
+    </div>
+)} */}
