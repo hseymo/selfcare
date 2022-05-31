@@ -8,8 +8,8 @@ import Mindfulness from './pages/Mindfulness'
 import Home from './pages/Home'
 
 export default function SiteContainer() {
-    const [currentPage, setCurrentPage] = useState('Dashboard');
-
+    const [currentPage, setCurrentPage] = useState('Home');
+    
     const renderPage = () => {
         if (currentPage === 'Dashboard') {
             return <Dashboard />;

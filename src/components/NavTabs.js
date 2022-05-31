@@ -27,18 +27,18 @@ function NavTabs({ currentPage, handlePageChange }) {
 
 export default NavTabs;
 
-{/* {loggedIn ? (
-    <div>
-        <h3>Logged in as { }</h3>
-        <button type="button" onClick={() => setLoggedIn(!loggedIn)}>
-            Log out
-        </button>
-    </div>
-) : (
-    <div>
-        <h3>Please log in to continue</h3>
-        <button type="button" onClick={() => setLoggedIn(!loggedIn)}>
-            Log in
-        </button>
-    </div>
-)} */}
+// {/* {loggedIn ? (
+//     <div>
+//         <h3>Logged in as { }</h3>
+//         <button type="button" onClick={() => setLoggedIn(!loggedIn)}>
+//             Log out
+//         </button>
+//     </div>
+// ) : (
+//     <div>
+//         <h3>Please log in to continue</h3>
+//         <button type="button" onClick={() => setLoggedIn(!loggedIn)}>
+//             Log in
+//         </button>
+//     </div>
+// )} */}
