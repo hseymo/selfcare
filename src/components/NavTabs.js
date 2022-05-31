@@ -20,8 +20,9 @@ function NavTabs({ currentPage, handlePageChange }) {
                 <li className="nav-item">
                     <Link to='/mindfulness'>Mindfulness</Link>
                 </li>
-                {/* {loggedIn ? (
+                {loggedIn ? (
                     <div>
+
                         <h3>Logged in as { }</h3>
                         <button type="button" onClick={() => setLoggedIn(!loggedIn)}>
                             Log out
@@ -30,11 +31,15 @@ function NavTabs({ currentPage, handlePageChange }) {
                 ) : (
                     <div>
                         <h3>Please log in to continue</h3>
+                        <form>
+                        <input type='email' name='email' placeholder='email...' required onSubmit={this.handleSubmit} />
+                        <input type='password' name='pwd' placeholder='password...' required onSubmit={this.handleSubmit} />
                         <button type="button" onClick={() => setLoggedIn(!loggedIn)}>
                             Log in
                         </button>
+                        </form>
                     </div>
-                )} */}
+                )}
             </ul>
         </aside>
     );
