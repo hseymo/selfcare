@@ -1,5 +1,13 @@
 import React from 'react';
+import NavTabs from '../NavTabs';
 
+const styles = {
+    navStyle: {
+        border: '2px solid black',
+        width: 'fit-content',
+        padding: '0px 10px',
+    }
+}
 export default function Mindfulness() {
     return (
         <div>
@@ -12,6 +20,9 @@ export default function Mindfulness() {
                 imperdiet. Praesent euismod mi justo, faucibus scelerisque risus cursus
                 in. Sed rhoncus mollis diam, sit amet facilisis lectus blandit at.
             </p>
+            <div style={styles.navStyle}>
+                {NavTabs({ })}
+            </div>
         </div>
     );
 }
