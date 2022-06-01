@@ -3,7 +3,7 @@ import './App.css';
 import './components/pages/header/NavTabs';
 import Home from './components/pages/Home'
 import Dashboard from './components/pages/dashboard/Dashboard';
-import Fitness from './components/pages/Fitness';
+import Fitness from './components/pages/Fitness/Fitness';
 import Sleep from './components/pages/Sleep';
 import Hydration from './components/pages/Hydration';
 import Mindfulness from './components/pages/Mindfulness';
