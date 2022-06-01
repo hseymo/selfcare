@@ -1,31 +1,54 @@
 import React from 'react';
 import './hydration.css';
 
-const styles = {
-    water: {
-        background: 'linear-gradient(#373080,#B4ADFF)',
-    }
-}
-
 export default function Hydration() {
     return (
-        <div style={styles.water}>
-            <h1>Hydration Page</h1>
-            <ul className="hydrateWeek">
-                <card>Saturday</card>
-                <br/>
-                <card>Sunday</card>
-                <br/>
-                <card>Monday</card>
-                <br/>
-                <card>Tuesday</card>
-                <br/>
-                <card>Wednesday</card>
-                <br/>
-                <card>Thursday</card>
-                <br/>
-                <card>Friday</card>
-            </ul>
+        <div className="hydration">
+            <h1>Hydration</h1>
+            <nav className="hydrateWeek">
+                <li>Saturday</li>
+                <form className="waterForm"><br />
+                    <label htmlFor="waterAmount">Input number of ounces drank today:</label><br />
+                    <input type="text" id="waterAmount" name="userWater" /><br />
+                    <input type="submit" value="Submit"></input>
+                </form>
+                <li>Sunday</li>
+                <form className="waterForm"><br />
+                    <label htmlFor="waterAmount">Input number of ounces drank today:</label><br />
+                    <input type="text" id="waterAmount" name="userWater" /><br />
+                    <input type="submit" value="Submit"></input>
+                </form>
+                <li>Monday</li>
+                <form className="waterForm"><br />
+                    <label htmlFor="waterAmount">Input number of ounces drank today:</label><br />
+                    <input type="text" id="waterAmount" name="userWater" /><br />
+                    <input type="submit" value="Submit"></input>
+                </form>
+                <li>Tuesday</li>
+                <form className="waterForm"><br />
+                    <label htmlFor="waterAmount">Input number of ounces drank today:</label><br />
+                    <input type="text" id="waterAmount" name="userWater" /><br />
+                    <input type="submit" value="Submit"></input>
+                </form>
+                <li>Wednesday</li>
+                <form className="waterForm"><br />
+                    <label htmlFor="waterAmount">Input number of ounces drank today:</label><br />
+                    <input type="text" id="waterAmount" name="userWater" /><br />
+                    <input type="submit" value="Submit"></input>
+                </form>
+                <li>Thursday</li>
+                <form className="waterForm"><br />
+                    <label htmlFor="waterAmount">Input number of ounces drank today:</label><br />
+                    <input type="text" id="waterAmount" name="userWater" /><br />
+                    <input type="submit" value="Submit"></input>
+                </form>
+                <li>Friday</li>
+                <form className="waterForm"><br />
+                    <label htmlFor="waterAmount">Input number of ounces drank today:</label><br />
+                    <input type="text" id="waterAmount" name="userWater" /><br />
+                    <input type="submit" value="Submit"></input>
+                </form>
+            </nav>
         </div>
     );
 }
