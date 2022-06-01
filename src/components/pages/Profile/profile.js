@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import "./index.css"
 
 export default function Profile() {
@@ -6,6 +6,25 @@ const [fitnessTimeGoal, setFitnessTimeGoal] = useState();
 const [fitnessFrequencyGoal, setFitnessFrequencyGoal] = useState();
 const [sleepTimeGoal, setSleepTimeGoal] = useState();
 const [hydrationGoal, setHydrationGoal] = useState();
+
+// ON PAGE LOAD FETCH REQUEST TO LOAD FROM DATABASE AND INPUT INTO EACH BOX
+
+const handleInputChange = (e) => {
+    const { target } = e;
+    const inputType = target.name;
+    const inputValue = target.value;
+
+    if (inputType === 'fitnessTimeGoal') {
+        setFitnessTimeGoal(inputValue);
+    } else if (inputType === 'fitnessFrequencyGoal') {
+        setFitnessFrequencyGoal(inputValue);
+    } else if (inputType === 'sleepTimeGoal'){
+        setSleepTimeGoal(inputValue);
+    } else if (inputType === 'hydrationGoal'){
+        setHydrationGoal(inputValue);
+    }
+  };
+
     return (
         <div className='profilePage'>
             <h1>Tell us about yourself</h1>
@@ -18,6 +37,7 @@ const [hydrationGoal, setHydrationGoal] = useState();
                     type="number"
                     min="0"
                     max="10000"
+                    onChange={handleInputChange}
                     />
                     <label> minutes per week! 🏃‍♀️ </label>
                 </div>
@@ -29,6 +49,7 @@ const [hydrationGoal, setHydrationGoal] = useState();
                     type="number"
                     min="0"
                     max="7"
+                    onChange={handleInputChange}
                     />
                     <label> days per week! 🚴 </label>
                 </div>
@@ -40,6 +61,7 @@ const [hydrationGoal, setHydrationGoal] = useState();
                     type="number"
                     min="0"
                     max="24"
+                    onChange={handleInputChange}
                     />
                     <label> hours per night! 😴 </label>
                 </div>
@@ -51,6 +73,7 @@ const [hydrationGoal, setHydrationGoal] = useState();
                     type="number"
                     min="0"
                     max="1000"
+                    onChange={handleInputChange}
                     />
                     <label> ounces of water per day! 💧</label>
                 </div>

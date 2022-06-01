@@ -10,7 +10,7 @@ export default function Home() {
             <h3>Enjoy and love yourself!</h3>
             <p> 💛 Chris, Jaden, Kalif and Haley (your website creators)</p>
 {/* dashboard redirect if logged in */}
-            <a href='/login'>Enter</a>
+            <a className='enter' href='/login'>Enter</a>
         </div>
     );
 }

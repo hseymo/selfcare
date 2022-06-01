@@ -18,10 +18,15 @@ export default function Dashboard() {
     return (
         <div className="Dashboard">
             <h1>Your Dashboard for the Week</h1>
-            <h2>Click on a category to see more!</h2>
-            <p>
+            <h2>Your Goals</h2>
+            <ul className='goalsList'>
+              <li className='goalsLi'>You said you wanted to exercise 150 minutes per week.</li>
+              <li className='goalsLi'>You said you wanted to exercise 5 days per week.</li>
+              <li className='goalsLi'>You said you wanted to sleep 7 hours per night.</li>
+              <li className='goalsLi'>You said you wanted to drink 72 oz of water per day.</li>
+            </ul>
+            <a className='goalsLink' href='/profile'>Update my goals</a>
                 {/* {result?result:''} */}
-            </p>
             <table>
         <tr>
           <th></th>
@@ -64,6 +69,7 @@ export default function Dashboard() {
           <td> {threewater} </td>
         </tr>
       </table>
+      <h3>Click on a category to see more!</h3>
         </div>
     );
 }
