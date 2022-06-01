@@ -1,5 +1,6 @@
 import React from 'react';
-import NavTabs from '../NavTabs';
+import NavTabs from './NavTabs';
+import './index.css';
 
 const styles = {
     background: 'linear-gradient(#6B1F80,#E68AFF)'
@@ -7,7 +8,7 @@ const styles = {
 
 export default function Header () {
     return (
-        <div style={styles}>
+        <div className="Header">
             <h1>SelfCareCentral</h1>
             < NavTabs />
         </div>

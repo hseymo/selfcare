@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function NavTabs(props) {
     return (
-        <aside>Menu
+        <nav>
             <ul className="nav nav-tabs">
                 {/* add conditional - if logged in, show logout else and vice versa */}
                 <li className="nav-item">
@@ -28,7 +28,7 @@ function NavTabs(props) {
                     <Link to='/mindfulness'>Mindfulness</Link>
                 </li>
             </ul>
-        </aside>
+        </nav>
     );
 }
 

@@ -1,0 +1,23 @@
+.Header {
+    padding: 50px 0px;
+    background-color: #295982;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Header h1 {
+    padding-left: 30px;
+}
+
+nav {
+    margin-right: 30px;
+  }
+  
+nav li {
+    display: inline-block;
+    padding: 5px;
+    margin: 10px;
+    text-align: center;
+  }
