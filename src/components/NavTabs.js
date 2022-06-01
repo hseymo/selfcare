@@ -20,8 +20,7 @@ function NavTabs({ currentPage, handlePageChange }) {
                 <li className="nav-item">
                     <Link to='/mindfulness'>Mindfulness</Link>
                 </li>
-<<<<<<< HEAD
-                {loggedIn ? (
+                {/* {loggedIn ? (
                     <div>
 
                         <h3>Logged in as { }</h3>
@@ -40,9 +39,7 @@ function NavTabs({ currentPage, handlePageChange }) {
                         </button>
                         </form>
                     </div>
-                )}
-=======
->>>>>>> dev
+                )} */}
             </ul>
         </aside>
     );
