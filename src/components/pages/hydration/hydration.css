@@ -2,7 +2,7 @@
     background: linear-gradient(#373080, #B4ADFF);
 }
 
-.hydration h1 {
+.hydration h1, h2, nav h2 {
     padding: 50px 0px;
     display: flex;
     flex-wrap:inherit;
