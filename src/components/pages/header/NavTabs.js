@@ -1,14 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const styles = {
-    navStyle: {
-        border: '2px solid black',
-        width: 'fit-content',
-        padding: '0px 10px',
-    }
-}
-
 function NavTabs(props) {
     return (
         <nav>
