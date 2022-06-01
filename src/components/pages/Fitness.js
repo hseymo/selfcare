@@ -1,13 +1,5 @@
 import React from 'react';
 
-const styles = {
-    navStyle: {
-        border: '2px solid black',
-        width: 'fit-content',
-        padding: '0px 10px',
-    }
-}
-
 export default function Fitness() {
     return (
         <div>

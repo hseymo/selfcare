@@ -5,10 +5,10 @@ import Home from './components/pages/Home'
 import Dashboard from './components/pages/Dashboard';
 import Fitness from './components/pages/Fitness';
 import Sleep from './components/pages/Sleep';
-import Hydration from './components/pages/Hydration';
+import Hydration from './components/pages/hydration/Hydration';
 import Mindfulness from './components/pages/Mindfulness';
 import Header from './components/pages/Header';
-import Login from './components/pages/Login'
+import Login from './components/pages/Login';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
