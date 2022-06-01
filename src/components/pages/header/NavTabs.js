@@ -16,6 +16,9 @@ function NavTabs(props) {
                     <Link to='/dashboard'>Dashboard</Link>
                 </li>
                 <li className="nav-item">
+                    <Link to='/profile'>Profile</Link>
+                </li>
+                <li className="nav-item">
                     <Link to='/fitness'>Fitness</Link>
                 </li>
                 <li className="nav-item">

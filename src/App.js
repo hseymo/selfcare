@@ -1,14 +1,15 @@
 import React from "react";
 import './App.css';
 import './components/pages/header/NavTabs';
-import Home from './components/pages/Home'
+import Home from './components/pages/home/Home'
 import Dashboard from './components/pages/dashboard/Dashboard';
 import Fitness from './components/pages/Fitness';
 import Sleep from './components/pages/Sleep';
 import Hydration from './components/pages/hydration/Hydration';
 import Mindfulness from './components/pages/Mindfulness';
 import Header from './components/pages/header/Header';
-import Login from './components/pages/Login'
+import Login from './components/pages/login/Login';
+import Profile from './components/pages/profile/Profile'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/profile' element={<Profile />} />
         <Route path='/fitness' element={<Fitness />} />
         <Route path='/sleep' element={<Sleep />} />
         <Route path='/hydration' element={<Hydration />} />

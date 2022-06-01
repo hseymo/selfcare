@@ -1,14 +1,39 @@
-
-.weekDays {
-    display: flex;
-    flex: wrap;
+* {
+    text-decoration: none;
 }
 
-.weekDays ul {
-    flex-direction: column;
+.Dashboard {
+text-align: center;
 }
 
-.weekDays li {
+.goalsList {
+    margin-bottom: 40px;
+}
+
+.goalsLi {
     list-style-type: none;
+    padding: 10px;
+}
 
+table {
+    margin: auto;
+    padding: 10px;
+    min-width: 80%;
+}
+
+tr {
+    height: 50px;
+}
+
+th {
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.goalsLink {
+    padding: 10px;
+    background-color: blue;
+    border-radius: 5px;
+    border: 5px solid navy;
+    color: white;
 }
