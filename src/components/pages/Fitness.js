@@ -1,5 +1,4 @@
 import React from 'react';
-import NavTabs from '../NavTabs';
 
 const styles = {
     navStyle: {
@@ -21,9 +20,6 @@ export default function Fitness() {
                 imperdiet. Praesent euismod mi justo, faucibus scelerisque risus cursus
                 in. Sed rhoncus mollis diam, sit amet facilisis lectus blandit at.
             </p>
-            <div style={styles.navStyle}>
-                {NavTabs({ })}
-            </div>
         </div>
     );
 }
