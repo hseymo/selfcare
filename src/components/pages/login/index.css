@@ -1,0 +1,8 @@
+.loginPageBody {
+    display: flex;
+}
+
+.signUpSection, .logInSection {
+    width: 50%;
+    text-align: center;
+}
