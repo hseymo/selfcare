@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './index.css';
 import { Link } from 'react-router-dom';
-const checkmark =require ("./assets/checkmark.png");
-const redX =require ("./assets/redX.png");
-const questionmark =require ("./assets/questionmark.png");
-const onewaterdrop =require ("./assets/water1drop.png");
-const threewaterdrops =require ("./assets/water3drops.png");
-
 // import API from '../../utils/API';
 
 export default function Dashboard() {
@@ -15,15 +9,11 @@ export default function Dashboard() {
     //     fetch("http://localhost:3001/api/sleep").then((res)=>res.json()).then((data)=>{setResult(data[1].mood_upon_wake)})
     // },[])
 
-    const checkmarkImage= <img className="checkmark" src={checkmark} width="20px"/>;
-
-    const redXImage= <img className="X" src={redX} width="20px"/>;
-
-    const questionMarkImage= <img className="questionmark" src={questionmark} width="20px"/>
-
-    const lowHydration = <img className="lowHydration" src={onewaterdrop} width="20px"/>
-
-    const goodHydration = <img className="goodHydration" src={threewaterdrops} width="20px"/>
+    const checkmark = '✅';
+    const redX= '❌';
+    const questionmark = '⁇'
+    const onewater = '💧';
+    const threewater = '💦';
 
     return (
         <div className="Dashboard">
@@ -45,35 +35,47 @@ export default function Dashboard() {
         </tr>
         <tr>
           <td className="rowHeader"><Link to='/fitness'>Fitness</Link></td>
-          <td> {checkmarkImage} </td>
-          <td> {redXImage} </td>
-          <td> {redXImage} </td>
-          <td> {redXImage} </td>
-          <td> {checkmarkImage} </td>
-          <td> {checkmarkImage} </td>
-          <td> {questionMarkImage} </td>
+          <td> {checkmark} </td>
+          <td> {redX} </td>
+          <td> {redX} </td>
+          <td> {checkmark} </td>
+          <td> {checkmark} </td>
+          <td> {questionmark} </td>
+          <td> {questionmark} </td>
         </tr>
         <tr>
           <td className="rowHeader"><Link to='/sleep'>Sleep</Link></td>
-          <td> {checkmarkImage} </td>
-          <td> {checkmarkImage} </td>
-          <td> {checkmarkImage} </td>
-          <td> {checkmarkImage} </td>
-          <td> {checkmarkImage} </td>
-          <td> {checkmarkImage} </td>
-          <td> {checkmarkImage} </td>
+          <td> {checkmark} </td>
+          <td> {checkmark} </td>
+          <td> {redX} </td>
+          <td> {checkmark} </td>
+          <td> {checkmark} </td>
+          <td> {checkmark} </td>
+          <td> {questionmark} </td>
         </tr>
         <tr>
           <td className="rowHeader"><Link to='/hydration'>Hydration</Link></td>
-          <td> {lowHydration} </td>
-          <td> {lowHydration} </td>
-          <td> {goodHydration} </td>
-          <td> {goodHydration} </td>
-          <td> {goodHydration} </td>
-          <td> {lowHydration} </td>
-          <td> {goodHydration} </td>
+          <td> {onewater} </td>
+          <td> {onewater} </td>
+          <td> {threewater} </td>
+          <td> {onewater} </td>
+          <td> {threewater} </td>
+          <td> {threewater} </td>
+          <td> {threewater} </td>
         </tr>
       </table>
         </div>
     );
 }
+
+// const checkmark =require ("./assets/checkmark.png");
+// const redX =require ("./assets/redX.png");
+// const questionmark =require ("./assets/questionmark.png");
+// const onewaterdrop =require ("./assets/water1drop.png");
+// const threewaterdrops =require ("./assets/water3drops.png");
+
+// const checkmarkImage= <img className="checkmark" src={checkmark} width="20px"/>;
+// const redXImage= <img className="X" src={redX} width="20px"/>;
+// const questionMarkImage= <img className="questionmark" src={questionmark} width="20px"/>
+// const lowHydration = <img className="lowHydration" src={onewaterdrop} width="20px"/>
+// const goodHydration = <img className="goodHydration" src={threewaterdrops} width="20px"/>

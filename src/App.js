@@ -8,7 +8,8 @@ import Sleep from './components/pages/Sleep';
 import Hydration from './components/pages/Hydration';
 import Mindfulness from './components/pages/Mindfulness';
 import Header from './components/pages/header/Header';
-import Login from './components/pages/Login'
+import Login from './components/pages/Login';
+import Profile from './components/pages/Profile/profile'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/profile' element={<Profile />} />
         <Route path='/fitness' element={<Fitness />} />
         <Route path='/sleep' element={<Sleep />} />
         <Route path='/hydration' element={<Hydration />} />
