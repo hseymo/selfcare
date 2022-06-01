@@ -1,0 +1,15 @@
+.homePage {
+text-align: center;
+}
+
+.homePage p {
+    margin-bottom: 30px;
+}
+
+.homePage a {
+    padding: 10px;
+    background-color: blue;
+    border-radius: 5px;
+    border: 5px solid navy;
+    color: white;
+}

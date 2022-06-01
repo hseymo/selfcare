@@ -1,7 +1,7 @@
 import React from "react";
 import './App.css';
 import './components/pages/header/NavTabs';
-import Home from './components/pages/Home'
+import Home from './components/pages/Home/Home'
 import Dashboard from './components/pages/dashboard/Dashboard';
 import Fitness from './components/pages/Fitness';
 import Sleep from './components/pages/Sleep';
