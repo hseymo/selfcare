@@ -1,14 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import NavTabs from '../NavTabs';
 // import API from '../../utils/API';
-
-const styles = {
-    navStyle: {
-        border: '2px solid black',
-        width: 'fit-content',
-        padding: '0px 10px',
-    }
-}
 
 export default function Dashboard() {
     const [result, setResult] = useState()
@@ -21,9 +12,6 @@ export default function Dashboard() {
             <p>
                 {result?result:''}
             </p>
-            <div style={styles.navStyle}>
-                {NavTabs({ })}
-            </div>
         </div>
     );
 }

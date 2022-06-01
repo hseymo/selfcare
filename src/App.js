@@ -7,11 +7,13 @@ import Fitness from './components/pages/Fitness';
 import Sleep from './components/pages/Sleep';
 import Hydration from './components/pages/Hydration';
 import Mindfulness from './components/pages/Mindfulness';
+import Header from './components/pages/Header';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
     <BrowserRouter>
+      <Header />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/dashboard' element={<Dashboard />} />
