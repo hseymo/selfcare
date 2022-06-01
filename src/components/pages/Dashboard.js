@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import NavTabs from '../NavTabs';
+// import API from '../../utils/API';
 
 const styles = {
     navStyle: {
@@ -10,11 +11,15 @@ const styles = {
 }
 
 export default function Dashboard() {
+    const [result, setResult] = useState()
+    useEffect(()=>{
+        fetch("http://localhost:3001/api/sleep").then((res)=>res.json()).then((data)=>{setResult(data[1].mood_upon_wake)})
+    },[])
     return (
         <div>
             <h1>Dashboard Page</h1>
             <p>
-                Wanna get fit? HERE'S HOW!
+                {result?result:''}
             </p>
             <div style={styles.navStyle}>
                 {NavTabs({ })}
