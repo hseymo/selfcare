@@ -1,0 +1,14 @@
+
+.weekDays {
+    display: flex;
+    flex: wrap;
+}
+
+.weekDays ul {
+    flex-direction: column;
+}
+
+.weekDays li {
+    list-style-type: none;
+
+}
