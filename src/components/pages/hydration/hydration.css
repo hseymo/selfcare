@@ -2,6 +2,10 @@
     background: linear-gradient(#373080, #B4ADFF);
 }
 
+.hydration h1 {
+    text-decoration: underline;
+}
+
 .hydration h1, .hydration h2, .hydration nav h2 {
     padding: 50px 0px;
     display: flex;
@@ -19,6 +23,7 @@
     font-weight:bolder;
 }
 
-form {
+.waterForm {
     display: block;
+    margin-left: 20px;
 }
