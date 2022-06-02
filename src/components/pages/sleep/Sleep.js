@@ -13,7 +13,7 @@ export default function Sleep() {
         const inputType = target.name;
         const inputValue = target.value;
 
-        if (inputType === 'sleepDate') {
+        if (inputType === Date) {
             setSleepDate(inputValue);
         } else if (inputType === 'timeAsleep') {
             setTimeAsleep(inputValue);
@@ -26,31 +26,24 @@ export default function Sleep() {
         }
     };
 
-        const handleSleepSubmit = (e) => {
-            e.preventDefault();
-    
-            console.log('sleep data submitted')
-        
-            setSleepDate('');
-            setTimeAsleep('');
-            setDiffFallingAsleep('');
-            setDiffStayingAsleep('');
-            setMoodAwake('');
-          };
-    
+    const handleSleepSubmit = (e) => {
+        e.preventDefault();
+
+        console.log('sleep data submitted')
+
+        setSleepDate('');
+        setTimeAsleep('');
+        setDiffFallingAsleep('');
+        setDiffStayingAsleep('');
+        setMoodAwake('');
+    };
+
 
     return (
-        <div>
-            <h1>Sleep Page</h1>
-            <p>
-                Nunc pharetra finibus est at efficitur. Praesent sed congue diam.
-                Integer gravida dui mauris, ut interdum nunc egestas sed. Aenean sed
-                mollis diam. Nunc aliquet risus ac finibus porta. Nam quis arcu non
-                lectus tincidunt fermentum. Suspendisse aliquet orci porta quam semper
-                imperdiet. Praesent euismod mi justo, faucibus scelerisque risus cursus
-                in. Sed rhoncus mollis diam, sit amet facilisis lectus blandit at.
-            </p>
-            <div>
+        <div className="sleep">
+            <h1>Sleep</h1>
+            <br/>
+            <nav className="sleepWeek">
                 <form className='form-horizontal'>
                     <h4>Date of sleep</h4>
                     <input
@@ -87,10 +80,10 @@ export default function Sleep() {
                         onChange={handleSleepInputChange}
                         placeholder="Rested"
                     />
-                    <button type="button"  onClick={handleSleepSubmit}>Submit</button>
+                    <button type="button" onClick={handleSleepSubmit}>Submit</button>
 
                 </form>
-            </div>
+            </nav>
         </div>
     );
 }
