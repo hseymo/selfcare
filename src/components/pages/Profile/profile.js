@@ -54,7 +54,7 @@ export default function Profile() {
                     <label> Days per week! 🚴 </label>
                 </div>
                 <div className='formGroup'>
-                    <label>I want to sleep </label>
+                    <label>I want to sleep! </label>
                     <input
                         value={sleepTimeGoal}
                         name="sleepTimeGoal"
