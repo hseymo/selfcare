@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import './index.css';
+import './home.css';
 import API from "../../../utils/API.js"
 
 export default function Home() {
