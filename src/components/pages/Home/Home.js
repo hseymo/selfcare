@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './index.css';
+import './home.css';
 
 export default function Home() {
     return (

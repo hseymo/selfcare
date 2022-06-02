@@ -1,29 +1,29 @@
-import React, {useState} from 'react';
-import "./index.css"
+import React, { useState } from 'react';
+import "./profile.css"
 
 export default function Profile() {
-const [fitnessTimeGoal, setFitnessTimeGoal] = useState();
-const [fitnessFrequencyGoal, setFitnessFrequencyGoal] = useState();
-const [sleepTimeGoal, setSleepTimeGoal] = useState();
-const [hydrationGoal, setHydrationGoal] = useState();
+    const [fitnessTimeGoal, setFitnessTimeGoal] = useState();
+    const [fitnessFrequencyGoal, setFitnessFrequencyGoal] = useState();
+    const [sleepTimeGoal, setSleepTimeGoal] = useState();
+    const [hydrationGoal, setHydrationGoal] = useState();
 
-// ON PAGE LOAD FETCH REQUEST TO LOAD FROM DATABASE AND INPUT INTO EACH BOX
+    // ON PAGE LOAD FETCH REQUEST TO LOAD FROM DATABASE AND INPUT INTO EACH BOX
 
-const handleInputChange = (e) => {
-    const { target } = e;
-    const inputType = target.name;
-    const inputValue = target.value;
+    const handleInputChange = (e) => {
+        const { target } = e;
+        const inputType = target.name;
+        const inputValue = target.value;
 
-    if (inputType === 'fitnessTimeGoal') {
-        setFitnessTimeGoal(inputValue);
-    } else if (inputType === 'fitnessFrequencyGoal') {
-        setFitnessFrequencyGoal(inputValue);
-    } else if (inputType === 'sleepTimeGoal'){
-        setSleepTimeGoal(inputValue);
-    } else if (inputType === 'hydrationGoal'){
-        setHydrationGoal(inputValue);
-    }
-  };
+        if (inputType === 'fitnessTimeGoal') {
+            setFitnessTimeGoal(inputValue);
+        } else if (inputType === 'fitnessFrequencyGoal') {
+            setFitnessFrequencyGoal(inputValue);
+        } else if (inputType === 'sleepTimeGoal') {
+            setSleepTimeGoal(inputValue);
+        } else if (inputType === 'hydrationGoal') {
+            setHydrationGoal(inputValue);
+        }
+    };
 
     return (
         <div className='profilePage'>
@@ -32,54 +32,54 @@ const handleInputChange = (e) => {
                 <div className='formGroup'>
                     <label> I want to exercise </label>
                     <input
-                    value={fitnessTimeGoal}
-                    name="fitnessTimeGoal"
-                    type="number"
-                    min="0"
-                    max="10000"
-                    onChange={handleInputChange}
+                        value={fitnessTimeGoal}
+                        name="fitnessTimeGoal"
+                        type="number"
+                        min="0"
+                        max="10000"
+                        onChange={handleInputChange}
                     />
-                    <label> minutes per week! 🏃‍♀️ </label>
+                    <label> Minutes per week! 🏃‍♀️ </label>
                 </div>
                 <div className='formGroup'>
                     <label>I want to exercise </label>
                     <input
-                    value={fitnessFrequencyGoal}
-                    name="fitnessFrequencyGoal"
-                    type="number"
-                    min="0"
-                    max="7"
-                    onChange={handleInputChange}
+                        value={fitnessFrequencyGoal}
+                        name="fitnessFrequencyGoal"
+                        type="number"
+                        min="0"
+                        max="7"
+                        onChange={handleInputChange}
                     />
-                    <label> days per week! 🚴 </label>
+                    <label> Days per week! 🚴 </label>
                 </div>
                 <div className='formGroup'>
-                    <label>I want to sleep </label>
+                    <label>I want to sleep! </label>
                     <input
-                    value={sleepTimeGoal}
-                    name="sleepTimeGoal"
-                    type="number"
-                    min="0"
-                    max="24"
-                    onChange={handleInputChange}
+                        value={sleepTimeGoal}
+                        name="sleepTimeGoal"
+                        type="number"
+                        min="0"
+                        max="24"
+                        onChange={handleInputChange}
                     />
-                    <label> hours per night! 😴 </label>
+                    <label> Hours per night! 😴 </label>
                 </div>
                 <div className='formGroup'>
-                <label>I want to drink </label>
+                    <label>I want to drink </label>
                     <input
-                    value={hydrationGoal}
-                    name="hydrationGoal"
-                    type="number"
-                    min="0"
-                    max="1000"
-                    onChange={handleInputChange}
+                        value={hydrationGoal}
+                        name="hydrationGoal"
+                        type="number"
+                        min="0"
+                        max="1000"
+                        onChange={handleInputChange}
                     />
-                    <label> ounces of water per day! 💧</label>
+                    <label> Ounces of water per day! 💧</label>
                 </div>
-                <button type="button" 
+                <button type="button"
                 >Submit</button>
-                </form>
+            </form>
         </div>
     );
 }
