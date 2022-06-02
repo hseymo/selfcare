@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import "./index.css"
+import "./login.css";
 
 export default function Login(props) {
 const [signupData, setSignupData] = useState({
