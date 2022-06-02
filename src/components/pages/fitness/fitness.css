@@ -1,49 +1,5 @@
-.fitness {
-    background: linear-gradient(#AD630E,#E6A45E);
-}
-
-.fitness h1 {
-    padding: 30px;
+card {
     display: flex;
-    flex-wrap:inherit;
+    flex-wrap: wrap;
     justify-content: space-between;
-    align-items: center;
-    justify-content: center;
-    text-decoration: underline;
-}
-
-.fitness Form, .fitness h2 {
-    padding: 0px;
-    display: flex;
-    flex-wrap:inherit;
-    justify-content: space-between;
-    align-items: center;
-    justify-content: center;
-}
-
-.fitnessDate {
-    display: flex;
-    justify-content: center;
-}
-
-.fitnessWeek {
-    display:flex;
-    padding-bottom: 30px;
-}
-
-.fitnessCards {
-    display: flex;
-    justify-content: center;
-    border: 1px solid blue;
-    margin: 2px;
-    height: fit-content;
-}
-
-.fitnessWeek h4 {
-    padding-bottom: 30px;
-}
-
-.fitnessInput {
-    padding-bottom: 5px;
-    max-width: 120px;
 }
