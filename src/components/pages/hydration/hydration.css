@@ -1,0 +1,24 @@
+.hydration {
+    background: linear-gradient(#373080, #B4ADFF);
+}
+
+.hydration h1, h2, nav h2 {
+    padding: 50px 0px;
+    display: flex;
+    flex-wrap:inherit;
+    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+}
+
+.hydrateWeek li {
+    display: flex;
+    justify-content: center;    
+    padding: 15px;
+    margin: 10px;
+    font-weight:bolder;
+}
+
+form {
+    
+}

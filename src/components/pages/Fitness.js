@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default function Hydration() {
+export default function Fitness() {
     return (
         <div>
-            <h1>Hydration Page</h1>
+            <h1>Fitness Page</h1>
             <p>
                 Nunc pharetra finibus est at efficitur. Praesent sed congue diam.
                 Integer gravida dui mauris, ut interdum nunc egestas sed. Aenean sed
