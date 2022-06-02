@@ -16,7 +16,7 @@ export default function Hydration() {
     return (
         <div className="hydration">
             <h1>Hydration</h1>
-            <h2>GOAL:<card id="storedWater"></card></h2>
+            <h2>GOAL:<div id="storedWater"></div></h2>
             <nav className="hydrateWeek">
                 <form className="waterForm"><br />
                     <input type="date" id="waterDate"/><br />
