@@ -1,12 +1,5 @@
 import React from 'react';
-
-const styles = {
-    navStyle: {
-        border: '2px solid black',
-        width: 'fit-content',
-        padding: '0px 10px',
-    }
-}
+import { Card, Button, Form } from 'react-bootstrap';
 
 export default function Fitness() {
     return (
