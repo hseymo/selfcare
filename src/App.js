@@ -3,10 +3,10 @@ import './App.css';
 import './components/pages/header/NavTabs';
 import Home from './components/pages/home/Home'
 import Dashboard from './components/pages/dashboard/Dashboard';
-import Fitness from './components/pages/Fitness/Fitness';
-import Sleep from './components/pages/Sleep';
+import Fitness from './components/pages/fitness/Fitness';
+import Sleep from './components/pages/sleep/Sleep';
 import Hydration from './components/pages/hydration/Hydration';
-import Mindfulness from './components/pages/Mindfulness';
+import Mindfulness from './components/pages/mindfulness/Mindfulness';
 import Header from './components/pages/header/Header';
 import Login from './components/pages/login/Login';
 import Profile from './components/pages/profile/Profile'
