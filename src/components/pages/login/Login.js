@@ -1,150 +1,111 @@
 import React, {useState} from 'react';
-import { checkPassword, validateEmail } from '../../../utils/helpers';
 import "./index.css"
 
-export default function SignUp() {
-    const [signUpEmail, setEmail] = useState('');
-    const [signUpFirstName, setFirstName] = useState('');
-    const [signUpLastName, setLastName] = useState('');
-    const [signUpPassword, setPassword] = useState('');
-    // const [errorMessage, setErrorMessage] = useState('');
-    const [logInEmail, setloginEmail] = useState('');
-    const [logInPassword, setloginPassword] = useState('');
+export default function Login(props) {
+const [signupData, setSignupData] = useState({
+  email:'',
+  first_name: '',
+  last_name: '',
+  password:''
+})
+const [loginData, setLoginData] = useState({
+  email:'',
+  password:''
+})
 
-    // SIGN UP
-    const handleSignUpInputChange = (e) => {
-        const { target } = e;
-        const inputType = target.name;
-        const inputValue = target.value;
-    
-        if (inputType === 'signUpEmail') {
-          setEmail(inputValue);
-        } else if (inputType === 'signUpFirstName') {
-          setFirstName(inputValue);
-        } else if (inputType === 'signUpLastName') {
-          setLastName(inputValue);
-        } else if (inputType === 'signUpPassword') {
-          setPassword(inputValue);
-        }
-      };
-
-      const handleSignUpSubmit = (e) => {
-        e.preventDefault();
-        if (!validateEmail(signUpEmail)) {
-          alert('Email is invalid');
-          return;
-        }
-        if (!checkPassword(signUpPassword)) {
-          alert(
-            `Choose a more secure password for the account`
-          );
-          return;
-        }
-        alert(`Hello ${signUpFirstName}`);
-
-        console.log('signup submitted')
-    
-        setEmail('');
-        setFirstName('');
-        setLastName('');
-        setPassword('');
-      };
-
-      // LOG IN
-      const handleLogInInputChange = (e) => {
-        const { target } = e;
-        const inputType = target.name;
-        const inputValue = target.value;
-    
-        if (inputType === 'logInEmail') {
-          setloginEmail(inputValue);
-        } else if (inputType === 'logInPassword') {
-          setloginPassword(inputValue);
-        }
-      };
-
-      const handleLogInSubmit = (e) => {
-        e.preventDefault();
-        console.log('login submitted')
-    
-        setEmail('');
-        setFirstName('');
-        setLastName('');
-        setPassword('');
-      };
+const loginSubmit = e=>{
+  e.preventDefault();
+  props.login(loginData);
+  setLoginData({
+      username:"",
+      password:""
+  })
+}
+const signupSubmit = e=>{
+  e.preventDefault();
+  props.signup(signupData);
+  setSignupData({
+    email:'',
+    first_name: '',
+    last_name: '',
+    password:''
+  })
+  console.log('clicked')
+}
 
     return (
         <div className='loginPageBody'>
             <div className="signUpSection">
             <h1>Sign Up</h1>
-                <form className="signUp">
+                <form className="signup" onSubmit={signupSubmit}>
                 <div className='formGroup'>
-                <label forHtml="signUpEmail">Email: </label>
+                <label forHtml="signupEmail">Email: </label>
                 <input
-                value={signUpEmail}
-                name="signUpEmail"
-                onChange={handleSignUpInputChange}
+                value={signupData.email}
+                name="signupEmail"
                 type="email"
                 placeholder="email"
+                onChange={(e) => setSignupData({...signupData,email:e.target.value})}
                 />
                 </div>
                 <div className='formGroup'>
-                <label forHtml="signUpFirstName">First Name: </label>
+                <label forHtml="signupFirstName">First Name: </label>
                 <input
-                value={signUpFirstName}
-                name="signUpFirstName"
-                onChange={handleSignUpInputChange}
+                value={signupData.first_name}
+                name="signupFirstName"
                 type="text"
                 placeholder="first name"
+                onChange={(e) => setSignupData({...signupData,first_name:e.target.value})}
                 />
                 </div>
                 <div className='formGroup'>
-                <label forHtml="signUpLastName">Last Name: </label>
+                <label forHtml="signupLastName">Last Name: </label>
                 <input
-                value={signUpLastName}
-                name="signUpLastName"
-                onChange={handleSignUpInputChange}
+                value={signupData.last_name}
+                name="signupLastName"
                 type="text"
                 placeholder="last name"
+                onChange={(e) => setSignupData({...signupData,last_name:e.target.value})}
                 />
                 </div>
                 <div className='formGroup'>
-                <label forHtml="signUpPassword">Password: </label>
+                <label forHtml="signppPassword">Password: </label>
                 <input
-                value={signUpPassword}
-                name="signUpPassword"
-                onChange={handleSignUpInputChange}
+                value={signupData.password}
+                name="signppPassword"
                 type="password"
                 placeholder="password"
+                onChange={(e) => setSignupData({...signupData,password:e.target.value})}
                 />
                 </div>
-                <button type="button" onClick={handleSignUpSubmit}>Submit</button>
+                <button type="submit">Submit</button>
                 </form>
             </div>
+
             <div className="logInSection">
             <h1>Login</h1>
-                <form className="logIn">
+                <form className="login" onSubmit={loginSubmit}>
                 <div className='formGroup'>
-                <label forHtml="logInEmail">Email: </label>
+                <label forHtml="loginEmail">Email: </label>
                 <input
-                value={logInEmail}
-                name="logInEmail"
-                onChange={handleLogInInputChange}
+                value={loginData.email}
+                name="loginEmail"
                 type="email"
                 placeholder='email'
+                onChange={(e) => setLoginData({...loginData,email:e.target.value})}
                 />
                 </div>
                 <div className='formGroup'>
-                <label forHtml="logInPassword">Password: </label>
+                <label forHtml="loginPassword">Password: </label>
                 <input
-                value={logInPassword}
-                name="logInPassword"
-                onChange={handleLogInInputChange}
+                value={loginData.password}
+                name="loginPassword"
                 type="password"
                 placeholder='password'
+                onChange={(e) => setLoginData({...loginData,password:e.target.value})}
                 />
                 </div>
-                <button type="button"  onClick={handleLogInSubmit}>Submit</button>
+                <button type="submit">Submit</button>
                 </form>
             </div>
             
