@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './sleep.css';
 
 export default function Sleep() {
 
@@ -42,46 +43,54 @@ export default function Sleep() {
     return (
         <div className="sleep">
             <h1>Sleep</h1>
-            <br/>
+            <br />
             <nav className="sleepWeek">
                 <form className='form-horizontal'>
-                    <h4>Date of sleep</h4>
+                    <label htmlFor='sleepDate'>Date of sleep</label>
                     <input
-                        value={sleepDate}
+                        id="sleepDay"
+                        type="date"
+                        // value={sleepDate}
                         name="sleepDate"
                         onChange={handleSleepInputChange}
-                        placeholder="Yesterday"
                     />
-                    <h4>How long did you sleep?</h4>
+                    <br/>
+                    <label htmlFor='timeAsleep'>How long did you sleep?</label>
                     <input
+                        type="text"
                         value={timeAsleep}
                         name="timeAsleep"
                         onChange={handleSleepInputChange}
                         placeholder="8 hours"
                     />
-                    <h4>Did you have difficulty falling asleep?</h4>
+                    <br />
+                    <label htmlFor='diffFallingAsleep'>Did you have difficulty falling asleep?</label>
                     <input
+                        type="text"
                         value={diffFallingAsleep}
                         name="diffFallingAsleep"
                         onChange={handleSleepInputChange}
                         placeholder="No"
                     />
-                    <h4>Did you have difficulty staying asleep?</h4>
+                    <br />
+                    <label htmlFor='diffStayingAsleep'>Did you have difficulty staying asleep?</label>
                     <input
+                        type="text"
                         value={diffStayingAsleep}
                         name="diffStayingAsleep"
                         onChange={handleSleepInputChange}
                         placeholder="No"
                     />
-                    <h4>How did you feel when you woke up?</h4>
+                    <br />
+                    <label htmlFor='moodAwake'>How did you feel when you woke up?</label>
                     <input
+                        type="text"
                         value={moodAwake}
                         name="moodAwake"
                         onChange={handleSleepInputChange}
                         placeholder="Rested"
                     />
                     <button type="button" onClick={handleSleepSubmit}>Submit</button>
-
                 </form>
             </nav>
         </div>

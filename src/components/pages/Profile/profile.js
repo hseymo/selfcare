@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import "./index.css"
+import "./profile.css"
 
 export default function Profile() {
 const [fitnessTimeGoal, setFitnessTimeGoal] = useState();
