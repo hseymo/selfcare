@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, Button, Form } from 'react-bootstrap';
 import './Exercise.css'
+import { Card, Button, Form } from 'react-bootstrap';
 
 export default function Fitness() {
     return (

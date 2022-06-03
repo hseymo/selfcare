@@ -28,12 +28,13 @@
     align-items: center;
     justify-content: center;
 }
-.fitnessCards {
+.fitnessCards.card {
     display: flex;
     justify-content: center;
     border: 1px solid blue;
     margin: 2px;
     height: fit-content;
+    flex-direction: row;
 }
 .fitnessWeek h4 {
     padding-bottom: 30px;
