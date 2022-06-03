@@ -34,7 +34,7 @@ export default function Fitness() {
             <input className="fitnessDate" type="date"></input>
             <br />
             <div className="fitnessWeek">
-                <Card className="fitnessCards" style={{ width: '18rem' }}>
+                <Card className="fitnessCards">
                     {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
                     <Card.Body>
                         <h4>Monday</h4>
@@ -45,7 +45,7 @@ export default function Fitness() {
                     </Card.Body>
                 </Card>
                 <br />
-                <Card className="fitnessCards" style={{ width: '18rem' }}>
+                <Card className="fitnessCards">
                     {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
                     <Card.Body>
                         <h4>Tuesday</h4>
@@ -56,7 +56,7 @@ export default function Fitness() {
                     </Card.Body>
                 </Card>
                 <br />
-                <Card className="fitnessCards" style={{ width: '18rem' }}>
+                <Card className="fitnessCards">
                     {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
                     <Card.Body>
                         <h4>Wednesday</h4>
@@ -67,7 +67,7 @@ export default function Fitness() {
                     </Card.Body>
                 </Card>
                 <br />
-                <Card className="fitnessCards" style={{ width: '18rem' }}>
+                <Card className="fitnessCards">
                     {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
                     <Card.Body>
                         <h4>Thursday</h4>
@@ -78,7 +78,7 @@ export default function Fitness() {
                     </Card.Body>
                 </Card>
                 <br />
-                <Card className="fitnessCards" style={{ width: '18rem' }}>
+                <Card className="fitnessCards">
                     {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
                     <Card.Body>
                         <h4>Friday</h4>
@@ -89,7 +89,7 @@ export default function Fitness() {
                     </Card.Body>
                 </Card>
                 <br />
-                <Card className="fitnessCards" style={{ width: '18rem' }}>
+                <Card className="fitnessCards">
                     {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
                     <Card.Body>
                         <h4>Saturday</h4>
@@ -100,7 +100,7 @@ export default function Fitness() {
                     </Card.Body>
                 </Card>
                 <br />
-                <Card className="fitnessCards" style={{ width: '18rem' }}>
+                <Card className="fitnessCards">
                     {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
                     <Card.Body>
                         <h4>Sunday</h4>
