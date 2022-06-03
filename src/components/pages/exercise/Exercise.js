@@ -1,13 +1,13 @@
 import React from 'react';
-import { Card, Button, Form } from 'react-bootstrap';
 import './Exercise.css'
+import { Card, Button, Form } from 'react-bootstrap';
 
 export default function Fitness() {
     return (
         <Card className="fitness">
             <h1>Exercise</h1>
             <h2>Your Goals</h2>
-            <Form>
+            <Form className="form">
                 {[''].map((type) => (
                     <Card key={`default-${type}`} className="mb-3">
                         <Form.Check
@@ -19,7 +19,7 @@ export default function Fitness() {
                 ))}
             </Form>
 
-            <Form>
+            <Form className="form">
                 {[''].map((type) => (
                     <Card key={`default-${type}`} className="mb-3">
                         <Form.Check
