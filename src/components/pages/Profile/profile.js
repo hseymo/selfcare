@@ -9,14 +9,14 @@ export default function Profile() {
     const [hydrationGoal, setHydrationGoal] = useState();
 
     // ON PAGE LOAD FETCH REQUEST TO LOAD FROM DATABASE AND INPUT INTO EACH BOX
-  
-      useEffect(() => {
-        API.getOneUser(1).then((userData)=>{
-          console.log(userData)
-          setFitnessTimeGoal(userData.goal.fitness_time);
-          setFitnessFrequencyGoal(userData.goal.fitness_frequency);
-          setSleepTimeGoal(userData.goal.sleep_time);
-          setHydrationGoal(userData.goal.hydration_oz);
+
+    useEffect(() => {
+        API.getOneUser(1).then((userData) => {
+            console.log(userData)
+            setFitnessTimeGoal(userData.goal.fitness_time);
+            setFitnessFrequencyGoal(userData.goal.fitness_frequency);
+            setSleepTimeGoal(userData.goal.sleep_time);
+            setHydrationGoal(userData.goal.hydration_oz);
         })
     }, [])
 
@@ -37,7 +37,7 @@ export default function Profile() {
     };
 
     const handleFormSubmit = (e) => {
-        
+
     }
 
     return (
