@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./profile.css"
+import API from "../../../utils/API.js"
 
 export default function Profile() {
     const [fitnessTimeGoal, setFitnessTimeGoal] = useState();
@@ -8,6 +9,16 @@ export default function Profile() {
     const [hydrationGoal, setHydrationGoal] = useState();
 
     // ON PAGE LOAD FETCH REQUEST TO LOAD FROM DATABASE AND INPUT INTO EACH BOX
+  
+      useEffect(() => {
+        API.getOneUser(1).then((userData)=>{
+          console.log(userData)
+          setFitnessTimeGoal(userData.goal.fitness_time);
+          setFitnessFrequencyGoal(userData.goal.fitness_frequency);
+          setSleepTimeGoal(userData.goal.sleep_time);
+          setHydrationGoal(userData.goal.hydration_oz);
+        })
+    }, [])
 
     const handleInputChange = (e) => {
         const { target } = e;
@@ -25,10 +36,14 @@ export default function Profile() {
         }
     };
 
+    const handleFormSubmit = (e) => {
+        
+    }
+
     return (
         <div className='profilePage'>
             <h1>Tell us about yourself</h1>
-            <form className="profileForm">
+            <form className="profileForm" onSubmit={handleFormSubmit}>
                 <div className='formGroup'>
                     <label> I want to exercise </label>
                     <input
@@ -39,7 +54,7 @@ export default function Profile() {
                         max="10000"
                         onChange={handleInputChange}
                     />
-                    <label> Minutes per week! 🏃‍♀️ </label>
+                    <label> minutes per week! 🏃‍♀️ </label>
                 </div>
                 <div className='formGroup'>
                     <label>I want to exercise </label>
@@ -51,10 +66,10 @@ export default function Profile() {
                         max="7"
                         onChange={handleInputChange}
                     />
-                    <label> Days per week! 🚴 </label>
+                    <label> days per week! 🚴 </label>
                 </div>
                 <div className='formGroup'>
-                    <label>I want to sleep! </label>
+                    <label>I want to sleep </label>
                     <input
                         value={sleepTimeGoal}
                         name="sleepTimeGoal"
@@ -63,7 +78,7 @@ export default function Profile() {
                         max="24"
                         onChange={handleInputChange}
                     />
-                    <label> Hours per night! 😴 </label>
+                    <label> hours per night! 😴 </label>
                 </div>
                 <div className='formGroup'>
                     <label>I want to drink </label>
@@ -75,7 +90,7 @@ export default function Profile() {
                         max="1000"
                         onChange={handleInputChange}
                     />
-                    <label> Ounces of water per day! 💧</label>
+                    <label> ounces of water per day! 💧</label>
                 </div>
                 <button type="button"
                 >Submit</button>
