@@ -31,30 +31,19 @@ export default function Home() {
 
     return (
         <>
-            <div
-                className="backgroundImage"
-                key={item.id}
-                style={{
-                    backgroundImage: `url(${item.url})`
-                }}>
-                    <div className="homePage">
-                        <h3>Welcome to your one stop shop for all things lifestyle!</h3>
-                        <h3>Let us take care of you!</h3>
-                        <h3>Check out our fitness, sleep and hydration trackers as well as our meditation hub.</h3>
-                        <h3>Enjoy and love yourself!</h3>
-                        <p> 💛 Chris, Jaden, Kalif and Haley (your website creators)</p>
-                        {/* dashboard redirect if logged in */}
-                        <a className='enter' href='/login'>Enter</a>
-                    </div>
-                    <Card>
-                        <Card.Header>
-                            This is a card
-                        </Card.Header>
-                        <Card.Body>
-                            This is the body of the card
-                        </Card.Body>
-                    </Card>
-            </div>
+            <Card className="backgroundImage" key={item.id} style={{
+                backgroundImage: `url(${item.url})`
+            }}>
+                <Card className="homePage">
+                    <Card.Text>Welcome to your one stop shop for all things lifestyle!</Card.Text>
+                    <Card.Text>Let us take care of you!</Card.Text>
+                    <Card.Text>Check out our fitness, sleep and hydration trackers as well as our meditation hub.</Card.Text>
+                    <Card.Text>Enjoy and love yourself!</Card.Text>
+                    <Card.Text> 💛 Chris, Jaden, Kalif and Haley (your website creators)</Card.Text>
+                    {/* dashboard redirect if logged in */}
+                    <a className='enter' href='/login'>Enter</a>
+                </Card>
+            </Card>
         </>
     );
 }

@@ -15,7 +15,7 @@ export default function Sleep() {
         const inputType = target.name;
         const inputValue = target.value;
 
-        if (inputType === Date) {
+        if (inputType === Date.format('yyyy-MM-dd')) {
             setSleepDate(inputValue);
         } else if (inputType === 'timeAsleep') {
             setTimeAsleep(inputValue);
