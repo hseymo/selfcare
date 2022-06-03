@@ -9,10 +9,6 @@ export default function Hydration() {
         console.log(date)
         console.log(water_oz)
     }
-    function handleGoal(e) {
-        e.preventDefault();
-        console.log(document.getElementById("waterGoal").value)
-    }
     return (
         <div className="hydration">
             <h1>Hydration</h1>
@@ -25,15 +21,6 @@ export default function Hydration() {
                     <button type="submit" onClick={handleSubmit}>Submit</button>
                     <button type="reset">Reset</button>
                 </form>
-            </nav>
-            <nav>
-                <h2>GOAL:
-                    <form>
-                        <input min="0" max="500" type='number' id="waterGoal" name="goalWater" />
-                        <button type="submit" onClick={handleGoal}>Submit</button>
-                        <button type="reset">Reset</button>
-                    </form>
-                </h2>
             </nav>
         </div>
     );
