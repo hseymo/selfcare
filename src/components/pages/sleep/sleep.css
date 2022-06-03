@@ -19,3 +19,14 @@
     margin: 10px;
     font-weight:bolder;
 }
+
+.form-horizontal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#sleepDay, #sleepTime, #sleepFall, #sleepStay, #sleepFeel {
+    height: 30px;
+}

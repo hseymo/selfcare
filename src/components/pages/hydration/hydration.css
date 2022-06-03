@@ -15,6 +15,12 @@
     justify-content: center;
 }
 
+.hydrateWeek {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .hydrateWeek li {
     display: flex;
     justify-content: center;    
@@ -25,5 +31,15 @@
 
 .waterForm {
     display: block;
-    margin-left: 20px;
+}
+
+.waterForm.card {
+    width: fit-content;
+    display: flex;
+    padding: 0px 10px;
+    align-items: center;
+}
+
+.form-check-input {
+    height: 30px;
 }
