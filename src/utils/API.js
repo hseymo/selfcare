@@ -34,10 +34,30 @@ module.exports = {
         }).then(res=>res.json())
     },
 
-    getOneUser: (userId) => {
-        return fetch(`${BASE_URL}/api/users/${userId}`)
+    getOneUser: (token) => {
+        return fetch(`${BASE_URL}/api/users/me`,{
+            headers:{
+                authorization:`Bearer ${token}`
+            }} )
         .then(res=> res.json())
-    }
+    },
 
-    
+    getUserGoals: (token) => {
+        return fetch(`${BASE_URL}/api/goals/user/me`,{
+            headers:{
+                authorization:`Bearer ${token}`
+            }} )
+        .then(res=> res.json())
+    },
+
+    updateGoals: (token, goalData) => {
+        return fetch(`${BASE_URL}/api/goals/user/me`,{
+            method:"PUT",
+            body:JSON.stringify(goalData),
+            headers:{
+                authorization:`Bearer ${token}`,
+                "Content-Type":"application/json"
+            }
+        }).then(res=>res.json())
+    }
 }

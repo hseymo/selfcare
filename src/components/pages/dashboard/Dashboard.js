@@ -4,23 +4,28 @@ import { Link } from 'react-router-dom';
 import API from "../../../utils/API.js"
  
 
-export default function Dashboard({userId}) {
+export default function Dashboard({token}) {
   const [name, setName] = useState('')
-  const [fitnessTimeGoal, setFitnessTimeGoal] = useState('');
-  const [fitnessFreqGoal, setFitnessFreqGoal] = useState('');
-  const [sleepGoal, setSleepGoal] = useState('');
-  const [hydrationGoal, setHydrationGoal] = useState('')
+  const [fitnessTimeGoal, setFitnessTimeGoal] = useState();
+  const [fitnessFreqGoal, setFitnessFreqGoal] = useState();
+  const [sleepGoal, setSleepGoal] = useState();
+  const [hydrationGoal, setHydrationGoal] = useState()
+  const [isGoals, setIsGoals] = useState(false)
 
   useEffect(() => {
-    API.getOneUser(userId).then((userData)=>{
+    API.getOneUser(token).then((userData)=>{
       console.log(userData)
+      const { fitness_time, fitness_frequency, sleep_time, hydration_oz } = userData.goal;
       setName(userData.first_name);
-      setFitnessTimeGoal(userData.goal.fitness_time);
-      setFitnessFreqGoal(userData.goal.fitness_frequency);
-      setSleepGoal(userData.goal.sleep_time);
-      setHydrationGoal(userData.goal.hydration_oz);
+      setFitnessTimeGoal(fitness_time);
+      setFitnessFreqGoal(fitness_frequency);
+      setSleepGoal(sleep_time);
+      setHydrationGoal(hydration_oz);
+      if (fitness_time || fitness_frequency || sleep_time || hydration_oz ) {
+        setIsGoals(true)
+    }
     })
-  }, [userId])
+  }, [token])
 
     const checkmark = '✅';
     const redX= '❌';
@@ -28,18 +33,34 @@ export default function Dashboard({userId}) {
     const onewater = '💧';
     const threewater = '💦';
 
+
+
     return (
         <div className="Dashboard">
             <h1>{name}'s Dashboard for the Week</h1>
             <h2>Your Goals</h2>
+            { isGoals ? (
+            <>
             <ul className='goalsList'>
+              { fitnessTimeGoal != 0 && (
               <li className='goalsLi'>You said you wanted to exercise {fitnessTimeGoal} minutes per week.</li>
+              )}
+              { fitnessFreqGoal != 0 && (
               <li className='goalsLi'>You said you wanted to exercise {fitnessFreqGoal} days per week.</li>
+              )}
+              {sleepGoal != 0 && (
               <li className='goalsLi'>You said you wanted to sleep {sleepGoal} hours per night.</li>
+              )}
+              { hydrationGoal != 0 && (
               <li className='goalsLi'>You said you wanted to drink {hydrationGoal} oz of water per day.</li>
+              )}
             </ul>
-            <a className='goalsLink' href='/profile'>Update my goals</a>
-                {/* {result?result:''} */}
+            <button className='goalsLink' onClick={(e) => {window.location.href = "/profile"}}>Update my goals</button>
+            </>
+            ) : (
+              <button className='goalsLink' onClick={(e) => {window.location.href = "/profile"}}>Set my goals!</button>
+            )}
+            <h2>Your Recent Activity</h2>
             <table>
         <tr>
           <th></th>
