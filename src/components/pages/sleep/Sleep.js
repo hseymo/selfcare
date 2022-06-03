@@ -42,13 +42,13 @@ export default function Sleep() {
 
 
     return (
-        <div className="sleep">
+        <Card className="sleep">
             <h1>Sleep</h1>
             <br />
             <nav className="sleepWeek">
-                <form className='form-horizontal'>
-                    <label htmlFor='sleepDate'>Date of sleep</label>
-                    <input
+                <Form className='form-horizontal'>
+                    <Form.Label htmlFor='sleepDate'>Date of sleep</Form.Label>
+                    <Form.Check
                         id="sleepDay"
                         type="date"
                         // value={sleepDate}
@@ -56,8 +56,8 @@ export default function Sleep() {
                         onChange={handleSleepInputChange}
                     />
                     <br/>
-                    <label htmlFor='timeAsleep'>How long did you sleep?</label>
-                    <input
+                    <Form.Label htmlFor='timeAsleep'>How long did you sleep?</Form.Label>
+                    <Form.Check
                         type="text"
                         value={timeAsleep}
                         name="timeAsleep"
@@ -65,8 +65,8 @@ export default function Sleep() {
                         placeholder="8 hours"
                     />
                     <br />
-                    <label htmlFor='diffFallingAsleep'>Did you have difficulty falling asleep?</label>
-                    <input
+                    <Form.Label htmlFor='diffFallingAsleep'>Did you have difficulty falling asleep?</Form.Label>
+                    <Form.Check
                         type="text"
                         value={diffFallingAsleep}
                         name="diffFallingAsleep"
@@ -74,8 +74,8 @@ export default function Sleep() {
                         placeholder="No"
                     />
                     <br />
-                    <label htmlFor='diffStayingAsleep'>Did you have difficulty staying asleep?</label>
-                    <input
+                    <Form.Label htmlFor='diffStayingAsleep'>Did you have difficulty staying asleep?</Form.Label>
+                    <Form.Check
                         type="text"
                         value={diffStayingAsleep}
                         name="diffStayingAsleep"
@@ -83,17 +83,17 @@ export default function Sleep() {
                         placeholder="No"
                     />
                     <br />
-                    <label htmlFor='moodAwake'>How did you feel when you woke up?</label>
-                    <input
+                    <Form.Label htmlFor='moodAwake'>How did you feel when you woke up?</Form.Label>
+                    <Form.Check
                         type="text"
                         value={moodAwake}
                         name="moodAwake"
                         onChange={handleSleepInputChange}
                         placeholder="Rested"
                     />
-                    <button type="button" onClick={handleSleepSubmit}>Submit</button>
-                </form>
+                    <Button type="button" onClick={handleSleepSubmit}>Submit</Button>
+                </Form>
             </nav>
-        </div>
+        </Card>
     );
 }
