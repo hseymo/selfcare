@@ -1,13 +1,26 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './dashboard.css';
 import { Link } from 'react-router-dom';
-// import API from '../../utils/API';
+import API from "../../../utils/API.js"
+ 
 
-export default function Dashboard() {
-    // const [result, setResult] = useState()
-    // useEffect(()=>{
-    //     fetch("http://localhost:3001/api/sleep").then((res)=>res.json()).then((data)=>{setResult(data[1].mood_upon_wake)})
-    // },[])
+export default function Dashboard({userId}) {
+  const [name, setName] = useState('')
+  const [fitnessTimeGoal, setFitnessTimeGoal] = useState('');
+  const [fitnessFreqGoal, setFitnessFreqGoal] = useState('');
+  const [sleepGoal, setSleepGoal] = useState('');
+  const [hydrationGoal, setHydrationGoal] = useState('')
+
+  useEffect(() => {
+    API.getOneUser(userId).then((userData)=>{
+      console.log(userData)
+      setName(userData.first_name);
+      setFitnessTimeGoal(userData.goal.fitness_time);
+      setFitnessFreqGoal(userData.goal.fitness_frequency);
+      setSleepGoal(userData.goal.sleep_time);
+      setHydrationGoal(userData.goal.hydration_oz);
+    })
+  }, [userId])
 
     const checkmark = '✅';
     const redX= '❌';
@@ -17,13 +30,13 @@ export default function Dashboard() {
 
     return (
         <div className="Dashboard">
-            <h1>Your Dashboard for the Week</h1>
+            <h1>{name}'s Dashboard for the Week</h1>
             <h2>Your Goals</h2>
             <ul className='goalsList'>
-              <li className='goalsLi'>You said you wanted to exercise 150 minutes per week.</li>
-              <li className='goalsLi'>You said you wanted to exercise 5 days per week.</li>
-              <li className='goalsLi'>You said you wanted to sleep 7 hours per night.</li>
-              <li className='goalsLi'>You said you wanted to drink 72 oz of water per day.</li>
+              <li className='goalsLi'>You said you wanted to exercise {fitnessTimeGoal} minutes per week.</li>
+              <li className='goalsLi'>You said you wanted to exercise {fitnessFreqGoal} days per week.</li>
+              <li className='goalsLi'>You said you wanted to sleep {sleepGoal} hours per night.</li>
+              <li className='goalsLi'>You said you wanted to drink {hydrationGoal} oz of water per day.</li>
             </ul>
             <a className='goalsLink' href='/profile'>Update my goals</a>
                 {/* {result?result:''} */}

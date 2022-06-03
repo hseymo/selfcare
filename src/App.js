@@ -28,6 +28,7 @@ function App() {
   useEffect(()=> {
     if(token) {
       API.verify(token).then(userData => {
+        console.log("userdata: ", userData)
         if (userData.userId){
           setIsLoggedIn(true);
           setUserId(userData.userId)
@@ -45,8 +46,9 @@ function App() {
   const handleLoginSubmit = (loginData) => {
     API.login(loginData).then(data => {
       if (data.token) {
-        setToken(data.token)
-        localStorage.setItem("token", data.token)
+        setToken(data.token);
+        localStorage.setItem("token", data.token);
+        window.location.href = "/dashboard"
       }
     })
   }
@@ -55,16 +57,16 @@ function App() {
     API.signup(signupData).then(data => {
       if (data.token) {
         setToken(data.token)
-        localStorage.setItem("token", data.token)
+        localStorage.setItem("token", data.token);
+        window.location.href = "/dashboard"
       }
     })
   }
 
   const logout = () => {
     setToken(null);
-    localStorage.removeItem('token')
+    localStorage.removeItem('token');
   }
-
 
   return (
     <BrowserRouter>
@@ -72,7 +74,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login signup={handleSignupSubmit} login={handleLoginSubmit} />} />
-        <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/dashboard' element={<Dashboard userId={userId} />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/fitness' element={<Exercise />} />
         <Route path='/sleep' element={<Sleep />} />
