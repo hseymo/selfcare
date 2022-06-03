@@ -21,14 +21,6 @@
     justify-content: center;
 }
 
-.hydrateWeek li {
-    display: flex;
-    justify-content: center;    
-    padding: 15px;
-    margin: 10px;
-    font-weight:bolder;
-}
-
 .waterForm {
     display: block;
 }
@@ -40,6 +32,6 @@
     align-items: center;
 }
 
-.form-check-input {
+#waterDate, #waterAmount {
     height: 30px;
 }

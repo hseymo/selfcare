@@ -1,7 +1,7 @@
 import { clear } from '@testing-library/user-event/dist/clear';
 import React from 'react';
-import { Card, Button, Form } from 'react-bootstrap';
 import './hydration.css';
+import { Card, Button, Form } from 'react-bootstrap';
 
 export default function Hydration() {
 
