@@ -13,7 +13,6 @@
 .fitness Form, .fitness h2 {
     padding: 0px;
     display: flex;
-    flex-wrap:inherit;
     justify-content: space-between;
     align-items: center;
     justify-content: center;
@@ -24,7 +23,10 @@
 }
 .fitnessWeek {
     display:flex;
+    flex-wrap: wrap;
     padding-bottom: 30px;
+    align-items: center;
+    justify-content: center;
 }
 .fitnessCards {
     display: flex;
@@ -36,7 +38,7 @@
 .fitnessWeek h4 {
     padding-bottom: 30px;
 }
-.fitnessInput {
+.fitnessInput, .form-check-input {
     padding-bottom: 5px;
     max-width: 120px;
 }

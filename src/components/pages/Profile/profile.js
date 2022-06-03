@@ -7,16 +7,8 @@ export default function Profile({token}) {
     const [fitnessFreqGoal, setFitnessFreqGoal] = useState('');
     const [sleepGoal, setSleepGoal] = useState('');
     const [hydrationGoal, setHydrationGoal] = useState('');
-    // const [goalObject, setGoalObject] = useState({});
+    const [goalObject, setGoalObject] = useState({});
     const [goalId, setGoalId] = useState('');
-
-    const [goalObject, setGoalObject] = useState({
-        id: goalId,
-        fitness_time:'',
-        fitness_frequency:'',
-        sleep_time: '',
-        hydration_oz: ''
-    })
 
     useEffect(() => {
         API.getUserGoals(token).then((userData)=>{
@@ -34,19 +26,6 @@ export default function Profile({token}) {
           setGoalId(id);
         })
     }, [token])
-
-    // on page load paste goals
-    //   useEffect(() => {
-    //     API.getOneUser(userId).then((userData)=>{
-    //     console.log(userData)
-    //       const { fitness_time, fitness_frequency, sleep_time, hydration_oz, id } = userData.goal;
-    //       setFitnessTimeGoal(fitness_time);
-    //       setFitnessFreqGoal(fitness_frequency);
-    //       setSleepGoal(sleep_time);
-    //       setHydrationGoal(hydration_oz);
-    //       setGoalId(id);
-    //     })
-    // }, [userId])
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
