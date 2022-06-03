@@ -1,5 +1,7 @@
 import React from 'react';
 import './hydration.css';
+import { Card, Button, Form } from 'react-bootstrap';
+
 export default function Hydration() {
     
     function handleSubmit(e) {
@@ -10,18 +12,18 @@ export default function Hydration() {
         console.log(water_oz)
     }
     return (
-        <div className="hydration">
+        <Card className="hydration">
             <h1>Hydration</h1>
-            <h2>GOAL:<div id="storedWater"></div></h2>
+            <h2>GOAL:<Card id="storedWater"></Card></h2>
             <nav className="hydrateWeek">
-                <form className="waterForm"><br />
-                    <input type="date" id="waterDate"/><br />
-                    <label htmlFor="waterAmount">Input number of ounces drank today:</label><br />
-                    <input min="0" max="500" type="number" id="waterAmount" name="userWater" /><br />
-                    <button type="submit" onClick={handleSubmit}>Submit</button>
-                    <button type="reset">Reset</button>
-                </form>
+                <Form className="waterForm"><br />
+                    <Form.Check type="date" id="waterDate"/><br />
+                    <Form.Label htmlFor="waterAmount">Input number of ounces drank today:</Form.Label><br />
+                    <Form.Check min="0" max="500" type="number" id="waterAmount" name="userWater" /><br />
+                    <Button type="submit" onClick={handleSubmit}>Submit</Button>
+                    <Button type="reset">Reset</Button>
+                </Form>
             </nav>
-        </div>
+        </Card>
     );
 }
