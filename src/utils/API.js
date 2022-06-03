@@ -59,5 +59,50 @@ module.exports = {
                 "Content-Type":"application/json"
             }
         }).then(res=>res.json())
+    },
+
+    getUserFitness: (token) => {
+        return fetch(`${BASE_URL}/api/fitness/user/me`,{
+            headers:{
+                authorization:`Bearer ${token}`
+            }} )
+        .then(res=> res.json())
+    },
+
+    updateFitnessEntry: (token, goalData) => {
+        return fetch(`${BASE_URL}/api/fitness/:id`,{
+            method:"PUT",
+            body:JSON.stringify(goalData),
+            headers:{
+                authorization:`Bearer ${token}`,
+                "Content-Type":"application/json"
+            }
+        }).then(res=>res.json())
+    },
+
+    deleteFitnessEntry: (token, goalData) => {
+        return fetch(`${BASE_URL}/api/fitness/:id`,{
+            method:"DELETE",
+            body:JSON.stringify(goalData),
+            headers:{
+                authorization:`Bearer ${token}`,
+            }
+        }).then(res=>res.json())
+    },
+
+    getUserSleep: (token) => {
+        return fetch(`${BASE_URL}/api/sleep/user/me`,{
+            headers:{
+                authorization:`Bearer ${token}`
+            }} )
+        .then(res=> res.json())
+    },
+
+    getUserHydration: (token) => {
+        return fetch(`${BASE_URL}/api/hydration/user/me`,{
+            headers:{
+                authorization:`Bearer ${token}`
+            }} )
+        .then(res=> res.json())
     }
 }

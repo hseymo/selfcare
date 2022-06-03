@@ -16,6 +16,22 @@ export default function Dashboard({token}) {
     API.getOneUser(token).then((userData)=>{
       console.log(userData)
       const { fitness_time, fitness_frequency, sleep_time, hydration_oz } = userData.goal;
+
+      userData.fitnesses.map(entry => {
+        console.log(entry)
+        const {id, date, activity_type, activity_duration, RPE, notes} = entry;
+      })
+
+      userData.sleep.map(entry => {
+        console.log(entry)
+        const {id, date, time_asleep, diff_falling_asleep, diff_staying_asleep, mood_upon_wake } = entry;
+      })
+
+      userData.hydrations.map(entry => {
+        console.log(entry)
+        const { id, date, water_oz } = entry;
+      })
+
       setName(userData.first_name);
       setFitnessTimeGoal(fitness_time);
       setFitnessFreqGoal(fitness_frequency);
@@ -34,6 +50,30 @@ export default function Dashboard({token}) {
     const threewater = '💦';
 
 
+    // FOR INDIVIDUAL PAGES
+    useEffect(() => {
+      API.getUserFitness(token).then((userData)=>{
+      userData.map(entry => {
+        const {id, date, activity_type, activity_duration, RPE, notes} = entry;
+      })
+      })
+    }, [token])
+
+    useEffect(() => {
+      API.getUserSleep(token).then((userData)=>{
+      userData.map(entry => {
+        const {id, date, time_asleep, diff_falling_asleep, diff_staying_asleep, mood_upon_wake } = entry;
+      })
+      })
+    }, [token])
+
+    useEffect(() => {
+      API.getUserHydration(token).then((userData)=>{
+      userData.map(entry => {
+        const { id, date, water_oz } = entry;
+      })
+      })
+    }, [token])
 
     return (
         <div className="Dashboard">
@@ -119,3 +159,4 @@ export default function Dashboard({token}) {
 // const questionMarkImage= <img className="questionmark" src={questionmark} width="20px"/>
 // const lowHydration = <img className="lowHydration" src={onewaterdrop} width="20px"/>
 // const goodHydration = <img className="goodHydration" src={threewaterdrops} width="20px"/>
+
