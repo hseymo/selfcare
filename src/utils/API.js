@@ -32,5 +32,12 @@ module.exports = {
                 "Content-Type":"application/json"
             }
         }).then(res=>res.json())
+    },
+
+    getOneUser: (userId) => {
+        return fetch(`${BASE_URL}/api/users/${userId}`)
+        .then(res=> res.json())
     }
+
+    
 }

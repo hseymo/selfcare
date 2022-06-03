@@ -1,14 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import './home.css';
-import API from "../../../utils/API.js"
 
 export default function Home() {
-
-    // testing route
-    useEffect(() => {
-        API.getAllUsers().then(userData=>{console.log(userData)})
-    }, [])
-
     return (
         <div className="homePage">
             <h3>Welcome to your one stop shop for all things lifestyle!</h3>

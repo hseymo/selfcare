@@ -1,18 +1,17 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import './navtabs.css'
 
-function NavTabs(props) {
+function NavTabs({isLoggedIn, userId, logout}) {
     return (
         <nav>
             <ul className="nav nav-tabs">
-                {/* add conditional - if logged in, show logout else and vice versa */}
-                <li className="nav-item">
-                    <Link to='/login'>Login</Link>
-                </li>
-                <li className="nav-item">
-                    <Link to='/logout'>Logout</Link>
-                </li>
+        {!isLoggedIn ? (
+            <li className="nav-item">
+                <Link to='/login'>Login</Link>
+            </li>
+        ) : (
+            <>
                 <li className="nav-item">
                     <Link to='/dashboard'>Dashboard</Link>
                 </li>
@@ -31,6 +30,11 @@ function NavTabs(props) {
                 <li className="nav-item">
                     <Link to='/mindfulness'>Mindfulness</Link>
                 </li>
+                <li className="nav-item">
+                    <Link to='/' onClick={logout}>Logout</Link>
+                </li>
+                    </>
+        )}
             </ul>
         </nav>
     );
