@@ -28,7 +28,6 @@ function App() {
   useEffect(()=> {
     if(token) {
       API.verify(token).then(userData => {
-        console.log("userdata: ", userData)
         if (userData.userId){
           setIsLoggedIn(true);
           setUserId(userData.userId)
@@ -74,12 +73,12 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login signup={handleSignupSubmit} login={handleLoginSubmit} />} />
-        <Route path='/dashboard' element={<Dashboard userId={userId} />} />
-        <Route path='/profile' element={<Profile />} />
-        <Route path='/fitness' element={<Exercise />} />
-        <Route path='/sleep' element={<Sleep />} />
-        <Route path='/hydration' element={<Hydration />} />
-        <Route path='/mindfulness' element={<Mindfulness />} />
+        <Route path='/dashboard' element={<Dashboard userId={userId} token={token} />} />
+        <Route path='/profile' element={<Profile userId={userId} token={token}/>} />
+        <Route path='/fitness' element={<Exercise userId={userId} token={token}/>} />
+        <Route path='/sleep' element={<Sleep userId={userId} token={token} />} />
+        <Route path='/hydration' element={<Hydration userId={userId} token={token}/>} />
+        <Route path='/mindfulness' element={<Mindfulness userId={userId}token={token} />} />
       </Routes>
     </BrowserRouter>
   );

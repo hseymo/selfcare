@@ -4,16 +4,17 @@ import { Link } from 'react-router-dom';
 import API from "../../../utils/API.js"
  
 
-export default function Dashboard({userId}) {
+export default function Dashboard({token}) {
   const [name, setName] = useState('')
-  const [fitnessTimeGoal, setFitnessTimeGoal] = useState(null);
-  const [fitnessFreqGoal, setFitnessFreqGoal] = useState(null);
-  const [sleepGoal, setSleepGoal] = useState(null);
-  const [hydrationGoal, setHydrationGoal] = useState(null)
+  const [fitnessTimeGoal, setFitnessTimeGoal] = useState();
+  const [fitnessFreqGoal, setFitnessFreqGoal] = useState();
+  const [sleepGoal, setSleepGoal] = useState();
+  const [hydrationGoal, setHydrationGoal] = useState()
   const [isGoals, setIsGoals] = useState(false)
 
   useEffect(() => {
-    API.getOneUser(userId).then((userData)=>{
+    API.getOneUser(token).then((userData)=>{
+      console.log(userData)
       const { fitness_time, fitness_frequency, sleep_time, hydration_oz } = userData.goal;
       setName(userData.first_name);
       setFitnessTimeGoal(fitness_time);
@@ -24,13 +25,15 @@ export default function Dashboard({userId}) {
         setIsGoals(true)
     }
     })
-  }, [userId])
+  }, [token])
 
     const checkmark = '✅';
     const redX= '❌';
     const questionmark = '⁇'
     const onewater = '💧';
     const threewater = '💦';
+
+
 
     return (
         <div className="Dashboard">
@@ -39,24 +42,25 @@ export default function Dashboard({userId}) {
             { isGoals ? (
             <>
             <ul className='goalsList'>
-              { fitnessTimeGoal && (
+              { fitnessTimeGoal != 0 && (
               <li className='goalsLi'>You said you wanted to exercise {fitnessTimeGoal} minutes per week.</li>
               )}
-              { fitnessFreqGoal && (
+              { fitnessFreqGoal != 0 && (
               <li className='goalsLi'>You said you wanted to exercise {fitnessFreqGoal} days per week.</li>
               )}
-              {sleepGoal && (
+              {sleepGoal != 0 && (
               <li className='goalsLi'>You said you wanted to sleep {sleepGoal} hours per night.</li>
               )}
-              { hydrationGoal && (
+              { hydrationGoal != 0 && (
               <li className='goalsLi'>You said you wanted to drink {hydrationGoal} oz of water per day.</li>
               )}
             </ul>
-            <a className='goalsLink' href='/profile'>Update my goals</a>
+            <button className='goalsLink' onClick={(e) => {window.location.href = "/profile"}}>Update my goals</button>
             </>
             ) : (
-              <a className='goalsLink' href='/profile'>Set my goals!</a>
+              <button className='goalsLink' onClick={(e) => {window.location.href = "/profile"}}>Set my goals!</button>
             )}
+            <h2>Your Recent Activity</h2>
             <table>
         <tr>
           <th></th>
