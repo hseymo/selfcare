@@ -1,7 +1,10 @@
+import { clear } from '@testing-library/user-event/dist/clear';
 import React from 'react';
 import './hydration.css';
+import { Card, Button, Form } from 'react-bootstrap';
+
 export default function Hydration() {
-    
+
     function handleSubmit(e) {
         e.preventDefault();
         var water_oz = document.getElementById("waterAmount").value
@@ -9,32 +12,21 @@ export default function Hydration() {
         console.log(date)
         console.log(water_oz)
     }
-    function handleGoal(e) {
-        e.preventDefault();
-        console.log(document.getElementById("waterGoal").value)
-    }
     return (
-        <div className="hydration">
-            <h1>Hydration</h1>
-            <h2>GOAL:<div id="storedWater"></div></h2>
-            <nav className="hydrateWeek">
-                <form className="waterForm"><br />
-                    <input type="date" id="waterDate"/><br />
-                    <label htmlFor="waterAmount">Input number of ounces drank today:</label><br />
-                    <input min="0" max="500" type="number" id="waterAmount" name="userWater" /><br />
-                    <button type="submit" onClick={handleSubmit}>Submit</button>
-                    <button type="reset">Reset</button>
-                </form>
-            </nav>
-            <nav>
-                <h2>GOAL:
-                    <form>
-                        <input min="0" max="500" type='number' id="waterGoal" name="goalWater" />
-                        <button type="submit" onClick={handleGoal}>Submit</button>
-                        <button type="reset">Reset</button>
-                    </form>
-                </h2>
-            </nav>
-        </div>
+        <Form>
+            <Card className="hydration">
+                <h1>Hydration</h1>
+                <h2>GOAL:<Form id="storedWater"></Form></h2>
+                <nav className="hydrateWeek">
+                    <Card className="waterForm">
+                        <Form.Check type="date" id="waterDate" />
+                        <Form.Label htmlFor="waterAmount">Input number of ounces drank today:</Form.Label>
+                        <Form.Check min="0" max="500" type="number" id="waterAmount" name="userWater" /><br />
+                        <Button type="submit" onClick={handleSubmit}>Submit</Button>
+                        <Button type="reset" value="Reset">Reset</Button>
+                    </Card>
+                </nav>
+            </Card>
+        </Form>
     );
 }

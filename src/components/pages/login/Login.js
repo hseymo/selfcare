@@ -8,6 +8,7 @@ const [signupData, setSignupData] = useState({
   last_name: '',
   password:''
 })
+
 const [loginData, setLoginData] = useState({
   email:'',
   password:''
@@ -30,7 +31,6 @@ const signupSubmit = e=>{
     last_name: '',
     password:''
   })
-  console.log('clicked')
 }
 
     return (
