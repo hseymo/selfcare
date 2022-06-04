@@ -20,7 +20,6 @@ export default function Dashboard({token, weekArray}) {
   const [fitnessTime, setFitnessTime] = useState(0)
   const [fitnessCount, setFitnessCount] = useState(0)
   const [fitnessEmoji, setFitnessEmoji] = useState([])
-
   const [sleepEmoji, setSleepEmoji] = useState([])
   const [sleepWins, setSleepWins] = useState(0)
 
@@ -67,13 +66,15 @@ export default function Dashboard({token, weekArray}) {
         }
         fitnessArray.push(newObj);
       })
+
+      setFitnessEmoji(fitnessArray)
       setFitnessTime(weeklyFitnessTime)
       setFitnessCount(weeklyFitnessCount)
-      setFitnessEmoji(fitnessArray)
       console.log('fitnessArray: ', fitnessArray)
       console.log('weeklyFitnessTime: ', weeklyFitnessTime)
       console.log('weeklyFitnessCount: ', weeklyFitnessCount)
       console.log('test fitness: ', fitnessArray)
+
 
       // SLEEP LOGIC_______________________________________________
         const sleepArray = [];
@@ -175,24 +176,19 @@ export default function Dashboard({token, weekArray}) {
             results={fitnessEmoji}/>
       </table>
       
-      <h4>So far this week:</h4>
       <ul>
-      <li className="compLi"> You have reported {fitnessTime} minutes of exercise.</li>
-      {/* NOT PROTECTING AGAINST 0 GOAL  */}
-      {(goalsData.fitness_time != 0 && fitnessTime >= goalsData.fitness_time) ? (
-        <li className='compLi'>You are {fitnessTime - goalsData.fitness_time} minutes above your goal of {goalsData.fitness_time}!</li>
-       ) : (
-        <li className='compLi'>You are {goalsData.fitness_time - fitnessTime} minutes below your goal of {goalsData.fitness_time}.</li>
+      { goalsData.fitness_time != 0 ? (
+      <li className='compLi'>You are at {fitnessTime}/{goalsData.fitness_time} of your weekly goal for minutes of exercise!</li>) : (
+        <></>
       )}
-      <li className='compLi'>You reported {fitnessCount} days of exercise!</li> 
-      {(fitnessCount >= goalsData.fitness_frequency) ? 
-        <li className='compLi'>You met your goal of {goalsData.fitness_frequency}!</li>
-          : 
-        <li className='compLi'>You are not at your goal of {goalsData.fitness_frequency} days per week.</li>
-      }
+            { goalsData.fitness_frequency != 0 ? (
+      <li className='compLi'>You are at {fitnessCount}/{goalsData.fitness_frequency} of your weekly goal for days of exercise!</li>) : (
+        <></>
+      )}
       </ul>
+
       <h2>Sleep and Hydration</h2>
-                  <table>
+        <table>
         <tr className="dayHeaders">
           <th></th>
           <th>Monday <br/> {weekArray[0]}</th>
@@ -212,7 +208,16 @@ export default function Dashboard({token, weekArray}) {
             link='/hydration' 
             results={hydrationEmoji}/>
         </table>
-
+      <ul>
+        { goalsData.sleep_time != 0 ? (
+      <li className="compLi"> You met your sleep goal {sleepWins} times this week.</li> ) : (
+        <></>
+      )}
+      { goalsData.hydration_oz != 0 ? ( 
+      <li className="compLi"> You met your hydration goal {hydrationWins} times this week.</li> ) : (
+        <></>
+      ) }
+      </ul>
       <h3>Click on a category to see more!</h3>
         </div>
     );
