@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Card, Button, Form } from 'react-bootstrap';
 import './sleep.css';
+import { Card, Button, Form } from 'react-bootstrap';
 
 export default function Sleep() {
 
@@ -55,9 +55,10 @@ export default function Sleep() {
                         name="sleepDate"
                         onChange={handleSleepInputChange}
                     />
-                    <br/>
+                    <br />
                     <Form.Label htmlFor='timeAsleep'>How long did you sleep?</Form.Label>
                     <Form.Check
+                        id="sleepTime"
                         type="text"
                         value={timeAsleep}
                         name="timeAsleep"
@@ -67,6 +68,7 @@ export default function Sleep() {
                     <br />
                     <Form.Label htmlFor='diffFallingAsleep'>Did you have difficulty falling asleep?</Form.Label>
                     <Form.Check
+                        id="sleepFall"
                         type="text"
                         value={diffFallingAsleep}
                         name="diffFallingAsleep"
@@ -76,6 +78,7 @@ export default function Sleep() {
                     <br />
                     <Form.Label htmlFor='diffStayingAsleep'>Did you have difficulty staying asleep?</Form.Label>
                     <Form.Check
+                        id="sleepStay"
                         type="text"
                         value={diffStayingAsleep}
                         name="diffStayingAsleep"
@@ -85,6 +88,7 @@ export default function Sleep() {
                     <br />
                     <Form.Label htmlFor='moodAwake'>How did you feel when you woke up?</Form.Label>
                     <Form.Check
+                        id="sleepFeel"
                         type="text"
                         value={moodAwake}
                         name="moodAwake"

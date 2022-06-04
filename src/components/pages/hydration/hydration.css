@@ -15,15 +15,23 @@
     justify-content: center;
 }
 
-.hydrateWeek li {
+.hydrateWeek {
     display: flex;
-    justify-content: center;    
-    padding: 15px;
-    margin: 10px;
-    font-weight:bolder;
+    align-items: center;
+    justify-content: center;
 }
 
 .waterForm {
     display: block;
-    margin-left: 20px;
+}
+
+.waterForm.card {
+    width: fit-content;
+    display: flex;
+    padding: 0px 10px;
+    align-items: center;
+}
+
+#waterDate, #waterAmount {
+    height: 30px;
 }
