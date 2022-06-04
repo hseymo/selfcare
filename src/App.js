@@ -71,25 +71,6 @@ function App() {
     localStorage.removeItem('token');
   }
 
-// useEffect(() => {
-//     API.getOneUser(token).then((userData)=>{
-//       const sleepArray = [];
-//       weekArray.map(entry => {
-//         var response = userData.sleep.find(data => data.date === entry);
-//         console.log(response)
-//         if (response === undefined) {
-//           sleepArray.push('⁇')
-//         } else if (response.time_asleep >= 6.5) {
-//           sleepArray.push('1')
-//         } else if (response.time_asleep < 6.5) {
-//           sleepArray.push('2')
-//         }
-//       })
-//       setSleepData(sleepArray);
-//   }) 
-//   }, [token]
-// )
-
   return (
     <BrowserRouter>
       <Header isLoggedIn={isLoggedIn} userId={userId} logout={logout} />
@@ -108,7 +89,6 @@ function App() {
             userId={userId} 
             token={token} 
             weekArray={weekArray} 
-            // sleepData={sleepData}
             />} />
         <Route 
           path='/profile' 

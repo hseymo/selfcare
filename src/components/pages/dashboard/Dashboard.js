@@ -2,8 +2,9 @@ import React, {useEffect, useState} from 'react';
 import './dashboard.css';
 import { Link } from 'react-router-dom';
 import API from "../../../utils/API.js"
+import Card from "./card"
 
-export default function Dashboard({token, weekArray, sleepData}) {
+export default function Dashboard({token, weekArray}) {
   const [name, setName] = useState('')
   const [goalsData, setGoalsData] = useState({
     fitness_time:'',
@@ -19,7 +20,6 @@ export default function Dashboard({token, weekArray, sleepData}) {
 
   useEffect(() => {
     API.getOneUser(token).then((userData)=>{
-      // console.log(userData)
       setName(userData.first_name);
       // USERS GOALS_______________________________________________
       const { fitness_time, fitness_frequency, sleep_time, hydration_oz } = userData.goal;
@@ -32,6 +32,7 @@ export default function Dashboard({token, weekArray, sleepData}) {
       if (fitness_time || fitness_frequency || sleep_time || hydration_oz ) {
         setIsGoals(true)
       }
+      
       // FITNESS LOGIC__________________________________________
       // temp holders to set state with
       const fitnessArray = [];
@@ -59,24 +60,35 @@ export default function Dashboard({token, weekArray, sleepData}) {
       // NEED TO RENDER EMOJI ARRAY TO THE PAGE
 
       // SLEEP LOGIC_______________________________________________
-        // const sleepArray = [];
-        // weekArray.map(entry => {
-        //   var response = userData.sleep.find(data => data.date === entry);
-        //   console.log(response)
-        //   if (response === undefined) {
-        //     sleepArray.push('⁇')
-        //   } else if (response.time_asleep >= sleepGoal) {
-        //     sleepArray.push('1')
-        //   } else if (response.time_asleep < sleepGoal) {
-        //     sleepArray.push('2')
-        //   }
-        // })
-        // console.log(userData.sleep)
+        const sleepArray = [];
+        weekArray.map(entry => {
+          var response = userData.sleep.find(data => data.date === entry);
+          console.log(response)
+          if (response === undefined) {
+            sleepArray.push('⁇')
+          } else {
+            sleepArray.push('Reported')
+          }
+          // else if (response.time_asleep >= sleepGoal) {
+          //   sleepArray.push('1')
+          // } else if (response.time_asleep < sleepGoal) {
+          //   sleepArray.push('2')
+          // }
+        })
+        console.log(userData.sleep)
 
-      // userData.hydrations.map(entry => {
-      //   // console.log(entry)
-      //   const { id, date, water_oz } = entry;
-      // })
+      // HYDRATAION LOGIC__________________________________________
+        const hydrationArray = [];
+        weekArray.map(entry => {
+          var response = userData.hydrations.find(data => data.date === entry);
+          console.log(response)
+          if (response === undefined) {
+            hydrationArray.push('⁇')
+          } else {
+            hydrationArray.push('Reported')
+          }
+        })
+
     })
   }, [token])
 
@@ -151,9 +163,6 @@ export default function Dashboard({token, weekArray, sleepData}) {
         </tr>
         <tr>
           <td className="rowHeader"><Link to='/fitness'>Did you workout today?</Link></td>
-              {/* {fitnessEmoji.forEach((emoji) => (
-                console.log(emoji)
-              ))} */}
           <td> {redX} </td>
           <td> {redX} </td>
           <td> {checkmark} </td>
@@ -163,16 +172,20 @@ export default function Dashboard({token, weekArray, sleepData}) {
         </tr>
       </table>
       
-      <h3>So far this week, you've exercised {fitnessTime} minutes. {(fitnessTime >= goalsData.fitness_time) ? 
-        `You are ${fitnessTime - goalsData.fitness_time} minutes above your goal of ${goalsData.fitness_time} minutes!`
+      <h2>So far this week:</h2>
+      <h3> You have reported {fitnessTime} minutes of exercise.</h3>
+      {/* NOT PROTECTING AGAINST 0 GOAL  */}
+      {(goalsData.fitness_time != 0 && fitnessTime >= goalsData.fitness_time) ? (
+        <h3>You are {fitnessTime - goalsData.fitness_time} minutes above your goal of {goalsData.fitness_time}!</h3>
+       ) : (
+        <h3>You are {goalsData.fitness_time - fitnessTime} minutes below your goal of {goalsData.fitness_time}.</h3>
+      )}
+      <h3>You reported {fitnessCount} days of exercise!</h3> 
+      {(fitnessCount >= goalsData.fitness_frequency) ? 
+        <h3>You met your goal of {goalsData.fitness_frequency}!</h3>
           : 
-        `You are ${goalsData.fitness_time - fitnessTime} minutes below your goal of ${goalsData.fitness_time} minutes.`
-      }</h3>
-      <h3>This week you exercised {fitnessCount} days! {(fitnessCount >= goalsData.fitness_frequency) ? 
-        `You met your goal of ${goalsData.fitness_frequency}!`
-          : 
-        `You are not at your goal of ${goalsData.fitness_frequency} days this week.`
-      }</h3>
+        <h3>You are not at your goal of {goalsData.fitness_frequency} days per week.</h3>
+      }
       <h2>Sleep and Hydration</h2>
                   <table>
         <tr className="dayHeaders">
