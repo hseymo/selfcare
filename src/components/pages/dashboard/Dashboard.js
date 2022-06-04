@@ -2,9 +2,8 @@ import React, {useEffect, useState} from 'react';
 import './dashboard.css';
 import { Link } from 'react-router-dom';
 import API from "../../../utils/API.js"
- 
 
-export default function Dashboard({token}) {
+export default function Dashboard({token, weekArray}) {
   const [name, setName] = useState('')
   const [fitnessTimeGoal, setFitnessTimeGoal] = useState();
   const [fitnessFreqGoal, setFitnessFreqGoal] = useState();
@@ -14,23 +13,28 @@ export default function Dashboard({token}) {
 
   useEffect(() => {
     API.getOneUser(token).then((userData)=>{
-      console.log(userData)
+      // console.log(userData)
       const { fitness_time, fitness_frequency, sleep_time, hydration_oz } = userData.goal;
 
-      userData.fitnesses.map(entry => {
-        console.log(entry)
-        const {id, date, activity_type, activity_duration, RPE, notes} = entry;
+      weekArray.map(entry => {
+        for (let i = 0; i < userData.fitnesses.length; i++) {
+          if (entry === userData.fitnesses[i].date) {
+            console.log("Match for ", entry, "&", userData.fitnesses[i].date)
+          } else {
+            console.log("No match for ", entry, "&", userData.fitnesses[i].date)
+          }
+        }
       })
 
-      userData.sleep.map(entry => {
-        console.log(entry)
-        const {id, date, time_asleep, diff_falling_asleep, diff_staying_asleep, mood_upon_wake } = entry;
-      })
+      // userData.sleep.map(entry => {
+      //   // console.log(entry)
+      //   const {id, date, time_asleep, diff_falling_asleep, diff_staying_asleep, mood_upon_wake } = entry;
+      // })
 
-      userData.hydrations.map(entry => {
-        console.log(entry)
-        const { id, date, water_oz } = entry;
-      })
+      // userData.hydrations.map(entry => {
+      //   // console.log(entry)
+      //   const { id, date, water_oz } = entry;
+      // })
 
       setName(userData.first_name);
       setFitnessTimeGoal(fitness_time);
@@ -102,19 +106,21 @@ export default function Dashboard({token}) {
             )}
             <h2>Your Recent Activity</h2>
             <table>
-        <tr>
+        <tr className="dayHeaders">
           <th></th>
-          <th>Monday</th>
-          <th>Tuesday</th>
-          <th>Wednesday</th>
-          <th>Thursday</th>
-          <th>Friday</th>
-          <th>Saturday</th>
-          <th>Sunday</th>
+          <th>Monday <br/> {weekArray[0]}</th>
+          <th>Tuesday <br/> {weekArray[1]}</th>
+          <th>Wednesday <br/> {weekArray[2]} </th>
+          <th>Thursday <br/> {weekArray[3]}</th>
+          <th>Friday <br/> {weekArray[4]}</th>
+          <th>Saturday <br/> {weekArray[5]}</th>
+          <th>Sunday <br/> {weekArray[6]}</th>
         </tr>
         <tr>
           <td className="rowHeader"><Link to='/fitness'>Fitness</Link></td>
-          <td> {checkmark} </td>
+          <td> 
+
+          </td>
           <td> {redX} </td>
           <td> {redX} </td>
           <td> {checkmark} </td>
