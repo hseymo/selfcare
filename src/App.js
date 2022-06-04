@@ -20,6 +20,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState(null);
   const [token, setToken] = useState(null);
+  // const [sleepData, setSleepData] = useState()
 
   useEffect(()=>{
     const storedToken = localStorage.getItem("token")
@@ -70,18 +71,70 @@ function App() {
     localStorage.removeItem('token');
   }
 
+// useEffect(() => {
+//     API.getOneUser(token).then((userData)=>{
+//       const sleepArray = [];
+//       weekArray.map(entry => {
+//         var response = userData.sleep.find(data => data.date === entry);
+//         console.log(response)
+//         if (response === undefined) {
+//           sleepArray.push('⁇')
+//         } else if (response.time_asleep >= 6.5) {
+//           sleepArray.push('1')
+//         } else if (response.time_asleep < 6.5) {
+//           sleepArray.push('2')
+//         }
+//       })
+//       setSleepData(sleepArray);
+//   }) 
+//   }, [token]
+// )
+
   return (
     <BrowserRouter>
       <Header isLoggedIn={isLoggedIn} userId={userId} logout={logout} />
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/login' element={<Login signup={handleSignupSubmit} login={handleLoginSubmit} />} />
-        <Route path='/dashboard' element={<Dashboard userId={userId} token={token} weekArray={weekArray}/>} />
-        <Route path='/profile' element={<Profile userId={userId} token={token}/>} />
-        <Route path='/fitness' element={<Exercise userId={userId} token={token}/>} />
-        <Route path='/sleep' element={<Sleep userId={userId} token={token} />} />
-        <Route path='/hydration' element={<Hydration userId={userId} token={token}/>} />
-        <Route path='/mindfulness' element={<Mindfulness userId={userId}token={token} />} />
+        <Route 
+          path='/' 
+          element={<Home />} />
+        <Route 
+          path='/login' 
+          element={<Login 
+            signup={handleSignupSubmit} 
+            login={handleLoginSubmit} />} />
+        <Route 
+          path='/dashboard' 
+          element={<Dashboard 
+            userId={userId} 
+            token={token} 
+            weekArray={weekArray} 
+            // sleepData={sleepData}
+            />} />
+        <Route 
+          path='/profile' 
+          element={<Profile 
+            userId={userId} 
+            token={token}/>} />
+        <Route 
+          path='/fitness' 
+          element={<Exercise 
+            userId={userId} 
+            token={token}/>} />
+        <Route 
+          path='/sleep' 
+          element={<Sleep 
+            userId={userId} 
+            token={token} />} />
+        <Route 
+          path='/hydration' 
+          element={<Hydration 
+            userId={userId} 
+            token={token}/>} />
+        <Route 
+          path='/mindfulness' 
+          element={<Mindfulness 
+            userId={userId} 
+            token={token} />} />
       </Routes>
     </BrowserRouter>
   );
