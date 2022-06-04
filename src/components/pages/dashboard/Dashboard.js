@@ -10,21 +10,38 @@ export default function Dashboard({token, weekArray}) {
   const [sleepGoal, setSleepGoal] = useState();
   const [hydrationGoal, setHydrationGoal] = useState()
   const [isGoals, setIsGoals] = useState(false)
+  const [fitnessTime, setFitnessTime] = useState(0)
+  const [fitnessCount, setFitnessCount] = useState(0)
 
   useEffect(() => {
     API.getOneUser(token).then((userData)=>{
       // console.log(userData)
+
+      // DESTRUCTURE USERS GOALS
       const { fitness_time, fitness_frequency, sleep_time, hydration_oz } = userData.goal;
 
+      // ARRAY OF EMOJIS IF REPORTED EXERCISE ON A GIVEN DAY
+      const fitnessArray = [];
+      // EXERCISE TIME REPORTED FOR THE WEEK
+      let weeklyFitnessTime = 0;
+      // COUNT OF DAYS WHEN EXERCISED
+      let weeklyFitnessCount = 0;
       weekArray.map(entry => {
-        for (let i = 0; i < userData.fitnesses.length; i++) {
-          if (entry === userData.fitnesses[i].date) {
-            console.log("Match for ", entry, "&", userData.fitnesses[i].date)
-          } else {
-            console.log("No match for ", entry, "&", userData.fitnesses[i].date)
-          }
+        var response = userData.fitnesses.find(data => data.date === entry);
+        if (response === undefined) {
+          fitnessArray.push('❌')
+        } else {
+          fitnessArray.push('✅');
+          weeklyFitnessTime = weeklyFitnessTime + response.activity_duration;
+          weeklyFitnessCount++;
         }
       })
+
+      console.log('fitnessArray: ', fitnessArray)
+      console.log('weeklyFitnessTime: ', weeklyFitnessTime)
+      console.log('weeklyFitnessCount: ', weeklyFitnessCount)
+      setFitnessTime(weeklyFitnessTime)
+      setFitnessCount(weeklyFitnessCount)
 
       // userData.sleep.map(entry => {
       //   // console.log(entry)
@@ -87,10 +104,10 @@ export default function Dashboard({token, weekArray}) {
             <>
             <ul className='goalsList'>
               { fitnessTimeGoal != 0 && (
-              <li className='goalsLi'>You said you wanted to exercise {fitnessTimeGoal} minutes per week.</li>
+              <li className='goalsLi'>You said you wanted to exercise {fitnessTimeGoal} minutes per week. So far this week, you've exercised {fitnessTime}!</li>
               )}
               { fitnessFreqGoal != 0 && (
-              <li className='goalsLi'>You said you wanted to exercise {fitnessFreqGoal} days per week.</li>
+              <li className='goalsLi'>You said you wanted to exercise {fitnessFreqGoal} days per week. So far you have exercised {fitnessCount} days!</li>
               )}
               {sleepGoal != 0 && (
               <li className='goalsLi'>You said you wanted to sleep {sleepGoal} hours per night.</li>
@@ -117,7 +134,7 @@ export default function Dashboard({token, weekArray}) {
           <th>Sunday <br/> {weekArray[6]}</th>
         </tr>
         <tr>
-          <td className="rowHeader"><Link to='/fitness'>Fitness</Link></td>
+          <td className="rowHeader"><Link to='/fitness'>Did you workout today?</Link></td>
           <td> 
 
           </td>
@@ -129,7 +146,7 @@ export default function Dashboard({token, weekArray}) {
           <td> {questionmark} </td>
         </tr>
         <tr>
-          <td className="rowHeader"><Link to='/sleep'>Sleep</Link></td>
+          <td className="rowHeader"><Link to='/sleep'>Did you meet your sleep goal today?</Link></td>
           <td> {checkmark} </td>
           <td> {checkmark} </td>
           <td> {redX} </td>
@@ -139,7 +156,7 @@ export default function Dashboard({token, weekArray}) {
           <td> {questionmark} </td>
         </tr>
         <tr>
-          <td className="rowHeader"><Link to='/hydration'>Hydration</Link></td>
+          <td className="rowHeader"><Link to='/hydration'>Did you meet your hydration goal today?</Link></td>
           <td> {onewater} </td>
           <td> {onewater} </td>
           <td> {threewater} </td>
