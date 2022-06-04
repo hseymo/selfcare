@@ -14,7 +14,6 @@ import API from "./utils/API";
 import Exercise from './components/pages/exercise/Exercise';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState(null);
