@@ -92,38 +92,6 @@ export default function Dashboard({token, weekArray}) {
     })
   }, [token])
 
-    const checkmark = '✅';
-    const redX= '❌';
-    const questionmark = '⁇'
-    const onewater = '💧';
-    const threewater = '💦';
-
-
-    // FOR INDIVIDUAL PAGES
-    useEffect(() => {
-      API.getUserFitness(token).then((userData)=>{
-      userData.map(entry => {
-        const {id, date, activity_type, activity_duration, RPE, notes} = entry;
-      })
-      })
-    }, [token])
-
-    useEffect(() => {
-      API.getUserSleep(token).then((userData)=>{
-      userData.map(entry => {
-        const {id, date, time_asleep, diff_falling_asleep, diff_staying_asleep, mood_upon_wake } = entry;
-      })
-      })
-    }, [token])
-
-    useEffect(() => {
-      API.getUserHydration(token).then((userData)=>{
-      userData.map(entry => {
-        const { id, date, water_oz } = entry;
-      })
-      })
-    }, [token])
-
     return (
         <div className="Dashboard">
             <h1>{name}'s Dashboard for the Week</h1>
@@ -163,12 +131,13 @@ export default function Dashboard({token, weekArray}) {
         </tr>
         <tr>
           <td className="rowHeader"><Link to='/fitness'>Did you workout today?</Link></td>
-          <td> {redX} </td>
-          <td> {redX} </td>
-          <td> {checkmark} </td>
-          <td> {checkmark} </td>
-          <td> {questionmark} </td>
-          <td> {questionmark} </td>
+          <td> ❌ </td>
+          <td> ✅ </td>
+          <td> ⁇ </td>
+          <td> ✅ </td>
+          <td> ✅ </td>
+          <td> ❌ </td>
+          <td> ❌ </td>
         </tr>
       </table>
       
@@ -203,23 +172,23 @@ export default function Dashboard({token, weekArray}) {
           {/* {sleepData.forEach((sleep) => (
             console.log('sleepy')
           ))} */}
-          <td> {checkmark} </td>
-          <td> {checkmark} </td>
-          <td> {redX} </td>
-          <td> {checkmark} </td>
-          <td> {checkmark} </td>
-          <td> {checkmark} </td>
-          <td> {questionmark} </td>
+          <td> ✅ </td>
+          <td> ✅ </td>
+          <td> ✅ </td>
+          <td> ❌ </td>
+          <td> ❌ </td>
+          <td> ✅ </td>
+          <td> ❌ </td>
         </tr>
         <tr>
           <td className="rowHeader"><Link to='/hydration'>Did you meet your hydration goal today?</Link></td>
-          <td> {onewater} </td>
-          <td> {onewater} </td>
-          <td> {threewater} </td>
-          <td> {onewater} </td>
-          <td> {threewater} </td>
-          <td> {threewater} </td>
-          <td> {threewater} </td>
+          <td> 💧 </td>
+          <td> 💦 </td>
+          <td> 💧 </td>
+          <td> 💦 </td>
+          <td> 💦 </td>
+          <td> 💦 </td>
+          <td> 💧 </td>
         </tr>
         </table>
       <h3>Click on a category to see more!</h3>

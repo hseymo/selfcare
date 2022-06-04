@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './sleep.css';
 import { Card, Button, Form } from 'react-bootstrap';
+import API from "../../../utils/API.js"
 
-export default function Sleep() {
+export default function Sleep(token) {
+
 
     const [sleepDate, setSleepDate] = useState('');
     const [timeAsleep, setTimeAsleep] = useState('');
@@ -40,6 +42,13 @@ export default function Sleep() {
         setMoodAwake('');
     };
 
+    useEffect(() => {
+        API.getUserSleep(token).then((userData)=>{
+        userData.map(entry => {
+          const {id, date, time_asleep, diff_falling_asleep, diff_staying_asleep, mood_upon_wake } = entry;
+        })
+        })
+      }, [token])
 
     return (
         <Card className="sleep">

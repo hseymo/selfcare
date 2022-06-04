@@ -1,8 +1,16 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './Exercise.css'
 import { Card, Button, Form } from 'react-bootstrap';
+import API from "../../../utils/API.js"
 
-export default function Fitness() {
+export default function Fitness(token) {
+    useEffect(() => {
+        API.getUserFitness(token).then((userData)=>{
+        userData.map(entry => {
+          const {id, date, activity_type, activity_duration, RPE, notes} = entry;
+        })
+        })
+      }, [token])
     return (
         <Card className="fitness">
             <h1>Exercise</h1>
