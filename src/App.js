@@ -13,11 +13,13 @@ import Profile from './components/pages/profile/profile'
 import API from "./utils/API";
 import Exercise from './components/pages/exercise/Exercise';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import weekArray from "./utils/weekdates";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState(null);
   const [token, setToken] = useState(null);
+  // const [sleepData, setSleepData] = useState()
 
   useEffect(()=>{
     const storedToken = localStorage.getItem("token")
@@ -72,14 +74,46 @@ function App() {
     <BrowserRouter>
       <Header isLoggedIn={isLoggedIn} userId={userId} logout={logout} />
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/login' element={<Login signup={handleSignupSubmit} login={handleLoginSubmit} />} />
-        <Route path='/dashboard' element={<Dashboard userId={userId} token={token} />} />
-        <Route path='/profile' element={<Profile userId={userId} token={token}/>} />
-        <Route path='/fitness' element={<Exercise userId={userId} token={token}/>} />
-        <Route path='/sleep' element={<Sleep userId={userId} token={token} />} />
-        <Route path='/hydration' element={<Hydration userId={userId} token={token}/>} />
-        <Route path='/mindfulness' element={<Mindfulness userId={userId}token={token} />} />
+        <Route 
+          path='/' 
+          element={<Home />} />
+        <Route 
+          path='/login' 
+          element={<Login 
+            signup={handleSignupSubmit} 
+            login={handleLoginSubmit} />} />
+        <Route 
+          path='/dashboard' 
+          element={<Dashboard 
+            userId={userId} 
+            token={token} 
+            weekArray={weekArray} 
+            />} />
+        <Route 
+          path='/profile' 
+          element={<Profile 
+            userId={userId} 
+            token={token}/>} />
+        <Route 
+          path='/fitness' 
+          element={<Exercise 
+            userId={userId} 
+            token={token}/>} />
+        <Route 
+          path='/sleep' 
+          element={<Sleep 
+            userId={userId} 
+            token={token} />} />
+        <Route 
+          path='/hydration' 
+          element={<Hydration 
+            userId={userId} 
+            token={token}/>} />
+        <Route 
+          path='/mindfulness' 
+          element={<Mindfulness 
+            userId={userId} 
+            token={token} />} />
       </Routes>
     </BrowserRouter>
   );

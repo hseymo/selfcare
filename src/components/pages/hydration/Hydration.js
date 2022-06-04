@@ -1,9 +1,18 @@
 import { clear } from '@testing-library/user-event/dist/clear';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './hydration.css';
 import { Card, Button, Form } from 'react-bootstrap';
+import API from "../../../utils/API.js"
 
-export default function Hydration() {
+export default function Hydration(token) {
+
+    useEffect(() => {
+        API.getUserHydration(token).then((userData)=>{
+        userData.map(entry => {
+          const { id, date, water_oz } = entry;
+        })
+        })
+      }, [token])
 
     function handleSubmit(e) {
         e.preventDefault();
