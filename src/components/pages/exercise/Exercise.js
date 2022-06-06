@@ -147,7 +147,7 @@ export default function Fitness({token, weekArray}) {
                             name="formType" 
                             onChange={(e) => setFormType(e.target.value)}/>
                         <Form.Label htmlFor="formDuration">
-                            How long did you exercise for?
+                            How long did you exercise for (in minutes)?
                         </Form.Label>
                         <Form.Check 
                             value={formDuration}

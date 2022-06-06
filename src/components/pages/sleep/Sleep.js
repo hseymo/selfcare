@@ -33,6 +33,7 @@ const [existingItem, setExistingItem] = useState('');
 
                 newObj.id = id;
                 newObj.time_asleep = time_asleep;
+                newObj.mood_upon_wake = mood_upon_wake;
                 if (diff_falling_asleep === true ) {
                     newObj.diff_falling_asleep = 'true'
                 } else {
@@ -44,8 +45,10 @@ const [existingItem, setExistingItem] = useState('');
                     newObj.diff_staying_asleep = 'false'
                 }
                 console.log(newObj)
-                sleepArray.push(newObj);
-            }})
+            }
+            sleepArray.push(newObj);
+        })
+            console.log(sleepArray)
             sleepArray[0].day = 'Monday';
             sleepArray[1].day = 'Tuesday';
             sleepArray[2].day = 'Wednesday';
@@ -53,7 +56,6 @@ const [existingItem, setExistingItem] = useState('');
             sleepArray[4].day = 'Friday';
             sleepArray[5].day = 'Saturday';
             sleepArray[6].day = 'Sunday';
-            console.log(sleepArray)
             setThisWeek(sleepArray)
         })
     }, [token])
@@ -171,7 +173,7 @@ const [existingItem, setExistingItem] = useState('');
                         placeholder="true/false"
                     />
                     <br />
-                    <Form.Label htmlFor='moodAwake'>How did you feel when you woke up?</Form.Label>
+                    <Form.Label htmlFor='formMood'>How did you feel when you woke up?</Form.Label>
                     <Form.Check
                         value={formMood}
                         type="text"
