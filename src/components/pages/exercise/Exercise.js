@@ -6,6 +6,12 @@ import ExerciseCard from "./ExerciseCard"
 
 export default function Fitness({token, weekArray}) {
     const [thisWeek, setThisWeek] = useState([])
+    const [formDate, setFormDate] = useState('');
+    const [formType, setFormType] = useState('');
+    const [formDuration, setFormDuration] = useState('');
+    const [formRPE, setFormRPE] = useState('');
+    const [formNotes, setFormNotes] = useState('')
+
     useEffect(() => {
         API.getUserFitness(token).then((userData)=>{
             // console.log(userData)
@@ -40,35 +46,79 @@ export default function Fitness({token, weekArray}) {
             setThisWeek(fitnessArray)
         })
       }, [token])
+
+      function handleFormSubmit(e) {
+        e.preventDefault();
+        setFormDate('');
+        setFormType('');
+        setFormDuration('');
+        setFormRPE('');
+        setFormNotes('');
+    }
+
     return (
         <Card className="fitness">
             <h1>Exercise</h1>
             <h2>Your Goals</h2>
-            <Form className="form">
-                {[''].map((type) => (
-                    <Card key={`default-${type}`} className="mb-3">
-                        <Form.Check
-                            type={type}
-                            id={`default-${type}`}
-                            label={`days ${type}`}
-                        />
-                    </Card>
-                ))}
-            </Form>
 
-            <Form className="form">
-                {[''].map((type) => (
-                    <Card key={`default-${type}`} className="mb-3">
-                        <Form.Check
-                            type={type}
-                            id={`default-${type}`}
-                            label={`minutes ${type}`}
-                        />
-                    </Card>
-                ))}
-            </Form>
             <br />
-            <Form.Check className="fitnessDate" type="date"></Form.Check>
+            <Form 
+                onSubmit={handleFormSubmit}
+                >
+                <h2>Report fitness data</h2>
+                    <Card className="fitnessForm">
+                        <Form.Label htmlFor="formDate">
+                            Choose date:
+                        </Form.Label>
+                        <Form.Check 
+                            value={formDate}
+                            type="date" 
+                            id="formDate" 
+                            name="formDate"
+                            onChange={(e) => setFormDate(e.target.value)}/>
+                        <Form.Label htmlFor="formType">
+                            What type of exercise did you complete?
+                        </Form.Label>
+                        <Form.Check 
+                            value={formType}
+                            type="text" 
+                            id="formType" 
+                            name="formType" 
+                            onChange={(e) => setFormType(e.target.value)}/>
+                        <Form.Label htmlFor="formDuration">
+                            How long did you exercise for?
+                        </Form.Label>
+                        <Form.Check 
+                            value={formDuration}
+                            type="number" 
+                            id="formDuration" 
+                            name="formDuration" 
+                            onChange={(e) => setFormDuration(e.target.value)}/>
+                        <Form.Label htmlFor="formRPE">
+                            On an Rate of Perceived Exertion Scale (RPE) from 0 (easy) to 10 (extremely difficult), how hard did you work?
+                        </Form.Label>
+                        <Form.Check 
+                            value={formRPE}
+                            type="number" 
+                            min="0"
+                            max='10'
+                            id="formRPE" 
+                            name="formRPE" 
+                            onChange={(e) => setFormRPE(e.target.value)}/>
+                        <Form.Label htmlFor="formNotes">
+                            Notes from your workout:
+                        </Form.Label>
+                        <Form.Check 
+                            value={formNotes}
+                            type="text" 
+                            id="formNotes" 
+                            name="formNotes" 
+                            onChange={(e) => setFormNotes(e.target.value)}/>
+                        <br />
+                        <Button type="submit">Submit</Button>
+                    </Card>
+                </Form>
+
             <br />
             <h3>This week's fitness reporting: </h3>
             <ExerciseCard

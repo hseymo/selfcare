@@ -27,6 +27,6 @@
     flex-direction: column;
 }
 
-#sleepDay, #sleepTime, #sleepFall, #sleepStay, #sleepFeel {
+#formDate, #formTime, #formDiffFall, #formDiffStay, #formMood {
     height: 30px;
 }
