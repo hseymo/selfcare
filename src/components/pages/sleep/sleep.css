@@ -13,15 +13,6 @@
     text-decoration: underline;
 }
 
-.sleepWeek {
-    background: #b8947e;
-    display: flex;
-    justify-content: center;    
-    padding: 15px;
-    margin: 10px;
-    font-weight:bolder;
-}
-
 .form-horizontal {
     background: #b8947e;
     display: flex;
