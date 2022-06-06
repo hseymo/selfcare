@@ -161,8 +161,9 @@ export default function Sleep({ token, weekArray }) {
                     onChange={(e) => setFormDiffFall(e.target.value)}
                     placeholder="true/false"
                 >
-                    <option value='true'>Yes</option>
-                    <option value='false'>No</option>
+                    <option disabled={true} value=''>Select an option</option>
+                    <option value={true}>Yes</option>
+                    <option value={false}>No</option>
                 </Form.Select>
                 <br />
                 <Form.Label htmlFor='formDiffStay'>Did you have difficulty staying asleep?</Form.Label>
@@ -175,8 +176,9 @@ export default function Sleep({ token, weekArray }) {
                     onChange={(e) => setFormDiffStay(e.target.value)}
                     placeholder="true/false"
                 >
-                    <option value='true'>Yes</option>
-                    <option value='false'>No</option>
+                    <option disabled={true} value=''>Select an option</option>
+                    <option value={true}>Yes</option>
+                    <option value={false}>No</option>
                 </Form.Select>
                 <br />
                 <Form.Label htmlFor='moodAwake'>How did you feel when you woke up?</Form.Label>
