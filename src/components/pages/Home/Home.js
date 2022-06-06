@@ -3,7 +3,7 @@ import { Card, Container } from 'react-bootstrap';
 import { CardHeader } from 'react-bootstrap/esm/CardHeader';
 import { useTransition, animated, config } from 'react-spring';
 import { useInterval } from 'usehooks-ts'
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 import './home.css';
@@ -22,30 +22,33 @@ export default function Home() {
     // useInterval(increment, 2000)
     const transitions = useTransition(index, {
         key: index,
-        from: { opacity: 0, transform: 'scale(1.1)' },
+        from: { opacity: 0, transform: 'scale(1.02)' },
         enter: { opacity: 1, transform: 'scale(1)' },
-        leave: { opacity: 0, transform: 'scale(0.9)' },
-        config: {duration: 3000},
+        leave: { opacity: 0, transform: 'scale(0.99)' },
+        config: config.molasses ,
         onRest: (_a, _b, item) => {
             if (index === item) {
-              set(state => (state + 1) % slides.length)
+                set(state => (state + 1) % slides.length)
             }
-          },
-          exitBeforeEnter: true,
+        },
+        exitBeforeEnter: true,
     })
     // useEffect(() => void setInterval(() => set(state => (state + 1) % 4), 2000), [])
     return (
         <>
-        {transitions((style, i) => (
-            <animated.div
-                className="backgroundImage"
-                style={{
-                    ...style, backgroundImage: `url(${slides[i]})`
+            {transitions((style, i) => (
+                <animated.div
+                    className="backgroundImage"
+                    style={{
+                        ...style, backgroundImage: `url(${slides[i]})`
 
-                }} />
-        ))}
-            
-            <div className="homePage">
+                    }} >
+                    <div className="container">
+                    </div>
+                </animated.div>
+            ))}
+
+            <div className="container">
                 <h3>Welcome to your one stop shop for all things lifestyle!</h3>
                 <h3>Let us take care of you!</h3>
                 <h3>Check out our fitness, sleep and hydration trackers as well as our meditation hub.</h3>
@@ -54,7 +57,7 @@ export default function Home() {
                 {/* dashboard redirect if logged in */}
                 <a className='enter' href='/login'>Enter</a>
             </div>
-            <Container>
+            {/* <Container>
                 <Card>
                     <Card.Body>
                         <Card.Title>
@@ -64,7 +67,7 @@ export default function Home() {
                         This is the body of the card
                     </Card.Body>
                 </Card>
-            </Container>
+            </Container> */}
         </>
     );
 }
