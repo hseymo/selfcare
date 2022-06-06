@@ -31,24 +31,24 @@ export default function Sleep({ token, weekArray }) {
                 } else {
                     const { id, date, time_asleep, diff_falling_asleep, diff_staying_asleep, mood_upon_wake } = response;
 
-                    console.log('diff falling', diff_falling_asleep)
-
-                    newObj.id = id;
-                    newObj.time_asleep = time_asleep;
-                    if (diff_falling_asleep === true) {
-                        newObj.diff_falling_asleep = 'true'
-                    } else {
-                        newObj.diff_falling_asleep = 'false'
-                    }
-                    if (diff_staying_asleep === true) {
-                        newObj.diff_staying_asleep = 'true'
-                    } else {
-                        newObj.diff_staying_asleep = 'false'
-                    }
-                    console.log(newObj)
-                    sleepArray.push(newObj);
+                newObj.id = id;
+                newObj.time_asleep = time_asleep;
+                newObj.mood_upon_wake = mood_upon_wake;
+                if (diff_falling_asleep === true ) {
+                    newObj.diff_falling_asleep = 'true'
+                } else {
+                    newObj.diff_falling_asleep = 'false'
                 }
-            })
+                if (diff_staying_asleep === true) {
+                    newObj.diff_staying_asleep = 'true'
+                } else {
+                    newObj.diff_staying_asleep = 'false'
+                }
+                console.log(newObj)
+            }
+            sleepArray.push(newObj);
+        })
+            console.log(sleepArray)
             sleepArray[0].day = 'Monday';
             sleepArray[1].day = 'Tuesday';
             sleepArray[2].day = 'Wednesday';
@@ -56,7 +56,6 @@ export default function Sleep({ token, weekArray }) {
             sleepArray[4].day = 'Friday';
             sleepArray[5].day = 'Saturday';
             sleepArray[6].day = 'Sunday';
-            console.log(sleepArray)
             setThisWeek(sleepArray)
         })
     }, [token])
