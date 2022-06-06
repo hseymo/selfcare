@@ -17,9 +17,18 @@ export default function ExerciseCard(props) {
         ) : (
             <>
                 <li>Activity Type: {result.activity_type}</li>
-                <li>Activity Duration: {result.activity_duration}</li>
+                <li>Activity Duration: {result.activity_duration} minutes</li>
+            { result.RPE ? (
                 <li>RPE: {result.RPE}</li>
+            ) : (
+                <></>
+            )}
+
+            { result.notes ? (
                 <li>Notes: {result.notes}</li>
+            ) : (
+                <></>
+            )}      
                 </>
         )} 
         </Card.Text>

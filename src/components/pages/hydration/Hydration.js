@@ -90,6 +90,32 @@ export default function Hydration({token, userId, weekArray}) {
         setUpdateReq(true)
     }, [waterObj])
 
+    // const handleUpdate = useCallback(async (e) => {
+    //     e.preventDefault();
+    //     await function objectCreation() {setWaterObj({
+    //         date: waterDate,
+    //         water_oz: waterAmount
+    //     })
+    // }
+    //     API.updateHydrationEntry(token, waterObj).then((res) => {
+    //         console.log(res);
+    //         console.log('Hydration Entry updated')
+    //     })
+    // })
+
+    // const handleSubmit = useCallback(async (e) => {
+    //     e.preventDefault();
+    //     await function objectCreation() {setWaterObj({
+    //         date: waterDate,
+    //         water_oz: waterAmount
+    //     })
+    // }
+    //     API.postHydrationEntry(token, waterObj).then((res) => {
+    //         console.log(res);
+    //         console.log('New hydration entry created')
+    //     })
+    // })
+
     const sendDelete = useCallback(async () => {
         API.deleteHydrationEntry(token, waterDate).then((response) => {
             console.log(response)

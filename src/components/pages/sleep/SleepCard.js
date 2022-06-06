@@ -17,9 +17,24 @@ return (
         ) : (
             <>
             <li>Time Asleep: {result.time_asleep}</li>
+
+            { result.diff_falling_asleep ? (
             <li>Difficulty Falling Asleep? {result.diff_falling_asleep}</li>
+            ) : (
+                <></>
+            )}
+
+            { result.diff_staying_asleep ? (
             <li>Difficulty Staying Asleep? {result.diff_staying_asleep}</li>
+            ) : (
+                <></>
+            )}
+
+            { result.mood_upon_wake ? (
             <li>Mood Upon Wake: {result.mood_upon_wake}</li>
+            ) : (
+                <></>
+            )}
             </>
         )}
         </ul>
