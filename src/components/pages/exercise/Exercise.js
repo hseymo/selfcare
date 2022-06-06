@@ -5,7 +5,7 @@ import API from "../../../utils/API.js"
 import ExerciseCard from "./ExerciseCard"
 
 export default function Fitness({token, weekArray}) {
-    const [thisWeek, setThisWeek] = useState([])
+    const [thisWeek, setThisWeek] = useState([]);
     const [formDate, setFormDate] = useState('');
     const [formType, setFormType] = useState('');
     const [formDuration, setFormDuration] = useState('');
@@ -119,7 +119,7 @@ export default function Fitness({token, weekArray}) {
 
     return (
         <Card className="fitness">
-            <h1>Exercise</h1>
+            <h1>Fitness</h1>
             <h2>Your Goals</h2>
 
             <br />
