@@ -1,6 +1,6 @@
 .loginPageBody {
     display: flex;
-    background: linear-gradient(#75716D,#e0dedd)
+    background: #8a5f49;
 }
 
 .signUpSection, .logInSection {
