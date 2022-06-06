@@ -54,9 +54,10 @@
 .fitnessWeek h4 {
     padding-bottom: 30px;
 }
-.fitnessInput, .form-check-input {
-    padding-bottom: 5px;
+#formDate, #formType, #formDuration, #formRPE, #formNotes {
+    /* padding-bottom: 5px; */
     max-width: 120px;
+    height: 25px;
 }
 
 .fitnessForm.card {

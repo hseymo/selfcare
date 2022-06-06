@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import { Card, Button, Form } from 'react-bootstrap';
+import './exerciseCard.css'
 
 export default function ExerciseCard(props) {
     return (
