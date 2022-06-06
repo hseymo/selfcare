@@ -6,6 +6,17 @@ div {
     background-color: transparent;
 }
 
+.backgroundImage {
+    padding: 5px;
+    margin: 10px;
+    top: 0;
+    left: 0;
+    max-width: 99%;
+    height: 1000px;
+    background-size: cover;
+    background-position: center;
+}
+
 .homePage.card {
     background: transparent;
     color: white;
