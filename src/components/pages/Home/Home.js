@@ -36,6 +36,7 @@ export default function Home() {
     // useEffect(() => void setInterval(() => set(state => (state + 1) % 4), 2000), [])
     return (
         <>
+                    
             {transitions((style, i) => (
                 <animated.div
                     className="backgroundImage"
@@ -47,16 +48,16 @@ export default function Home() {
                     </div>
                 </animated.div>
             ))}
+                    <div className="container">
+                        <h3>Welcome to your one stop shop for all things lifestyle!</h3>
+                        <h3>Let us take care of you!</h3>
+                        <h3>Check out our fitness, sleep and hydration trackers as well as our meditation hub.</h3>
+                        <h3>Enjoy and love yourself!</h3>
+                        <p> 💛 Chris, Jaden, Kalif and Haley (your website creators)</p>
+                        {/* dashboard redirect if logged in */}
+                        <a className='enter' href='/login'>Enter</a>
+                    </div>
 
-            <div className="container">
-                <h3>Welcome to your one stop shop for all things lifestyle!</h3>
-                <h3>Let us take care of you!</h3>
-                <h3>Check out our fitness, sleep and hydration trackers as well as our meditation hub.</h3>
-                <h3>Enjoy and love yourself!</h3>
-                <p> 💛 Chris, Jaden, Kalif and Haley (your website creators)</p>
-                {/* dashboard redirect if logged in */}
-                <a className='enter' href='/login'>Enter</a>
-            </div>
             {/* <Container>
                 <Card>
                     <Card.Body>
