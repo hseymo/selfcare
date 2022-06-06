@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './sleep.css';
 import { Card, Button, Form } from 'react-bootstrap';
 import API from "../../../utils/API.js"
@@ -10,7 +10,11 @@ const [formDate, setFormDate] = useState('');
 const [formTime, setFormTime] = useState('');
 const [formDiffFall, setFormDiffFall] = useState('');
 const [formDiffStay, setFormDiffStay] = useState('');
-const [formMood, setFormMood] = useState('')
+const [formMood, setFormMood] = useState('');
+const [formObj, setFormObj] = useState({});
+const [deleteReq, setDeleteReq] = useState('');
+const [updateReq, setUpdateReq] = useState('');
+const [existingItem, setExistingItem] = useState('');
 
     useEffect(() => {
         API.getUserSleep(token).then((userData)=>{
@@ -30,14 +34,14 @@ const [formMood, setFormMood] = useState('')
                 newObj.id = id;
                 newObj.time_asleep = time_asleep;
                 if (diff_falling_asleep === true ) {
-                    newObj.diff_falling_asleep = 'Yes'
+                    newObj.diff_falling_asleep = 'true'
                 } else {
-                    newObj.diff_falling_asleep = 'No'
+                    newObj.diff_falling_asleep = 'false'
                 }
                 if (diff_staying_asleep === true) {
-                    newObj.diff_staying_asleep = 'Yes'
+                    newObj.diff_staying_asleep = 'true'
                 } else {
-                    newObj.diff_staying_asleep = 'No'
+                    newObj.diff_staying_asleep = 'false'
                 }
                 newObj.mood_upon_wake = mood_upon_wake;
             }
@@ -56,23 +60,69 @@ const [formMood, setFormMood] = useState('')
         })
       }, [token])
 
-    const [sleepDate, setSleepDate] = useState('');
-    const [timeAsleep, setTimeAsleep] = useState('');
-    const [diffFallingAsleep, setDiffFallingAsleep] = useState('');
-    const [diffStayingAsleep, setDiffStayingAsleep] = useState('');
-    const [moodAwake, setMoodAwake] = useState('');
+    useEffect(() => {
+        API.getOneUserSleep(token, formDate).then((res) => {
+            console.log(res)
+            if (res.id) {
+                setFormTime(res.time_asleep);
+                setFormDiffFall(res.diff_falling_asleep);
+                setFormDiffStay(res.diff_staying_asleep);
+                setFormMood(res.mood_upon_wake);
+                setExistingItem(true);
+            } else {
+                setFormTime('');
+                setFormDiffFall('');
+                setFormDiffStay('');
+                setFormMood('');
+                setExistingItem(false);
+            }
+        })
+    }, [formDate])
 
-    const handleFormSubmit = (e) => {
+    function handleFormSubmit (e) {
         e.preventDefault();
-
-        console.log('sleep data submitted')
-
-        setSleepDate('');
-        setTimeAsleep('');
-        setDiffFallingAsleep('');
-        setDiffStayingAsleep('');
-        setMoodAwake('');
+        if (formDate != '' && formTime != '') {
+            setFormObj({
+                date: formDate,
+                time_asleep: formTime,
+                diff_falling_asleep: formDiffFall,
+                diff_staying_asleep: formDiffStay,
+                mood_upon_wake: formMood
+            })
+            console.log('sleep form object', formObj)
+        setFormDate('')
+        setFormTime('');
+        setFormDiffFall('');
+        setFormDiffStay('');
+        setFormMood('');
+        } else {
+            alert("Please enter date and time asleep")
+        }
     };
+
+    useEffect(()=> {
+        if (existingItem == true) {
+            API.updateSleepEntry(token, formObj).then((res) => {
+                console.log(res);
+                console.log('Sleep entry updated')
+            })
+        } else if (existingItem == false) {
+            API.postSleepEntry(token, formObj).then((res) => {
+                console.log(res);
+                console.log('New sleep entry created')
+            })
+        }
+        // NEED TO RELOAD CARDS
+        setUpdateReq(true)
+    }, [formObj])
+
+    const sendDelete = useCallback(async () => {
+        API.deleteSleepEntry(token, formDate).then((response) => {
+            console.log(response)
+        })
+        // NEED TO RELOAD CARDS
+        setUpdateReq(true)
+    })
 
     return (
         <Card className="sleep">
@@ -109,7 +159,7 @@ const [formMood, setFormMood] = useState('')
                         id="formDiffFall"
                         name="formDiffFall"
                         onChange={(e) => setFormDiffFall(e.target.value)}
-                        placeholder="True/False"
+                        placeholder="true/false"
                     />
                     <br />
                     <Form.Label htmlFor='formDiffStay'>Did you have difficulty staying asleep?</Form.Label>
@@ -120,7 +170,7 @@ const [formMood, setFormMood] = useState('')
                         id="formDiffStay"
                         name="formDiffStay"
                         onChange={(e) => setFormDiffStay(e.target.value)}
-                        placeholder="True/False"
+                        placeholder="true/false"
                     />
                     <br />
                     <Form.Label htmlFor='moodAwake'>How did you feel when you woke up?</Form.Label>
@@ -133,6 +183,12 @@ const [formMood, setFormMood] = useState('')
                         placeholder="Rested"
                     />
                     <Button type="submit">Submit</Button>
+                    { (existingItem == true) ? (
+                            <Button type="button"
+                            onClick={sendDelete}>Delete</Button>
+                        ) : (
+                            <></>
+                        )}
                 </Form>
         <h3> This week's sleep reporting:</h3>
         <SleepCard 

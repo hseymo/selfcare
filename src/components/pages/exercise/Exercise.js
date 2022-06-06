@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import './Exercise.css'
 import { Card, Button, Form } from 'react-bootstrap';
 import API from "../../../utils/API.js"
@@ -10,7 +10,11 @@ export default function Fitness({token, weekArray}) {
     const [formType, setFormType] = useState('');
     const [formDuration, setFormDuration] = useState('');
     const [formRPE, setFormRPE] = useState('');
-    const [formNotes, setFormNotes] = useState('')
+    const [formNotes, setFormNotes] = useState('');
+    const [formObj, setFormObj] = useState({});
+    const [deleteReq, setDeleteReq] = useState('');
+    const [updateReq, setUpdateReq] = useState('');
+    const [existingItem, setExistingItem] = useState('');
 
     useEffect(() => {
         API.getUserFitness(token).then((userData)=>{
@@ -55,6 +59,14 @@ export default function Fitness({token, weekArray}) {
         setFormRPE('');
         setFormNotes('');
     }
+
+    const sendDelete = useCallback(async () => {
+        API.deleteFitnessEntry(token, formDate).then((response) => {
+            console.log(response)
+        })
+        // NEED TO RELOAD CARDS
+        setUpdateReq(true)
+    })
 
     return (
         <Card className="fitness">
@@ -116,6 +128,12 @@ export default function Fitness({token, weekArray}) {
                             onChange={(e) => setFormNotes(e.target.value)}/>
                         <br />
                         <Button type="submit">Submit</Button>
+                        { (existingItem == true) ? (
+                            <Button type="button"
+                            onClick={sendDelete}>Delete</Button>
+                        ) : (
+                            <></>
+                        )}
                     </Card>
                 </Form>
 

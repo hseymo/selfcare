@@ -61,6 +61,8 @@ module.exports = {
         }).then(res=>res.json())
     },
 
+    // FITNESS
+
     getUserFitness: (token) => {
         return fetch(`${BASE_URL}/api/fitness/user/me`,{
             headers:{
@@ -69,26 +71,46 @@ module.exports = {
         .then(res=> res.json())
     },
 
-    // updateFitnessEntry: (token, goalData) => {
-    //     return fetch(`${BASE_URL}/api/fitness/:id`,{
-    //         method:"PUT",
-    //         body:JSON.stringify(goalData),
-    //         headers:{
-    //             authorization:`Bearer ${token}`,
-    //             "Content-Type":"application/json"
-    //         }
-    //     }).then(res=>res.json())
-    // },
+    getOneUserFitness: (token, fitnessDate) => {
+        return fetch(`${BASE_URL}/api/fitness/user/me/${fitnessDate}`,{
+            headers:{
+                authorization:`Bearer ${token}`
+            }} )
+        .then(res=> res.json())
+    },
 
-    // deleteFitnessEntry: (token, goalData) => {
-    //     return fetch(`${BASE_URL}/api/fitness/:id`,{
-    //         method:"DELETE",
-    //         body:JSON.stringify(goalData),
-    //         headers:{
-    //             authorization:`Bearer ${token}`,
-    //         }
-    //     }).then(res=>res.json())
-    // },
+    postFitnessEntry: (token, fitnessObj) => {
+        return fetch(`${BASE_URL}/api/fitness`,{
+            method:"POST",
+            body:JSON.stringify(fitnessObj),
+            headers:{
+                authorization:`Bearer ${token}`,
+                "Content-Type":"application/json"
+            }
+        }).then(res=>res.json())
+    },
+
+    updateFitnessEntry: (token, fitnessObj) => {
+        return fetch(`${BASE_URL}/api/fitness/update`,{
+            method:"PUT",
+            body:JSON.stringify(fitnessObj),
+            headers:{
+                authorization:`Bearer ${token}`,
+                "Content-Type":"application/json"
+            }
+        }).then(res=>res.json())
+    },
+
+    deleteFitnessEntry: (token, fitnessDate) => {
+        return fetch(`${BASE_URL}/api/fitness/user/me/${fitnessDate}`,{
+            method:"DELETE",
+            headers:{
+                authorization:`Bearer ${token}`
+            }} )
+        .then(res=> res.json())
+    },
+
+    // SLEEP
 
     getUserSleep: (token) => {
         return fetch(`${BASE_URL}/api/sleep/user/me`,{
@@ -98,6 +120,47 @@ module.exports = {
         .then(res=> res.json())
     },
 
+    getOneUserSleep: (token, formDate) => {
+        return fetch(`${BASE_URL}/api/sleep/user/me/${formDate}`,{
+            headers:{
+                authorization:`Bearer ${token}`
+            }} )
+        .then(res=> res.json())
+    },
+
+    postSleepEntry: (token, formObj) => {
+        return fetch(`${BASE_URL}/api/sleep`,{
+            method:"POST",
+            body:JSON.stringify(formObj),
+            headers:{
+                authorization:`Bearer ${token}`,
+                "Content-Type":"application/json"
+            }
+        }).then(res=>res.json())
+    },
+
+    updateSleepEntry: (token, formObj) => {
+        return fetch(`${BASE_URL}/api/sleep/update`,{
+            method:"PUT",
+            body:JSON.stringify(formObj),
+            headers:{
+                authorization:`Bearer ${token}`,
+                "Content-Type":"application/json"
+            }
+        }).then(res=>res.json())
+    },
+
+    deleteSleepEntry: (token, formDate) => {
+        return fetch(`${BASE_URL}/api/sleep/user/me/${formDate}`,{
+            method:"DELETE",
+            headers:{
+                authorization:`Bearer ${token}`
+            }} )
+        .then(res=> res.json())
+    },
+
+    // HYDRATION
+
     getUserHydration: (token) => {
         return fetch(`${BASE_URL}/api/hydration/user/me`,{
             headers:{
@@ -106,13 +169,13 @@ module.exports = {
         .then(res=> res.json())
     },
 
-    // getOneUserHydration: (token, waterDate) => {
-    //     return fetch(`${BASE_URL}/api/hydration/user/me/${waterDate}`,{
-    //         headers:{
-    //             authorization:`Bearer ${token}`
-    //         }} )
-    //     .then(res=> res.json())
-    // },
+    getOneUserHydration: (token, waterDate) => {
+        return fetch(`${BASE_URL}/api/hydration/user/me/${waterDate}`,{
+            headers:{
+                authorization:`Bearer ${token}`
+            }} )
+        .then(res=> res.json())
+    },
 
     postHydrationEntry: (token, waterObj) => {
         return fetch(`${BASE_URL}/api/hydration`,{
@@ -134,5 +197,14 @@ module.exports = {
                 "Content-Type":"application/json"
             }
         }).then(res=>res.json())
+    },
+
+    deleteHydrationEntry: (token, waterDate) => {
+        return fetch(`${BASE_URL}/api/hydration/user/me/${waterDate}`,{
+            method:"DELETE",
+            headers:{
+                authorization:`Bearer ${token}`
+            }} )
+        .then(res=> res.json())
     },
 }

@@ -24,7 +24,6 @@ export default function ExerciseCard(props) {
         )}
         </ul> 
         </Card.Text>
-        <Button variant="primary">Update</Button>
     </Card.Body>
     </Card>
     )}
