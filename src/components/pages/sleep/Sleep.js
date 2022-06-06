@@ -127,7 +127,6 @@ const [existingItem, setExistingItem] = useState('');
     return (
         <Card className="sleep">
             <h1>Sleep</h1>
-            <br />
             <Form className='form-horizontal' onSubmit={handleFormSubmit}>
                 <h2>Report sleep Data</h2>
                     <Form.Label htmlFor='formDate'>Date of sleep</Form.Label>
@@ -138,7 +137,7 @@ const [existingItem, setExistingItem] = useState('');
                         name="formDate"
                         onChange={(e) => setFormDate(e.target.value)}
                     />
-                    <br />
+    
                     <Form.Label htmlFor='formTime'>How long did you sleep?</Form.Label>
                     <Form.Check
                         value={formTime}
@@ -150,7 +149,7 @@ const [existingItem, setExistingItem] = useState('');
                         onChange={(e) => setFormTime(e.target.value)}
                         placeholder="8 hours"
                     />
-                    <br />
+    
                     <Form.Label htmlFor='formDiffFall'>Did you have difficulty falling asleep?</Form.Label>
                     {/* CHANGE TO RADIO BUTTONS */}
                     <Form.Check
@@ -161,7 +160,7 @@ const [existingItem, setExistingItem] = useState('');
                         onChange={(e) => setFormDiffFall(e.target.value)}
                         placeholder="true/false"
                     />
-                    <br />
+    
                     <Form.Label htmlFor='formDiffStay'>Did you have difficulty staying asleep?</Form.Label>
                     {/* CHANGE TO RADIO BUTTONS */}
                     <Form.Check
@@ -172,7 +171,7 @@ const [existingItem, setExistingItem] = useState('');
                         onChange={(e) => setFormDiffStay(e.target.value)}
                         placeholder="true/false"
                     />
-                    <br />
+    
                     <Form.Label htmlFor='formMood'>How did you feel when you woke up?</Form.Label>
                     <Form.Check
                         value={formMood}

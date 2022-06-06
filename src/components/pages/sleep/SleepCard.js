@@ -8,7 +8,7 @@ return (
     <div className='cardHolder'>
         {props.results.map((result) =>  
     <Card className="sleepCards" key={result.id}>
-        <Card.Body>
+        <Card.Body className='sleepBody'>
         <h4>{result.day}</h4>
         <h4>{result.date}</h4>
         <ul className="sleepResults">

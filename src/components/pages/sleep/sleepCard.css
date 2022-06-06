@@ -10,13 +10,19 @@
     padding: 15px;
     margin: 10px;
     font-weight:bolder;
-    width: fit-content;
+    width: 15rem;
+    height: 10rem;
+    max-height: fit-content;
     justify-content: center;
     flex-direction: row;
 }
 
 h4 {
     text-align: center;
+}
+
+.sleepBody {
+    max-height: 15rem;
 }
 
 .sleepResults {
