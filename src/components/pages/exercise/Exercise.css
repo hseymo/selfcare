@@ -15,9 +15,9 @@
     align-items: center;
     justify-content: center;
 }
-.mb-3 {
-    width: fit-content;
-    padding: 0px 7px;
+.btn {
+    width:fit-content;
+    margin-bottom: 3px;
 }
 .form-check-label {
     padding: 0px 5px;
