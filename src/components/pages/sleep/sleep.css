@@ -1,8 +1,9 @@
 .sleep {
-    background: linear-gradient(#017b90, #9fe9ff);
+    background: #b8947e;
 }
 
 .sleep h1 {
+    background: #b8947e;
     padding: 50px 0px;
     display: flex;
     flex-wrap:wrap;
@@ -12,15 +13,8 @@
     text-decoration: underline;
 }
 
-.sleepWeek {
-    display: flex;
-    justify-content: center;    
-    padding: 15px;
-    margin: 10px;
-    font-weight:bolder;
-}
-
 .form-horizontal {
+    background: #b8947e;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -29,4 +23,8 @@
 
 #formDate, #formTime, #formDiffFall, #formDiffStay, #formMood {
     height: 30px;
+}
+
+.card.body {
+    background: #d9ae94;
 }

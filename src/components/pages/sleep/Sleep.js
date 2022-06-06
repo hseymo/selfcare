@@ -17,14 +17,14 @@ const [updateReq, setUpdateReq] = useState('');
 const [existingItem, setExistingItem] = useState('');
 
     useEffect(() => {
-        API.getUserSleep(token).then((userData)=>{
+        API.getUserSleep(token).then((userData) => {
             console.log(userData)
             const sleepArray = [];
-        weekArray.map(entry => {
-            var response = userData.find(data => data.date === entry);
-            console.log(response)
+            weekArray.map(entry => {
+                var response = userData.find(data => data.date === entry);
+                console.log(response)
 
-            let newObj = {date: entry}
+                let newObj = { date: entry }
 
             if (response === undefined) {
                 newObj.status = 'Not Reported';
@@ -43,22 +43,20 @@ const [existingItem, setExistingItem] = useState('');
                 } else {
                     newObj.diff_staying_asleep = 'false'
                 }
-                newObj.mood_upon_wake = mood_upon_wake;
-            }
-            console.log(newObj)
-            sleepArray.push(newObj);
+                console.log(newObj)
+                sleepArray.push(newObj);
+            }})
+            sleepArray[0].day = 'Monday';
+            sleepArray[1].day = 'Tuesday';
+            sleepArray[2].day = 'Wednesday';
+            sleepArray[3].day = 'Thursday';
+            sleepArray[4].day = 'Friday';
+            sleepArray[5].day = 'Saturday';
+            sleepArray[6].day = 'Sunday';
+            console.log(sleepArray)
+            setThisWeek(sleepArray)
         })
-        sleepArray[0].day = 'Monday';
-        sleepArray[1].day = 'Tuesday';
-        sleepArray[2].day = 'Wednesday';
-        sleepArray[3].day = 'Thursday';
-        sleepArray[4].day = 'Friday';
-        sleepArray[5].day = 'Saturday';
-        sleepArray[6].day = 'Sunday';
-        console.log(sleepArray)
-        setThisWeek(sleepArray)
-        })
-      }, [token])
+    }, [token])
 
     useEffect(() => {
         API.getOneUserSleep(token, formDate).then((res) => {
@@ -128,7 +126,7 @@ const [existingItem, setExistingItem] = useState('');
         <Card className="sleep">
             <h1>Sleep</h1>
             <br />
-                <Form className='form-horizontal' onSubmit={handleFormSubmit}>
+            <Form className='form-horizontal' onSubmit={handleFormSubmit}>
                 <h2>Report sleep Data</h2>
                     <Form.Label htmlFor='formDate'>Date of sleep</Form.Label>
                     <Form.Check
