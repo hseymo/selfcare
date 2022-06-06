@@ -5,14 +5,13 @@ import './exerciseCard.css'
 
 export default function ExerciseCard(props) {
     return (
-    <div>
+    <div className="exerciseCardHolder">
     {props.results.map((result) => 
     <Card className="fitnessCards" key={result.id}>
     <Card.Body>
         <h4>{result.day}</h4>
         <h4>{result.date}</h4>
         <Card.Text>
-        <ul>
         { result.status ? (
             <li> No activity reported </li>
         ) : (
@@ -22,10 +21,8 @@ export default function ExerciseCard(props) {
                 <li>RPE: {result.RPE}</li>
                 <li>Notes: {result.notes}</li>
                 </>
-        )}
-        </ul> 
+        )} 
         </Card.Text>
-        <Button variant="primary">Update</Button>
     </Card.Body>
     </Card>
     )}

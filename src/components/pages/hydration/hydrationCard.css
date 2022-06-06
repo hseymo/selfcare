@@ -1,21 +1,25 @@
-.exerciseCardHolder {
-    display: flex;
+.hydrationCardHolder {
+    display:flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.fitnessCards {
+.hydrationCards {
     display: flex;
     justify-content: center;
     padding: 15px;
     margin: 10px;
+    width: fit-content;
+    flex-direction: row;
 }
 
 h4 {
-    font-size: large;
-    font-weight: bolder;
     display: flex;
     justify-content: center;
+}
+
+ul {
+    padding: 0px;
 }
 
 li {
@@ -23,3 +27,4 @@ li {
     width: fit-content;
     text-align: left;
 }
+

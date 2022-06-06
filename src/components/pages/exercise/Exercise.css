@@ -47,7 +47,6 @@
 .fitnessCards {
     display: flex;
     justify-content: center;
-    border: 1px solid blue;
     margin: 2px;
     height: fit-content;
 }
