@@ -127,7 +127,6 @@ export default function Sleep({ token, weekArray }) {
     return (
         <Card className="sleep">
             <h1>Sleep</h1>
-            <br />
             <Form className='form-horizontal' onSubmit={handleFormSubmit}>
                 <h2>Report sleep Data</h2>
                 <Form.Label htmlFor='formDate'>Date of sleep</Form.Label>

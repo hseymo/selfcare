@@ -154,7 +154,6 @@ export default function Hydration({ token, userId, weekArray }) {
                             id="waterAmount"
                             name="waterAmount"
                             onChange={(e) => setWaterAmount(e.target.value)} />
-                        <br />
                         <Button type="submit">Submit</Button>
                         {(existingItem == true) ? (
                             <Button type="button"

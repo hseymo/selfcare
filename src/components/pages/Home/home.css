@@ -29,9 +29,14 @@ div {
 }
 
 .enter {
-    padding: 10px;
-    background: #43a047;
+    padding: 5px;
+    background: #416655;
     border-radius: 5px;
-    border: 5px solid navy;
-    color: white;
+    border: 3px solid rgb(26, 17, 5);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    
+}
+#root {
+    background-color: #916f3da6;
 }
