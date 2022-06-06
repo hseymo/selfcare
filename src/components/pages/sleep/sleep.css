@@ -18,10 +18,14 @@
     margin-left: 10px;
 }
 
-#formDate, #formTime, #formDiffFall, #formDiffStay, #formMood {
+#formDate, #formTime, #formMood {
     height: 30px;
 }
 
+#formDiffFall, #formDiffStay {
+    height: 40px;
+    width: 10%;
+}
 .card.body {
     background: #d9ae94;
 }
