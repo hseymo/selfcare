@@ -51,14 +51,63 @@ export default function Fitness({token, weekArray}) {
         })
       }, [token])
 
+    useEffect(() => {
+        API.getOneUserFitness(token, formDate).then((res) => {
+            console.log(res)
+            if (res.id) {
+                setFormType(res.activity_type);
+                setFormDuration(res.activity_duration);
+                setFormRPE(res.RPE);
+                setFormNotes(res.notes);
+                setExistingItem(true);
+            } else {
+                setFormType('');
+                setFormDuration('');
+                setFormRPE('');
+                setFormNotes('');
+                setExistingItem(false);
+            }
+        })
+    }, [formDate])
+
       function handleFormSubmit(e) {
         e.preventDefault();
-        setFormDate('');
+        if (formDate != '' && formType != '' && formDuration != '') {
+            setFormObj({
+                date: formDate,
+                activity_type: formType,
+                activity_duration: formDuration,
+                RPE: formRPE,
+                notes: formNotes
+            })
+            console.log('fitness form object', formObj)
+        setFormDate('')
         setFormType('');
         setFormDuration('');
         setFormRPE('');
         setFormNotes('');
+        setExistingItem(false);
+        } else {
+            alert("Please enter date, activity type and duraton")
+        }
     }
+
+    useEffect(()=> {
+        // not triggering first block 
+        if (existingItem == true) {
+            API.updateFitnessEntry(token, formObj).then((res) => {
+                console.log(res);
+                console.log('Fitness entry updated')
+            })
+        } else if (existingItem == false) {
+            API.postFitnessEntry(token, formObj).then((res) => {
+                console.log(res);
+                console.log('New fitness entry created')
+            })
+        }
+        // NEED TO RELOAD CARDS
+        setUpdateReq(true)
+    }, [formObj])
 
     const sendDelete = useCallback(async () => {
         API.deleteFitnessEntry(token, formDate).then((response) => {
