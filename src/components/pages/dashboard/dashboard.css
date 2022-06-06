@@ -4,14 +4,14 @@
 
 .Dashboard {
 text-align: center;
-background: linear-gradient(rgb(231, 59, 59),rgb(240, 180, 69));
+background: #797d62;
 }
 
 .goalsList {
     margin-bottom: 40px;
 }
 
-.goalsLi {
+.goalsLi, .compLi {
     list-style-type: none;
     padding: 10px;
 }

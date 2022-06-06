@@ -36,7 +36,7 @@ export default function Profile({token}) {
             sleep_time: sleepGoal,
             hydration_oz: hydrationGoal
         })
-        console.log(goalObject)
+        window.location.href = "/dashboard"
     }
 
     useEffect(() => {

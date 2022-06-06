@@ -5,6 +5,7 @@ import { useTransition, animated, config } from 'react-spring';
 import { useInterval } from 'usehooks-ts'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
 import './home.css';
 
 const slides = [
@@ -67,7 +68,6 @@ export default function Home() {
                     </Card.Body>
                 </Card>
             </Container> */}
-
         </>
     );
 }

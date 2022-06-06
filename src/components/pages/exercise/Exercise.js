@@ -1,116 +1,129 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './Exercise.css'
 import { Card, Button, Form } from 'react-bootstrap';
+import API from "../../../utils/API.js"
+import ExerciseCard from "./ExerciseCard"
 
-export default function Fitness() {
+export default function Fitness({token, weekArray}) {
+    const [thisWeek, setThisWeek] = useState([])
+    const [formDate, setFormDate] = useState('');
+    const [formType, setFormType] = useState('');
+    const [formDuration, setFormDuration] = useState('');
+    const [formRPE, setFormRPE] = useState('');
+    const [formNotes, setFormNotes] = useState('')
+
+    useEffect(() => {
+        API.getUserFitness(token).then((userData)=>{
+            // console.log(userData)
+            const fitnessArray = [];
+            console.log(weekArray)
+            weekArray.map(entry => {
+                var response = userData.find(data => data.date === entry);
+                console.log(response)
+
+                let newObj = {date: entry}
+
+                if (response === undefined) {
+                    newObj.status = 'Not Reported';
+                } else {
+                    const {id, date, activity_type, activity_duration, RPE, notes} = response;
+                    newObj.id = id
+                    newObj.activity_type = activity_type;
+                    newObj.activity_duration = activity_duration;
+                    newObj.RPE = RPE;
+                    newObj.notes = notes;
+                }
+                fitnessArray.push(newObj)
+            })
+            console.log(fitnessArray);
+            fitnessArray[0].day = 'Monday';
+            fitnessArray[1].day = 'Tuesday';
+            fitnessArray[2].day = 'Wednesday';
+            fitnessArray[3].day = 'Thursday';
+            fitnessArray[4].day = 'Friday';
+            fitnessArray[5].day = 'Saturday';
+            fitnessArray[6].day = 'Sunday';
+            setThisWeek(fitnessArray)
+        })
+      }, [token])
+
+      function handleFormSubmit(e) {
+        e.preventDefault();
+        setFormDate('');
+        setFormType('');
+        setFormDuration('');
+        setFormRPE('');
+        setFormNotes('');
+    }
+
     return (
         <Card className="fitness">
             <h1>Exercise</h1>
             <h2>Your Goals</h2>
-            <Form className="form">
-                {[''].map((type) => (
-                    <Card key={`default-${type}`} className="mb-3">
-                        <Form.Check
-                            type={type}
-                            id={`default-${type}`}
-                            label={`days ${type}`}
-                        />
-                    </Card>
-                ))}
-            </Form>
 
-            <Form className="form">
-                {[''].map((type) => (
-                    <Card key={`default-${type}`} className="mb-3">
-                        <Form.Check
-                            type={type}
-                            id={`default-${type}`}
-                            label={`minutes ${type}`}
-                        />
+            <br />
+            <Form 
+                onSubmit={handleFormSubmit}
+                >
+                <h2>Report fitness data</h2>
+                    <Card className="fitnessForm">
+                        <Form.Label htmlFor="formDate">
+                            Choose date:
+                        </Form.Label>
+                        <Form.Check 
+                            value={formDate}
+                            type="date" 
+                            id="formDate" 
+                            name="formDate"
+                            onChange={(e) => setFormDate(e.target.value)}/>
+                        <Form.Label htmlFor="formType">
+                            What type of exercise did you complete?
+                        </Form.Label>
+                        <Form.Check 
+                            value={formType}
+                            type="text" 
+                            id="formType" 
+                            name="formType" 
+                            onChange={(e) => setFormType(e.target.value)}/>
+                        <Form.Label htmlFor="formDuration">
+                            How long did you exercise for?
+                        </Form.Label>
+                        <Form.Check 
+                            value={formDuration}
+                            type="number" 
+                            id="formDuration" 
+                            name="formDuration" 
+                            onChange={(e) => setFormDuration(e.target.value)}/>
+                        <Form.Label htmlFor="formRPE">
+                            On an Rate of Perceived Exertion Scale (RPE) from 0 (easy) to 10 (extremely difficult), how hard did you work?
+                        </Form.Label>
+                        <Form.Check 
+                            value={formRPE}
+                            type="number" 
+                            min="0"
+                            max='10'
+                            id="formRPE" 
+                            name="formRPE" 
+                            onChange={(e) => setFormRPE(e.target.value)}/>
+                        <Form.Label htmlFor="formNotes">
+                            Notes from your workout:
+                        </Form.Label>
+                        <Form.Check 
+                            value={formNotes}
+                            type="text" 
+                            id="formNotes" 
+                            name="formNotes" 
+                            onChange={(e) => setFormNotes(e.target.value)}/>
+                        <br />
+                        <Button type="submit">Submit</Button>
                     </Card>
-                ))}
-            </Form>
+                </Form>
+
             <br />
-            <Form.Check className="fitnessDate" type="date"></Form.Check>
-            <br />
-            <Card className="fitnessWeek">
-                <Card className="fitnessCards">
-                    {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
-                    <Card.Body>
-                        <h4>Monday</h4>
-                        <Card.Text>
-                            <Form.Check className="fitnessInput" type="text"></Form.Check>
-                        </Card.Text>
-                        <Button className="fitnessBtn" variant="primary">Save Daily Changes</Button>
-                    </Card.Body>
-                </Card>
-                <br />
-                <Card className="fitnessCards">
-                    {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
-                    <Card.Body>
-                        <h4>Tuesday</h4>
-                        <Card.Text>
-                            <Form.Check className="fitnessInput" type="text"></Form.Check>
-                        </Card.Text>
-                        <Button variant="primary">Save Daily Changes</Button>
-                    </Card.Body>
-                </Card>
-                <br />
-                <Card className="fitnessCards">
-                    {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
-                    <Card.Body>
-                        <h4>Wednesday</h4>
-                        <Card.Text>
-                            <Form.Check className="fitnessInput" type="text"></Form.Check>
-                        </Card.Text>
-                        <Button variant="primary">Save Daily Changes</Button>
-                    </Card.Body>
-                </Card>
-                <br />
-                <Card className="fitnessCards">
-                    {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
-                    <Card.Body>
-                        <h4>Thursday</h4>
-                        <Card.Text>
-                            <Form.Check className="fitnessInput" type="text"></Form.Check>
-                        </Card.Text>
-                        <Button variant="primary">Save Daily Changes</Button>
-                    </Card.Body>
-                </Card>
-                <br />
-                <Card className="fitnessCards">
-                    {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
-                    <Card.Body>
-                        <h4>Friday</h4>
-                        <Card.Text>
-                            <Form.Check className="fitnessInput" type="text"></Form.Check>
-                        </Card.Text>
-                        <Button variant="primary">Save Daily Changes</Button>
-                    </Card.Body>
-                </Card>
-                <br />
-                <Card className="fitnessCards">
-                    {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
-                    <Card.Body>
-                        <h4>Saturday</h4>
-                        <Card.Text>
-                            <Form.Check className="fitnessInput" type="text"></Form.Check>
-                        </Card.Text>
-                        <Button variant="primary">Save Daily Changes</Button>
-                    </Card.Body>
-                </Card>
-                <br />
-                <Card className="fitnessCards">
-                    {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
-                    <Card.Body>
-                        <h4>Sunday</h4>
-                        <Card.Text>
-                            <Form.Check className="fitnessInput" type="text"></Form.Check>
-                        </Card.Text>
-                        <Button variant="primary">Save Daily Changes</Button>
-                    </Card.Body>
-                </Card>
-            </Card>
+            <h3>This week's fitness reporting: </h3>
+            <ExerciseCard
+            results={thisWeek}
+                />
         </Card>
     );
 }
