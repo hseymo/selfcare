@@ -1,16 +1,17 @@
 import React from 'react'
 import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import './sleepCard.css'
 
 export default function SleepCard(props) {
 return (
-    <div>
+    <div className='cardHolder'>
         {props.results.map((result) =>  
     <Card className="sleepCards" key={result.id}>
         <Card.Body>
         <h4>{result.day}</h4>
         <h4>{result.date}</h4>
-        <ul>
+        <ul className="sleepResults">
         { result.status ? (
             <li> No sleep reported </li>
         ) : (

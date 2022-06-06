@@ -12,14 +12,6 @@
     text-decoration: underline;
 }
 
-.sleepWeek {
-    display: flex;
-    justify-content: center;    
-    padding: 15px;
-    margin: 10px;
-    font-weight:bolder;
-}
-
 .form-horizontal {
     display: flex;
     align-items: center;
