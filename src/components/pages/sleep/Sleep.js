@@ -79,7 +79,7 @@ export default function Sleep({ token, weekArray }) {
         })
     }, [formDate])
 
-    function handleFormSubmit(e) {
+    function handleFormSubmit (e) {
         e.preventDefault();
         if (formDate != '' && formTime != '') {
             setFormObj({

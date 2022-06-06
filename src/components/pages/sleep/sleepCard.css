@@ -11,7 +11,7 @@
     margin: 10px;
     font-weight:bolder;
     width: 15rem;
-    height: 10rem;
+    height: 17rem;
     max-height: fit-content;
     justify-content: center;
     flex-direction: row;
@@ -19,10 +19,6 @@
 
 h4 {
     text-align: center;
-}
-
-.sleepBody {
-    max-height: 15rem;
 }
 
 .sleepResults {
