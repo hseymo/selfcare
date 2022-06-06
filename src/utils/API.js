@@ -69,26 +69,26 @@ module.exports = {
         .then(res=> res.json())
     },
 
-    updateFitnessEntry: (token, goalData) => {
-        return fetch(`${BASE_URL}/api/fitness/:id`,{
-            method:"PUT",
-            body:JSON.stringify(goalData),
-            headers:{
-                authorization:`Bearer ${token}`,
-                "Content-Type":"application/json"
-            }
-        }).then(res=>res.json())
-    },
+    // updateFitnessEntry: (token, goalData) => {
+    //     return fetch(`${BASE_URL}/api/fitness/:id`,{
+    //         method:"PUT",
+    //         body:JSON.stringify(goalData),
+    //         headers:{
+    //             authorization:`Bearer ${token}`,
+    //             "Content-Type":"application/json"
+    //         }
+    //     }).then(res=>res.json())
+    // },
 
-    deleteFitnessEntry: (token, goalData) => {
-        return fetch(`${BASE_URL}/api/fitness/:id`,{
-            method:"DELETE",
-            body:JSON.stringify(goalData),
-            headers:{
-                authorization:`Bearer ${token}`,
-            }
-        }).then(res=>res.json())
-    },
+    // deleteFitnessEntry: (token, goalData) => {
+    //     return fetch(`${BASE_URL}/api/fitness/:id`,{
+    //         method:"DELETE",
+    //         body:JSON.stringify(goalData),
+    //         headers:{
+    //             authorization:`Bearer ${token}`,
+    //         }
+    //     }).then(res=>res.json())
+    // },
 
     getUserSleep: (token) => {
         return fetch(`${BASE_URL}/api/sleep/user/me`,{
@@ -104,5 +104,35 @@ module.exports = {
                 authorization:`Bearer ${token}`
             }} )
         .then(res=> res.json())
-    }
+    },
+
+    // getOneUserHydration: (token, waterDate) => {
+    //     return fetch(`${BASE_URL}/api/hydration/user/me/${waterDate}`,{
+    //         headers:{
+    //             authorization:`Bearer ${token}`
+    //         }} )
+    //     .then(res=> res.json())
+    // },
+
+    postHydrationEntry: (token, waterObj) => {
+        return fetch(`${BASE_URL}/api/hydration`,{
+            method:"POST",
+            body:JSON.stringify(waterObj),
+            headers:{
+                authorization:`Bearer ${token}`,
+                "Content-Type":"application/json"
+            }
+        }).then(res=>res.json())
+    },
+
+    updateHydrationEntry: (token, waterObj) => {
+        return fetch(`${BASE_URL}/api/hydration/update`,{
+            method:"PUT",
+            body:JSON.stringify(waterObj),
+            headers:{
+                authorization:`Bearer ${token}`,
+                "Content-Type":"application/json"
+            }
+        }).then(res=>res.json())
+    },
 }

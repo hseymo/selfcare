@@ -98,17 +98,23 @@ function App() {
           path='/fitness' 
           element={<Exercise 
             userId={userId} 
-            token={token}/>} />
+            token={token}
+            weekArray={weekArray} 
+            />} />
         <Route 
           path='/sleep' 
           element={<Sleep 
             userId={userId} 
-            token={token} />} />
+            token={token} 
+            weekArray={weekArray} 
+            />} />
         <Route 
           path='/hydration' 
           element={<Hydration 
             userId={userId} 
-            token={token}/>} />
+            token={token}
+            weekArray={weekArray} 
+            />} />
         <Route 
           path='/mindfulness' 
           element={<Mindfulness 

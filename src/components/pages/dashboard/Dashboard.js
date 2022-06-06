@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import './dashboard.css';
 import { Link } from 'react-router-dom';
 import API from "../../../utils/API.js"
-import Card from "./card"
 import DashboardRow from './card';
 
 export default function Dashboard({token, weekArray}) {
@@ -25,7 +24,6 @@ export default function Dashboard({token, weekArray}) {
 
   const [hydrationEmoji, setHydrationEmoji] = useState([])
   const [hydrationWins, setHydrationWins] = useState(0)
-
 
   useEffect(() => {
     API.getOneUser(token).then((userData)=>{
@@ -50,7 +48,7 @@ export default function Dashboard({token, weekArray}) {
       weekArray.map(entry => {
         var response = userData.fitnesses.find(data => data.date === entry);
         let newObj = {date: entry}
-        console.log(response)
+        // console.log(response)
         if (response === undefined) {
           newObj.status = 'Not reported'
           newObj.emoji = '⁇'
@@ -70,10 +68,10 @@ export default function Dashboard({token, weekArray}) {
       setFitnessEmoji(fitnessArray)
       setFitnessTime(weeklyFitnessTime)
       setFitnessCount(weeklyFitnessCount)
-      console.log('fitnessArray: ', fitnessArray)
-      console.log('weeklyFitnessTime: ', weeklyFitnessTime)
-      console.log('weeklyFitnessCount: ', weeklyFitnessCount)
-      console.log('test fitness: ', fitnessArray)
+      // console.log('fitnessArray: ', fitnessArray)
+      // console.log('weeklyFitnessTime: ', weeklyFitnessTime)
+      // console.log('weeklyFitnessCount: ', weeklyFitnessCount)
+      // console.log('test fitness: ', fitnessArray)
 
 
       // SLEEP LOGIC_______________________________________________
@@ -98,9 +96,9 @@ export default function Dashboard({token, weekArray}) {
         })
         setSleepWins(sleepCount)
         setSleepEmoji(sleepArray)
-        console.log('sleepArray: ', sleepArray)
-        console.log('test sleep: ', sleepEmoji)
-        console.log('sleep wins: ', sleepWins)
+        // console.log('sleepArray: ', sleepArray)
+        // console.log('test sleep: ', sleepEmoji)
+        // console.log('sleep wins: ', sleepWins)
 
       // HYDRATAION LOGIC__________________________________________
         const hydrationArray = [];
@@ -109,7 +107,7 @@ export default function Dashboard({token, weekArray}) {
         weekArray.map(entry => {
           var response = userData.hydrations.find(data => data.date === entry);
           let newObj = {date: entry}
-          console.log(response)
+          // console.log(response)
           if (response === undefined) {
             newObj.status = 'Not reported'
             newObj.emoji = '⁇'
@@ -127,9 +125,9 @@ export default function Dashboard({token, weekArray}) {
         })
         setHydrationEmoji(hydrationArray)
         setHydrationWins(hydrationCount);
-        console.log('hydrationArray: ', hydrationArray)
-        console.log('test hydration :', hydrationEmoji)
-        console.log('hydration wins: ', hydrationWins)
+        // console.log('hydrationArray: ', hydrationArray)
+        // console.log('test hydration :', hydrationEmoji)
+        // console.log('hydration wins: ', hydrationWins)
     })
   }, [token])
 

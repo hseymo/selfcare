@@ -2,9 +2,53 @@ import React, { useState, useEffect } from 'react';
 import './sleep.css';
 import { Card, Button, Form } from 'react-bootstrap';
 import API from "../../../utils/API.js"
+import SleepCard from "./SleepCard"
 
-export default function Sleep(token) {
+export default function Sleep({token, weekArray}) {
+const [thisWeek, setThisWeek] = useState([])
+    useEffect(() => {
+        API.getUserSleep(token).then((userData)=>{
+            console.log(userData)
+            const sleepArray = [];
+        weekArray.map(entry => {
+            var response = userData.find(data => data.date === entry);
+            console.log(response)
 
+            let newObj = {date: entry}
+
+            if (response === undefined) {
+                newObj.status = 'Not Reported';
+            } else { 
+                const {id, date, time_asleep, diff_falling_asleep, diff_staying_asleep, mood_upon_wake } = response;
+
+                newObj.id = id;
+                newObj.time_asleep = time_asleep;
+                if (diff_falling_asleep === true ) {
+                    newObj.diff_falling_asleep = 'Yes'
+                } else {
+                    newObj.diff_falling_asleep = 'No'
+                }
+                if (diff_staying_asleep === true) {
+                    newObj.diff_staying_asleep = 'Yes'
+                } else {
+                    newObj.diff_staying_asleep = 'No'
+                }
+                newObj.mood_upon_wake = mood_upon_wake;
+            }
+            console.log(newObj)
+            sleepArray.push(newObj);
+        })
+        sleepArray[0].day = 'Monday';
+        sleepArray[1].day = 'Tuesday';
+        sleepArray[2].day = 'Wednesday';
+        sleepArray[3].day = 'Thursday';
+        sleepArray[4].day = 'Friday';
+        sleepArray[5].day = 'Saturday';
+        sleepArray[6].day = 'Sunday';
+        console.log(sleepArray)
+        setThisWeek(sleepArray)
+        })
+      }, [token])
 
     const [sleepDate, setSleepDate] = useState('');
     const [timeAsleep, setTimeAsleep] = useState('');
@@ -41,14 +85,6 @@ export default function Sleep(token) {
         setDiffStayingAsleep('');
         setMoodAwake('');
     };
-
-    useEffect(() => {
-        API.getUserSleep(token).then((userData)=>{
-        userData.map(entry => {
-          const {id, date, time_asleep, diff_falling_asleep, diff_staying_asleep, mood_upon_wake } = entry;
-        })
-        })
-      }, [token])
 
     return (
         <Card className="sleep">
@@ -107,6 +143,10 @@ export default function Sleep(token) {
                     <Button type="button" onClick={handleSleepSubmit}>Submit</Button>
                 </Form>
             </nav>
+        <h3> This week's sleep reporting:</h3>
+        <SleepCard 
+            name='sleep' 
+            results={thisWeek}/>
         </Card>
     );
 }
