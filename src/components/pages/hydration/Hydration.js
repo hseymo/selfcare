@@ -95,6 +95,10 @@ export default function Hydration({ token, userId, weekArray }) {
             console.log(response)
             setUpdateReq(true)
         })
+        setHydrationFormObject({
+            date: '',
+            water_oz: ''
+        })
         setUpdateReq(false)
     })
 

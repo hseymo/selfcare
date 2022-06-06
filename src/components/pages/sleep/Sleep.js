@@ -93,7 +93,6 @@ const [existingItem, setExistingItem] = useState('');
             mood_upon_wake: ''
         })
         setUpdateReq(false)
-
     })
 
     const sendCreate = useCallback( async (e)=> {
@@ -118,6 +117,13 @@ const [existingItem, setExistingItem] = useState('');
         await API.deleteSleepEntry(token, sleepFormObject.date).then((response) => {
             console.log(response)
             setUpdateReq(true)
+        })
+        setSleepFormObject({
+            date: '',
+            time_asleep: '',
+            diff_falling_asleep: '',
+            diff_staying_asleep: '',
+            mood_upon_wake: ''
         })
         setUpdateReq(false)
     })
