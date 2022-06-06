@@ -2,7 +2,6 @@
     background: #baa587;
 }
 .fitness h1 {
-    padding: 30px;
     display: flex;
     flex-wrap:inherit;
     justify-content: space-between;
@@ -61,4 +60,5 @@
 
 .fitnessForm.card {
     background: #baa587;
+    margin-left: 10px;
 }

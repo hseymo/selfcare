@@ -15,9 +15,7 @@
 
 .form-horizontal {
     background: #b8947e;
-    /* display: flex;
-    align-items: center;
-    flex-direction: column; */
+    margin-left: 10px;
 }
 
 #formDate, #formTime, #formDiffFall, #formDiffStay, #formMood {

@@ -127,7 +127,7 @@ const [existingItem, setExistingItem] = useState('');
     return (
         <Card className="sleep">
             <h1>Sleep</h1>
-            <Form className='form-horizontal col-3' onSubmit={handleFormSubmit}>
+            <Form className='form-horizontal' onSubmit={handleFormSubmit}>
                 <h2>Report sleep Data</h2>
                     <Form.Label htmlFor='formDate'>Date of sleep</Form.Label>
                     <Form.Check
