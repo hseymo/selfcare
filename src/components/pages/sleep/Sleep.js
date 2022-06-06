@@ -80,7 +80,7 @@ const [existingItem, setExistingItem] = useState('');
     }, [formDate])
 
     function handleFormSubmit (e) {
-        // e.preventDefault();
+        e.preventDefault();
         if (formDate != '' && formTime != '') {
             setFormObj({
                 date: formDate,
