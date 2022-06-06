@@ -1,5 +1,5 @@
 .fitness.card {
-    background: linear-gradient(#AD630E,#E6A45E);
+    background: #baa587;
 }
 .fitness h1 {
     padding: 30px;
@@ -57,4 +57,8 @@
 .fitnessInput, .form-check-input {
     padding-bottom: 5px;
     max-width: 120px;
+}
+
+.fitnessForm.card {
+    background: #baa587;
 }

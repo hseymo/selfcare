@@ -1,6 +1,6 @@
 .Header {
     padding: 50px 0px;
-    background-color: #295982;
+    background-color: #535c64;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -22,3 +22,4 @@ nav li {
     margin: 10px;
     text-align: center;
   }
+  
