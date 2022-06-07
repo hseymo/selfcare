@@ -9,10 +9,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './home.css';
 
 const slides = [
-    'https://images.pexels.com/photos/260352/pexels-photo-260352.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    'https://post.healthline.com/wp-content/uploads/2015/11/man-male-running-sex-workouts-732x549-thumbnail-1.jpg',
     'https://images.pexels.com/photos/416528/pexels-photo-416528.jpeg',
     'https://images.pexels.com/photos/416160/pexels-photo-416160.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    'https://images.pexels.com/photos/7353021/pexels-photo-7353021.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+    'https://c0.wallpaperflare.com/preview/685/967/619/healthy-lifestyle-meditating-nature.jpg'
 ]
 
 export default function Home() {
