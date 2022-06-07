@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './Exercise.css'
 import { Card, Button, Form } from 'react-bootstrap';
 import API from "../../../utils/API.js"
@@ -17,7 +17,7 @@ export default function Fitness({token, weekArray}) {
     const [existingItem, setExistingItem] = useState('');
 
     useEffect(() => {
-        API.getUserFitness(token).then((userData)=>{
+        API.getUserFitness(token).then((userData) => {
             // console.log(userData)
             const fitnessArray = [];
             console.log(weekArray)
@@ -25,12 +25,12 @@ export default function Fitness({token, weekArray}) {
                 var response = userData.find(data => data.date === entry);
                 console.log(response)
 
-                let newObj = {date: entry}
+                let newObj = { date: entry }
 
                 if (response === undefined) {
                     newObj.status = 'Not Reported';
                 } else {
-                    const {id, date, activity_type, activity_duration, RPE, notes} = response;
+                    const { id, date, activity_type, activity_duration, RPE, notes } = response;
                     newObj.id = id
                     newObj.activity_type = activity_type;
                     newObj.activity_duration = activity_duration;
@@ -195,8 +195,8 @@ export default function Fitness({token, weekArray}) {
             <br />
             <h3>This week's fitness reporting: </h3>
             <ExerciseCard
-            results={thisWeek}
-                />
+                results={thisWeek}
+            />
         </Card>
     );
 }

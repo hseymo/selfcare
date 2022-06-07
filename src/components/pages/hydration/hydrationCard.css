@@ -11,6 +11,8 @@
     margin: 10px;
     width: fit-content;
     flex-direction: row;
+    width: 15rem;
+    height: 18rem;
 }
 
 h4 {

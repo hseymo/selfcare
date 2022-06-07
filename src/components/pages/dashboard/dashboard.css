@@ -33,8 +33,8 @@ th {
 
 .goalsLink {
     padding: 10px;
-    background-color: blue;
+    background-color: #416655;
     border-radius: 5px;
-    border: 5px solid navy;
+    border: 3px solid rgb(26, 17, 5);
     color: white;
 }

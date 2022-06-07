@@ -9,7 +9,6 @@
 
 .hydration h1, .hydration h2, .hydration nav h2 {
     background: #a39779;
-    padding: 50px 0px;
     display: flex;
     flex-wrap:inherit;
     justify-content: space-between;
@@ -35,6 +34,7 @@
     display: flex;
     padding: 0px 10px;
     align-items: center;
+    margin-left: 10px;
 }
 
 #waterDate, #waterAmount {

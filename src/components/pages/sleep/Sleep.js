@@ -26,10 +26,10 @@ const [existingItem, setExistingItem] = useState('');
 
                 let newObj = { date: entry }
 
-            if (response === undefined) {
-                newObj.status = 'Not Reported';
-            } else { 
-                const {id, date, time_asleep, diff_falling_asleep, diff_staying_asleep, mood_upon_wake } = response;
+                if (response === undefined) {
+                    newObj.status = 'Not Reported';
+                } else {
+                    const { id, date, time_asleep, diff_falling_asleep, diff_staying_asleep, mood_upon_wake } = response;
 
                 newObj.id = id;
                 newObj.time_asleep = time_asleep;
@@ -134,7 +134,7 @@ const [existingItem, setExistingItem] = useState('');
             <br />
             <Form className='form-horizontal'>
                 <h2>Report Sleep Data</h2>
-                    <Form.Label htmlFor='formDate'>Date of sleep</Form.Label>
+                    <Form.Label htmlFor='formDate'>Date</Form.Label>
                     <Form.Check
                         value={sleepFormObject.date}
                         type="date"
@@ -155,26 +155,32 @@ const [existingItem, setExistingItem] = useState('');
                     />
                     <br />
                     <Form.Label htmlFor='formDiffFall'>Did you have difficulty falling asleep?</Form.Label>
-                    {/* CHANGE TO RADIO BUTTONS */}
-                    <Form.Check
-                        value={sleepFormObject.diff_falling_asleep}
-                        type="boolean"
-                        id="formDiffFall"
-                        name="formDiffFall"
-                        onChange={(e) => setSleepFormObject({...sleepFormObject, diff_falling_asleep: e.target.value})}
-                        placeholder="true/false"
-                    />
+                    <Form.Select
+                    value={sleepFormObject.diff_falling_asleep}
+                    type="boolean"
+                    id="formDiffFall"
+                    name="formDiffFall"
+                    onChange={(e) => setSleepFormObject({...sleepFormObject, diff_falling_asleep: e.target.value})}
+                    placeholder="true/false"
+                    >
+                    <option disabled={true} value=''>Select an option</option>
+                    <option value={true}>Yes</option>
+                    <option value={false}>No</option>
+                    </Form.Select>
                     <br />
                     <Form.Label htmlFor='formDiffStay'>Did you have difficulty staying asleep?</Form.Label>
-                    {/* CHANGE TO RADIO BUTTONS */}
-                    <Form.Check
-                        value={sleepFormObject.diff_staying_asleep}
-                        type="boolean"
-                        id="formDiffStay"
-                        name="formDiffStay"
-                        onChange={(e) => setSleepFormObject({...sleepFormObject, diff_staying_asleep: e.target.value})}
-                        placeholder="true/false"
-                    />
+                    <Form.Select
+                    value={sleepFormObject.diff_staying_asleep}
+                    type="boolean"
+                    id="formDiffStay"
+                    name="formDiffStay"
+                    onChange={(e) => setSleepFormObject({...sleepFormObject, diff_staying_asleep: e.target.value})}
+                    placeholder="true/false"
+                    >
+                    <option disabled={true} value=''>Select an option</option>
+                    <option value={true}>Yes</option>
+                    <option value={false}>No</option>
+                    </Form.Select>
                     <br />
                     <Form.Label htmlFor='formMood'>How did you feel when you woke up?</Form.Label>
                     <Form.Check
@@ -201,6 +207,10 @@ const [existingItem, setExistingItem] = useState('');
         <SleepCard 
             name='sleep' 
             results={thisWeek}/>
+            <h3> This week's sleep reporting:</h3>
+            <SleepCard
+                name='sleep'
+                results={thisWeek} />
         </Card>
     );
 }
