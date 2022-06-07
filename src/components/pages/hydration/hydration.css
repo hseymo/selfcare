@@ -1,0 +1,51 @@
+.hydration {
+    background: #a39779;
+}
+
+.hydration h1 {
+    
+    text-decoration: underline;
+}
+
+.hydration h1, .hydration h2, .hydration nav h2 {
+    background: #a39779;
+    display: flex;
+    flex-wrap:inherit;
+    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+}
+
+.hydrateWeek {
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.waterForm {
+    
+    display: block;
+}
+
+.waterForm.card {
+    background: #a39779;
+    width: fit-content;
+    display: flex;
+    padding: 0px 10px;
+    align-items: center;
+    margin-left: 10px;
+}
+
+#waterDate, #waterAmount {
+    height: 30px;
+    
+}
+
+.card-body {
+    background: #cfbd8f;
+}
+
+.hydration.card {
+    background: #a39779;
+}

@@ -1,0 +1,36 @@
+.sleep {
+    background: #b8947e;
+}
+
+.sleep h1 {
+    background: #b8947e;
+    padding: 15px 0px;
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    text-decoration: underline;
+}
+
+.form-horizontal {
+    background: #b8947e;
+    margin-left: 10px;
+}
+
+#formDate, #formTime, #formMood {
+    height: 30px;
+}
+
+#formDiffFall, #formDiffStay {
+    height: 40px;
+    width: 10%;
+}
+.card.body {
+    background: #d9ae94;
+}
+
+.btn {
+    width: fit-content;
+    margin: 3px;
+}

@@ -1,0 +1,12 @@
+.profilePage {
+    text-align: center;
+    background: #9c9c6f;
+}
+
+.profileForm {
+    display: block;
+}
+
+.formGroup {
+    margin: 30px;
+}

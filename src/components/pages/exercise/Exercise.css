@@ -1,0 +1,64 @@
+.fitness.card {
+    background: #baa587;
+}
+.fitness h1 {
+    display: flex;
+    flex-wrap:inherit;
+    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    text-decoration: underline;
+}
+.form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn {
+    width:fit-content;
+    margin-bottom: 3px;
+}
+.form-check-label {
+    padding: 0px 5px;
+}
+.form-check-input, .fitness h2 {
+    padding: 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    min-width: 120px;
+}
+.fitnessDate {
+    display: flex;
+    justify-content: center;
+}
+.fitnessWeek.card {
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    padding-bottom: 30px;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border-color: transparent;
+}
+.fitnessCards {
+    display: flex;
+    justify-content: center;
+    margin: 2px;
+    height: fit-content;
+}
+.fitnessWeek h4 {
+    padding-bottom: 30px;
+}
+#formDate, #formType, #formDuration, #formRPE, #formNotes {
+    /* padding-bottom: 5px; */
+    max-width: 120px;
+    height: 25px;
+}
+
+.fitnessForm.card {
+    background: #baa587;
+    margin-left: 10px;
+}

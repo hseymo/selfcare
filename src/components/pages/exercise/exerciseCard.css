@@ -1,0 +1,27 @@
+.exerciseCardHolder {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.fitnessCards {
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+    margin: 10px;
+    width: 15rem;
+    height: 18rem;
+}
+
+h4 {
+    font-size: large;
+    font-weight: bolder;
+    display: flex;
+    justify-content: center;
+}
+
+li {
+    font-weight: normal;
+    width: fit-content;
+    text-align: left;
+}

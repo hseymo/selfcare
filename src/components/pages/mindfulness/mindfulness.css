@@ -1,0 +1,21 @@
+.mindful {
+    background: #b99249;
+}
+
+.mindful h1 {
+    padding: 50px 0px;
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    text-decoration: underline;
+}
+
+.mindfulWeek {
+    display: flex;
+    justify-content: center;    
+    padding: 15px;
+    margin: 10px;
+    font-weight:bolder;
+}

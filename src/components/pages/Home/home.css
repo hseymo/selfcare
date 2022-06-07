@@ -1,0 +1,42 @@
+div {
+    max-height: fit-content;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+}
+
+.backgroundImage {
+    padding: 5px;
+    margin: 10px;
+    top: 0;
+    left: 0;
+    max-width: 99%;
+    height: 1000px;
+    background-size: cover;
+    background-position: center;
+}
+
+.homePage.card {
+    background: transparent;
+    color: white;
+    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px purple;
+    text-align: center;
+}
+
+.homePage p {
+    margin-bottom: 30px;
+}
+
+.enter {
+    padding: 5px;
+    background: #416655;
+    border-radius: 5px;
+    border: 3px solid rgb(26, 17, 5);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    
+}
+#root {
+    background-color: #916f3da6;
+}
