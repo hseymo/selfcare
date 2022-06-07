@@ -7,10 +7,10 @@ import HydrationCard from './HydrationCard';
 
 export default function Hydration({ token, userId, weekArray }) {
     const [thisWeek, setThisWeek] = useState([]);
-    const [waterDate, setWaterDate] = useState('');
-    const [waterAmount, setWaterAmount] = useState('');
-    const [waterObj, setWaterObj] = useState({});
-    const [deleteReq, setDeleteReq] = useState('');
+    const [hydrationFormObject, setHydrationFormObject] = useState({
+        date: '', 
+        water_oz: ''
+    })
     const [updateReq, setUpdateReq] = useState('');
     const [existingItem, setExistingItem] = useState('');
 
@@ -47,81 +47,59 @@ export default function Hydration({ token, userId, weekArray }) {
     }, [token, updateReq])
 
     useEffect(() => {
-        API.getOneUserHydration(token, waterDate).then((response) => {
+        API.getOneUserHydration(token, hydrationFormObject.date).then((response) => {
             console.log(response)
             if (response.id) {
-                setWaterAmount(response.water_oz)
+                setHydrationFormObject({
+                    date: response.date,
+                    water_oz: response.water_oz
+                })
                 setExistingItem(true);
             } else {
-                setWaterAmount('')
                 setExistingItem(false);
             }
         })
-    }, [waterDate])
+    }, [hydrationFormObject.date])
 
-    function handleFormSubmit(e) {
+    const sendUpdate = useCallback(async (e) => {
         e.preventDefault();
-        if (waterDate != '' && waterAmount != '') {
-            setWaterObj({
-                date: waterDate,
-                water_oz: waterAmount
-            })
-            console.log('water object:', waterObj)
-            setWaterDate('');
-            setWaterAmount('');
-        } else {
-            alert("Please enter date and amount")
-        }
-    }
-
-    useEffect(() => {
-        if (existingItem == true) {
-            API.updateHydrationEntry(token, waterObj).then((res) => {
-                console.log(res);
-                console.log('Hydration Entry updated')
-            })
-        } else if (existingItem == false) {
-            API.postHydrationEntry(token, waterObj).then((res) => {
-                console.log(res);
-                console.log('New hydration entry created')
-            })
-        }
-        // NEED TO RELOAD CARDS
-        setUpdateReq(true)
-    }, [waterObj])
-
-    // const handleUpdate = useCallback(async (e) => {
-    //     e.preventDefault();
-    //     await function objectCreation() {setWaterObj({
-    //         date: waterDate,
-    //         water_oz: waterAmount
-    //     })
-    // }
-    //     API.updateHydrationEntry(token, waterObj).then((res) => {
-    //         console.log(res);
-    //         console.log('Hydration Entry updated')
-    //     })
-    // })
-
-    // const handleSubmit = useCallback(async (e) => {
-    //     e.preventDefault();
-    //     await function objectCreation() {setWaterObj({
-    //         date: waterDate,
-    //         water_oz: waterAmount
-    //     })
-    // }
-    //     API.postHydrationEntry(token, waterObj).then((res) => {
-    //         console.log(res);
-    //         console.log('New hydration entry created')
-    //     })
-    // })
-
-    const sendDelete = useCallback(async () => {
-        API.deleteHydrationEntry(token, waterDate).then((response) => {
-            console.log(response)
+        await API.updateHydrationEntry(token, hydrationFormObject).then((res) => {
+            console.log(res);
+            console.log('Hydration Entry updated')
+            setUpdateReq(true)
         })
-        // NEED TO RELOAD CARDS
-        setUpdateReq(true)
+        setHydrationFormObject({
+            date: '',
+            water_oz: ''
+        })
+        setUpdateReq(false)
+    })
+
+    const sendCreate = useCallback(async (e) => {
+        e.preventDefault();
+        API.postHydrationEntry(token, hydrationFormObject).then((res) => {
+            console.log(res);
+            console.log('New hydration entry created')
+            setUpdateReq(true)
+        })
+        setHydrationFormObject({
+            date: '',
+            water_oz: ''
+        })
+        setUpdateReq(false)
+    })
+
+    const sendDelete = useCallback(async (e) => {
+        e.preventDefault();
+        API.deleteHydrationEntry(token, hydrationFormObject.date).then((response) => {
+            console.log(response)
+            setUpdateReq(true)
+        })
+        setHydrationFormObject({
+            date: '',
+            water_oz: ''
+        })
+        setUpdateReq(false)
     })
 
     return (
@@ -129,37 +107,41 @@ export default function Hydration({ token, userId, weekArray }) {
             <Card className="hydration">
                 <h1>Hydration</h1>
                 <h2>Your Hydration Goal:</h2>
-                <Form
-                    onSubmit={handleFormSubmit}
-                >
+                <Form>
                     <h2>Report Water Intake</h2>
                     <Card className="waterForm">
                         <Form.Label htmlFor="waterDate">
                             Choose date:
                         </Form.Label>
                         <Form.Check
-                            value={waterDate}
+                            value={hydrationFormObject.date}
                             type="date"
                             id="waterDate"
                             name="waterDate"
-                            onChange={(e) => setWaterDate(e.target.value)} />
+                            onChange={(e) => setHydrationFormObject({...hydrationFormObject, date: e.target.value})}
+                            />
                         <Form.Label htmlFor="waterAmount">
-                            Input number of ounces drank today:
+                            How many ounces did you drink?
                         </Form.Label>
                         <Form.Check
-                            value={waterAmount}
+                            value={hydrationFormObject.water_oz}
                             min="0"
                             max="1000"
                             type="number"
                             id="waterAmount"
                             name="waterAmount"
-                            onChange={(e) => setWaterAmount(e.target.value)} />
-                        <Button type="submit">Submit</Button>
-                        {(existingItem == true) ? (
+                            onChange={(e) => setHydrationFormObject({...hydrationFormObject, water_oz: e.target.value})}
+                            />
+                        <br />
+                        { (existingItem == true) ? (
+                        <>
                             <Button type="button"
-                                onClick={sendDelete}>Delete</Button>
+                                onClick={sendUpdate}>Update</Button>
+                            <Button type="button"
+                            onClick={sendDelete}>Delete</Button>
+                        </>
                         ) : (
-                            <></>
+                            <Button type="button" onClick={sendCreate}>Submit</Button>
                         )}
                     </Card>
                 </Form>
