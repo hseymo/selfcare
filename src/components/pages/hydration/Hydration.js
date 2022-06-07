@@ -143,7 +143,7 @@ export default function Hydration({ token, userId, weekArray, goalObj }) {
                             onClick={sendDelete}>Delete</Button>
                         </>
                         ) : (
-                            <Button type="button" onClick={sendCreate}>Submit</Button>
+                            <Button id="hydroBtn"type="button" onClick={sendCreate}>Submit</Button>
                         )}
                     </Card>
                 </Form>

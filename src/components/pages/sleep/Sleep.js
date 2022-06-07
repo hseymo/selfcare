@@ -198,7 +198,7 @@ export default function Sleep({ token, weekArray, goalObj }) {
                             onClick={sendDelete}>Delete</Button>
                     </>
                 ) : (
-                    <Button type="button" onClick={sendCreate}>Submit</Button>
+                    <Button id="sleepBtn" type="button" onClick={sendCreate}>Submit</Button>
                 )}
             </Form>
             <h2> This week's sleep reporting:</h2>

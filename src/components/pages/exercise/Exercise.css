@@ -66,3 +66,11 @@
 .form-check-input {
     color: black
 }
+
+#fitnessBtn {
+    padding: 10px;
+    background-color: #5c4927;
+    border-radius: 5px;
+    border: 3px solid rgb(26, 17, 5);
+    color: white;
+}

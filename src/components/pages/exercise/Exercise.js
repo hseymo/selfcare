@@ -193,7 +193,7 @@ export default function Fitness({ token, weekArray, goalObj }) {
                                 onClick={sendDelete}>Delete</Button>
                         </>
                     ) : (
-                        <Button type="button" onClick={sendCreate}>Submit</Button>
+                        <Button id="fitnessBtn"type="button" onClick={sendCreate}>Submit</Button>
                     )}
                 </Card>
             </Form>
