@@ -3,7 +3,6 @@
 }
 
 .mindful h1 {
-    padding: 50px 0px;
     display: flex;
     flex-wrap:wrap;
     justify-content: space-between;
@@ -18,4 +17,8 @@
     padding: 15px;
     margin: 10px;
     font-weight:bolder;
+}
+
+.form-check-input {
+    height: 30px;
 }
