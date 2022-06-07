@@ -154,6 +154,7 @@ export default function Fitness({token, weekArray}) {
                             value={exerciseFormObject.activity_duration}
                             type="number" 
                             id="formDuration" 
+                            min='0'
                             name="formDuration" 
                             onChange={(e) => setExerciseFormObject({...exerciseFormObject, activity_duration: e.target.value})}
                             />
