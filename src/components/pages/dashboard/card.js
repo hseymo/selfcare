@@ -6,7 +6,7 @@ export default function DashboardRow(props) {
     return (
         <tr>
             <td className="rowHeader">
-                <Link to={props.link}>
+                <Link to={props.link} className='pageLink'>
                     { props.name === 'fitness' ? (
                         "Did you workout today?"
                     ) : (

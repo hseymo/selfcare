@@ -40,3 +40,13 @@ div {
 #root {
     background-color: #916f3da6;
 }
+
+
+.container {
+    background-color: #916f3da6;
+    position: absolute;
+    margin-top: -900px;
+    z-index: 1;
+    text-align: center;
+    padding: 15px;
+}
