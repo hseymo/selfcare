@@ -3,47 +3,38 @@ import "./profile.css"
 import API from "../../../utils/API.js"
 
 export default function Profile({token}) {
-    const [fitnessTimeGoal, setFitnessTimeGoal] = useState('');
-    const [fitnessFreqGoal, setFitnessFreqGoal] = useState('');
-    const [sleepGoal, setSleepGoal] = useState('');
-    const [hydrationGoal, setHydrationGoal] = useState('');
-    const [goalObject, setGoalObject] = useState({});
-    const [goalId, setGoalId] = useState('');
+    const [goalObj, setGoalObj] = useState({
+        id: '',
+        fitness_time:'',
+        fitness_frequency:'',
+        sleep_time: '',
+        hydration_oz: ''
+    })
 
     useEffect(() => {
         API.getUserGoals(token).then((userData)=>{
         console.log(userData)
         const { fitness_time, fitness_frequency, sleep_time, hydration_oz, id } = userData[0];
-        console.log(fitness_time);
-        console.log(fitness_frequency);
-        console.log(sleep_time);
-        console.log(hydration_oz)
-        console.log(id)
-          setFitnessTimeGoal(fitness_time);
-          setFitnessFreqGoal(fitness_frequency);
-          setSleepGoal(sleep_time);
-          setHydrationGoal(hydration_oz);
-          setGoalId(id);
+        setGoalObj({
+            id,
+            fitness_time,
+            fitness_frequency,
+            sleep_time,
+            hydration_oz
+        })
         })
     }, [token])
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        setGoalObject({
-            id: goalId,
-            fitness_time:fitnessTimeGoal,
-            fitness_frequency:fitnessFreqGoal,
-            sleep_time: sleepGoal,
-            hydration_oz: hydrationGoal
-        })
         window.location.href = "/dashboard"
     }
 
     useEffect(() => {
-        API.updateGoals(token, goalObject).then((res) => {
+        API.updateGoals(token, goalObj).then((res) => {
         console.log(res)
     })
-    }, [goalObject])
+    }, [goalObj])
 
     return (
         <div className='profilePage'>
@@ -52,52 +43,56 @@ export default function Profile({token}) {
                 <div className='formGroup'>
                     <label> I want to exercise </label>
                     <input
-                        value={fitnessTimeGoal}
+                        className='input'
+                        value={goalObj.fitness_time}
                         name="fitnessTimeGoal"
                         type="number"
                         min="0"
                         max="10000"
-                        onChange={(e) => setFitnessTimeGoal(e.target.value)}
+                        onChange={(e) => setGoalObj({...goalObj, fitness_time: e.target.value})}
                     />
                     <label> minutes per week! 🏃‍♀️ </label>
                 </div>
                 <div className='formGroup'>
                     <label>I want to exercise </label>
                     <input
-                        value={fitnessFreqGoal}
+                        className='input'
+                        value={goalObj.fitness_frequency}
                         name="fitnessFreqGoal"
                         type="number"
                         min="0"
                         max="7"
-                        onChange={(e) => setFitnessFreqGoal(e.target.value)}
+                        onChange={(e) => setGoalObj({...goalObj, fitness_frequency: e.target.value})}
                     />
                     <label> days per week! 🚴 </label>
                 </div>
                 <div className='formGroup'>
                     <label>I want to sleep </label>
                     <input
-                        value={sleepGoal}
+                        className='input'
+                        value={goalObj.sleep_time}
                         name="sleepGoal"
                         type="decimal"
                         min="0"
                         max="24"
-                        onChange={(e) => setSleepGoal(e.target.value)}
+                        onChange={(e) => setGoalObj({...goalObj, sleep_time: e.target.value})}
                     />
                     <label> hours per night! 😴 </label>
                 </div>
                 <div className='formGroup'>
                     <label>I want to drink </label>
                     <input
-                        value={hydrationGoal}
+                        className='input'
+                        value={goalObj.hydration_oz}
                         name="hydrationGoal"
                         type="number"
                         min="0"
                         max="1000"
-                        onChange={(e) => setHydrationGoal(e.target.value)}
+                        onChange={(e) => setGoalObj({...goalObj, hydration_oz: e.target.value})}
                     />
                     <label> ounces of water per day! 💧</label>
                 </div>
-                <button type="submit"
+                <button className='button' type="submit"
                 >Submit</button>
             </form>
         </div>

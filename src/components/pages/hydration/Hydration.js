@@ -1,11 +1,10 @@
-import { clear } from '@testing-library/user-event/dist/clear';
 import React, { useState, useEffect, useCallback } from 'react';
 import './hydration.css';
 import { Card, Button, Form } from 'react-bootstrap';
 import API from "../../../utils/API.js"
 import HydrationCard from './HydrationCard';
 
-export default function Hydration({ token, userId, weekArray }) {
+export default function Hydration({ token, userId, weekArray, goalObj }) {
     const [thisWeek, setThisWeek] = useState([]);
     const [hydrationFormObject, setHydrationFormObject] = useState({
         date: '', 
@@ -106,7 +105,10 @@ export default function Hydration({ token, userId, weekArray }) {
         <div>
             <Card className="hydration">
                 <h1>Hydration</h1>
-                <h2>Your Hydration Goal:</h2>
+                <h2>Your Goals</h2>
+                { goalObj.hydration_oz != 0 && (
+              <h4 className=''>Your daily water intake goal is {goalObj.hydration_oz} oz.</h4>
+              )}
                 <Form>
                     <h2>Report Water Intake</h2>
                     <Card className="waterForm">
@@ -147,7 +149,7 @@ export default function Hydration({ token, userId, weekArray }) {
                 </Form>
             </Card>
 
-            <h3>This week's hydration reporting: </h3>
+            <h2>This week's hydration reporting: </h2>
             <HydrationCard
                 name='hydrationCard'
                 results={thisWeek}

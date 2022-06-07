@@ -4,7 +4,7 @@ import { Card, Button, Form } from 'react-bootstrap';
 import API from "../../../utils/API.js"
 import ExerciseCard from "./ExerciseCard"
 
-export default function Fitness({token, weekArray}) {
+export default function Fitness({token, weekArray, goalObj}) {
     const [thisWeek, setThisWeek] = useState([]);
     const [exerciseFormObject, setExerciseFormObject] = useState({
         date: '',
@@ -123,6 +123,12 @@ export default function Fitness({token, weekArray}) {
         <Card className="fitness">
             <h1>Fitness</h1>
             <h2>Your Goals</h2>
+            { goalObj.fitness_time != 0 && (
+            <h4 className=''>Your exercise time goal is {goalObj.fitness_time} minutes per week. </h4>
+              )}
+              { goalObj.fitness_frequency != 0 && (
+              <h4 className=''>Your exercise frequency goal is {goalObj.fitness_frequency} days per week. </h4>
+              )}
             <br />
             <Form>
                 <h2>Report fitness data</h2>
@@ -194,7 +200,7 @@ export default function Fitness({token, weekArray}) {
                 </Form>
 
             <br />
-            <h3>This week's fitness reporting: </h3>
+            <h2>This week's fitness reporting: </h2>
             <ExerciseCard
                 results={thisWeek}
             />

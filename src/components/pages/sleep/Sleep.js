@@ -4,7 +4,7 @@ import { Card, Button, Form } from 'react-bootstrap';
 import API from "../../../utils/API.js"
 import SleepCard from "./SleepCard"
 
-export default function Sleep({token, weekArray}) {
+export default function Sleep({token, weekArray, goalObj}) {
 const [thisWeek, setThisWeek] = useState([]);
 const [sleepFormObject, setSleepFormObject] = useState({
     date: '',
@@ -131,6 +131,10 @@ const [existingItem, setExistingItem] = useState('');
     return (
         <Card className="sleep">
             <h1>Sleep</h1>
+            <h2>Your Goals</h2>
+            {goalObj.sleep_time != 0 && (
+              <h4 className=''>Your nightly sleep goal is {goalObj.sleep_time} hours.</h4>
+              )}
             <br />
             <Form className='form-horizontal'>
                 <h2>Report Sleep Data</h2>
@@ -203,7 +207,7 @@ const [existingItem, setExistingItem] = useState('');
                             <Button type="button" onClick={sendCreate}>Submit</Button>
                         )}
                 </Form>
-        <h3> This week's sleep reporting:</h3>
+        <h2> This week's sleep reporting:</h2>
         <SleepCard 
             name='sleep' 
             results={thisWeek}/>
