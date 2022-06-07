@@ -207,10 +207,6 @@ const [existingItem, setExistingItem] = useState('');
         <SleepCard 
             name='sleep' 
             results={thisWeek}/>
-            <h3> This week's sleep reporting:</h3>
-            <SleepCard
-                name='sleep'
-                results={thisWeek} />
         </Card>
     );
 }
