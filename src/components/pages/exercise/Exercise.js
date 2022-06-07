@@ -4,7 +4,7 @@ import { Card, Button, Form } from 'react-bootstrap';
 import API from "../../../utils/API.js"
 import ExerciseCard from "./ExerciseCard"
 
-export default function Fitness({token, weekArray, goalObj}) {
+export default function Fitness({ token, weekArray, goalObj }) {
     const [thisWeek, setThisWeek] = useState([]);
     const [exerciseFormObject, setExerciseFormObject] = useState({
         date: '',
@@ -49,7 +49,7 @@ export default function Fitness({token, weekArray, goalObj}) {
             fitnessArray[6].day = 'Sunday';
             setThisWeek(fitnessArray)
         })
-      }, [token, updateReq])
+    }, [token, updateReq])
 
     useEffect(() => {
         API.getOneUserFitness(token, exerciseFormObject.date).then((res) => {
@@ -123,81 +123,80 @@ export default function Fitness({token, weekArray, goalObj}) {
         <Card className="fitness">
             <h1>Fitness</h1>
             <h2>Your Goals</h2>
-            { goalObj.fitness_time != 0 && (
-            <h4 className=''>Your exercise time goal is {goalObj.fitness_time} minutes per week. </h4>
-              )}
-              { goalObj.fitness_frequency != 0 && (
-              <h4 className=''>Your exercise frequency goal is {goalObj.fitness_frequency} days per week. </h4>
-              )}
-            <br />
+            {goalObj.fitness_time != 0 && (
+                <h4 className=''>Your exercise time goal is {goalObj.fitness_time} minutes per week. </h4>
+            )}
+            {goalObj.fitness_frequency != 0 && (
+                <h4 className=''>Your exercise frequency goal is {goalObj.fitness_frequency} days per week. </h4>
+            )}
             <Form>
                 <h2>Report fitness data</h2>
-                    <Card className="fitnessForm">
-                        <Form.Label htmlFor="formDate">
-                            Choose date:
-                        </Form.Label>
-                        <Form.Check 
-                            value={exerciseFormObject.date}
-                            type="date" 
-                            id="formDate" 
-                            name="formDate"
-                            onChange={(e) => setExerciseFormObject({...exerciseFormObject, date: e.target.value})}
-                            />
-                        <Form.Label htmlFor="formType">
-                            What type of exercise did you complete?
-                        </Form.Label>
-                        <Form.Check 
-                            value={exerciseFormObject.activity_type}
-                            type="text" 
-                            id="formType" 
-                            name="formType" 
-                            onChange={(e) => setExerciseFormObject({...exerciseFormObject, activity_type: e.target.value})}
-                            />
-                        <Form.Label htmlFor="formDuration">
-                            How long did you exercise for (in minutes)?
-                        </Form.Label>
-                        <Form.Check 
-                            value={exerciseFormObject.activity_duration}
-                            type="number" 
-                            id="formDuration" 
-                            min='0'
-                            name="formDuration" 
-                            onChange={(e) => setExerciseFormObject({...exerciseFormObject, activity_duration: e.target.value})}
-                            />
-                        <Form.Label htmlFor="formRPE">
-                            On an Rate of Perceived Exertion Scale (RPE) from 0 (easy) to 10 (extremely difficult), how hard did you work?
-                        </Form.Label>
-                        <Form.Check 
-                            value={exerciseFormObject.RPE}
-                            type="number" 
-                            min="0"
-                            max='10'
-                            id="formRPE" 
-                            name="formRPE" 
-                            onChange={(e) => setExerciseFormObject({...exerciseFormObject, RPE: e.target.value})}/>
-                        <Form.Label htmlFor="formNotes">
-                            Notes from your workout:
-                        </Form.Label>
-                        <Form.Check 
-                            value={exerciseFormObject.notes}
-                            type="text" 
-                            id="formNotes" 
-                            name="formNotes" 
-                            onChange={(e) => setExerciseFormObject({...exerciseFormObject, notes: e.target.value})}
-                            />
-                        <br />
-                        { (existingItem == true) ? (
+                <Card className="fitnessForm">
+                    <Form.Label htmlFor="formDate">
+                        Choose date:
+                    </Form.Label>
+                    <Form.Check
+                        value={exerciseFormObject.date}
+                        type="date"
+                        id="formDate"
+                        name="formDate"
+                        onChange={(e) => setExerciseFormObject({ ...exerciseFormObject, date: e.target.value })}
+                    />
+                    <Form.Label htmlFor="formType">
+                        What type of exercise did you complete?
+                    </Form.Label>
+                    <Form.Check
+                        value={exerciseFormObject.activity_type}
+                        type="text"
+                        id="formType"
+                        name="formType"
+                        onChange={(e) => setExerciseFormObject({ ...exerciseFormObject, activity_type: e.target.value })}
+                    />
+                    <Form.Label htmlFor="formDuration">
+                        How long did you exercise for (in minutes)?
+                    </Form.Label>
+                    <Form.Check
+                        value={exerciseFormObject.activity_duration}
+                        type="number"
+                        id="formDuration"
+                        min='0'
+                        name="formDuration"
+                        onChange={(e) => setExerciseFormObject({ ...exerciseFormObject, activity_duration: e.target.value })}
+                    />
+                    <Form.Label htmlFor="formRPE">
+                        On an Rate of Perceived Exertion Scale (RPE) from 0 (easy) to 10 (extremely difficult), how hard did you work?
+                    </Form.Label>
+                    <Form.Check
+                        value={exerciseFormObject.RPE}
+                        type="number"
+                        min="0"
+                        max='10'
+                        id="formRPE"
+                        name="formRPE"
+                        onChange={(e) => setExerciseFormObject({ ...exerciseFormObject, RPE: e.target.value })} />
+                    <Form.Label htmlFor="formNotes">
+                        Notes from your workout:
+                    </Form.Label>
+                    <Form.Check
+                        value={exerciseFormObject.notes}
+                        type="text"
+                        id="formNotes"
+                        name="formNotes"
+                        onChange={(e) => setExerciseFormObject({ ...exerciseFormObject, notes: e.target.value })}
+                    />
+                    <br />
+                    {(existingItem == true) ? (
                         <>
                             <Button type="button"
                                 onClick={sendUpdate}>Update</Button>
                             <Button type="button"
-                            onClick={sendDelete}>Delete</Button>
+                                onClick={sendDelete}>Delete</Button>
                         </>
-                        ) : (
-                            <Button type="button" onClick={sendCreate}>Submit</Button>
-                        )}
-                    </Card>
-                </Form>
+                    ) : (
+                        <Button id="fitnessBtn"type="button" onClick={sendCreate}>Submit</Button>
+                    )}
+                </Card>
+            </Form>
 
             <br />
             <h2>This week's fitness reporting: </h2>

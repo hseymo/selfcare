@@ -9,9 +9,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './home.css';
 
 const slides = [
-    'https://wallpaperaccess.com/full/31121.jpg',
-    'https://images4.alphacoders.com/855/85556.jpg',
-    'https://wallpaperboat.com/wp-content/uploads/2020/07/13/50145/tokyo-02.jpg'
+    'https://images.unsplash.com/photo-1486218119243-13883505764c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2072&q=80',
+    'https://images.pexels.com/photos/416528/pexels-photo-416528.jpeg',
+    'https://images.unsplash.com/photo-1558674378-e4334d4fecc2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80',
+    'https://images.unsplash.com/photo-1602192509154-0b900ee1f851?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'
 ]
 
 export default function Home() {

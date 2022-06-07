@@ -4,17 +4,17 @@ import { Card, Button, Form } from 'react-bootstrap';
 import API from "../../../utils/API.js"
 import SleepCard from "./SleepCard"
 
-export default function Sleep({token, weekArray, goalObj}) {
-const [thisWeek, setThisWeek] = useState([]);
-const [sleepFormObject, setSleepFormObject] = useState({
-    date: '',
-    time_asleep: '',
-    diff_falling_asleep: '',
-    diff_staying_asleep: '',
-    mood_upon_wake: ''
-})
-const [updateReq, setUpdateReq] = useState('');
-const [existingItem, setExistingItem] = useState('');
+export default function Sleep({ token, weekArray, goalObj }) {
+    const [thisWeek, setThisWeek] = useState([]);
+    const [sleepFormObject, setSleepFormObject] = useState({
+        date: '',
+        time_asleep: '',
+        diff_falling_asleep: '',
+        diff_staying_asleep: '',
+        mood_upon_wake: ''
+    })
+    const [updateReq, setUpdateReq] = useState('');
+    const [existingItem, setExistingItem] = useState('');
 
     useEffect(() => {
         API.getUserSleep(token).then((userData) => {
@@ -31,23 +31,23 @@ const [existingItem, setExistingItem] = useState('');
                 } else {
                     const { id, date, time_asleep, diff_falling_asleep, diff_staying_asleep, mood_upon_wake } = response;
 
-                newObj.id = id;
-                newObj.time_asleep = time_asleep;
-                newObj.mood_upon_wake = mood_upon_wake;
-                if (diff_falling_asleep === true ) {
-                    newObj.diff_falling_asleep = 'true'
-                } else {
-                    newObj.diff_falling_asleep = 'false'
+                    newObj.id = id;
+                    newObj.time_asleep = time_asleep;
+                    newObj.mood_upon_wake = mood_upon_wake;
+                    if (diff_falling_asleep === true) {
+                        newObj.diff_falling_asleep = 'true'
+                    } else {
+                        newObj.diff_falling_asleep = 'false'
+                    }
+                    if (diff_staying_asleep === true) {
+                        newObj.diff_staying_asleep = 'true'
+                    } else {
+                        newObj.diff_staying_asleep = 'false'
+                    }
+                    console.log(newObj)
                 }
-                if (diff_staying_asleep === true) {
-                    newObj.diff_staying_asleep = 'true'
-                } else {
-                    newObj.diff_staying_asleep = 'false'
-                }
-                console.log(newObj)
-            }
-            sleepArray.push(newObj);
-        })
+                sleepArray.push(newObj);
+            })
             console.log(sleepArray)
             sleepArray[0].day = 'Monday';
             sleepArray[1].day = 'Tuesday';
@@ -78,7 +78,7 @@ const [existingItem, setExistingItem] = useState('');
         })
     }, [sleepFormObject.date])
 
-    const sendUpdate = useCallback(async (e)=> {
+    const sendUpdate = useCallback(async (e) => {
         e.preventDefault();
         await API.updateSleepEntry(token, sleepFormObject).then((res) => {
             console.log(res);
@@ -95,7 +95,7 @@ const [existingItem, setExistingItem] = useState('');
         setUpdateReq(false)
     })
 
-    const sendCreate = useCallback( async (e)=> {
+    const sendCreate = useCallback(async (e) => {
         e.preventDefault();
         await API.postSleepEntry(token, sleepFormObject).then((res) => {
             console.log(res);
@@ -133,84 +133,78 @@ const [existingItem, setExistingItem] = useState('');
             <h1>Sleep</h1>
             <h2>Your Goals</h2>
             {goalObj.sleep_time != 0 && (
-              <h4 className=''>Your nightly sleep goal is {goalObj.sleep_time} hours.</h4>
-              )}
-            <br />
+                <h4 className=''>Your nightly sleep goal is {goalObj.sleep_time} hours.</h4>
+            )}
             <Form className='form-horizontal'>
                 <h2>Report Sleep Data</h2>
-                    <Form.Label htmlFor='formDate'>Date</Form.Label>
-                    <Form.Check
-                        value={sleepFormObject.date}
-                        type="date"
-                        id="formDate"
-                        name="formDate"
-                        onChange={(e) => setSleepFormObject({...sleepFormObject, date: e.target.value})}
-                    />
-                    <br />
-                    <Form.Label htmlFor='formTime'>How long did you sleep?</Form.Label>
-                    <Form.Check
-                        value={sleepFormObject.time_asleep}
-                        type="number"
-                        min='0'
-                        max='24'
-                        id="formTime"
-                        onChange={(e) => setSleepFormObject({...sleepFormObject, time_asleep: e.target.value})}
-                        placeholder="8 hours"
-                    />
-                    <br />
-                    <Form.Label htmlFor='formDiffFall'>Did you have difficulty falling asleep?</Form.Label>
-                    <Form.Select
+                <Form.Label htmlFor='formDate'>Date</Form.Label>
+                <Form.Check
+                    value={sleepFormObject.date}
+                    type="date"
+                    id="formDate"
+                    name="formDate"
+                    onChange={(e) => setSleepFormObject({ ...sleepFormObject, date: e.target.value })}
+                />
+                <Form.Label htmlFor='formTime'>How long did you sleep?</Form.Label>
+                <Form.Check
+                    value={sleepFormObject.time_asleep}
+                    type="number"
+                    min='0'
+                    max='24'
+                    id="formTime"
+                    onChange={(e) => setSleepFormObject({ ...sleepFormObject, time_asleep: e.target.value })}
+                    placeholder="8 hours"
+                />
+                <Form.Label htmlFor='formDiffFall'>Did you have difficulty falling asleep?</Form.Label>
+                <Form.Select
                     value={sleepFormObject.diff_falling_asleep}
                     type="boolean"
                     id="formDiffFall"
                     name="formDiffFall"
-                    onChange={(e) => setSleepFormObject({...sleepFormObject, diff_falling_asleep: e.target.value})}
+                    onChange={(e) => setSleepFormObject({ ...sleepFormObject, diff_falling_asleep: e.target.value })}
                     placeholder="true/false"
-                    >
+                >
                     <option disabled={true} value=''>Select an option</option>
                     <option value={true}>Yes</option>
                     <option value={false}>No</option>
-                    </Form.Select>
-                    <br />
-                    <Form.Label htmlFor='formDiffStay'>Did you have difficulty staying asleep?</Form.Label>
-                    <Form.Select
+                </Form.Select>
+                <Form.Label htmlFor='formDiffStay'>Did you have difficulty staying asleep?</Form.Label>
+                <Form.Select
                     value={sleepFormObject.diff_staying_asleep}
                     type="boolean"
                     id="formDiffStay"
                     name="formDiffStay"
-                    onChange={(e) => setSleepFormObject({...sleepFormObject, diff_staying_asleep: e.target.value})}
+                    onChange={(e) => setSleepFormObject({ ...sleepFormObject, diff_staying_asleep: e.target.value })}
                     placeholder="true/false"
-                    >
+                >
                     <option disabled={true} value=''>Select an option</option>
                     <option value={true}>Yes</option>
                     <option value={false}>No</option>
-                    </Form.Select>
-                    <br />
-                    <Form.Label htmlFor='formMood'>How did you feel when you woke up?</Form.Label>
-                    <Form.Check
-                        value={sleepFormObject.mood_upon_wake}
-                        type="text"
-                        id="formMood"
-                        name="formMood"
-                        onChange={(e) => setSleepFormObject({...sleepFormObject, mood_upon_wake: e.target.value})}
-                        placeholder="Rested"
-                    />
-                    
-                    { (existingItem == true) ? (
-                        <>
-                            <Button type="button"
-                                onClick={sendUpdate}>Update</Button>
-                            <Button type="button"
+                </Form.Select>
+                <Form.Label htmlFor='formMood'>How did you feel when you woke up?</Form.Label>
+                <Form.Check
+                    value={sleepFormObject.mood_upon_wake}
+                    type="text"
+                    id="formMood"
+                    name="formMood"
+                    onChange={(e) => setSleepFormObject({ ...sleepFormObject, mood_upon_wake: e.target.value })}
+                    placeholder="Rested"
+                />
+                {(existingItem == true) ? (
+                    <>
+                        <Button type="button"
+                            onClick={sendUpdate}>Update</Button>
+                        <Button type="button"
                             onClick={sendDelete}>Delete</Button>
-                        </>
-                        ) : (
-                            <Button type="button" onClick={sendCreate}>Submit</Button>
-                        )}
-                </Form>
-        <h2> This week's sleep reporting:</h2>
-        <SleepCard 
-            name='sleep' 
-            results={thisWeek}/>
+                    </>
+                ) : (
+                    <Button id="sleepBtn" type="button" onClick={sendCreate}>Submit</Button>
+                )}
+            </Form>
+            <h2> This week's sleep reporting:</h2>
+            <SleepCard
+                name='sleep'
+                results={thisWeek} />
         </Card>
     );
 }
