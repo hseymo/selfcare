@@ -2,14 +2,14 @@ import React, {useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import './components/pages/header/NavTabs';
-import Home from './components/pages/Home/Home'
+import Home from './components/pages/home/Home'
 import Dashboard from './components/pages/dashboard/Dashboard';
 import Sleep from './components/pages/sleep/Sleep';
 import Hydration from './components/pages/hydration/Hydration';
 import Mindfulness from './components/pages/mindfulness/Mindfulness';
 import Header from './components/pages/header/Header';
 import Login from './components/pages/login/Login';
-import Profile from './components/pages/Profile/profile'
+import Profile from './components/pages/profile/profile'
 import API from "./utils/API";
 import Exercise from './components/pages/exercise/Exercise';
 import 'bootstrap/dist/css/bootstrap.min.css';
