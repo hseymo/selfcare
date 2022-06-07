@@ -19,7 +19,13 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState(null);
   const [token, setToken] = useState(null);
-  // const [sleepData, setSleepData] = useState()
+  const [goalObj, setGoalObj] = useState({
+    id: '',
+    fitness_time:'',
+    fitness_frequency:'',
+    sleep_time: '',
+    hydration_oz: ''
+})
 
   useEffect(()=>{
     const storedToken = localStorage.getItem("token")
@@ -69,6 +75,20 @@ function App() {
     setToken(null);
     localStorage.removeItem('token');
   }
+  
+  useEffect(() => {
+    API.getUserGoals(token).then((userData)=>{
+    console.log(userData)
+    const { fitness_time, fitness_frequency, sleep_time, hydration_oz, id } = userData[0];
+    setGoalObj({
+        id,
+        fitness_time,
+        fitness_frequency,
+        sleep_time,
+        hydration_oz
+    })
+    })
+}, [token])
 
   return (
     <BrowserRouter>
@@ -100,6 +120,7 @@ function App() {
             userId={userId} 
             token={token}
             weekArray={weekArray} 
+            goalObj={goalObj}
             />} />
         <Route 
           path='/sleep' 
@@ -107,6 +128,7 @@ function App() {
             userId={userId} 
             token={token} 
             weekArray={weekArray} 
+            goalObj={goalObj}
             />} />
         <Route 
           path='/hydration' 
@@ -114,12 +136,15 @@ function App() {
             userId={userId} 
             token={token}
             weekArray={weekArray} 
+            goalObj={goalObj}
             />} />
         <Route 
           path='/mindfulness' 
           element={<Mindfulness 
             userId={userId} 
-            token={token} />} />
+            token={token} 
+            weekArray={weekArray} 
+            goalObj={goalObj}/>} />
       </Routes>
     </BrowserRouter>
   );

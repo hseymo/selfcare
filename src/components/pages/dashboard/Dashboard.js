@@ -156,7 +156,7 @@ export default function Dashboard({token, weekArray}) {
             ) : (
               <button className='goalsLink' onClick={(e) => {window.location.href = "/profile"}}>Set my goals!</button>
             )}
-            <h2>Fitness</h2>
+            <Link to='/fitness/' className='pageLink'><h2>Fitness</h2></Link>
         <table>
         <tr className="dayHeaders">
           <th></th>
@@ -185,7 +185,8 @@ export default function Dashboard({token, weekArray}) {
       )}
       </ul>
 
-      <h2>Sleep and Hydration</h2>
+      <Link to='/sleep/' className='pageLink'><h2>Sleep</h2></Link><Link to='/hydration/' className='pageLink'><h2>Hydration</h2></Link>
+
         <table>
         <tr className="dayHeaders">
           <th></th>
