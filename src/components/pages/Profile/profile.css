@@ -11,13 +11,17 @@
     margin: 20px;
 }
 
-.button {
+.proBtn {
     background-color: #5f9660;
     margin-bottom: 10px;
     padding: 10px;
     border-radius: 5px;
     border: 3px solid rgb(26, 17, 5);
     color: white;
+}
+
+.proBtn:hover {
+    background-color: black;
 }
 
 .profileinput {

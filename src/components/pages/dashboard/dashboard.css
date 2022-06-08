@@ -36,6 +36,10 @@ flex-direction: column;
     color: white;
 }
 
+.goalsLink:hover {
+    background-color: black;
+}
+
 table {
     margin: auto;
     padding: 10px;
@@ -61,8 +65,17 @@ th {
     border-radius: 10px;
     padding: 10px;
     margin: 10px 30px;
-
 }
+
+.dayHeaders {
+    display:flexbox;
+    height: fit-content;
+    width: 400px;
+    overflow: scroll;
+    overflow-wrap: break-word;
+}
+
+
 
 /* .hydrationdashboard p {
     display: none;

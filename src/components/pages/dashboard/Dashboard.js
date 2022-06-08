@@ -24,15 +24,6 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
 
   const [hydrationEmoji, setHydrationEmoji] = useState([])
   const [hydrationWins, setHydrationWins] = useState(0)
-  const [isHovering, setIsHovering] = useState(false);
-
-  const handleMouseEnter = () => {
-    setIsHovering(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovering(false);
-  };
 
   useEffect(() => {
     API.getOneUser(token).then((userData) => {

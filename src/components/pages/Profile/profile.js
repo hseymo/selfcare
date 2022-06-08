@@ -10,15 +10,6 @@ export default function Profile({token}) {
         sleep_time: '',
         hydration_oz: ''
     });
-    const [isHovering, setIsHovering] = useState(false);
-
-    const handleMouseEnter = () => {
-        setIsHovering(true);
-    };
-
-    const handleMouseLeave = () => {
-        setIsHovering(false);
-    };
 
     useEffect(() => {
         API.getUserGoals(token).then((userData)=>{
@@ -101,13 +92,7 @@ export default function Profile({token}) {
                     />
                     <label> ounces of water per day! 💧</label>
                 </div>
-                <button 
-                style={{
-                    background: isHovering ? 'black' : '',
-                }}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-                className='button' type="submit"
+                <button className='proBtn' type="submit"
                 >Submit</button>
             </form>
         </div>
