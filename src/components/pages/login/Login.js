@@ -41,7 +41,6 @@ const signupSubmit = e=>{
                 <div className='formGroup'>
                 <label forHtml="signupEmail">Email: </label>
                 <input
-                className='input'
                 value={signupData.email}
                 name="signupEmail"
                 type="email"
@@ -52,7 +51,6 @@ const signupSubmit = e=>{
                 <div className='formGroup'>
                 <label forHtml="signupFirstName">First Name: </label>
                 <input
-                className='input'
                 value={signupData.first_name}
                 name="signupFirstName"
                 type="text"
@@ -63,7 +61,6 @@ const signupSubmit = e=>{
                 <div className='formGroup'>
                 <label forHtml="signupLastName">Last Name: </label>
                 <input
-                className='input'
                 value={signupData.last_name}
                 name="signupLastName"
                 type="text"
@@ -74,7 +71,6 @@ const signupSubmit = e=>{
                 <div className='formGroup'>
                 <label forHtml="signppPassword">Password: </label>
                 <input
-                className='input'
                 value={signupData.password}
                 name="signppPassword"
                 type="password"
@@ -82,7 +78,7 @@ const signupSubmit = e=>{
                 onChange={(e) => setSignupData({...signupData,password:e.target.value})}
                 />
                 </div>
-                <button type="submit"                 className='button'>Submit</button>
+                <button type="submit"                 className='submitbutton'>Submit</button>
                 </form>
             </div>
 
@@ -92,7 +88,6 @@ const signupSubmit = e=>{
                 <div className='formGroup'>
                 <label forHtml="loginEmail">Email: </label>
                 <input
-                className='input'
                 value={loginData.email}
                 name="loginEmail"
                 type="email"
@@ -103,7 +98,6 @@ const signupSubmit = e=>{
                 <div className='formGroup'>
                 <label forHtml="loginPassword">Password: </label>
                 <input
-                className='input'
                 value={loginData.password}
                 name="loginPassword"
                 type="password"
@@ -111,7 +105,7 @@ const signupSubmit = e=>{
                 onChange={(e) => setLoginData({...loginData,password:e.target.value})}
                 />
                 </div>
-                <button className='button' type="submit">Submit</button>
+                <button className='loginbutton' type="submit">Submit</button>
                 </form>
             </div>
             

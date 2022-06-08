@@ -1,40 +1,31 @@
 .sleep {
     background: #b8947e;
-}
-
-.sleep h1 {
-    background: #b8947e;
-    display: flex;
-    flex-wrap:wrap;
-    justify-content: space-between;
-    align-items: center;
-    justify-content: center;
-    text-decoration: underline;
-}
-
-.form-horizontal {
-    background: #b8947e;
-    margin-left: 10px;
-}
-
-#formDate, #formTime, #formMood {
-    height: 30px;
-}
-
-#formDiffFall, #formDiffStay {
-    height: 40px;
-    width: 10%;
-}
-.card.body {
-    background: #d9ae94;
-}
-
-
-h2 {
     text-align: center;
 }
 
+.sleep h1 {
+    margin-top: 10px;
+}
+
+.sleep h2 {
+    padding: 10px;
+}
+
+.sleepForm {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    text-align: center;
+    border: 5px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
  #sleepBtn{
+    margin-bottom: 10px;
+    margin-top: 10px;
     padding: 10px;
     background-color: #ad5353;
     border-radius: 5px;
