@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import API from "../../../utils/API.js"
 import DashboardRow from './card';
 
-export default function Dashboard({token, weekArray}) {
+export default function Dashboard({token, weekArray, isLoggedIn}) {
   const [userData, setUserData] = useState([])
   const [name, setName] = useState('')
 
@@ -133,8 +133,11 @@ export default function Dashboard({token, weekArray}) {
 
     return (
         <div className="Dashboard">
+            {!isLoggedIn ? (
+                <h2><Link class="link-light" to='/login'>Login</Link></h2>
+            ) : (
+                <>
             <h1>{name}'s Dashboard for the Week</h1>
-
             <div className='yourGoals'>
             <h2>Your Goals</h2>
             { isGoals ? (
@@ -247,7 +250,8 @@ export default function Dashboard({token, weekArray}) {
       </div>
 
       <h4>Click on a category to see more!</h4>
-
+      </> 
+            )}
     </div>
     );
 }

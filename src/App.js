@@ -92,7 +92,11 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Header isLoggedIn={isLoggedIn} userId={userId} logout={logout} />
+      <Header 
+        isLoggedIn={isLoggedIn} 
+        userId={userId} 
+        logout={logout} 
+      />
       <Routes>
         <Route 
           path='/' 
@@ -105,6 +109,7 @@ function App() {
         <Route 
           path='/dashboard' 
           element={<Dashboard 
+            isLoggedIn={isLoggedIn} 
             userId={userId} 
             token={token} 
             weekArray={weekArray} 
@@ -112,11 +117,13 @@ function App() {
         <Route 
           path='/profile' 
           element={<Profile 
+            isLoggedIn={isLoggedIn} 
             userId={userId} 
             token={token}/>} />
         <Route 
           path='/fitness' 
           element={<Exercise 
+            isLoggedIn={isLoggedIn} 
             userId={userId} 
             token={token}
             weekArray={weekArray} 
@@ -125,6 +132,7 @@ function App() {
         <Route 
           path='/sleep' 
           element={<Sleep 
+            isLoggedIn={isLoggedIn} 
             userId={userId} 
             token={token} 
             weekArray={weekArray} 
@@ -133,6 +141,7 @@ function App() {
         <Route 
           path='/hydration' 
           element={<Hydration 
+            isLoggedIn={isLoggedIn} 
             userId={userId} 
             token={token}
             weekArray={weekArray} 
@@ -141,6 +150,7 @@ function App() {
         <Route 
           path='/mindfulness' 
           element={<Mindfulness 
+            isLoggedIn={isLoggedIn} 
             userId={userId} 
             token={token} 
             weekArray={weekArray} 

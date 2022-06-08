@@ -1,14 +1,19 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './mindfulness.css'
 import { Card, Button, Form, FormLabel } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import API from "../../../utils/API.js"
 
-export default function Mindfulness({ token, userId, weekArray, goalObj }) {
+export default function Mindfulness({ token, weekArray, goalObj, isLoggedIn }) {
     const [mindObj, setMindObj] = useState({
         date: '',
     })
     return (
         <Card className="mindful">
+        {!isLoggedIn ? (
+            <h2><Link class="link-light" to='/login'>Login</Link></h2>
+            ) : (
+                <>
             <h1>Mindfulness</h1>
             <h2>Your Goals</h2>
                 {/* { goalObj.mindful != 0 && (
@@ -32,6 +37,8 @@ export default function Mindfulness({ token, userId, weekArray, goalObj }) {
             name='mindfulCard'
             results={thisWeek}
             /> */}
+            </>
+            )}
         </Card>
     );
 }

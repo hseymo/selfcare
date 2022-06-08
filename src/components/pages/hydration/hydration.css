@@ -23,7 +23,7 @@
     justify-content: space-around;
 }
 
-#hydroBtn {
+.hydroBtn {
     background-color: #66562b;
     margin-bottom: 10px;
     margin-top: 10px;
