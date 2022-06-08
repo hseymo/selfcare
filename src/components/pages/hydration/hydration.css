@@ -1,13 +1,23 @@
 .hydration {
     background: #a39779;
+    text-align: center;
 }
 
 .hydration h1 {
-    
-    text-decoration: underline;
+    margin-top: 10px;
 }
 
-.hydration h1, .hydration h2, .hydration nav h2 {
+.hydration h2 {
+    padding: 10px;
+}
+
+
+
+
+
+
+
+.hydration h2, .hydration nav h2 {
     background: #a39779;
     display: flex;
     flex-wrap:inherit;

@@ -29,6 +29,8 @@ export default function Fitness({ token, weekArray, goalObj }) {
 
                 if (response === undefined) {
                     newObj.status = 'Not Reported';
+                } else if (newObj.activity_duration == 0) {
+                    newObj.status = 'No Exercise';
                 } else {
                     const { id, date, activity_type, activity_duration, RPE, notes } = response;
                     newObj.id = id
@@ -119,6 +121,8 @@ export default function Fitness({ token, weekArray, goalObj }) {
         setUpdateReq(false)
     })
 
+    const sendNull = useCallback
+
     return (
         <Card className="fitness">
             <h1>Fitness</h1>
@@ -135,7 +139,7 @@ export default function Fitness({ token, weekArray, goalObj }) {
                     <Form.Label htmlFor="formDate">
                         Choose date:
                     </Form.Label>
-                    <Form.Check
+                    <Form.Check 
                         value={exerciseFormObject.date}
                         type="date"
                         id="formDate"
@@ -153,7 +157,7 @@ export default function Fitness({ token, weekArray, goalObj }) {
                         onChange={(e) => setExerciseFormObject({ ...exerciseFormObject, activity_type: e.target.value })}
                     />
                     <Form.Label htmlFor="formDuration">
-                        How long did you exercise for (in minutes)?
+                        How long did you exercise for (in minutes)? Note: if you did not exercise, report '0'.
                     </Form.Label>
                     <Form.Check
                         value={exerciseFormObject.activity_duration}
@@ -187,13 +191,13 @@ export default function Fitness({ token, weekArray, goalObj }) {
                     <br />
                     {(existingItem == true) ? (
                         <>
-                            <Button type="button"
+                            <Button type="button" className="fitnessBtn" 
                                 onClick={sendUpdate}>Update</Button>
-                            <Button type="button"
+                            <Button type="button" className="fitnessBtn" 
                                 onClick={sendDelete}>Delete</Button>
                         </>
                     ) : (
-                        <Button id="fitnessBtn"type="button" onClick={sendCreate}>Submit</Button>
+                        <Button className="fitnessBtn" type="button" onClick={sendCreate}>Submit</Button>
                     )}
                 </Card>
             </Form>

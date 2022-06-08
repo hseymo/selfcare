@@ -1,38 +1,46 @@
-.fitness.card {
+.fitness {
     background: #baa587;
+    text-align: center;
 }
+
 .fitness h1 {
+    margin-top: 10px;
+}
+
+.fitness h2 {
+    padding: 10px;
+}
+
+.fitnessForm {
+    background: #baa587;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
-    flex-wrap:inherit;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    justify-content: center;
-    text-decoration: underline;
+    padding: 10px;
 }
-.form {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+.form-label {
+    margin-top: 10px;
 }
-.btn {
-    width:fit-content;
-    margin-bottom: 3px;
+
+.form-check-input {
+    padding: 10px;
+    width: 100%;
+    color: black;
 }
-.form-check-label {
-    padding: 0px 5px;
+
+.fitnessBtn {
+    margin: 10px;
+    padding: 10px;
+    background-color: #5c4927;
+    border-radius: 5px;
+    border: 3px solid rgb(26, 17, 5);
+    color: white;
 }
-.form-check-input, .fitness h2 {
-    padding: 0px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    justify-content: center;
-    min-width: 120px;
-}
-.fitnessDate {
-    display: flex;
-    justify-content: center;
-}
+
 .fitnessWeek.card {
     display:flex;
     flex-wrap: wrap;
@@ -51,26 +59,4 @@
 }
 .fitnessWeek h4 {
     padding-bottom: 30px;
-}
-#formDate, #formType, #formDuration, #formRPE, #formNotes {
-    /* padding-bottom: 5px; */
-    max-width: 120px;
-    height: 25px;
-}
-
-.fitnessForm.card {
-    background: #baa587;
-    margin-left: 10px;
-}
-
-.form-check-input {
-    color: black
-}
-
-#fitnessBtn {
-    padding: 10px;
-    background-color: #5c4927;
-    border-radius: 5px;
-    border: 3px solid rgb(26, 17, 5);
-    color: white;
 }

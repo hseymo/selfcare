@@ -1,15 +1,14 @@
 .sleep {
     background: #b8947e;
+    text-align: center;
 }
 
 .sleep h1 {
-    background: #b8947e;
-    display: flex;
-    flex-wrap:wrap;
-    justify-content: space-between;
-    align-items: center;
-    justify-content: center;
-    text-decoration: underline;
+    margin-top: 10px;
+}
+
+.sleep h2 {
+    padding: 10px;
 }
 
 .form-horizontal {
