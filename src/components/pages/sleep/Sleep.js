@@ -16,7 +16,7 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
     })
     const [updateReq, setUpdateReq] = useState('');
     const [existingItem, setExistingItem] = useState('');
-
+    
     useEffect(() => {
         API.getUserSleep(token).then((userData) => {
             console.log(userData)
@@ -147,7 +147,6 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
                     className='sleepInput'
                     value={sleepFormObject.date}
                     type="date"
-                    id="formDate"
                     name="formDate"
                     onChange={(e) => setSleepFormObject({ ...sleepFormObject, date: e.target.value })}
                 />
@@ -158,7 +157,6 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
                     type="number"
                     min='0'
                     max='24'
-                    id="formTime"
                     onChange={(e) => setSleepFormObject({ ...sleepFormObject, time_asleep: e.target.value })}
                     placeholder="8 hours"
                 />
@@ -167,35 +165,32 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
                     className='sleepInput'
                     value={sleepFormObject.diff_falling_asleep}
                     type="boolean"
-                    id="formDiffFall"
                     name="formDiffFall"
                     onChange={(e) => setSleepFormObject({ ...sleepFormObject, diff_falling_asleep: e.target.value })}
                     placeholder="true/false"
                 >
                     <option disabled={true} value=''>Select an option</option>
-                    <option value={true}>Yes</option>
-                    <option value={false}>No</option>
+                    <option className="sleepOption" value={true}>Yes</option>
+                    <option className="sleepOption" value={false}>No</option>
                 </Form.Select>
                 <Form.Label htmlFor='formDiffStay'>Did you have difficulty staying asleep?</Form.Label>
                 <Form.Select
                     className='sleepInput'
                     value={sleepFormObject.diff_staying_asleep}
                     type="boolean"
-                    id="formDiffStay"
                     name="formDiffStay"
                     onChange={(e) => setSleepFormObject({ ...sleepFormObject, diff_staying_asleep: e.target.value })}
                     placeholder="true/false"
                 >
                     <option disabled={true} value=''>Select an option</option>
-                    <option value={true}>Yes</option>
-                    <option value={false}>No</option>
+                    <option className="sleepOption" value={true}>Yes</option>
+                    <option className="sleepOption" value={false}>No</option>
                 </Form.Select>
                 <Form.Label htmlFor='formMood'>How did you feel when you woke up?</Form.Label>
                 <Form.Check
                     className='sleepInput'
                     value={sleepFormObject.mood_upon_wake}
                     type="text"
-                    id="formMood"
                     name="formMood"
                     onChange={(e) => setSleepFormObject({ ...sleepFormObject, mood_upon_wake: e.target.value })}
                     placeholder="Rested"
