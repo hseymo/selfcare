@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import "./login.css";
+import { Link } from 'react-router-dom';
 
-export default function Login(props) {
+export default function Login(props, {isLoggedIn}) {
 const [signupData, setSignupData] = useState({
   email:'',
   first_name: '',
@@ -35,6 +36,8 @@ const signupSubmit = e=>{
 
     return (
         <div className='loginPageBody'>
+          {!isLoggedIn ? (
+            <>
             <div className="signUpSection">
             <h1>Sign Up</h1>
                 <form className="signup" onSubmit={signupSubmit}>
@@ -108,7 +111,10 @@ const signupSubmit = e=>{
                 <button className='loginbutton' type="submit">Submit</button>
                 </form>
             </div>
-            
+            </>
+          ) : (
+            <h2>You are already logged in! Please visit your <Link class="link-light" to='/login'>Dashboard</Link>.</h2>
+          )}
         </div>
     );
 }

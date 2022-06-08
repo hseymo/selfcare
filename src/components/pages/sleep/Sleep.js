@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './sleep.css';
 import { Card, Button, Form } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import API from "../../../utils/API.js"
 import SleepCard from "./SleepCard"
 
-export default function Sleep({ token, weekArray, goalObj }) {
+export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
     const [thisWeek, setThisWeek] = useState([]);
     const [sleepFormObject, setSleepFormObject] = useState({
         date: '',
@@ -130,6 +131,10 @@ export default function Sleep({ token, weekArray, goalObj }) {
 
     return (
         <Card className="sleep">
+            {!isLoggedIn ? (
+                <h2><Link class="link-light" to='/login'>Login</Link></h2>
+            ) : (
+                <>
             <h1>Sleep</h1>
             <h2>Your Goals</h2>
             {goalObj.sleep_time != 0 && (
@@ -197,19 +202,21 @@ export default function Sleep({ token, weekArray, goalObj }) {
                 />
                 {(existingItem == true) ? (
                     <>
-                        <Button type="button"
+                        <Button type="button" className="sleepBtn"
                             onClick={sendUpdate}>Update</Button>
-                        <Button type="button"
+                        <Button type="button" className="sleepBtn"
                             onClick={sendDelete}>Delete</Button>
                     </>
                 ) : (
-                    <Button id="sleepBtn" type="button" onClick={sendCreate}>Submit</Button>
+                    <Button className="sleepBtn" type="button" onClick={sendCreate}>Submit</Button>
                 )}
             </Form>
             <h2> This week's sleep reporting:</h2>
             <SleepCard
                 name='sleep'
                 results={thisWeek} />
+                </> 
+            )}
         </Card>
     );
 }

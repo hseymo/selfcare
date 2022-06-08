@@ -16,8 +16,16 @@ export default function ExerciseCard(props) {
             <li> No activity reported </li>
         ) : (
             <>
+            { result.activity_type ? (
                 <li>Activity Type: {result.activity_type}</li>
+            ) : (
+                <></>
+            )}
+            { result.activity_duration > 0 ? (
                 <li>Activity Duration: {result.activity_duration} minutes</li>
+            ) : (
+                <li>You reported a rest day. You did not exercise this day.</li>
+            )}
             { result.RPE ? (
                 <li>RPE: {result.RPE}</li>
             ) : (
