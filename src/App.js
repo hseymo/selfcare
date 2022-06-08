@@ -155,6 +155,9 @@ function App() {
             token={token} 
             weekArray={weekArray} 
             goalObj={goalObj}/>} />
+        <Route 
+          path='*' 
+          element={<Home />} />
       </Routes>
     </BrowserRouter>
   );
