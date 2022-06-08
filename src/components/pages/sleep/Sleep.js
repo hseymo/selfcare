@@ -23,9 +23,10 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
             const sleepArray = [];
             weekArray.map(entry => {
                 var response = userData.find(data => data.date === entry);
+                let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
                 console.log(response)
 
-                let newObj = { date: entry }
+                let newObj = { date: dateFormat }
 
                 if (response === undefined) {
                     newObj.status = 'Not Reported';
@@ -36,14 +37,14 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
                     newObj.time_asleep = time_asleep;
                     newObj.mood_upon_wake = mood_upon_wake;
                     if (diff_falling_asleep === true) {
-                        newObj.diff_falling_asleep = 'true'
+                        newObj.diff_falling_asleep = 'Y'
                     } else {
-                        newObj.diff_falling_asleep = 'false'
+                        newObj.diff_falling_asleep = 'N'
                     }
                     if (diff_staying_asleep === true) {
-                        newObj.diff_staying_asleep = 'true'
+                        newObj.diff_staying_asleep = 'Y'
                     } else {
-                        newObj.diff_staying_asleep = 'false'
+                        newObj.diff_staying_asleep = 'N'
                     }
                     console.log(newObj)
                 }
@@ -206,12 +207,16 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
                     <Button className="sleepBtn" type="button" onClick={sendCreate}>Submit</Button>
                 )}
             </Form>
-            <h2> This week's sleep reporting:</h2>
+            <h2>This week's sleep reporting:</h2>
             <SleepCard
                 name='sleep'
                 results={thisWeek} />
                 </> 
             )}
+            <h2>View another week's sleep reporting:</h2>
+            <form>
+                
+            </form>
         </Card>
     );
 }

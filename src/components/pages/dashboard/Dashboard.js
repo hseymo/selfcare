@@ -47,9 +47,10 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
       let weeklyFitnessTime = 0;
       let weeklyFitnessCount = 0;
       weekArray.map(entry => {
-        var response = userData.fitnesses.find(data => data.date === entry);
+        // let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
+        // console.log(dateFormat)
         let newObj = { date: entry }
-        // console.log(response)
+        var response = userData.fitnesses.find(data => data.date === entry);
         if (response === undefined) {
           newObj.status = 'Not reported'
           newObj.emoji = '⁇'
@@ -65,7 +66,7 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
         }
         fitnessArray.push(newObj);
       })
-
+      console.log(fitnessArray)
       setFitnessEmoji(fitnessArray)
       setFitnessTime(weeklyFitnessTime)
       setFitnessCount(weeklyFitnessCount)
@@ -80,7 +81,8 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
       let sleepCount = 0;
       weekArray.map(entry => {
         var response = userData.sleep.find(data => data.date === entry);
-        let newObj = { date: entry };
+        // let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
+        let newObj = { date: entry }
         if (response === undefined) {
           newObj.status = 'Not reported';
           newObj.emoji = '⁇';
@@ -107,8 +109,8 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
       let dailyHydration = 0;
       weekArray.map(entry => {
         var response = userData.hydrations.find(data => data.date === entry);
+        // let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
         let newObj = { date: entry }
-        // console.log(response)
         if (response === undefined) {
           newObj.status = 'Not reported'
           newObj.emoji = '⁇'
@@ -175,13 +177,13 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
         <table className="dayTable">
         <tr className="dayHeaders">
           <th></th>
-          <th>Monday <br/> {weekArray[0]}</th>
-          <th>Tuesday <br/> {weekArray[1]}</th>
-          <th>Wednesday <br/> {weekArray[2]} </th>
-          <th>Thursday <br/> {weekArray[3]}</th>
-          <th>Friday <br/> {weekArray[4]}</th>
-          <th>Saturday <br/> {weekArray[5]}</th>
-          <th>Sunday <br/> {weekArray[6]}</th>
+          <th>Monday <br/> {weekArray[0].slice(5) + "-" + weekArray[0].slice(0,4)}</th>
+          <th>Tuesday <br/> {weekArray[1].slice(5) + "-" + weekArray[1].slice(0,4)}</th>
+          <th>Wednesday <br/> {weekArray[2].slice(5) + "-" + weekArray[2].slice(0,4)} </th>
+          <th>Thursday <br/> {weekArray[3].slice(5) + "-" + weekArray[3].slice(0,4)}</th>
+          <th>Friday <br/> {weekArray[4].slice(5) + "-" + weekArray[4].slice(0,4)}</th>
+          <th>Saturday <br/> {weekArray[5].slice(5) + "-" + weekArray[5].slice(0,4)}</th>
+          <th>Sunday <br/> {weekArray[6].slice(5) + "-" + weekArray[0].slice(0,4)}</th>
         </tr>
         <DashboardRow 
             name='fitness' 
@@ -206,13 +208,13 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
       <table className='dayTable'>
         <tr className="dayHeaders">
           <th></th>
-          <th>Monday <br/> {weekArray[0]}</th>
-          <th>Tuesday <br/> {weekArray[1]}</th>
-          <th>Wednesday <br/> {weekArray[2]} </th>
-          <th>Thursday <br/> {weekArray[3]}</th>
-          <th>Friday <br/> {weekArray[4]}</th>
-          <th>Saturday <br/> {weekArray[5]}</th>
-          <th>Sunday <br/> {weekArray[6]}</th>
+          <th>Monday <br/> {weekArray[0].slice(5) + "-" + weekArray[0].slice(0,4)}</th>
+          <th>Tuesday <br/> {weekArray[1].slice(5) + "-" + weekArray[1].slice(0,4)}</th>
+          <th>Wednesday <br/> {weekArray[2].slice(5) + "-" + weekArray[2].slice(0,4)} </th>
+          <th>Thursday <br/> {weekArray[3].slice(5) + "-" + weekArray[3].slice(0,4)}</th>
+          <th>Friday <br/> {weekArray[4].slice(5) + "-" + weekArray[4].slice(0,4)}</th>
+          <th>Saturday <br/> {weekArray[5].slice(5) + "-" + weekArray[5].slice(0,4)}</th>
+          <th>Sunday <br/> {weekArray[6].slice(5) + "-" + weekArray[0].slice(0,4)}</th>
         </tr>
           <DashboardRow 
             name='sleep' 
@@ -238,13 +240,13 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
         <table className="dayTable">
         <tr className="dayHeaders">
           <th></th>
-          <th>Monday <br/> {weekArray[0]}</th>
-          <th>Tuesday <br/> {weekArray[1]}</th>
-          <th>Wednesday <br/> {weekArray[2]} </th>
-          <th>Thursday <br/> {weekArray[3]}</th>
-          <th>Friday <br/> {weekArray[4]}</th>
-          <th>Saturday <br/> {weekArray[5]}</th>
-          <th>Sunday <br/> {weekArray[6]}</th>
+          <th>Monday <br/> {weekArray[0].slice(5) + "-" + weekArray[0].slice(0,4)}</th>
+          <th>Tuesday <br/> {weekArray[1].slice(5) + "-" + weekArray[1].slice(0,4)}</th>
+          <th>Wednesday <br/> {weekArray[2].slice(5) + "-" + weekArray[2].slice(0,4)} </th>
+          <th>Thursday <br/> {weekArray[3].slice(5) + "-" + weekArray[3].slice(0,4)}</th>
+          <th>Friday <br/> {weekArray[4].slice(5) + "-" + weekArray[4].slice(0,4)}</th>
+          <th>Saturday <br/> {weekArray[5].slice(5) + "-" + weekArray[5].slice(0,4)}</th>
+          <th>Sunday <br/> {weekArray[6].slice(5) + "-" + weekArray[0].slice(0,4)}</th>
         </tr>
           <DashboardRow 
             name='hydration'  
