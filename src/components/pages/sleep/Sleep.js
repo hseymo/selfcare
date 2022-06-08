@@ -16,7 +16,7 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
     })
     const [updateReq, setUpdateReq] = useState('');
     const [existingItem, setExistingItem] = useState('');
-
+    
     useEffect(() => {
         API.getUserSleep(token).then((userData) => {
             console.log(userData)
@@ -173,8 +173,8 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
                     placeholder="true/false"
                 >
                     <option disabled={true} value=''>Select an option</option>
-                    <option value={true}>Yes</option>
-                    <option value={false}>No</option>
+                    <option className="sleepOption" value={true}>Yes</option>
+                    <option className="sleepOption" value={false}>No</option>
                 </Form.Select>
                 <Form.Label htmlFor='formDiffStay'>Did you have difficulty staying asleep?</Form.Label>
                 <Form.Select
@@ -187,8 +187,8 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
                     placeholder="true/false"
                 >
                     <option disabled={true} value=''>Select an option</option>
-                    <option value={true}>Yes</option>
-                    <option value={false}>No</option>
+                    <option className="sleepOption" value={true}>Yes</option>
+                    <option className="sleepOption" value={false}>No</option>
                 </Form.Select>
                 <Form.Label htmlFor='formMood'>How did you feel when you woke up?</Form.Label>
                 <Form.Check

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import './dashboard.css';
 import { Link } from 'react-router-dom';
 import API from "../../../utils/API.js"
@@ -9,7 +9,7 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
   const [name, setName] = useState('')
 
   const [goalsData, setGoalsData] = useState({
-    fitness_time:'',
+    fitness_time: '',
     fitness_frequency: '',
     sleep_time: '',
     hydration_oz: ''
@@ -26,10 +26,10 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
   const [hydrationWins, setHydrationWins] = useState(0)
 
   useEffect(() => {
-    API.getOneUser(token).then((userData)=>{
+    API.getOneUser(token).then((userData) => {
       setUserData(userData)
       setName(userData.first_name);
-// USERS GOALS_______________________________________________
+      // USERS GOALS_______________________________________________
       const { fitness_time, fitness_frequency, sleep_time, hydration_oz } = userData.goal;
       setGoalsData({
         fitness_time: fitness_time,
@@ -37,17 +37,17 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
         sleep_time: sleep_time,
         hydration_oz: hydration_oz
       })
-      if (fitness_time || fitness_frequency || sleep_time || hydration_oz ) {
+      if (fitness_time || fitness_frequency || sleep_time || hydration_oz) {
         setIsGoals(true)
       }
-      
-// FITNESS LOGIC__________________________________________
+
+      // FITNESS LOGIC__________________________________________
       const fitnessArray = [];
       let weeklyFitnessTime = 0;
       let weeklyFitnessCount = 0;
       weekArray.map(entry => {
         var response = userData.fitnesses.find(data => data.date === entry);
-        let newObj = {date: entry}
+        let newObj = { date: entry }
         // console.log(response)
         if (response === undefined) {
           newObj.status = 'Not reported'
@@ -59,7 +59,7 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
           } else {
             newObj.emoji = '✅'
             weeklyFitnessTime = weeklyFitnessTime + response.activity_duration;
-           weeklyFitnessCount++;
+            weeklyFitnessCount++;
           }
         }
         fitnessArray.push(newObj);
@@ -75,59 +75,59 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
 
 
       // SLEEP LOGIC_______________________________________________
-        const sleepArray = [];
-        let sleepCount = 0;
-        weekArray.map(entry => {
-          var response = userData.sleep.find(data => data.date === entry);
-          let newObj = {date: entry};
-          if (response === undefined) {
-            newObj.status = 'Not reported';
-            newObj.emoji = '⁇';
-          } else {
-            newObj.status = 'Reported';
-            if (response.time_asleep >= userData.goal.sleep_time) {
+      const sleepArray = [];
+      let sleepCount = 0;
+      weekArray.map(entry => {
+        var response = userData.sleep.find(data => data.date === entry);
+        let newObj = { date: entry };
+        if (response === undefined) {
+          newObj.status = 'Not reported';
+          newObj.emoji = '⁇';
+        } else {
+          newObj.status = 'Reported';
+          if (response.time_asleep >= userData.goal.sleep_time) {
             newObj.emoji = '💤';
             sleepCount++;
           } else {
             newObj.emoji = '🥱';
-          } 
+          }
         }
         sleepArray.push(newObj)
-        })
-        setSleepWins(sleepCount)
-        setSleepEmoji(sleepArray)
-        // console.log('sleepArray: ', sleepArray)
-        // console.log('test sleep: ', sleepEmoji)
-        // console.log('sleep wins: ', sleepWins)
+      })
+      setSleepWins(sleepCount)
+      setSleepEmoji(sleepArray)
+      // console.log('sleepArray: ', sleepArray)
+      // console.log('test sleep: ', sleepEmoji)
+      // console.log('sleep wins: ', sleepWins)
 
       // HYDRATAION LOGIC__________________________________________
-        const hydrationArray = [];
-        let hydrationCount = 0;
-        let dailyHydration = 0;
-        weekArray.map(entry => {
-          var response = userData.hydrations.find(data => data.date === entry);
-          let newObj = {date: entry}
-          // console.log(response)
-          if (response === undefined) {
-            newObj.status = 'Not reported'
-            newObj.emoji = '⁇'
+      const hydrationArray = [];
+      let hydrationCount = 0;
+      let dailyHydration = 0;
+      weekArray.map(entry => {
+        var response = userData.hydrations.find(data => data.date === entry);
+        let newObj = { date: entry }
+        // console.log(response)
+        if (response === undefined) {
+          newObj.status = 'Not reported'
+          newObj.emoji = '⁇'
+        } else {
+          newObj.status = 'Reported';
+          newObj.oz = response.water_oz;
+          if (response.water_oz >= userData.goal.hydration_oz) {
+            newObj.emoji = '💦'
+            hydrationCount++;
           } else {
-            newObj.status = 'Reported';
-            newObj.oz = response.water_oz;
-            if (response.water_oz >= userData.goal.hydration_oz) {
-              newObj.emoji='💦'
-              hydrationCount++;
-            } else {
-              newObj.emoji='💧'
-            }
+            newObj.emoji = '💧'
           }
-          hydrationArray.push(newObj)
-        })
-        setHydrationEmoji(hydrationArray)
-        setHydrationWins(hydrationCount);
-        // console.log('hydrationArray: ', hydrationArray)
-        // console.log('test hydration :', hydrationEmoji)
-        // console.log('hydration wins: ', hydrationWins)
+        }
+        hydrationArray.push(newObj)
+      })
+      setHydrationEmoji(hydrationArray)
+      setHydrationWins(hydrationCount);
+      // console.log('hydrationArray: ', hydrationArray)
+      // console.log('test hydration :', hydrationEmoji)
+      // console.log('hydration wins: ', hydrationWins)
     })
   }, [token])
 
@@ -143,17 +143,17 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
             { isGoals ? (
             <>
             <ul className='goalsList'>
-              { goalsData.fitness_time != 0 && (
-              <li className='goalsLi'>Your exercise time goal is {goalsData.fitness_time} minutes per week. </li>
+              {goalsData.fitness_time != 0 && (
+                <li className='goalsLi'>Your exercise time goal is {goalsData.fitness_time} minutes per week. </li>
               )}
-              { goalsData.fitness_frequency != 0 && (
-              <li className='goalsLi'>Your exercise frequency goal is {goalsData.fitness_frequency} days per week. </li>
+              {goalsData.fitness_frequency != 0 && (
+                <li className='goalsLi'>Your exercise frequency goal is {goalsData.fitness_frequency} days per week. </li>
               )}
               {goalsData.sleep_time != 0 && (
-              <li className='goalsLi'>Your nightly sleep goal is {goalsData.sleep_time} hours.</li>
+                <li className='goalsLi'>Your nightly sleep goal is {goalsData.sleep_time} hours.</li>
               )}
-              { goalsData.hydration_oz != 0 && (
-              <li className='goalsLi'>Your daily water intake goal is {goalsData.hydration_oz} oz.</li>
+              {goalsData.hydration_oz != 0 && (
+                <li className='goalsLi'>Your daily water intake goal is {goalsData.hydration_oz} oz.</li>
               )}
             </ul>
             <button className='goalsLink' onClick={(e) => {window.location.href = "/profile"}}>Update my goals</button>
@@ -170,7 +170,7 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
         <div className='fitnessdashboard'>
         <h2>Fitness</h2>
         <p>Key: ✅ indicates you reported exercise on this day while ❌ indicates you reported that you did not exercise this day.</p>
-        <table>
+        <table className="dayTable">
         <tr className="dayHeaders">
           <th></th>
           <th>Monday <br/> {weekArray[0]}</th>
@@ -202,7 +202,7 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
         <div className='sleepdashboard'>
       <h2>Sleep</h2>
       <p>Key: 🥱 indicates reported time asleep below your daily goal while 💤 indicates you met your goal for the day! </p>
-      <table>
+      <table className="dayTable">
         <tr className="dayHeaders">
           <th></th>
           <th>Monday <br/> {weekArray[0]}</th>
@@ -217,13 +217,13 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
             name='sleep' 
             results={sleepEmoji}/>
         </table>
-      
+
         <ul>
-        { goalsData.sleep_time != 0 ? (
-      <li className="compLi"> You met your sleep goal {sleepWins} times this week.</li> ) : (
-        <></>
-      )}
-      </ul>
+          {goalsData.sleep_time != 0 ? (
+            <li className="compLi"> You met your sleep goal {sleepWins} times this week.</li>) : (
+            <></>
+          )}
+        </ul>
       </div>
       </Link>
 
@@ -231,7 +231,7 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
         <div className='hydrationdashboard'>
       <h2>Hydration</h2>
         <p>Key: 💧 indicates reported water intake below your daily goal while 💦 indicates you met your goal for the day! </p>
-        <table>
+        <table className="dayTable">
         <tr className="dayHeaders">
           <th></th>
           <th>Monday <br/> {weekArray[0]}</th>
@@ -246,12 +246,12 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
             name='hydration'  
             results={hydrationEmoji}/>
         </table>
-      <ul>
-      { goalsData.hydration_oz != 0 ? ( 
-      <li className="compLi"> You met your hydration goal {hydrationWins} times this week.</li> ) : (
-        <></>
-      ) }
-      </ul>
+        <ul>
+          {goalsData.hydration_oz != 0 ? (
+            <li className="compLi"> You met your hydration goal {hydrationWins} times this week.</li>) : (
+            <></>
+          )}
+        </ul>
       </div>
       </Link>
 
@@ -259,5 +259,5 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
       </> 
             )}
     </div>
-    );
+  );
 }

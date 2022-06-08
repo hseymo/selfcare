@@ -16,7 +16,7 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
     })
     const [updateReq, setUpdateReq] = useState('');
     const [existingItem, setExistingItem] = useState('');
-
+    
     useEffect(() => {
         API.getUserFitness(token).then((userData) => {
             // console.log(userData)

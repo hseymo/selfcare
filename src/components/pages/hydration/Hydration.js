@@ -8,7 +8,7 @@ import HydrationCard from './HydrationCard';
 export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
     const [thisWeek, setThisWeek] = useState([]);
     const [hydrationFormObject, setHydrationFormObject] = useState({
-        date: '', 
+        date: '',
         water_oz: ''
     })
     const [updateReq, setUpdateReq] = useState('');
@@ -110,35 +110,35 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
                 <>
                 <h1>Hydration</h1>
                 <h2>Your Goals</h2>
-                { goalObj.hydration_oz != 0 && (
-              <h4 className=''>Your daily water intake goal is {goalObj.hydration_oz} oz.</h4>
-              )}
+                {goalObj.hydration_oz != 0 && (
+                    <h4 className=''>Your daily water intake goal is {goalObj.hydration_oz} oz.</h4>
+                )}
                 <h2>Report Water Intake</h2>
                 <Form className="waterForm">
-                        <Form.Label htmlFor="waterDate">
-                            Choose date:
-                        </Form.Label>
-                        <Form.Check
-                            value={hydrationFormObject.date}
-                            type="date"
-                            id="waterDate"
-                            name="waterDate"
-                            onChange={(e) => setHydrationFormObject({...hydrationFormObject, date: e.target.value})}
-                            />
-                        <Form.Label htmlFor="waterAmount">
-                            How many ounces did you drink?
-                        </Form.Label>
-                        <Form.Check
-                            value={hydrationFormObject.water_oz}
-                            min="0"
-                            max="1000"
-                            type="number"
-                            id="waterAmount"
-                            name="waterAmount"
-                            onChange={(e) => setHydrationFormObject({...hydrationFormObject, water_oz: e.target.value})}
-                            />
-                        <br />
-                        { (existingItem == true) ? (
+                    <Form.Label htmlFor="waterDate">
+                        Choose date:
+                    </Form.Label>
+                    <Form.Check
+                        value={hydrationFormObject.date}
+                        type="date"
+                        id="waterDate"
+                        name="waterDate"
+                        onChange={(e) => setHydrationFormObject({ ...hydrationFormObject, date: e.target.value })}
+                    />
+                    <Form.Label htmlFor="waterAmount">
+                        How many ounces did you drink?
+                    </Form.Label>
+                    <Form.Check
+                        value={hydrationFormObject.water_oz}
+                        min="0"
+                        max="1000"
+                        type="number"
+                        id="waterAmount"
+                        name="waterAmount"
+                        onChange={(e) => setHydrationFormObject({ ...hydrationFormObject, water_oz: e.target.value })}
+                    />
+                    <br />
+                    {(existingItem == true) ? (
                         <>
                             <Button type="button" className="hydroBtn"
                                 onClick={sendUpdate}>Update</Button>
