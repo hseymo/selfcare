@@ -82,7 +82,7 @@ th {
 .dayTable {
     display:block;
     height: fit-content;
-    width: 200px;
+    width: 140px;
     overflow: scroll;
 }
 
