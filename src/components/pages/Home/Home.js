@@ -48,16 +48,16 @@ export default function Home({isLoggedIn}) {
                     </div>
                 </animated.div>
             ))}
-                    <div className="container">
-                        <h3>Welcome to your one stop shop for all things lifestyle!</h3>
-                        <h3>Let us take care of you!</h3>
-                        <h3>Check out our fitness, sleep and hydration trackers as well as our meditation hub.</h3>
-                        <h3>Enjoy and love yourself!</h3>
-                        <p> 💛 Chris, Jaden, Kalif and Haley (your website creators)</p>
+            <div className="container">
+                <h3>Welcome to your one stop shop for all things lifestyle!</h3>
+                <h3>Let us take care of you!</h3>
+                <h3>Check out our fitness, sleep and hydration trackers as well as our meditation hub.</h3>
+                <h3>Enjoy and love yourself!</h3>
+                <p> 💛 Chris, Jaden, Kalif and Haley (your website creators)</p>
             {!isLoggedIn ? (
-                <a className='enter' href='/login'>Login</a>
+                <button className='enter' onClick={(e) => {window.location.href = "/login"}}>Login</button>
             ) : (
-                <a className='enter' href='/dashboard'>Dashboard</a>
+                <button className='enter' onClick={(e) => {window.location.href = "/dashboard"}}>Dashboard</button>
             )}
             </div>
         </div>

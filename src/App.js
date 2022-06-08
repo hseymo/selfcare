@@ -26,6 +26,7 @@ function App() {
     sleep_time: '',
     hydration_oz: ''
 })
+const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(()=>{
     const storedToken = localStorage.getItem("token")
@@ -54,9 +55,12 @@ function App() {
   const handleLoginSubmit = (loginData) => {
     API.login(loginData).then(data => {
       if (data.token) {
+        console.log(data)
         setToken(data.token);
         localStorage.setItem("token", data.token);
         window.location.href = "/dashboard"
+      } else {
+        setErrorMessage('Login failed; please try again.')
       }
     })
   }
@@ -67,6 +71,8 @@ function App() {
         setToken(data.token)
         localStorage.setItem("token", data.token);
         window.location.href = "/dashboard"
+      } else {
+        setErrorMessage('Signup failed; please try again.')
       }
     })
   }
@@ -100,14 +106,17 @@ function App() {
       <Routes>
         <Route 
           path='/' 
-          isLoggedIn={isLoggedIn} 
-          element={<Home />} />
+          element={<Home 
+            isLoggedIn={isLoggedIn} 
+          />} />
         <Route 
           path='/login' 
           element={<Login 
             isLoggedIn={isLoggedIn} 
             signup={handleSignupSubmit} 
-            login={handleLoginSubmit} />} />
+            login={handleLoginSubmit} 
+            errorMessage={errorMessage}
+            />} />
         <Route 
           path='/dashboard' 
           element={<Dashboard 
