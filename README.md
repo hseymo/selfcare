@@ -1,70 +1,135 @@
-# Getting Started with Create React App
+# **[Self Care Central](https://selfcarecentral.herokuapp.com/)**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Badge](https://img.shields.io/badge/license-MIT-blue)
 
-## Available Scripts
+## Table of Contents
+---
+* [License](#license)
+* [Installation](#installation)
+* [Packages](#packages)
+* [Description](#description)
+* [Usage](#usage)
+* [Contributing](#contributing)
+* [Questions](#questions)
 
-In the project directory, you can run:
+<br>
 
-### `npm start`
+## License 
+---
+[MIT License](./LICENSE) <br>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Copyright (c) 2022 Haley Seymour
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-### `npm test`
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+ <br>
 
-### `npm run build`
+<br>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Installation
+---
+To install the react front end for this project: 
+1. Start by forking this repository on Github. 
+2. Clone this project to your machine by using the "git clone + URL" command. 
+3. Open the project with your favorite text editor, like VS Code (in your terminal, first type "cd foldername" then "code ."). 
+4. This project includes a package.json file that specifies dependencies for this project, so be sure to run "npm install". This will install the packages specified in the next section. 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+To install the server for this project: 
+1. Navigate to the [repo](https://github.com/hseymo/selfcareBackend).
+2. Start by forking the repository on Github. 
+3. Clone this project to your machine by using the "git clone + URL" command. 
+4. Open the project with your favorite text editor, like VS Code (in your terminal, first type "cd foldername" then "code ."). 
+5. Install Node.js from their website, if you have not already. Here are some additional [instructions](https://coding-boot-camp.github.io/full-stack/nodejs/how-to-install-nodejs).
+6. Install MySQL from their website, if you have not already. Here are some additional [instructions](https://coding-boot-camp.github.io/full-stack/mysql/mysql-installation-guide).
+7. Suggest installing [Nodemon](https://www.npmjs.com/package/nodemon) if you have not already.
+8. Suggest installing [Insomnia](https://insomnia.rest/download) if you have not already. 
+9. This project includes a package.json file that specifies dependencies for this project, so be sure to run "npm install". This will install the packages specified in the next section. 
+10. If you would like to work on the server side, make sure to change the front end (this repo) to send fetch requests to your local server rather than the deployed heroku URL. Make this change in `src/utils/API.js` by changing the `BASE_URL` on line 1. 
+The deployed server for this project is: https://selfcarecentral.herokuapp.com/.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<br>
 
-### `npm run eject`
+## Packages
+---
+General Technologies: 
+- Javascript
+- Node.js
+- Git
+- Heroku 
+- Insomnia
+- MySql
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Server NPM Packages
+- mysql2
+- sequelize 
+- express
+- cors
+- dotenv
+- bcrypt
+- jsonwebtoken
+- nodemon 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Front-end NPM Packages
+- React
+- React-bootstrap
+- React-dom
+- React-moment
+- React-router-dom
+- React-scripts
+- React-spring
+- React-useinterval
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<br>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Description
+---
+This project is a app to help you with all your self care needs! Come visit our site as your one stop shop to manage your life style needs. Set goals for fitness, sleep and hydration. Report your metrics daily and view your progress! Additionally, you can update or delete as necessary. Let us compare your metrics to your goals so you can see how you are tracking and your progress over time! 
+ <br><br>
+To view this project deployed, click [here](https://selfcarecentral.herokuapp.com/). <br><br>
+TO view the deployed server, click [here](https://selfcarecentral.herokuapp.com/).<br><br>
 
-## Learn More
+## Usage 
+---
+After following the instructions in installation: 
+1. Open the database file in your terminal. 
+2. Run command "npm start" to start the react app on your local host server. It will automatically open. 
+3. When finished, run CONTROL-C in terminal to end the session. 
+<br>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### **Screenshots**
+--- 
+Title <br>
+![screenshot](URL)
+<br>
+Title <br>
+![gif](URL)
+<br>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Contributing 
+---
+This project was completed as a group as 'project 3' for the University of Washington Web Development Bootcamp. If you would like to contribute, please feel free and contact us with questions. 
 
-### Code Splitting
+<br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Questions?
+---
+If you have any questions, please feel free to contact our team: 
+1. Project Manager: Haley Seymour | [Github](https://github.com/hseymo) | [email](mailto:haleycseymour@comcast.net)
+2. Git Administrator: Chris DeLaGarza | [Github](https://github.com/Interrubble) | [email](delagarzachris@icloud.com)
+3. Kalif Purce | [Github](https://github.com/Unconditionallove47) | [email](kpurcedesigns@gmail.com)
+4. Jaden | [Github](https://github.com/eminss) | [email]()
