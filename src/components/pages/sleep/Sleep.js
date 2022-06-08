@@ -15,7 +15,7 @@ export default function Sleep({ token, weekArray, goalObj }) {
     })
     const [updateReq, setUpdateReq] = useState('');
     const [existingItem, setExistingItem] = useState('');
-
+    
     useEffect(() => {
         API.getUserSleep(token).then((userData) => {
             console.log(userData)
@@ -168,8 +168,8 @@ export default function Sleep({ token, weekArray, goalObj }) {
                     placeholder="true/false"
                 >
                     <option disabled={true} value=''>Select an option</option>
-                    <option value={true}>Yes</option>
-                    <option value={false}>No</option>
+                    <option className="sleepOption" value={true}>Yes</option>
+                    <option className="sleepOption" value={false}>No</option>
                 </Form.Select>
                 <Form.Label htmlFor='formDiffStay'>Did you have difficulty staying asleep?</Form.Label>
                 <Form.Select
@@ -182,8 +182,8 @@ export default function Sleep({ token, weekArray, goalObj }) {
                     placeholder="true/false"
                 >
                     <option disabled={true} value=''>Select an option</option>
-                    <option value={true}>Yes</option>
-                    <option value={false}>No</option>
+                    <option className="sleepOption" value={true}>Yes</option>
+                    <option className="sleepOption" value={false}>No</option>
                 </Form.Select>
                 <Form.Label htmlFor='formMood'>How did you feel when you woke up?</Form.Label>
                 <Form.Check
@@ -197,13 +197,17 @@ export default function Sleep({ token, weekArray, goalObj }) {
                 />
                 {(existingItem == true) ? (
                     <>
-                        <Button type="button"
+                        <Button
+                            className = 'sleepBtn'
                             onClick={sendUpdate}>Update</Button>
-                        <Button type="button"
+                        <Button
+                            className = 'sleepBtn'
                             onClick={sendDelete}>Delete</Button>
                     </>
                 ) : (
-                    <Button id="sleepBtn" type="button" onClick={sendCreate}>Submit</Button>
+                    <Button
+                        className="sleepBtn" type="button" 
+                        onClick={sendCreate}>Submit</Button>
                 )}
             </Form>
             <h2> This week's sleep reporting:</h2>

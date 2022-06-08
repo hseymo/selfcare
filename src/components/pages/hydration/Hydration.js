@@ -7,11 +7,20 @@ import HydrationCard from './HydrationCard';
 export default function Hydration({ token, userId, weekArray, goalObj }) {
     const [thisWeek, setThisWeek] = useState([]);
     const [hydrationFormObject, setHydrationFormObject] = useState({
-        date: '', 
+        date: '',
         water_oz: ''
     })
     const [updateReq, setUpdateReq] = useState('');
     const [existingItem, setExistingItem] = useState('');
+    const [isHovering, setIsHovering] = useState(false);
+
+    const handleMouseEnter = () => {
+        setIsHovering(true);
+    };
+
+    const handleMouseLeave = () => {
+        setIsHovering(false);
+    };
 
     useEffect(() => {
         API.getUserHydration(token).then((userData) => {
@@ -106,51 +115,69 @@ export default function Hydration({ token, userId, weekArray, goalObj }) {
             <Card className="hydration">
                 <h1>Hydration</h1>
                 <h2>Your Goals</h2>
-                { goalObj.hydration_oz != 0 && (
-              <h4 className=''>Your daily water intake goal is {goalObj.hydration_oz} oz.</h4>
-              )}
+                {goalObj.hydration_oz != 0 && (
+                    <h4 className=''>Your daily water intake goal is {goalObj.hydration_oz} oz.</h4>
+                )}
                 <h2>Report Water Intake</h2>
                 <Form className="waterForm">
-                        <Form.Label htmlFor="waterDate">
-                            Choose date:
-                        </Form.Label>
-                        <Form.Check
-                            value={hydrationFormObject.date}
-                            type="date"
-                            id="waterDate"
-                            name="waterDate"
-                            onChange={(e) => setHydrationFormObject({...hydrationFormObject, date: e.target.value})}
-                            />
-                        <Form.Label htmlFor="waterAmount">
-                            How many ounces did you drink?
-                        </Form.Label>
-                        <Form.Check
-                            value={hydrationFormObject.water_oz}
-                            min="0"
-                            max="1000"
-                            type="number"
-                            id="waterAmount"
-                            name="waterAmount"
-                            onChange={(e) => setHydrationFormObject({...hydrationFormObject, water_oz: e.target.value})}
-                            />
-                        <br />
-                        { (existingItem == true) ? (
+                    <Form.Label htmlFor="waterDate">
+                        Choose date:
+                    </Form.Label>
+                    <Form.Check
+                        value={hydrationFormObject.date}
+                        type="date"
+                        id="waterDate"
+                        name="waterDate"
+                        onChange={(e) => setHydrationFormObject({ ...hydrationFormObject, date: e.target.value })}
+                    />
+                    <Form.Label htmlFor="waterAmount">
+                        How many ounces did you drink?
+                    </Form.Label>
+                    <Form.Check
+                        value={hydrationFormObject.water_oz}
+                        min="0"
+                        max="1000"
+                        type="number"
+                        id="waterAmount"
+                        name="waterAmount"
+                        onChange={(e) => setHydrationFormObject({ ...hydrationFormObject, water_oz: e.target.value })}
+                    />
+                    <br />
+                    {(existingItem == true) ? (
                         <>
-                            <Button type="button"
+                            <Button
+                                style={{
+                                    background: isHovering ? 'black' : '',
+                                }}
+                                onMouseEnter={handleMouseEnter}
+                                onMouseLeave={handleMouseLeave}
+                                type="button"
                                 onClick={sendUpdate}>Update</Button>
-                            <Button type="button"
-                            onClick={sendDelete}>Delete</Button>
+                            <Button
+                                style={{
+                                    background: isHovering ? 'black' : '',
+                                }}
+                                onMouseEnter={handleMouseEnter}
+                                onMouseLeave={handleMouseLeave}
+                                type="button"
+                                onClick={sendDelete}>Delete</Button>
                         </>
-                        ) : (
-                            <Button id="hydroBtn"type="button" onClick={sendCreate}>Submit</Button>
-                        )}
+                    ) : (
+                        <Button
+                            style={{
+                                background: isHovering ? 'black' : '',
+                            }}
+                            onMouseEnter={handleMouseEnter}
+                            onMouseLeave={handleMouseLeave}
+                            id="hydroBtn" type="button" onClick={sendCreate}>Submit</Button>
+                    )}
                 </Form>
-            <h2>This week's hydration reporting: </h2>
-            <HydrationCard
-                name='hydrationCard'
-                results={thisWeek}
-            />
-        </Card>
+                <h2>This week's hydration reporting: </h2>
+                <HydrationCard
+                    name='hydrationCard'
+                    results={thisWeek}
+                />
+            </Card>
         </div>
     );
 }

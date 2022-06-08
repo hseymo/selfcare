@@ -15,6 +15,15 @@ export default function Fitness({ token, weekArray, goalObj }) {
     })
     const [updateReq, setUpdateReq] = useState('');
     const [existingItem, setExistingItem] = useState('');
+    const [isHovering, setIsHovering] = useState(false);
+
+    const handleMouseEnter = () => {
+        setIsHovering(true);
+    };
+
+    const handleMouseLeave = () => {
+        setIsHovering(false);
+    };
 
     useEffect(() => {
         API.getUserFitness(token).then((userData) => {
@@ -195,13 +204,31 @@ export default function Fitness({ token, weekArray, goalObj }) {
                     <br />
                     {(existingItem == true) ? (
                         <>
-                            <Button type="button" className="fitnessBtn" 
+                            <Button 
+                            style={{
+                                background: isHovering ? 'black' : '',
+                            }}
+                            onMouseEnter={handleMouseEnter}
+                            onMouseLeave={handleMouseLeave}
+                            type="button" className="fitnessBtn" 
                                 onClick={sendUpdate}>Update</Button>
-                            <Button type="button" className="fitnessBtn" 
+                            <Button 
+                            style={{
+                                background: isHovering ? 'black' : '',
+                            }}
+                            onMouseEnter={handleMouseEnter}
+                            onMouseLeave={handleMouseLeave}
+                            type="button" className="fitnessBtn" 
                                 onClick={sendDelete}>Delete</Button>
                         </>
                     ) : (
-                        <Button className="fitnessBtn" type="button" onClick={sendCreate}>Submit</Button>
+                        <Button 
+                        style={{
+                            background: isHovering ? 'black' : '',
+                        }}
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                        className="fitnessBtn" type="button" onClick={sendCreate}>Submit</Button>
                     )}
             </Form>
 
