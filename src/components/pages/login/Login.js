@@ -82,7 +82,7 @@ const signupSubmit = e=>{
                 onChange={(e) => setSignupData({...signupData,password:e.target.value})}
                 />
                 </div>
-                <button type="submit"                 className='button'>Submit</button>
+                <button type="submit"                 className='submitbutton'>Submit</button>
                 </form>
             </div>
 
@@ -111,7 +111,7 @@ const signupSubmit = e=>{
                 onChange={(e) => setLoginData({...loginData,password:e.target.value})}
                 />
                 </div>
-                <button className='button' type="submit">Submit</button>
+                <button className='loginbutton' type="submit">Submit</button>
                 </form>
             </div>
             

@@ -6,6 +6,7 @@
 .Dashboard {
 text-align: center;
 background: #797d62;
+padding: 10px;
 }
 
 .goalsList {
@@ -45,4 +46,8 @@ th {
 .pageLink {
     text-decoration: none;
     color: white;
+}
+
+.yourGoals {
+    margin: 10px;
 }
