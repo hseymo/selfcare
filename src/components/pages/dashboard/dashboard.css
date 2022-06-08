@@ -56,6 +56,14 @@ th {
     color: white;
 }
 
+.fitnessdashboard, .sleepdashboard, .hydrationdashboard {
+    border: 3px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px 30px;
+
+}
+
 /* .hydrationdashboard p {
     display: none;
 }

@@ -159,12 +159,16 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
             <button className='goalsLink' onClick={(e) => {window.location.href = "/profile"}}>Update my goals</button>
             </>
             ) : (
+              <>
+              <h4>You have not set any goals yet!</h4>
               <button className='goalsLink' onClick={(e) => {window.location.href = "/profile"}}>Set my goals!</button>
+              </>
             )}
             </div>
 
+        <Link to='/fitness/' className='pageLink'>
         <div className='fitnessdashboard'>
-        <Link to='/fitness/' className='pageLink'><h2>Fitness</h2></Link>
+        <h2>Fitness</h2>
         <p>Key: ✅ indicates you reported exercise on this day while ❌ indicates you reported that you did not exercise this day.</p>
         <table>
         <tr className="dayHeaders">
@@ -179,7 +183,6 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
         </tr>
         <DashboardRow 
             name='fitness' 
-            link='/fitness' 
             results={fitnessEmoji}/>
       </table>
       <ul>
@@ -193,9 +196,11 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
       )}
       </ul>
       </div>
+      </Link>
 
-      <div className='sleepdashboard'>
-      <Link to='/sleep/' className='pageLink'><h2>Sleep</h2></Link>
+      <Link to='/sleep/' className='pageLink'>
+        <div className='sleepdashboard'>
+      <h2>Sleep</h2>
       <p>Key: 🥱 indicates reported time asleep below your daily goal while 💤 indicates you met your goal for the day! </p>
       <table>
         <tr className="dayHeaders">
@@ -210,7 +215,6 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
         </tr>
           <DashboardRow 
             name='sleep' 
-            link='/sleep' 
             results={sleepEmoji}/>
         </table>
       
@@ -221,9 +225,11 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
       )}
       </ul>
       </div>
+      </Link>
 
-      <div className='hydrationdashboard'>
-      <Link to='/hydration/' className='pageLink'><h2>Hydration</h2></Link>
+      <Link to='/hydration/' className='pageLink'>
+        <div className='hydrationdashboard'>
+      <h2>Hydration</h2>
         <p>Key: 💧 indicates reported water intake below your daily goal while 💦 indicates you met your goal for the day! </p>
         <table>
         <tr className="dayHeaders">
@@ -237,8 +243,7 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
           <th>Sunday <br/> {weekArray[6]}</th>
         </tr>
           <DashboardRow 
-            name='hydration' 
-            link='/hydration' 
+            name='hydration'  
             results={hydrationEmoji}/>
         </table>
       <ul>
@@ -248,6 +253,7 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
       ) }
       </ul>
       </div>
+      </Link>
 
       <h4>Click on a category to see more!</h4>
       </> 
