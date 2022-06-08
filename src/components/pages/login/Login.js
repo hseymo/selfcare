@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import "./login.css";
 import { Link } from 'react-router-dom';
+import { validateEmail, checkPassword } from '../../../utils/helpers';
 
-export default function Login(props, {isLoggedIn}) {
+export default function Login(props) {
 const [signupData, setSignupData] = useState({
   email:'',
   first_name: '',
@@ -15,16 +16,31 @@ const [loginData, setLoginData] = useState({
   password:''
 })
 
+const [error, setError] = useState('');
+
 const loginSubmit = e=>{
   e.preventDefault();
+  if (loginData.email == '' || loginData.password == '') {
+    setError('Login failed; please try again.')
+  } else {
   props.login(loginData);
   setLoginData({
       username:"",
       password:""
   })
+  setError('')
+  }
 }
+
 const signupSubmit = e=>{
   e.preventDefault();
+  if (!signupData.email) {
+    setError('Please enter valid email address.')
+  } else if (!signupData.first_name) {
+    setError('Please enter your first name.')
+  } else if (signupData.password.length < 8) {
+    setError('Please enter valid password of at least 8 characters.')
+  } else {
   props.signup(signupData);
   setSignupData({
     email:'',
@@ -32,11 +48,13 @@ const signupSubmit = e=>{
     last_name: '',
     password:''
   })
+  setError('')
+}
 }
 
     return (
         <div className='loginPageBody'>
-          {!isLoggedIn ? (
+          {!props.isLoggedIn ? (
             <>
             <div className="signUpSection">
             <h1>Sign Up</h1>
@@ -111,9 +129,21 @@ const signupSubmit = e=>{
                 <button className='loginbutton' type="submit">Submit</button>
                 </form>
             </div>
+            {props.errorMessage && (
+        <div>
+          <p className="error">{props.errorMessage}
+           </p>
+        </div>
+      )}
+          {error && (
+        <div>
+          <p className="error">{error}
+           </p>
+        </div>
+      )}
             </>
           ) : (
-            <h2>You are already logged in! Please visit your <Link class="link-light" to='/login'>Dashboard</Link>.</h2>
+            <h2>You are already logged in! Please visit your <Link class="link-light" to='/dashboard'>Dashboard</Link>.</h2>
           )}
         </div>
     );

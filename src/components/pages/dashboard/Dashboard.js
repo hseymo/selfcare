@@ -5,7 +5,7 @@ import API from "../../../utils/API.js"
 import DashboardRow from './card';
 
 export default function Dashboard({token, weekArray, isLoggedIn}) {
-  const [userData, setUserData] = useState([])
+  const [user, setUser] = useState([])
   const [name, setName] = useState('')
 
   const [goalsData, setGoalsData] = useState({
@@ -27,15 +27,16 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
 
   useEffect(() => {
     API.getOneUser(token).then((userData)=>{
-      setUserData(userData)
       setName(userData.first_name);
+      setUser(userData)
 // USERS GOALS_______________________________________________
+      
       const { fitness_time, fitness_frequency, sleep_time, hydration_oz } = userData.goal;
       setGoalsData({
-        fitness_time: fitness_time,
-        fitness_frequency: fitness_frequency,
-        sleep_time: sleep_time,
-        hydration_oz: hydration_oz
+        fitness_time,
+        fitness_frequency,
+        sleep_time,
+        hydration_oz
       })
       if (fitness_time || fitness_frequency || sleep_time || hydration_oz ) {
         setIsGoals(true)
@@ -136,6 +137,7 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
             {!isLoggedIn ? (
                 <h2><Link class="link-light" to='/login'>Login</Link></h2>
             ) : (
+              // LOADING
                 <>
             <h1>{name}'s Dashboard for the Week</h1>
             <div className='yourGoals'>
@@ -201,7 +203,6 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
       <Link to='/sleep/' className='pageLink'>
         <div className='sleepdashboard'>
       <h2>Sleep</h2>
-      <p>Key: 🥱 indicates reported time asleep below your daily goal while 💤 indicates you met your goal for the day! </p>
       <table>
         <tr className="dayHeaders">
           <th></th>
@@ -220,8 +221,12 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
       
         <ul>
         { goalsData.sleep_time != 0 ? (
-      <li className="compLi"> You met your sleep goal {sleepWins} times this week.</li> ) : (
-        <></>
+        <>
+      <p>Key: 🥱 indicates reported time asleep below your daily goal while 💤 indicates you met your goal for the day! </p>
+      <li className="compLi"> You met your sleep goal {sleepWins} times this week.</li> 
+      </>
+      ) : (
+        <p> Key: 💤 indicates you reported sleep this night! You have not set a sleep goal. </p>
       )}
       </ul>
       </div>
@@ -230,7 +235,6 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
       <Link to='/hydration/' className='pageLink'>
         <div className='hydrationdashboard'>
       <h2>Hydration</h2>
-        <p>Key: 💧 indicates reported water intake below your daily goal while 💦 indicates you met your goal for the day! </p>
         <table>
         <tr className="dayHeaders">
           <th></th>
@@ -247,9 +251,13 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
             results={hydrationEmoji}/>
         </table>
       <ul>
-      { goalsData.hydration_oz != 0 ? ( 
-      <li className="compLi"> You met your hydration goal {hydrationWins} times this week.</li> ) : (
-        <></>
+      { goalsData.hydration_oz != 0 ? (
+        <>
+      <p>Key: 💧 indicates reported water intake below your daily goal while 💦 indicates you met your goal for the day! </p>
+      <li className="compLi"> You met your hydration goal {hydrationWins} times this week.</li>
+      </> ) : (
+      <p>Key: 💦 indicates you reported water intake this day! You have not set a hydration goal.
+      </p>
       ) }
       </ul>
       </div>
