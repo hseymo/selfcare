@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './Exercise.css'
 import { Card, Button, Form } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import API from "../../../utils/API.js"
 import ExerciseCard from "./ExerciseCard"
 
-export default function Fitness({ token, weekArray, goalObj }) {
+export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
     const [thisWeek, setThisWeek] = useState([]);
     const [exerciseFormObject, setExerciseFormObject] = useState({
         date: '',
@@ -38,8 +39,6 @@ export default function Fitness({ token, weekArray, goalObj }) {
 
                 if (response === undefined) {
                     newObj.status = 'Not Reported';
-                } else if (newObj.activity_duration == 0) {
-                    newObj.status = 'No Exercise';
                 } else {
                     const { id, date, activity_type, activity_duration, RPE, notes } = response;
                     newObj.id = id
@@ -134,6 +133,10 @@ export default function Fitness({ token, weekArray, goalObj }) {
 
     return (
         <Card className="fitness">
+            {!isLoggedIn ? (
+                <h2><Link class="link-light" to='/login'>Login</Link></h2>
+            ) : (
+            <>
             <h1>Fitness</h1>
             <h2>Your Goals</h2>
             {goalObj.fitness_time != 0 && (
@@ -237,6 +240,8 @@ export default function Fitness({ token, weekArray, goalObj }) {
             <ExerciseCard
                 results={thisWeek}
             />
+            </>
+            )}
         </Card>
     );
 }

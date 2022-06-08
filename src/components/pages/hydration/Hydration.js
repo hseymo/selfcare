@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './hydration.css';
 import { Card, Button, Form } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import API from "../../../utils/API.js"
 import HydrationCard from './HydrationCard';
 
-export default function Hydration({ token, userId, weekArray, goalObj }) {
+export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
     const [thisWeek, setThisWeek] = useState([]);
     const [hydrationFormObject, setHydrationFormObject] = useState({
         date: '',
@@ -111,8 +112,11 @@ export default function Hydration({ token, userId, weekArray, goalObj }) {
     })
 
     return (
-        <div>
-            <Card className="hydration">
+    <Card className="hydration">
+        {!isLoggedIn ? (
+            <h2><Link class="link-light" to='/login'>Login</Link></h2>
+            ) : (
+                <>
                 <h1>Hydration</h1>
                 <h2>Your Goals</h2>
                 {goalObj.hydration_oz != 0 && (
@@ -145,39 +149,22 @@ export default function Hydration({ token, userId, weekArray, goalObj }) {
                     <br />
                     {(existingItem == true) ? (
                         <>
-                            <Button
-                                style={{
-                                    background: isHovering ? 'black' : '',
-                                }}
-                                onMouseEnter={handleMouseEnter}
-                                onMouseLeave={handleMouseLeave}
-                                type="button"
+                            <Button type="button" className="hydroBtn"
                                 onClick={sendUpdate}>Update</Button>
-                            <Button
-                                style={{
-                                    background: isHovering ? 'black' : '',
-                                }}
-                                onMouseEnter={handleMouseEnter}
-                                onMouseLeave={handleMouseLeave}
-                                type="button"
-                                onClick={sendDelete}>Delete</Button>
+                            <Button type="button" className="hydroBtn"
+                            onClick={sendDelete}>Delete</Button>
                         </>
-                    ) : (
-                        <Button
-                            style={{
-                                background: isHovering ? 'black' : '',
-                            }}
-                            onMouseEnter={handleMouseEnter}
-                            onMouseLeave={handleMouseLeave}
-                            id="hydroBtn" type="button" onClick={sendCreate}>Submit</Button>
-                    )}
+                        ) : (
+                            <Button className="hydroBtn" type="button" onClick={sendCreate}>Submit</Button>
+                        )}
                 </Form>
-                <h2>This week's hydration reporting: </h2>
-                <HydrationCard
-                    name='hydrationCard'
-                    results={thisWeek}
-                />
-            </Card>
-        </div>
+            <h2>This week's hydration reporting: </h2>
+            <HydrationCard
+                name='hydrationCard'
+                results={thisWeek}
+            />
+        </>
+            )}
+    </Card>
     );
 }

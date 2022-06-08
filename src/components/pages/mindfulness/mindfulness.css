@@ -1,13 +1,14 @@
 .mindful {
     background: #b99249;
+    text-align: center;
 }
 
 .mindful h1 {
-    display: flex;
-    flex-wrap:wrap;
-    justify-content: space-between;
-    align-items: center;
-    justify-content: center;
+    margin-top: 10px;
+}
+
+.mindful h2 {
+    padding: 10px;
 }
 
 .mindfulWeek {
