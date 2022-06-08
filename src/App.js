@@ -100,10 +100,12 @@ function App() {
       <Routes>
         <Route 
           path='/' 
+          isLoggedIn={isLoggedIn} 
           element={<Home />} />
         <Route 
           path='/login' 
           element={<Login 
+            isLoggedIn={isLoggedIn} 
             signup={handleSignupSubmit} 
             login={handleLoginSubmit} />} />
         <Route 
