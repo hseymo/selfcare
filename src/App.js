@@ -54,12 +54,12 @@ const [errorMessage, setErrorMessage] = useState('');
 
   const handleLoginSubmit = (loginData) => {
     API.login(loginData).then(data => {
+      console.log(data)
       if (data.token) {
-        console.log(data)
         setToken(data.token);
         localStorage.setItem("token", data.token);
         window.location.href = "/dashboard"
-      } else {
+      } else if (data.msg) {
         setErrorMessage('Login failed; please try again.')
       }
     })
