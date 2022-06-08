@@ -133,13 +133,13 @@ export default function Fitness({ token, weekArray, goalObj }) {
             {goalObj.fitness_frequency != 0 && (
                 <h4 className=''>Your exercise frequency goal is {goalObj.fitness_frequency} days per week. </h4>
             )}
-            <Form>
-                <h2>Report fitness data</h2>
-                <Card className="fitnessForm">
+            <h2>Report Fitness Data</h2>
+            <Form className="fitnessForm">
                     <Form.Label htmlFor="formDate">
                         Choose date:
                     </Form.Label>
                     <Form.Check 
+                        className='fitnessInput'
                         value={exerciseFormObject.date}
                         type="date"
                         id="formDate"
@@ -150,6 +150,7 @@ export default function Fitness({ token, weekArray, goalObj }) {
                         What type of exercise did you complete?
                     </Form.Label>
                     <Form.Check
+                        className='fitnessInput'
                         value={exerciseFormObject.activity_type}
                         type="text"
                         id="formType"
@@ -160,6 +161,7 @@ export default function Fitness({ token, weekArray, goalObj }) {
                         How long did you exercise for (in minutes)? Note: if you did not exercise, report '0'.
                     </Form.Label>
                     <Form.Check
+                        className='fitnessInput'
                         value={exerciseFormObject.activity_duration}
                         type="number"
                         id="formDuration"
@@ -171,6 +173,7 @@ export default function Fitness({ token, weekArray, goalObj }) {
                         On an Rate of Perceived Exertion Scale (RPE) from 0 (easy) to 10 (extremely difficult), how hard did you work?
                     </Form.Label>
                     <Form.Check
+                        className='fitnessInput'
                         value={exerciseFormObject.RPE}
                         type="number"
                         min="0"
@@ -182,6 +185,7 @@ export default function Fitness({ token, weekArray, goalObj }) {
                         Notes from your workout:
                     </Form.Label>
                     <Form.Check
+                        className='fitnessInput'
                         value={exerciseFormObject.notes}
                         type="text"
                         id="formNotes"
@@ -199,7 +203,6 @@ export default function Fitness({ token, weekArray, goalObj }) {
                     ) : (
                         <Button className="fitnessBtn" type="button" onClick={sendCreate}>Submit</Button>
                     )}
-                </Card>
             </Form>
 
             <br />

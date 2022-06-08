@@ -1,19 +1,25 @@
-.profilePage {
+.profile {
     text-align: center;
     background: #9c9c6f;
 }
 
-.profileForm {
-    display: block;
+.profile h1 {
+    padding-top: 10px;
 }
 
 .formGroup {
-    margin: 30px;
+    margin: 20px;
 }
+
 .button {
-    padding: 10px;
     background-color: #5f9660;
+    margin-bottom: 10px;
+    padding: 10px;
     border-radius: 5px;
     border: 3px solid rgb(26, 17, 5);
-    color: white; 
+    color: white;
+}
+
+.profileinput {
+    width: 10%;
 }

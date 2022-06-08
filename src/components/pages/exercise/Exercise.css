@@ -11,19 +11,18 @@
     padding: 10px;
 }
 
+/* form */
 .fitnessForm {
     background: #baa587;
     width: 50%;
     margin-left: auto;
     margin-right: auto;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
     padding: 10px;
-}
-
-.form-label {
-    margin-top: 10px;
+    text-align: center;
+    border: 5px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 .form-check-input {
@@ -33,7 +32,8 @@
 }
 
 .fitnessBtn {
-    margin: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
     padding: 10px;
     background-color: #5c4927;
     border-radius: 5px;
@@ -41,6 +41,7 @@
     color: white;
 }
 
+/* weekly cards */
 .fitnessWeek.card {
     display:flex;
     flex-wrap: wrap;

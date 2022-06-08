@@ -135,10 +135,11 @@ export default function Sleep({ token, weekArray, goalObj }) {
             {goalObj.sleep_time != 0 && (
                 <h4 className=''>Your nightly sleep goal is {goalObj.sleep_time} hours.</h4>
             )}
-            <Form className='form-horizontal'>
-                <h2>Report Sleep Data</h2>
+            <h2>Report Sleep Data</h2>
+            <Form className='sleepForm'>
                 <Form.Label htmlFor='formDate'>Date</Form.Label>
                 <Form.Check
+                    className='sleepInput'
                     value={sleepFormObject.date}
                     type="date"
                     id="formDate"
@@ -147,6 +148,7 @@ export default function Sleep({ token, weekArray, goalObj }) {
                 />
                 <Form.Label htmlFor='formTime'>How long did you sleep?</Form.Label>
                 <Form.Check
+                    className='sleepInput'
                     value={sleepFormObject.time_asleep}
                     type="number"
                     min='0'
@@ -157,6 +159,7 @@ export default function Sleep({ token, weekArray, goalObj }) {
                 />
                 <Form.Label htmlFor='formDiffFall'>Did you have difficulty falling asleep?</Form.Label>
                 <Form.Select
+                    className='sleepInput'
                     value={sleepFormObject.diff_falling_asleep}
                     type="boolean"
                     id="formDiffFall"
@@ -170,6 +173,7 @@ export default function Sleep({ token, weekArray, goalObj }) {
                 </Form.Select>
                 <Form.Label htmlFor='formDiffStay'>Did you have difficulty staying asleep?</Form.Label>
                 <Form.Select
+                    className='sleepInput'
                     value={sleepFormObject.diff_staying_asleep}
                     type="boolean"
                     id="formDiffStay"
@@ -183,6 +187,7 @@ export default function Sleep({ token, weekArray, goalObj }) {
                 </Form.Select>
                 <Form.Label htmlFor='formMood'>How did you feel when you woke up?</Form.Label>
                 <Form.Check
+                    className='sleepInput'
                     value={sleepFormObject.mood_upon_wake}
                     type="text"
                     id="formMood"

@@ -109,9 +109,8 @@ export default function Hydration({ token, userId, weekArray, goalObj }) {
                 { goalObj.hydration_oz != 0 && (
               <h4 className=''>Your daily water intake goal is {goalObj.hydration_oz} oz.</h4>
               )}
-                <Form>
-                    <h2>Report Water Intake</h2>
-                    <Card className="waterForm">
+                <h2>Report Water Intake</h2>
+                <Form className="waterForm">
                         <Form.Label htmlFor="waterDate">
                             Choose date:
                         </Form.Label>
@@ -145,15 +144,13 @@ export default function Hydration({ token, userId, weekArray, goalObj }) {
                         ) : (
                             <Button id="hydroBtn"type="button" onClick={sendCreate}>Submit</Button>
                         )}
-                    </Card>
                 </Form>
-            </Card>
-
             <h2>This week's hydration reporting: </h2>
             <HydrationCard
                 name='hydrationCard'
                 results={thisWeek}
             />
+        </Card>
         </div>
     );
 }
