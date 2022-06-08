@@ -203,7 +203,7 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
       <Link to='/sleep/' className='pageLink'>
         <div className='sleepdashboard'>
       <h2>Sleep</h2>
-      <table>
+      <table className='dayTable'>
         <tr className="dayHeaders">
           <th></th>
           <th>Monday <br/> {weekArray[0]}</th>
@@ -235,7 +235,7 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
       <Link to='/hydration/' className='pageLink'>
         <div className='hydrationdashboard'>
       <h2>Hydration</h2>
-        <table>
+        <table className="dayTable">
         <tr className="dayHeaders">
           <th></th>
           <th>Monday <br/> {weekArray[0]}</th>
