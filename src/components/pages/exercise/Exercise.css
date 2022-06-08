@@ -24,6 +24,10 @@
     justify-content: space-around;
 }
 
+.form-label {
+    padding-top: 10px;
+}
+
 .form-check-input {
     padding: 10px;
     width: 80%;
