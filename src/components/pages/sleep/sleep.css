@@ -37,6 +37,11 @@
     color: black;
 }
 
+.form-check-input {
+    width: 100%;
+    height: 36px;
+}
+
 .sleepBtn:hover {
     background-color: black;
 }
