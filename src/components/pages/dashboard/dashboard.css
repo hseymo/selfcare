@@ -67,12 +67,11 @@ th {
     margin: 10px 30px;
 }
 
-.dayHeaders {
-    display:flexbox;
+.dayTable {
+    display:block;
     height: fit-content;
-    width: 400px;
+    width: 200px;
     overflow: scroll;
-    overflow-wrap: break-word;
 }
 
 

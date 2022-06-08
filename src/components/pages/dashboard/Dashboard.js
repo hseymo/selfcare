@@ -170,7 +170,7 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
         <div className='fitnessdashboard'>
         <h2>Fitness</h2>
         <p>Key: ✅ indicates you reported exercise on this day while ❌ indicates you reported that you did not exercise this day.</p>
-        <table>
+        <table className="dayTable">
         <tr className="dayHeaders">
           <th></th>
           <th>Monday <br/> {weekArray[0]}</th>
@@ -202,7 +202,7 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
         <div className='sleepdashboard'>
       <h2>Sleep</h2>
       <p>Key: 🥱 indicates reported time asleep below your daily goal while 💤 indicates you met your goal for the day! </p>
-      <table>
+      <table className="dayTable">
         <tr className="dayHeaders">
           <th></th>
           <th>Monday <br/> {weekArray[0]}</th>
@@ -231,7 +231,7 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
         <div className='hydrationdashboard'>
       <h2>Hydration</h2>
         <p>Key: 💧 indicates reported water intake below your daily goal while 💦 indicates you met your goal for the day! </p>
-        <table>
+        <table className="dayTable">
         <tr className="dayHeaders">
           <th></th>
           <th>Monday <br/> {weekArray[0]}</th>
