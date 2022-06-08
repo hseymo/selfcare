@@ -35,9 +35,10 @@
 
 .sleepOption {
     color: black;
+    height: 36px;
 }
 
-.form-check-input {
+.sleepInput {
     width: 100%;
     height: 36px;
 }

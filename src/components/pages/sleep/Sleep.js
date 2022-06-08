@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './sleep.css';
-import { Card, Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import API from "../../../utils/API.js"
 import SleepCard from "./SleepCard"
@@ -130,7 +129,7 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
     })
 
     return (
-        <Card className="sleep">
+        <div className="sleep">
             {!isLoggedIn ? (
                 <h2><Link class="link-light" to='/login'>Login</Link></h2>
             ) : (
@@ -141,17 +140,17 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
                 <h4 className=''>Your nightly sleep goal is {goalObj.sleep_time} hours.</h4>
             )}
             <h2>Report Sleep Data</h2>
-            <Form className='sleepForm'>
-                <Form.Label htmlFor='formDate'>Date</Form.Label>
-                <Form.Check
+            <form className='sleepForm'>
+                <label htmlFor='formDate'>Date</label>
+                <input
                     className='sleepInput'
                     value={sleepFormObject.date}
                     type="date"
                     name="formDate"
                     onChange={(e) => setSleepFormObject({ ...sleepFormObject, date: e.target.value })}
                 />
-                <Form.Label htmlFor='formTime'>How long did you sleep?</Form.Label>
-                <Form.Check
+                <label htmlFor='formTime'>How long did you sleep?</label>
+                <input
                     className='sleepInput'
                     value={sleepFormObject.time_asleep}
                     type="number"
@@ -160,9 +159,9 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
                     onChange={(e) => setSleepFormObject({ ...sleepFormObject, time_asleep: e.target.value })}
                     placeholder="8 hours"
                 />
-                <Form.Label htmlFor='formDiffFall'>Did you have difficulty falling asleep?</Form.Label>
-                <Form.Select
-                    className='sleepInput'
+                <label htmlFor='formDiffFall'>Did you have difficulty falling asleep?</label>
+                <select
+                    className='sleepOption'
                     value={sleepFormObject.diff_falling_asleep}
                     type="boolean"
                     name="formDiffFall"
@@ -172,10 +171,10 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
                     <option disabled={true} value=''>Select an option</option>
                     <option className="sleepOption" value={true}>Yes</option>
                     <option className="sleepOption" value={false}>No</option>
-                </Form.Select>
-                <Form.Label htmlFor='formDiffStay'>Did you have difficulty staying asleep?</Form.Label>
-                <Form.Select
-                    className='sleepInput'
+                </select>
+                <label htmlFor='formDiffStay'>Did you have difficulty staying asleep?</label>
+                <select
+                    className='sleepOption'
                     value={sleepFormObject.diff_staying_asleep}
                     type="boolean"
                     name="formDiffStay"
@@ -185,9 +184,9 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
                     <option disabled={true} value=''>Select an option</option>
                     <option className="sleepOption" value={true}>Yes</option>
                     <option className="sleepOption" value={false}>No</option>
-                </Form.Select>
-                <Form.Label htmlFor='formMood'>How did you feel when you woke up?</Form.Label>
-                <Form.Check
+                </select>
+                <label htmlFor='formMood'>How did you feel when you woke up?</label>
+                <input
                     className='sleepInput'
                     value={sleepFormObject.mood_upon_wake}
                     type="text"
@@ -197,21 +196,21 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
                 />
                 {(existingItem == true) ? (
                     <>
-                        <Button type="button" className="sleepBtn"
-                            onClick={sendUpdate}>Update</Button>
-                        <Button type="button" className="sleepBtn"
-                            onClick={sendDelete}>Delete</Button>
+                        <button type="button" className="sleepBtn"
+                            onClick={sendUpdate}>Update</button>
+                        <button type="button" className="sleepBtn"
+                            onClick={sendDelete}>Delete</button>
                     </>
                 ) : (
-                    <Button className="sleepBtn" type="button" onClick={sendCreate}>Submit</Button>
+                    <button className="sleepBtn" type="button" onClick={sendCreate}>Submit</button>
                 )}
-            </Form>
+            </form>
             <h2> This week's sleep reporting:</h2>
             <SleepCard
                 name='sleep'
                 results={thisWeek} />
                 </> 
             )}
-        </Card>
+        </div>
     );
 }

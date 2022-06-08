@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './hydration.css';
-import { Card, Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import API from "../../../utils/API.js"
 import HydrationCard from './HydrationCard';
@@ -103,7 +102,7 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
     })
 
     return (
-    <Card className="hydration">
+    <div className="hydration">
         {!isLoggedIn ? (
             <h2><Link class="link-light" to='/login'>Login</Link></h2>
             ) : (
@@ -114,21 +113,21 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
                     <h4 className=''>Your daily water intake goal is {goalObj.hydration_oz} oz.</h4>
                 )}
                 <h2>Report Water Intake</h2>
-                <Form className="waterForm">
-                    <Form.Label htmlFor="waterDate">
+                <form className="waterForm">
+                    <label htmlFor="waterDate">
                         Choose date:
-                    </Form.Label>
-                    <Form.Check
+                    </label>
+                    <input
                         value={hydrationFormObject.date}
                         type="date"
                         id="waterDate"
                         name="waterDate"
                         onChange={(e) => setHydrationFormObject({ ...hydrationFormObject, date: e.target.value })}
                     />
-                    <Form.Label htmlFor="waterAmount">
+                    <label htmlFor="waterAmount">
                         How many ounces did you drink?
-                    </Form.Label>
-                    <Form.Check
+                    </label>
+                    <input
                         value={hydrationFormObject.water_oz}
                         min="0"
                         max="1000"
@@ -140,15 +139,15 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
                     <br />
                     {(existingItem == true) ? (
                         <>
-                            <Button type="button" className="hydroBtn"
-                                onClick={sendUpdate}>Update</Button>
-                            <Button type="button" className="hydroBtn"
-                            onClick={sendDelete}>Delete</Button>
+                            <button type="button" className="hydroBtn"
+                                onClick={sendUpdate}>Update</button>
+                            <button type="button" className="hydroBtn"
+                            onClick={sendDelete}>Delete</button>
                         </>
                         ) : (
-                            <Button className="hydroBtn" type="button" onClick={sendCreate}>Submit</Button>
+                            <button className="hydroBtn" type="button" onClick={sendCreate}>Submit</button>
                         )}
-                </Form>
+                </form>
             <h2>This week's hydration reporting: </h2>
             <HydrationCard
                 name='hydrationCard'
@@ -156,6 +155,6 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
             />
         </>
             )}
-    </Card>
+    </div>
     );
 }
