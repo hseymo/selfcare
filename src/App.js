@@ -59,7 +59,7 @@ const [errorMessage, setErrorMessage] = useState('');
         setToken(data.token);
         localStorage.setItem("token", data.token);
         window.location.href = "/dashboard"
-      } else if (data.msg) {
+      } else {
         setErrorMessage('Login failed; please try again.')
       }
     })

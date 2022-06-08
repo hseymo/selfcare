@@ -23,7 +23,7 @@ flex-direction: column;
 
 .goalsLi, .compLi {
     list-style-type: none;
-    padding: 10px;
+    padding: 5px;
     text-align: center;
     width: 100%;
 }
@@ -61,10 +61,22 @@ th {
 }
 
 .fitnessdashboard, .sleepdashboard, .hydrationdashboard {
-    border: 3px solid black;
+    border: 2px solid black;
     border-radius: 10px;
     padding: 10px;
-    margin: 10px 30px;
+    margin: 10px 80px;
+}
+
+.fitnessdashboard {
+    background-color: #baa587;
+}
+
+.sleepdashboard {
+    background-color: #b8947e;
+}
+
+.hydrationdashboard {
+    background-color: #a39779;
 }
 
 .dayTable {
@@ -74,6 +86,12 @@ th {
     overflow: scroll;
 }
 
+@media screen and (max-width: 700px) {
+    .fitnessdashboard, .sleepdashboard, .hydrationdashboard {
+        margin: 10px 30px;
+    }
+}
+
 /* .hydrationdashboard p {
     display: none;
 }
@@ -81,3 +99,4 @@ th {
 .hydrationdashboard table:hover~ .hydrationdashboard p {
     display: block;
 } */
+
