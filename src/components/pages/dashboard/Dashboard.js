@@ -85,11 +85,11 @@ export default function Dashboard({token, weekArray}) {
             newObj.emoji = '⁇';
           } else {
             newObj.status = 'Reported';
-            if (response.time_asleep >= goalsData.sleep_time) {
-            newObj.emoji = '✅';
+            if (response.time_asleep >= userData.goal.sleep_time) {
+            newObj.emoji = '💤';
             sleepCount++;
           } else {
-            newObj.emoji = '❌';
+            newObj.emoji = '🥱';
           } 
         }
         sleepArray.push(newObj)
@@ -114,7 +114,7 @@ export default function Dashboard({token, weekArray}) {
           } else {
             newObj.status = 'Reported';
             newObj.oz = response.water_oz;
-            if (response.water_oz >= goalsData.hydration_oz) {
+            if (response.water_oz >= userData.goal.hydration_oz) {
               newObj.emoji='💦'
               hydrationCount++;
             } else {
@@ -134,6 +134,7 @@ export default function Dashboard({token, weekArray}) {
     return (
         <div className="Dashboard">
             <h1>{name}'s Dashboard for the Week</h1>
+
             <div className='yourGoals'>
             <h2>Your Goals</h2>
             { isGoals ? (
@@ -159,7 +160,9 @@ export default function Dashboard({token, weekArray}) {
             )}
             </div>
 
+        <div className='fitnessdashboard'>
         <Link to='/fitness/' className='pageLink'><h2>Fitness</h2></Link>
+        <p>Key: ✅ indicates you reported exercise on this day while ❌ indicates you reported that you did not exercise this day.</p>
         <table>
         <tr className="dayHeaders">
           <th></th>
@@ -186,9 +189,11 @@ export default function Dashboard({token, weekArray}) {
         <></>
       )}
       </ul>
+      </div>
 
-
+      <div className='sleepdashboard'>
       <Link to='/sleep/' className='pageLink'><h2>Sleep</h2></Link>
+      <p>Key: 🥱 indicates reported time asleep below your daily goal while 💤 indicates you met your goal for the day! </p>
       <table>
         <tr className="dayHeaders">
           <th></th>
@@ -212,9 +217,11 @@ export default function Dashboard({token, weekArray}) {
         <></>
       )}
       </ul>
+      </div>
 
+      <div className='hydrationdashboard'>
       <Link to='/hydration/' className='pageLink'><h2>Hydration</h2></Link>
-
+        <p>Key: 💧 indicates reported water intake below your daily goal while 💦 indicates you met your goal for the day! </p>
         <table>
         <tr className="dayHeaders">
           <th></th>
@@ -237,6 +244,7 @@ export default function Dashboard({token, weekArray}) {
         <></>
       ) }
       </ul>
+      </div>
 
       <h4>Click on a category to see more!</h4>
 

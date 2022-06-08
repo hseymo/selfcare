@@ -1,8 +1,8 @@
 .loginPageBody {
     display: flex;
     padding-top: 20px;
+    padding-bottom: 20px;
     background: #8a5f49;
-    height: 80vh;
     width: 100vw;
     display: flex;
     justify-content: space-around;
@@ -15,7 +15,11 @@
     margin: 10px;
 }
 
-.input {
+label {
+    margin-bottom: 15px;
+}
+
+input {
     color: black;
     width: 100%;
     padding: 5px;
