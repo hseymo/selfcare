@@ -6,10 +6,19 @@
 .Dashboard {
 text-align: center;
 background: #797d62;
+padding: 10px;
+display: flex;
+flex: wrap;
+flex-direction: column;
+}
+
+.yourGoals {
+    margin-top: 20px;
+    margin-bottom: 25px;;
 }
 
 .goalsList {
-    margin-bottom: 40px;
+    margin-bottom: 15px;
 }
 
 .goalsLi, .compLi {
@@ -17,6 +26,14 @@ background: #797d62;
     padding: 10px;
     text-align: center;
     width: 100%;
+}
+
+.goalsLink {
+    padding: 10px;
+    background-color: #416655;
+    border-radius: 5px;
+    border: 3px solid rgb(26, 17, 5);
+    color: white;
 }
 
 table {
@@ -34,15 +51,15 @@ th {
     margin-top: 20px;
 }
 
-.goalsLink {
-    padding: 10px;
-    background-color: #416655;
-    border-radius: 5px;
-    border: 3px solid rgb(26, 17, 5);
-    color: white;
-}
-
 .pageLink {
     text-decoration: none;
     color: white;
 }
+
+/* .hydrationdashboard p {
+    display: none;
+}
+
+.hydrationdashboard table:hover~ .hydrationdashboard p {
+    display: block;
+} */

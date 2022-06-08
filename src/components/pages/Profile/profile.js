@@ -37,13 +37,13 @@ export default function Profile({token}) {
     }, [goalObj])
 
     return (
-        <div className='profilePage'>
-            <h1>Tell us about yourself</h1>
+        <div className='profile'>
+            <h1>Tell Us About Your Goals</h1>
             <form className="profileForm" onSubmit={handleFormSubmit}>
                 <div className='formGroup'>
                     <label> I want to exercise </label>
                     <input
-                        className='input'
+                        className='profileinput'
                         value={goalObj.fitness_time}
                         name="fitnessTimeGoal"
                         type="number"
@@ -56,7 +56,7 @@ export default function Profile({token}) {
                 <div className='formGroup'>
                     <label>I want to exercise </label>
                     <input
-                        className='input'
+                        className='profileinput'
                         value={goalObj.fitness_frequency}
                         name="fitnessFreqGoal"
                         type="number"
@@ -69,7 +69,7 @@ export default function Profile({token}) {
                 <div className='formGroup'>
                     <label>I want to sleep </label>
                     <input
-                        className='input'
+                        className='profileinput'
                         value={goalObj.sleep_time}
                         name="sleepGoal"
                         type="decimal"
@@ -82,7 +82,7 @@ export default function Profile({token}) {
                 <div className='formGroup'>
                     <label>I want to drink </label>
                     <input
-                        className='input'
+                        className='profileinput'
                         value={goalObj.hydration_oz}
                         name="hydrationGoal"
                         type="number"
