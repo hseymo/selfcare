@@ -36,16 +36,6 @@
     background-color: black;
 }
 
-.hydrateWeek {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.card-body {
-    background: #cfbd8f;
-}
-
 .hydration.card {
     background: #a39779;
 }
