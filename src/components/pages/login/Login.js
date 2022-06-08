@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import "./login.css";
 import { Link } from 'react-router-dom';
-import { validateEmail, checkPassword } from '../../../utils/helpers';
+// import { validateEmail, checkPassword } from '../../../utils/helpers';
 
 export default function Login(props) {
 const [signupData, setSignupData] = useState({
@@ -21,7 +21,7 @@ const [error, setError] = useState('');
 const loginSubmit = e=>{
   e.preventDefault();
   if (loginData.email == '' || loginData.password == '') {
-    setError('Login failed; please try again.')
+    setError('Please enter email and password.')
   } else {
   props.login(loginData);
   setLoginData({
