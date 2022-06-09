@@ -48,7 +48,6 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
       let weeklyFitnessCount = 0;
       weekArray.map(entry => {
         let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
-        console.log(dateFormat)
         let newObj = { date: dateFormat }
         var response = userData.fitnesses.find(data => data.date === entry);
         if (response === undefined) {
@@ -73,15 +72,10 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
       fitnessArray[4].day = 'Friday';
       fitnessArray[5].day = 'Saturday';
       fitnessArray[6].day = 'Sunday';
-      console.log(fitnessArray)
 
       setFitnessEmoji(fitnessArray)
       setFitnessTime(weeklyFitnessTime)
       setFitnessCount(weeklyFitnessCount)
-      // console.log('fitnessArray: ', fitnessArray)
-      // console.log('weeklyFitnessTime: ', weeklyFitnessTime)
-      // console.log('weeklyFitnessCount: ', weeklyFitnessCount)
-      // console.log('test fitness: ', fitnessArray)
 
 
       // SLEEP LOGIC_______________________________________________
@@ -114,9 +108,6 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
       sleepArray[6].day = 'Sunday';
       setSleepWins(sleepCount)
       setSleepEmoji(sleepArray)
-      // console.log('sleepArray: ', sleepArray)
-      // console.log('test sleep: ', sleepEmoji)
-      // console.log('sleep wins: ', sleepWins)
 
       // HYDRATAION LOGIC__________________________________________
       const hydrationArray = [];
@@ -150,9 +141,6 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
       hydrationArray[6].day = 'Sunday';
       setHydrationEmoji(hydrationArray)
       setHydrationWins(hydrationCount);
-      // console.log('hydrationArray: ', hydrationArray)
-      // console.log('test hydration :', hydrationEmoji)
-      // console.log('hydration wins: ', hydrationWins)
     })
   }, [token])
 

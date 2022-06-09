@@ -8,6 +8,7 @@ import Progress from './Progress';
 import utilToday from '../../../utils/today.js';
 
 export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
+    const [Data, setData] = useState({});
     const [today, setToday] = useState();
     const [thisWeek, setThisWeek] = useState([]);
     const [hydrationFormObject, setHydrationFormObject] = useState({
@@ -18,15 +19,16 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
     const [existingItem, setExistingItem] = useState('');
     const [anotherDate, setAnotherDate] = useState('');
     const [anotherWeek, setAnotherWeek] = useState('');
+    const [error, setError] = useState('');
 
     useEffect(() => {
         API.getUserHydration(token).then((userData) => {
+            setData(userData)
             console.log(userData)
             const hydrationArray = [];
             weekArray.map(entry => {
                 var response = userData.find(data => data.date === entry);
                 let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
-                console.log(response)
 
                 let newObj = { date: dateFormat }
 
@@ -46,7 +48,6 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
             hydrationArray[4].day = 'Friday';
             hydrationArray[5].day = 'Saturday';
             hydrationArray[6].day = 'Sunday';
-            console.log(hydrationArray)
             setThisWeek(hydrationArray)
             var todaysResponse = userData.find(data => data.date === utilToday)
             setToday(todaysResponse);
@@ -54,11 +55,8 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
         })
     }, [token, updateReq])
 
-    
-
     useEffect(() => {
         API.getOneUserHydration(token, hydrationFormObject.date).then((response) => {
-            console.log(response)
             if (response.id) {
                 setHydrationFormObject({
                     date: response.date,
@@ -74,8 +72,6 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
     const sendUpdate = useCallback(async (e) => {
         e.preventDefault();
         await API.updateHydrationEntry(token, hydrationFormObject).then((res) => {
-            console.log(res);
-            console.log('Hydration Entry updated')
             setUpdateReq(true)
         })
         setHydrationFormObject({
@@ -88,8 +84,6 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
     const sendCreate = useCallback(async (e) => {
         e.preventDefault();
         API.postHydrationEntry(token, hydrationFormObject).then((res) => {
-            console.log(res);
-            console.log('New hydration entry created')
             setUpdateReq(true)
         })
         setHydrationFormObject({
@@ -102,7 +96,6 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
     const sendDelete = useCallback(async (e) => {
         e.preventDefault();
         API.deleteHydrationEntry(token, hydrationFormObject.date).then((response) => {
-            console.log(response)
             setUpdateReq(true)
         })
         setHydrationFormObject({
@@ -114,18 +107,16 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
 
     const reqAnotherWeek = useCallback( async(e) => {
         e.preventDefault();
-        await API.getUserHydration(token).then((userData) => {
-            console.log('changed')
+            if (anotherDate) {
             let anotherWeek = [];
             for (let i = 1; i < 8; i++) {
                 let thisDay = moment(anotherDate).day(i).format("YYYY-MM-DD");
                 anotherWeek.push(thisDay)
               }
-            console.log(anotherWeek)
 
             const anotherHydrationArray = [];
             anotherWeek.map(entry => {
-                var response = userData.find(data => data.date === entry);
+                var response = Data.find(data => data.date === entry);
                 let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
 
                 let newObj = { date: dateFormat }
@@ -139,7 +130,6 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
                 }
                 anotherHydrationArray.push(newObj);
             })
-            console.log(anotherHydrationArray)
             anotherHydrationArray[0].day = 'Monday';
             anotherHydrationArray[1].day = 'Tuesday';
             anotherHydrationArray[2].day = 'Wednesday';
@@ -148,7 +138,10 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
             anotherHydrationArray[5].day = 'Saturday';
             anotherHydrationArray[6].day = 'Sunday';
             setAnotherWeek(anotherHydrationArray)
-        })
+            setError('')
+        } else {
+            setError('Please choose a valid date.')
+        }
     })
 
 
@@ -218,6 +211,12 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
                     name="anotherDate"
                     onChange={(e) => setAnotherDate(e.target.value)}
                 />
+        {error && (
+            <div>
+              <p className="error">{error}
+              </p>
+            </div>
+          )}
                 <button className="hydroBtn" type="button" onClick={reqAnotherWeek}>Submit</button>
             </form>
             { anotherWeek ? (
