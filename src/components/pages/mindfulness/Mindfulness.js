@@ -27,7 +27,7 @@ export default function Mindfulness({ token, weekArray, goalObj, isLoggedIn }) {
             const mindfulnessArray = [];
             weekArray.map(entry => {
                 var response = userData.find(data => data.date === entry);
-                let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
+                let dateFormat = entry.slice(5) + "-" + entry.slice(0, 4);
                 let newObj = { date: dateFormat };
                 newObj.rawDate = entry;
 
@@ -117,19 +117,19 @@ export default function Mindfulness({ token, weekArray, goalObj, isLoggedIn }) {
         setUpdateReq(false)
     })
 
-    const reqAnotherWeek = useCallback( async(e) => {
+    const reqAnotherWeek = useCallback(async (e) => {
         e.preventDefault();
-            if (anotherDate) {
+        if (anotherDate) {
             let anotherWeek = [];
             for (let i = 1; i < 8; i++) {
                 let thisDay = moment(anotherDate).day(i).format("YYYY-MM-DD");
                 anotherWeek.push(thisDay)
-              }
+            }
 
             const anotherMindfulArray = [];
             anotherWeek.map(entry => {
                 var response = Data.find(data => data.date === entry);
-                let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
+                let dateFormat = entry.slice(5) + "-" + entry.slice(0, 4);
 
                 let newObj = { date: dateFormat }
 
@@ -141,7 +141,7 @@ export default function Mindfulness({ token, weekArray, goalObj, isLoggedIn }) {
                     newObj.activities_completed = activities_completed;
                     newObj.journal = journal;
                     newObj.overall_mood = overall_mood;
-                    newObj.quote_of_the_day  = quote_of_the_day;
+                    newObj.quote_of_the_day = quote_of_the_day;
                 }
                 anotherMindfulArray.push(newObj)
             })
@@ -165,105 +165,105 @@ export default function Mindfulness({ token, weekArray, goalObj, isLoggedIn }) {
                 <h2><Link class="link-light" to='/login'>Login</Link></h2>
             ) : (
                 <>
-                <h1>Mindfulness</h1>
-                <h2>Your Goals</h2>
-                { goalObj.mindfulness_frequency != 0 && (
-              <h4 className=''>Your goal is to practice mindfulness {goalObj.mindfulness_frequency} times per week.</h4>
-              )}
-                <h2>Report Mindfulness Practice</h2>
-                <form className="mindfulForm">
-                    <label htmlFor="mindfulDate">
-                            Choose date:
-                    </label>
-                    <input
-                        value={mindObj.date}
-                        type="date"
-                        name="mindfulDate"
-                        onChange={(e) => setMindObj({ ...mindObj, date: e.target.value })}
-                    />
-                    <label className='mindfulLabel' htmlFor="mindfulActivities">
-                        What mindfulness activities did you complete?
-                    </label>
-                    <input
-                        className='mindfulInput'
-                        value={mindObj.activities_completed}
-                        type="text"
-                        name="mindfulActivities"
-                        onChange={(e) => setMindObj({ ...mindObj, activities_completed: e.target.value })}
-                    />
-                    <label className='mindfulLabel' htmlFor="mindfulJournal">
-                        Journal Entry for Today:
-                    </label>
-                    <textarea
-                        type='text'
-                        name='mindfulJournal'
-                        rows='8'
-                        value={mindObj.journal}
-                        onChange={(e) => setMindObj({ ...mindObj, journal: e.target.value })}
-                    />
-                    <label className='mindfulLabel' htmlFor="mindfulMood">
-                        What was your overall mood today?
-                    </label>
-                    <input
-                        className='mindfulInput'
-                        value={mindObj.overall_mood}
-                        type="text"
-                        name='mindfulMood'
-                        onChange={(e) => setMindObj({ ...mindObj, overall_mood: e.target.value })}
-                    />
-                    <label className='mindfulLabel' htmlFor="mindfulQuote">
-                        Quote of the day: 
-                    </label>
-                    <input
-                        className='mindfulInput'
-                        value={mindObj.quote_of_the_day}
-                        type="text"
-                        name="mindfulQuote"
-                        onChange={(e) => setMindObj({ ...mindObj, quote_of_the_day: e.target.value })}
-                    />
-                    {(existingItem == true) ? (
-                        <>
-                            <button type="button" className="mindfulBtn" 
-                                onClick={sendUpdate}>Update</button>
-                            <button type="button" className="mindfulBtn" 
-                                onClick={sendDelete}>Delete</button>
-                        </>
-                    ) : (
-                        <button className="mindfulBtn" type="button" onClick={sendCreate}>Submit</button>
+                    <h1>Mindfulness</h1>
+                    <h2>Your Goals</h2>
+                    {goalObj.mindfulness_frequency != 0 && (
+                        <h4 className=''>Your goal is to practice mindfulness {goalObj.mindfulness_frequency} times per week.</h4>
                     )}
-                </form>
+                    <h2>Report Mindfulness Practice</h2>
+                    <form className="mindfulForm">
+                        <label htmlFor="mindfulDate">
+                            Choose date:
+                        </label>
+                        <input
+                            value={mindObj.date}
+                            type="date"
+                            name="mindfulDate"
+                            onChange={(e) => setMindObj({ ...mindObj, date: e.target.value })}
+                        />
+                        <label className='mindfulLabel' htmlFor="mindfulActivities">
+                            What mindfulness activities did you complete?
+                        </label>
+                        <input
+                            className='mindfulInput'
+                            value={mindObj.activities_completed}
+                            type="text"
+                            name="mindfulActivities"
+                            onChange={(e) => setMindObj({ ...mindObj, activities_completed: e.target.value })}
+                        />
+                        <label className='mindfulLabel' htmlFor="mindfulJournal">
+                            Journal Entry for Today:
+                        </label>
+                        <textarea
+                            type='text'
+                            name='mindfulJournal'
+                            rows='8'
+                            value={mindObj.journal}
+                            onChange={(e) => setMindObj({ ...mindObj, journal: e.target.value })}
+                        />
+                        <label className='mindfulLabel' htmlFor="mindfulMood">
+                            What was your overall mood today?
+                        </label>
+                        <input
+                            className='mindfulInput'
+                            value={mindObj.overall_mood}
+                            type="text"
+                            name='mindfulMood'
+                            onChange={(e) => setMindObj({ ...mindObj, overall_mood: e.target.value })}
+                        />
+                        <label className='mindfulLabel' htmlFor="mindfulQuote">
+                            Quote of the day:
+                        </label>
+                        <input
+                            className='mindfulInput'
+                            value={mindObj.quote_of_the_day}
+                            type="text"
+                            name="mindfulQuote"
+                            onChange={(e) => setMindObj({ ...mindObj, quote_of_the_day: e.target.value })}
+                        />
+                        {(existingItem == true) ? (
+                            <>
+                                <button type="button" className="mindfulBtn"
+                                    onClick={sendUpdate}>Update</button>
+                                <button type="button" className="mindfulBtn"
+                                    onClick={sendDelete}>Delete</button>
+                            </>
+                        ) : (
+                            <button className="mindfulBtn" type="button" onClick={sendCreate}>Submit</button>
+                        )}
+                    </form>
 
-                <br />
-                <h2>This week's mindfulness reporting:</h2>
-                <MindfulCard
-                    results={thisWeek}
-                />
+                    <br />
+                    <h2>This week's mindfulness reporting:</h2>
+                    <MindfulCard
+                        results={thisWeek}
+                    />
 
-            <div className='anotherWeekSection'> 
-            <h2>View another week's mindfulness reporting:</h2>
-            <form className='chooseDate'>
-                <label htmlFor='anotherDate'>Date</label>
-                <input
-                    value={anotherDate}
-                    type="date"
-                    name="anotherDate"
-                    onChange={(e) => setAnotherDate(e.target.value)}
-                />
-        {error && (
-            <div>
-              <p className="error">{error}
-              </p>
-            </div>
-          )}
-                <button className="mindfulBtn" type="button" onClick={reqAnotherWeek}>Submit</button>
-            </form>
-            { anotherWeek ? (
-            <MindfulCard
-                results={anotherWeek} />
-            ) : (
-                <></>
-                )}
-            </div> 
+                    <div className='anotherWeekSection'>
+                        <h2>View another week's mindfulness reporting:</h2>
+                        <form className='chooseDate'>
+                            <label htmlFor='anotherDate'>Date</label>
+                            <input
+                                value={anotherDate}
+                                type="date"
+                                name="anotherDate"
+                                onChange={(e) => setAnotherDate(e.target.value)}
+                            />
+                            {error && (
+                                <div>
+                                    <p className="error">{error}
+                                    </p>
+                                </div>
+                            )}
+                            <button className="mindfulBtn" type="button" onClick={reqAnotherWeek}>Submit</button>
+                        </form>
+                        {anotherWeek ? (
+                            <MindfulCard
+                                results={anotherWeek} />
+                        ) : (
+                            <></>
+                        )}
+                    </div>
 
                 </>
             )}
