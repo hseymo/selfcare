@@ -208,4 +208,53 @@ module.exports = {
             }} )
         .then(res=> res.json())
     },
+
+        // MINDFUL
+
+        getUserMindfulness: (token) => {
+            return fetch(`${BASE_URL}/api/mindfulness/user/me`,{
+                headers:{
+                    authorization:`Bearer ${token}`
+                }} )
+            .then(res=> res.json())
+        },
+    
+        getOneUserMindfulness: (token, mindfulDate) => {
+            return fetch(`${BASE_URL}/api/mindfulness/user/me/${mindfulDate}`,{
+                headers:{
+                    authorization:`Bearer ${token}`
+                }} )
+            .then(res=> res.json())
+        },
+    
+        postMindfulnessEntry: (token, mindfulDate) => {
+            return fetch(`${BASE_URL}/api/mindfulness`,{
+                method:"POST",
+                body:JSON.stringify(mindfulDate),
+                headers:{
+                    authorization:`Bearer ${token}`,
+                    "Content-Type":"application/json"
+                }
+            }).then(res=>res.json())
+        },
+    
+        updateMindfulnessEntry: (token, mindfulDate) => {
+            return fetch(`${BASE_URL}/api/mindfulness/update`,{
+                method:"PUT",
+                body:JSON.stringify(mindfulDate),
+                headers:{
+                    authorization:`Bearer ${token}`,
+                    "Content-Type":"application/json"
+                }
+            }).then(res=>res.json())
+        },
+    
+        deleteMindfulnessEntry: (token, mindfulDate) => {
+            return fetch(`${BASE_URL}/api/mindfulness/user/me/${mindfulDate}`,{
+                method:"DELETE",
+                headers:{
+                    authorization:`Bearer ${token}`
+                }} )
+            .then(res=> res.json())
+        },
 }
