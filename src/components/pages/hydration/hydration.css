@@ -41,13 +41,3 @@
 .hydration.card {
     background: #a39779;
 }
-
-.waterBottle {
-    height: 100px;
-    border: 3px solid black
-}
-
-.waterBottleFill {
-    width:100%;
-    background-color: blue;
-}
