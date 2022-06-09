@@ -20,14 +20,14 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
     const [anotherDate, setAnotherDate] = useState('');
     const [anotherWeek, setAnotherWeek] = useState('');
     const [error, setError] = useState('');
-    
+
     useEffect(() => {
         API.getUserFitness(token).then((userData) => {
             setData(userData)
             const fitnessArray = [];
             weekArray.map(entry => {
                 var response = userData.find(data => data.date === entry);
-                let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
+                let dateFormat = entry.slice(5) + "-" + entry.slice(0, 4);
                 let newObj = { date: dateFormat }
 
                 if (response === undefined) {
@@ -115,19 +115,19 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
         setUpdateReq(false)
     })
 
-    const reqAnotherWeek = useCallback( async(e) => {
+    const reqAnotherWeek = useCallback(async (e) => {
         e.preventDefault();
-            if (anotherDate) {
+        if (anotherDate) {
             let anotherWeek = [];
             for (let i = 1; i < 8; i++) {
                 let thisDay = moment(anotherDate).day(i).format("YYYY-MM-DD");
                 anotherWeek.push(thisDay)
-              }
+            }
 
             const anotherFitnessArray = [];
             anotherWeek.map(entry => {
                 var response = Data.find(data => data.date === entry);
-                let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
+                let dateFormat = entry.slice(5) + "-" + entry.slice(0, 4);
 
                 let newObj = { date: dateFormat }
 
@@ -163,119 +163,119 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
             {!isLoggedIn ? (
                 <h2><Link class="link-light" to='/login'>Login</Link></h2>
             ) : (
-            <>
-            <h1>Fitness</h1>
-            <h2>Your Goals</h2>
-            {goalObj.fitness_time != 0 && (
-                <h4 className=''>Your exercise time goal is {goalObj.fitness_time} minutes per week. </h4>
-            )}
-            {goalObj.fitness_frequency != 0 && (
-                <h4 className=''>Your exercise frequency goal is {goalObj.fitness_frequency} days per week. </h4>
-            )}
-            <h2>Report Fitness Data</h2>
-            <form className="fitnessForm">
-                    <label className='fitnessLabel' htmlFor="formDate">
-                        Choose date:
-                    </label>
-                    <input 
-                        className='fitnessInput'
-                        value={exerciseFormObject.date}
-                        type="date"
-                        id="formDate"
-                        name="formDate"
-                        onChange={(e) => setExerciseFormObject({ ...exerciseFormObject, date: e.target.value })}
-                    />
-                    <label className='fitnessLabel' htmlFor="formType">
-                        What type of exercise did you complete?
-                    </label>
-                    <input
-                        className='fitnessInput'
-                        value={exerciseFormObject.activity_type}
-                        type="text"
-                        id="formType"
-                        name="formType"
-                        onChange={(e) => setExerciseFormObject({ ...exerciseFormObject, activity_type: e.target.value })}
-                    />
-                    <label className='fitnessLabel' htmlFor="formDuration">
-                        How long did you exercise for (in minutes)? Note: if you did not exercise, report '0'.
-                    </label>
-                    <input
-                        className='fitnessInput'
-                        value={exerciseFormObject.activity_duration}
-                        type="number"
-                        id="formDuration"
-                        min='0'
-                        name="formDuration"
-                        onChange={(e) => setExerciseFormObject({ ...exerciseFormObject, activity_duration: e.target.value })}
-                    />
-                    <label className='fitnessLabel' htmlFor="formRPE">
-                        On an Rate of Perceived Exertion Scale (RPE) from 0 (easy) to 10 (extremely difficult), how hard did you work?
-                    </label>
-                    <input
-                        className='fitnessInput'
-                        value={exerciseFormObject.RPE}
-                        type="number"
-                        min="0"
-                        max='10'
-                        id="formRPE"
-                        name="formRPE"
-                        onChange={(e) => setExerciseFormObject({ ...exerciseFormObject, RPE: e.target.value })} />
-                    <label className='fitnessLabel' htmlFor="formNotes">
-                        Notes from your workout:
-                    </label>
-                    <input
-                        className='fitnessInput'
-                        value={exerciseFormObject.notes}
-                        type="text"
-                        id="formNotes"
-                        name="formNotes"
-                        onChange={(e) => setExerciseFormObject({ ...exerciseFormObject, notes: e.target.value })}
-                    />
-                    <br />
-                    {(existingItem == true) ? (
-                        <>
-                            <button type="button" className="fitnessBtn" 
-                                onClick={sendUpdate}>Update</button>
-                            <button type="button" className="fitnessBtn" 
-                                onClick={sendDelete}>Delete</button>
-                        </>
-                    ) : (
-                        <button className="fitnessBtn" type="button" onClick={sendCreate}>Submit</button>
+                <>
+                    <h1>Fitness</h1>
+                    <h2>Your Goals</h2>
+                    {goalObj.fitness_time != 0 && (
+                        <h4 className=''>Your exercise time goal is {goalObj.fitness_time} minutes per week. </h4>
                     )}
-            </form>
-            <br />
-            <h2>This week's fitness reporting: </h2>
-            <ExerciseCard
-                results={thisWeek}
-            />
+                    {goalObj.fitness_frequency != 0 && (
+                        <h4 className=''>Your exercise frequency goal is {goalObj.fitness_frequency} days per week. </h4>
+                    )}
+                    <h2>Report Fitness Data</h2>
+                    <form className="fitnessForm">
+                        <label htmlFor="formDate">
+                            Choose date:
+                        </label>
+                        <input
+                            className='fitnessInput'
+                            value={exerciseFormObject.date}
+                            type="date"
+                            id="formDate"
+                            name="formDate"
+                            onChange={(e) => setExerciseFormObject({ ...exerciseFormObject, date: e.target.value })}
+                        />
+                        <label htmlFor="formType">
+                            What type of exercise did you complete?
+                        </label>
+                        <input
+                            className='fitnessInput'
+                            value={exerciseFormObject.activity_type}
+                            type="text"
+                            id="formType"
+                            name="formType"
+                            onChange={(e) => setExerciseFormObject({ ...exerciseFormObject, activity_type: e.target.value })}
+                        />
+                        <label htmlFor="formDuration">
+                            How long did you exercise for (in minutes)? Note: if you did not exercise, report '0'.
+                        </label>
+                        <input
+                            className='fitnessInput'
+                            value={exerciseFormObject.activity_duration}
+                            type="number"
+                            id="formDuration"
+                            min='0'
+                            name="formDuration"
+                            onChange={(e) => setExerciseFormObject({ ...exerciseFormObject, activity_duration: e.target.value })}
+                        />
+                        <label htmlFor="formRPE">
+                            On an Rate of Perceived Exertion Scale (RPE) from 0 (easy) to 10 (extremely difficult), how hard did you work?
+                        </label>
+                        <input
+                            className='fitnessInput'
+                            value={exerciseFormObject.RPE}
+                            type="number"
+                            min="0"
+                            max='10'
+                            id="formRPE"
+                            name="formRPE"
+                            onChange={(e) => setExerciseFormObject({ ...exerciseFormObject, RPE: e.target.value })} />
+                        <label htmlFor="formNotes">
+                            Notes from your workout:
+                        </label>
+                        <input
+                            className='fitnessInput'
+                            value={exerciseFormObject.notes}
+                            type="text"
+                            id="formNotes"
+                            name="formNotes"
+                            onChange={(e) => setExerciseFormObject({ ...exerciseFormObject, notes: e.target.value })}
+                        />
+                        <br />
+                        {(existingItem == true) ? (
+                            <>
+                                <button type="button" className="fitnessBtn"
+                                    onClick={sendUpdate}>Update</button>
+                                <button type="button" className="fitnessBtn"
+                                    onClick={sendDelete}>Delete</button>
+                            </>
+                        ) : (
+                            <button className="fitnessBtn" type="button" onClick={sendCreate}>Submit</button>
+                        )}
+                    </form>
+                    <br />
+                    <h2>This week's fitness reporting: </h2>
+                    <ExerciseCard
+                        results={thisWeek}
+                    />
 
 
-        <div className='anotherWeekSection'> 
-            <h2>View another week's fitness reporting:</h2>
-            <form className='chooseDate'>
-                <label htmlFor='anotherDate'>Date</label>
-                <input
-                    value={anotherDate}
-                    type="date"
-                    name="anotherDate"
-                    onChange={(e) => setAnotherDate(e.target.value)}
-                />
-        {error && (
-            <div>
-              <p className="error">{error}
-              </p>
-            </div>
-          )}
-                <button className="fitnessBtn" type="button" onClick={reqAnotherWeek}>Submit</button>
-            </form>
-            { anotherWeek ? (
-            <ExerciseCard
-                results={anotherWeek} />
-            ) : (
-                <></>
-                )}
-            </div> 
-            </>
+                    <div className='anotherWeekSection'>
+                        <h2>View another week's fitness reporting:</h2>
+                        <form className='chooseDate'>
+                            <label htmlFor='anotherDate'>Date</label>
+                            <input
+                                value={anotherDate}
+                                type="date"
+                                name="anotherDate"
+                                onChange={(e) => setAnotherDate(e.target.value)}
+                            />
+                            {error && (
+                                <div>
+                                    <p className="error">{error}
+                                    </p>
+                                </div>
+                            )}
+                            <button className="fitnessBtn" type="button" onClick={reqAnotherWeek}>Submit</button>
+                        </form>
+                        {anotherWeek ? (
+                            <ExerciseCard
+                                results={anotherWeek} />
+                        ) : (
+                            <></>
+                        )}
+                    </div>
+                </>
             )}
         </div>
     );
