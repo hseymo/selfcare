@@ -11,24 +11,17 @@ export default function Progress(props) {
     // });
 
     // const anim = useSpring({ width: progress, config: config.slow });
-    console.log(props)
-    const [open, toggle] = useState(false);
-    const [ref, {width}] = useMeasure(props.goal);
-    const anima = useSpring({ ounces: open ? width : 0 })
-    console.log()
-    console.log(anima.width)
+    // const [open, toggle] = useState(false);
+    const [ref, {width}] = useMeasure();
+    const anima = useSpring({ width: (props.amount/props.goal)*width || 0 })
+    // console.log()
+    // console.log(anima.width)
     return (
-        <div id="container">
-            <div ref={ref} id="main" onClick={() => toggle(!open)}>
-                <animated.div id='fill' style={{
-                    position: `absolute`,
-                    top: 50,
-                    left: 0,
-                    width: `${props.amount}%`,
-                    height: '100%',
-                }} />
-                <animated.div id='content'>
-                    {anima.ounces.to(x=>x.toFixed(0))}
+        <div className="contained">
+            <div ref={ref} className="main">
+                <animated.div className='fill' style={anima}/>
+                <animated.div className='content'>
+                    {anima.width.to(x=>props.amount)}
                 </animated.div>
             </div>
         </div>
