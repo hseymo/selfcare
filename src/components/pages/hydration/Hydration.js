@@ -33,8 +33,6 @@ let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
                 let newObj = { date: dateFormat }
                 console.log(response)
 
-                let newObj = { date: entry }
-
                 if (response === undefined) {
                     newObj.status = 'Not Reported';
                 } else {

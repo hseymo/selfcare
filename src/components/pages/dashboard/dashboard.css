@@ -83,7 +83,7 @@ th {
     display:block;
     height: fit-content;
     width: 140px;
-    overflow: scroll;
+    overflow-x: auto;
 }
 
 @media screen and (max-width: 700px) {
