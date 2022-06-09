@@ -12,6 +12,9 @@ export default function Progress(props) {
 
     // const anim = useSpring({ width: progress, config: config.slow });
     // const [open, toggle] = useState(false);
+    
+    console.log(props.goal)
+    console.log(props.amount)
     const [ref, {width}] = useMeasure();
     const anima = useSpring({ width: (props.amount/props.goal)*width || 0 })
     // console.log()

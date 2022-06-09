@@ -1,10 +1,19 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Progress from './Progress'
 import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './hydrationCard.css';
 
 export default function HydrationCard(props) {
+
+    const doMath =(water) =>  {
+        if (props.goal != 0) {
+            let percentage = (water / props.goal)*100;
+            let fixedPercentage = percentage.toFixed(2)
+            return fixedPercentage + '% of daily goal'
+        }
+    }
+
 return (
     <div className="hydrationCardHolder">
         {props.results.map((result) =>  
@@ -18,7 +27,7 @@ return (
         ) : (
             <>
             <li>{result.water_oz} ounces</li>
-            <li>goal: {props.goal} ounces</li>
+            <li>{doMath(result.water_oz)}</li>
             </>
         )}
         </ul>
