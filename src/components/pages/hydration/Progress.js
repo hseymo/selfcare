@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { SpringValue, AnimatedValue, Spring, useSpring, animated, config } from 'react-spring'
-import useMeasure from 'react-use-measure'
+import { Spring, useSpring, animated, config } from 'react-spring'
+import useMeasure from 'react-use-measure';
 import './progress.css'
 
 export default function Progress(props) {
@@ -15,9 +15,9 @@ export default function Progress(props) {
     console.log(props.goal)
     console.log(props.amount)
 
-    const doMath =(water) =>  {
+    const doMath = (water) => {
         if (props.goal != 0) {
-            let percentage = (water / props.goal)*100;
+            let percentage = (water / props.goal) * 100;
             let fixedPercentage = percentage.toFixed(0)
             return fixedPercentage + '% of daily goal'
         } else {
@@ -25,15 +25,15 @@ export default function Progress(props) {
         }
     }
 
-    const [ref, {height}] = useMeasure();
-    
-    const anima = useSpring({ height: (props.amount/props.goal)*height || 0 })
+    const [ref, { height }] = useMeasure();
+
+    const anima = useSpring({ height: (props.amount / props.goal) * height || 0 })
     return (
         <div className="contained">
             <div ref={ref} className="main">
-                <animated.div className='fill' style={anima}/>
+                <animated.div className='fill' style={anima} />
                 <animated.div className='content'>
-                    {anima.height.to(x=>doMath(props.amount))}
+                    {anima.height.to(x => doMath(props.amount))}
                 </animated.div>
             </div>
         </div>
