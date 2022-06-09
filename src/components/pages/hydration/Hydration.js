@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './hydration.css';
 import { Card, Button, Form } from 'react-bootstrap';
-import API from "../../../utils/API.js"
+import API from "../../../utils/API.js";
 import HydrationCard from './HydrationCard';
+import Progress from './Progress';
+import utilToday from '../../../utils/today.js';
 
 export default function Hydration({ token, userId, weekArray, goalObj }) {
+    const [today, setToday] = useState();
     const [thisWeek, setThisWeek] = useState([]);
     const [hydrationFormObject, setHydrationFormObject] = useState({
         date: '', 
@@ -42,8 +45,13 @@ export default function Hydration({ token, userId, weekArray, goalObj }) {
             hydrationArray[6].day = 'Sunday';
             console.log(hydrationArray)
             setThisWeek(hydrationArray)
+            var todaysResponse = userData.find(data => data.date === utilToday)
+            setToday(todaysResponse);
+            console.log('-----------------------------', todaysResponse);
         })
     }, [token, updateReq])
+
+    
 
     useEffect(() => {
         API.getOneUserHydration(token, hydrationFormObject.date).then((response) => {
@@ -145,10 +153,13 @@ export default function Hydration({ token, userId, weekArray, goalObj }) {
                             <Button id="hydroBtn"type="button" onClick={sendCreate}>Submit</Button>
                         )}
                 </Form>
+                <Progress goal={goalObj.hydration_oz} amount={hydrationFormObject.water_oz} />
+                {console.log(thisWeek.day)}
             <h2>This week's hydration reporting: </h2>
             <HydrationCard
                 name='hydrationCard'
                 results={thisWeek}
+                goal={goalObj.hydration_oz}
             />
         </Card>
         </div>
