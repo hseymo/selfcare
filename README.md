@@ -113,11 +113,18 @@ After following the instructions in installation:
 
 ### **Screenshots**
 --- 
-Title <br>
-![screenshot](URL)
+Home Page<br>
+![Homepage](https://user-images.githubusercontent.com/75865873/172924970-36be2b1c-2c93-443b-a606-8c58fe09908a.png)
 <br>
-Title <br>
-![gif](URL)
+Login/Dashboard <br>
+![LoginDashPro](https://user-images.githubusercontent.com/75865873/172924484-985f6080-fbb2-4692-ad26-80cc29228cbb.gif)
+ Fitness Page Fillout    <br>
+![FitnessFillout](https://user-images.githubusercontent.com/75865873/172924715-53b293fa-1557-4d37-b9ab-a097c300d884.gif)
+Tab Run-through <br>
+![Tabs](https://user-images.githubusercontent.com/75865873/172925130-d4060547-2c2c-4742-99fd-fe27dae363b4.gif)
+Mobile Dashboard <br>
+![Mobile Dashboard](https://user-images.githubusercontent.com/75865873/172925039-7063b461-349d-49af-90ab-3ad8bcee6fe9.png)
+
 <br>
 
 ## Contributing 
