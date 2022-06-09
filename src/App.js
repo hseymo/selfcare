@@ -26,6 +26,7 @@ function App() {
     sleep_time: '',
     hydration_oz: ''
 })
+const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(()=>{
     const storedToken = localStorage.getItem("token")
@@ -53,10 +54,13 @@ function App() {
 
   const handleLoginSubmit = (loginData) => {
     API.login(loginData).then(data => {
+      console.log(data)
       if (data.token) {
         setToken(data.token);
         localStorage.setItem("token", data.token);
         window.location.href = "/dashboard"
+      } else if (data.msg) {
+        setErrorMessage('Login failed; please try again.')
       }
     })
   }
@@ -67,6 +71,8 @@ function App() {
         setToken(data.token)
         localStorage.setItem("token", data.token);
         window.location.href = "/dashboard"
+      } else {
+        setErrorMessage('Signup failed; please try again.')
       }
     })
   }
@@ -92,19 +98,29 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Header isLoggedIn={isLoggedIn} userId={userId} logout={logout} />
+      <Header 
+        isLoggedIn={isLoggedIn} 
+        userId={userId} 
+        logout={logout} 
+      />
       <Routes>
         <Route 
           path='/' 
-          element={<Home />} />
+          element={<Home 
+            isLoggedIn={isLoggedIn} 
+          />} />
         <Route 
           path='/login' 
           element={<Login 
+            isLoggedIn={isLoggedIn} 
             signup={handleSignupSubmit} 
-            login={handleLoginSubmit} />} />
+            login={handleLoginSubmit} 
+            errorMessage={errorMessage}
+            />} />
         <Route 
           path='/dashboard' 
           element={<Dashboard 
+            isLoggedIn={isLoggedIn} 
             userId={userId} 
             token={token} 
             weekArray={weekArray} 
@@ -112,11 +128,13 @@ function App() {
         <Route 
           path='/profile' 
           element={<Profile 
+            isLoggedIn={isLoggedIn} 
             userId={userId} 
             token={token}/>} />
         <Route 
           path='/fitness' 
           element={<Exercise 
+            isLoggedIn={isLoggedIn} 
             userId={userId} 
             token={token}
             weekArray={weekArray} 
@@ -125,6 +143,7 @@ function App() {
         <Route 
           path='/sleep' 
           element={<Sleep 
+            isLoggedIn={isLoggedIn} 
             userId={userId} 
             token={token} 
             weekArray={weekArray} 
@@ -133,6 +152,7 @@ function App() {
         <Route 
           path='/hydration' 
           element={<Hydration 
+            isLoggedIn={isLoggedIn} 
             userId={userId} 
             token={token}
             weekArray={weekArray} 
@@ -141,10 +161,14 @@ function App() {
         <Route 
           path='/mindfulness' 
           element={<Mindfulness 
+            isLoggedIn={isLoggedIn} 
             userId={userId} 
             token={token} 
             weekArray={weekArray} 
             goalObj={goalObj}/>} />
+        <Route 
+          path='*' 
+          element={<Home />} />
       </Routes>
     </BrowserRouter>
   );

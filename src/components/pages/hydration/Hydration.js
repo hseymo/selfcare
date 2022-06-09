@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './hydration.css';
-import { Card, Button, Form } from 'react-bootstrap';
-import API from "../../../utils/API.js";
+import { Link } from 'react-router-dom';
+import API from "../../../utils/API.js"
 import HydrationCard from './HydrationCard';
 import Progress from './Progress';
 import utilToday from '../../../utils/today.js';
 
-export default function Hydration({ token, userId, weekArray, goalObj }) {
+export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
     const [today, setToday] = useState();
     const [thisWeek, setThisWeek] = useState([]);
     const [hydrationFormObject, setHydrationFormObject] = useState({
-        date: '', 
+        date: '',
         water_oz: ''
     })
     const [updateReq, setUpdateReq] = useState('');
@@ -110,58 +110,62 @@ export default function Hydration({ token, userId, weekArray, goalObj }) {
     })
 
     return (
-        <div>
-            <Card className="hydration">
+    <div className="hydration">
+        {!isLoggedIn ? (
+            <h2><Link class="link-light" to='/login'>Login</Link></h2>
+            ) : (
+                <>
                 <h1>Hydration</h1>
                 <h2>Your Goals</h2>
-                { goalObj.hydration_oz != 0 && (
-              <h4 className=''>Your daily water intake goal is {goalObj.hydration_oz} oz.</h4>
-              )}
+                {goalObj.hydration_oz != 0 && (
+                    <h4 className=''>Your daily water intake goal is {goalObj.hydration_oz} oz.</h4>
+                )}
                 <h2>Report Water Intake</h2>
-                <Form className="waterForm">
-                        <Form.Label htmlFor="waterDate">
-                            Choose date:
-                        </Form.Label>
-                        <Form.Check
-                            value={hydrationFormObject.date}
-                            type="date"
-                            id="waterDate"
-                            name="waterDate"
-                            onChange={(e) => setHydrationFormObject({...hydrationFormObject, date: e.target.value})}
-                            />
-                        <Form.Label htmlFor="waterAmount">
-                            How many ounces did you drink?
-                        </Form.Label>
-                        <Form.Check
-                            value={hydrationFormObject.water_oz}
-                            min="0"
-                            max="1000"
-                            type="number"
-                            id="waterAmount"
-                            name="waterAmount"
-                            onChange={(e) => setHydrationFormObject({...hydrationFormObject, water_oz: e.target.value})}
-                            />
-                        <br />
-                        { (existingItem == true) ? (
+                <form className="waterForm">
+                    <label htmlFor="waterDate">
+                        Choose date:
+                    </label>
+                    <input
+                        value={hydrationFormObject.date}
+                        type="date"
+                        id="waterDate"
+                        name="waterDate"
+                        onChange={(e) => setHydrationFormObject({ ...hydrationFormObject, date: e.target.value })}
+                    />
+                    <label htmlFor="waterAmount">
+                        How many ounces did you drink?
+                    </label>
+                    <input
+                        value={hydrationFormObject.water_oz}
+                        min="0"
+                        max="1000"
+                        type="number"
+                        id="waterAmount"
+                        name="waterAmount"
+                        onChange={(e) => setHydrationFormObject({ ...hydrationFormObject, water_oz: e.target.value })}
+                    />
+                    <br />
+                    {(existingItem == true) ? (
                         <>
-                            <Button type="button"
-                                onClick={sendUpdate}>Update</Button>
-                            <Button type="button"
-                            onClick={sendDelete}>Delete</Button>
+                            <button type="button" className="hydroBtn"
+                                onClick={sendUpdate}>Update</button>
+                            <button type="button" className="hydroBtn"
+                            onClick={sendDelete}>Delete</button>
                         </>
                         ) : (
-                            <Button id="hydroBtn"type="button" onClick={sendCreate}>Submit</Button>
+                            <button className="hydroBtn" type="button" onClick={sendCreate}>Submit</button>
                         )}
-                </Form>
-                <Progress goal={goalObj.hydration_oz} amount={hydrationFormObject.water_oz} />
-                {console.log(thisWeek.day)}
+                </form>
+<Progress goal={goalObj.hydration_oz} amount={hydrationFormObject.water_oz} />
+
             <h2>This week's hydration reporting: </h2>
             <HydrationCard
                 name='hydrationCard'
                 results={thisWeek}
                 goal={goalObj.hydration_oz}
             />
-        </Card>
-        </div>
+        </>
+            )}
+    </div>
     );
 }

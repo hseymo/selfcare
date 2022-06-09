@@ -36,6 +36,10 @@ flex-direction: column;
     color: white;
 }
 
+.goalsLink:hover {
+    background-color: black;
+}
+
 table {
     margin: auto;
     padding: 10px;
@@ -54,6 +58,20 @@ th {
 .pageLink {
     text-decoration: none;
     color: white;
+}
+
+.fitnessdashboard, .sleepdashboard, .hydrationdashboard {
+    border: 3px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px 30px;
+}
+
+.dayTable {
+    display:block;
+    height: fit-content;
+    width: 140px;
+    overflow: scroll;
 }
 
 /* .hydrationdashboard p {

@@ -9,7 +9,7 @@ export default function Profile({token}) {
         fitness_frequency:'',
         sleep_time: '',
         hydration_oz: ''
-    })
+    });
 
     useEffect(() => {
         API.getUserGoals(token).then((userData)=>{
@@ -92,7 +92,7 @@ export default function Profile({token}) {
                     />
                     <label> ounces of water per day! 💧</label>
                 </div>
-                <button className='button' type="submit"
+                <button className='proBtn' type="submit"
                 >Submit</button>
             </form>
         </div>

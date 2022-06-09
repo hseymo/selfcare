@@ -15,6 +15,11 @@
     height: 18rem;
 }
 
+.card-body {
+    background: #cfbd8f;
+}
+
+
 h4 {
     display: flex;
     justify-content: center;

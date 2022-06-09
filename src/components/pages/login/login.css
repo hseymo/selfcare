@@ -34,8 +34,20 @@ input {
     color: white;
 }
 
+.loginbutton:hover, .submitbutton:hover {
+    background-color: black;
+}
+
 @media screen and (max-width: 420px) {
     .signUpSection, .logInSection {
         width: 90%;
     }
+}
+
+.error {
+    background-color: white;
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+    border: 3px solid rgb(26, 17, 5);
 }
