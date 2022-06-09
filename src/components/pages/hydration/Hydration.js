@@ -74,6 +74,10 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
                 })
                 setExistingItem(true);
             } else {
+                setHydrationFormObject({
+                    date: hydrationFormObject.date,
+                    water_oz: ''
+                })
                 setExistingItem(false);
             }
         })
@@ -178,7 +182,7 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
                             onChange={(e) => setHydrationFormObject({ ...hydrationFormObject, date: e.target.value })}
                         />
                         <label htmlFor="waterAmount">
-                            How many ounces did you drink?
+                            How many ounces did you drink? If left blank will report '0 oz'.
                         </label>
                         <input
                             value={hydrationFormObject.water_oz}

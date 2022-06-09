@@ -20,6 +20,7 @@ export default function Mindfulness({ token, weekArray, goalObj, isLoggedIn }) {
     const [anotherDate, setAnotherDate] = useState('');
     const [anotherWeek, setAnotherWeek] = useState('');
     const [error, setError] = useState('');
+    const [incomplete, setIncomplete] = useState('')
 
     useEffect(() => {
         API.getUserMindfulness(token).then((userData) => {
@@ -66,6 +67,13 @@ export default function Mindfulness({ token, weekArray, goalObj, isLoggedIn }) {
                 })
                 setExistingItem(true);
             } else {
+                setMindObj({
+                    date: mindObj.date,
+                    activities_completed: '',
+                    journal: '',
+                    overall_mood: '',
+                    quote_of_the_day: '',
+                })
                 setExistingItem(false);
             }
         })
@@ -73,6 +81,9 @@ export default function Mindfulness({ token, weekArray, goalObj, isLoggedIn }) {
 
     const sendUpdate = useCallback(async (e) => {
         e.preventDefault();
+        if (mindObj.activities_completed == '') {
+            setIncomplete('Please enter data');
+        } else {
         await API.updateMindfulnessEntry(token, mindObj).then((res) => {
             setUpdateReq(true)
         })
@@ -84,10 +95,15 @@ export default function Mindfulness({ token, weekArray, goalObj, isLoggedIn }) {
             quote_of_the_day: '',
         })
         setUpdateReq(false)
+        setIncomplete('')
+    }
     })
 
     const sendCreate = useCallback(async (e) => {
         e.preventDefault();
+        if (mindObj.activities_completed == '' && mindObj.journal == '' && mindObj.overall_mood == '' && mindObj.quote_of_the_day == '') {
+            setIncomplete('Please enter data');
+        } else {
         await API.postMindfulnessEntry(token, mindObj).then((res) => {
             console.log(mindObj)
             setUpdateReq(true)
@@ -100,6 +116,8 @@ export default function Mindfulness({ token, weekArray, goalObj, isLoggedIn }) {
             quote_of_the_day: '',
         })
         setUpdateReq(false)
+        setIncomplete('')
+    }
     })
 
     const sendDelete = useCallback(async (e) => {
@@ -221,6 +239,12 @@ export default function Mindfulness({ token, weekArray, goalObj, isLoggedIn }) {
                             name="mindfulQuote"
                             onChange={(e) => setMindObj({ ...mindObj, quote_of_the_day: e.target.value })}
                         />
+                                                          {incomplete && (
+            <div>
+              <p className="error">{incomplete}
+              </p>
+            </div>
+          )}
                         {(existingItem == true) ? (
                             <>
                                 <button type="button" className="mindfulBtn"
