@@ -35,7 +35,8 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
                     newObj.status = 'Not Reported';
                 } else {
                     const { id, date, time_asleep, diff_falling_asleep, diff_staying_asleep, mood_upon_wake } = response;
-
+                    // falsey values will always default to false
+                    console.log('--------------------------', diff_staying_asleep)
                     newObj.id = id;
                     newObj.time_asleep = time_asleep;
                     newObj.mood_upon_wake = mood_upon_wake;
@@ -46,8 +47,11 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
                     }
                     if (diff_staying_asleep === true) {
                         newObj.diff_staying_asleep = 'Y'
-                    } else {
+                    } else if (diff_staying_asleep === false) {
                         newObj.diff_staying_asleep = 'N'
+                    } else {
+                        // change sleep model to have strings here instead of booleans
+                        newObj.diff_staying_asleep = ''
                     }
                 }
                 sleepArray.push(newObj);
@@ -223,7 +227,7 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
                     onChange={(e) => setSleepFormObject({ ...sleepFormObject, diff_falling_asleep: e.target.value })}
                     placeholder="true/false"
                 >
-                    <option disabled={true} value=''>Select an option</option>
+                    <option selected disabled={true} value=''>Select an option</option>
                     <option className="sleepOption" value={true}>Yes</option>
                     <option className="sleepOption" value={false}>No</option>
                 </select>
@@ -236,7 +240,7 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
                     onChange={(e) => setSleepFormObject({ ...sleepFormObject, diff_staying_asleep: e.target.value })}
                     placeholder="true/false"
                 >
-                    <option disabled={true} value=''>Select an option</option>
+                    <option selected disabled={true} value=''>Select an option</option>
                     <option className="sleepOption" value={true}>Yes</option>
                     <option className="sleepOption" value={false}>No</option>
                 </select>
