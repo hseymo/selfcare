@@ -30,10 +30,8 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
                 var response = userData.find(data => data.date === entry);
 let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
                 
-                let newObj = { date: dateFormat }
-                console.log(response)
-
-                let newObj = { date: entry }
+                let newObj = { date: dateFormat };
+                console.log(response);
 
                 if (response === undefined) {
                     newObj.status = 'Not Reported';
