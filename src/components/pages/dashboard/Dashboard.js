@@ -12,7 +12,8 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
     fitness_time: '',
     fitness_frequency: '',
     sleep_time: '',
-    hydration_oz: ''
+    hydration_oz: '',
+    mindfulness_frequency: ''
   })
   const [isGoals, setIsGoals] = useState(false)
 
@@ -21,9 +22,10 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
   const [fitnessEmoji, setFitnessEmoji] = useState([])
   const [sleepEmoji, setSleepEmoji] = useState([])
   const [sleepWins, setSleepWins] = useState(0)
-
   const [hydrationEmoji, setHydrationEmoji] = useState([])
   const [hydrationWins, setHydrationWins] = useState(0)
+  const [mindfulEmoji, setMindfulEmoji] = useState([])
+  const [mindfulWins, setMindfulWins] = useState(0)
 
   useEffect(() => {
     API.getOneUser(token).then((userData)=>{
@@ -31,14 +33,15 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
       setUser(userData)
 // USERS GOALS_______________________________________________
       
-      const { fitness_time, fitness_frequency, sleep_time, hydration_oz } = userData.goal;
+      const { fitness_time, fitness_frequency, sleep_time, hydration_oz, mindfulness_frequency } = userData.goal;
       setGoalsData({
         fitness_time,
         fitness_frequency,
         sleep_time,
-        hydration_oz
+        hydration_oz,
+        mindfulness_frequency
       })
-      if (fitness_time || fitness_frequency || sleep_time || hydration_oz) {
+      if (fitness_time || fitness_frequency || sleep_time || hydration_oz || mindfulness_frequency) {
         setIsGoals(true)
       }
 
@@ -141,7 +144,37 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
       hydrationArray[6].day = 'Sunday';
       setHydrationEmoji(hydrationArray)
       setHydrationWins(hydrationCount);
-    })
+
+
+  // MINDFULNESS LOGIC
+  const mindfulArray = [];
+  let mindfulCount = 0;
+  weekArray.map(entry => {
+    var response = userData.mindfulnesses.find(data => data.date === entry);
+    let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
+    let newObj = { date: dateFormat }
+    if (response === undefined) {
+      newObj.status = 'Not reported'
+      newObj.emoji = '😐'
+    } else {
+      newObj.status= 'Reported';
+      newObj.emoji = '🧘'
+      mindfulCount++;
+    }
+    mindfulArray.push(newObj)
+  })
+  console.log(mindfulArray)
+  mindfulArray[0].day = 'Monday';
+  mindfulArray[1].day = 'Tuesday';
+  mindfulArray[2].day = 'Wednesday';
+  mindfulArray[3].day = 'Thursday';
+  mindfulArray[4].day = 'Friday';
+  mindfulArray[5].day = 'Saturday';
+  mindfulArray[6].day = 'Sunday';
+  setMindfulEmoji(mindfulArray)
+  setMindfulWins(mindfulCount);
+})
+    
   }, [token])
 
     return (
@@ -168,6 +201,9 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
               )}
               {goalsData.hydration_oz != 0 && (
                 <li className='goalsLi'>Your daily water intake goal is {goalsData.hydration_oz} oz.</li>
+              )}
+              {goalsData.mindfulness_frequency != 0 && (
+                <li className='goalsLi'>Your mindfulness frequency goal is {goalsData.mindfulness_frequency} days per week. </li>
               )}
             </ul>
             <button className='goalsLink' onClick={(e) => {window.location.href = "/profile"}}>Update my goals</button>
@@ -255,6 +291,29 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
       </> ) : (
       <p>Key: 💦 indicates you reported water intake this day! You have not set a hydration goal.
       </p>
+      ) }
+      </ul>
+      </div>
+      </Link>
+
+      <Link to='/mindfulness/' className='pageLink'>
+        <div className='mindfulnessdashboard'>
+      <h2>Mindfulness</h2>
+      <p>Key: 🧘 indicates you reported mindfulness practice this day while 😐 indicates you did not report mindfulness practice this day! </p>
+        <table className="dayTable">
+        <tr className="dayHeaders">
+          <th></th>
+          {mindfulEmoji.map((result) => 
+          <th>{result.day} <br/> {result.date}</th>)}
+        </tr>
+          <DashboardRow 
+            name='mindful'  
+            results={mindfulEmoji}/>
+        </table>
+      <ul>
+      { goalsData.mindfulness_frequency != 0 ? (
+      <li className='compLi'>You are at {mindfulWins}/{goalsData.mindfulness_frequency} of your weekly goal for days of mindfulness practice!</li>) : (
+        <></>
       ) }
       </ul>
       </div>

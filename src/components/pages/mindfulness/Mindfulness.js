@@ -50,7 +50,6 @@ export default function Mindfulness({ token, weekArray, goalObj, isLoggedIn }) {
             mindfulnessArray[4].day = 'Friday';
             mindfulnessArray[5].day = 'Saturday';
             mindfulnessArray[6].day = 'Sunday';
-            console.log(mindfulnessArray)
             setThisWeek(mindfulnessArray)
         })
     }, [token, updateReq])
@@ -90,6 +89,7 @@ export default function Mindfulness({ token, weekArray, goalObj, isLoggedIn }) {
     const sendCreate = useCallback(async (e) => {
         e.preventDefault();
         await API.postMindfulnessEntry(token, mindObj).then((res) => {
+            console.log(mindObj)
             setUpdateReq(true)
         })
         setMindObj({
@@ -167,9 +167,9 @@ export default function Mindfulness({ token, weekArray, goalObj, isLoggedIn }) {
                 <>
                 <h1>Mindfulness</h1>
                 <h2>Your Goals</h2>
-                {/* { goalObj.mindful != 0 && (
-              <h4 className=''>Your goal was to practice mindfulness {goalObj.mindful} times this week.</h4>
-              )} */}
+                { goalObj.mindfulness_frequency != 0 && (
+              <h4 className=''>Your goal is to practice mindfulness {goalObj.mindfulness_frequency} times per week.</h4>
+              )}
                 <h2>Report Mindfulness Practice</h2>
                 <form className="mindfulForm">
                     <label htmlFor="mindfulDate">

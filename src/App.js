@@ -84,13 +84,14 @@ const [errorMessage, setErrorMessage] = useState('');
   
   useEffect(() => {
     API.getUserGoals(token).then((userData)=>{
-    const { fitness_time, fitness_frequency, sleep_time, hydration_oz, id } = userData[0];
+    const { fitness_time, fitness_frequency, sleep_time, hydration_oz, mindfulness_frequency, id } = userData[0];
     setGoalObj({
         id,
         fitness_time,
         fitness_frequency,
         sleep_time,
-        hydration_oz
+        hydration_oz,
+        mindfulness_frequency
     })
     })
 }, [token])
