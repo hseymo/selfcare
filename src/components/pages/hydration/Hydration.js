@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import ReactDOM from 'react-dom/client'
 import './hydration.css';
 import { Link } from 'react-router-dom';
 import API from "../../../utils/API.js"
