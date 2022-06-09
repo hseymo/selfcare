@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './Exercise.css'
 import { Link } from 'react-router-dom';
-import API from "../../../utils/API.js"
-import ExerciseCard from "./ExerciseCard"
+import API from "../../../utils/API.js";
+import ExerciseCard from "./ExerciseCard";
+import moment from 'moment';
 
 export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
     const [thisWeek, setThisWeek] = useState([]);
@@ -15,6 +16,8 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
     })
     const [updateReq, setUpdateReq] = useState('');
     const [existingItem, setExistingItem] = useState('');
+    const [anotherDate, setAnotherDate] = useState('');
+    const [anotherWeek, setAnotherWeek] = useState('');
     
     useEffect(() => {
         API.getUserFitness(token).then((userData) => {
@@ -24,8 +27,8 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
             weekArray.map(entry => {
                 var response = userData.find(data => data.date === entry);
                 console.log(response)
-
-                let newObj = { date: entry }
+                let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
+                let newObj = { date: dateFormat }
 
                 if (response === undefined) {
                     newObj.status = 'Not Reported';
@@ -119,7 +122,48 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
         setUpdateReq(false)
     })
 
-    const sendNull = useCallback
+    const reqAnotherWeek = useCallback( async(e) => {
+        e.preventDefault();
+        await API.getUserFitness(token).then((userData) => {
+            console.log('changed')
+            let anotherWeek = [];
+            for (let i = 1; i < 8; i++) {
+                let thisDay = moment(anotherDate).day(i).format("YYYY-MM-DD");
+                anotherWeek.push(thisDay)
+              }
+            console.log(anotherWeek)
+
+            const anotherFitnessArray = [];
+            anotherWeek.map(entry => {
+                var response = userData.find(data => data.date === entry);
+                let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
+
+                let newObj = { date: dateFormat }
+
+                if (response === undefined) {
+                    newObj.status = 'Not Reported';
+                } else {
+                    const { id, date, activity_type, activity_duration, RPE, notes } = response;
+                    newObj.id = id
+                    newObj.activity_type = activity_type;
+                    newObj.activity_duration = activity_duration;
+                    newObj.RPE = RPE;
+                    newObj.notes = notes;
+                }
+                anotherFitnessArray.push(newObj)
+            })
+            console.log(anotherFitnessArray)
+            anotherFitnessArray[0].day = 'Monday';
+            anotherFitnessArray[1].day = 'Tuesday';
+            anotherFitnessArray[2].day = 'Wednesday';
+            anotherFitnessArray[3].day = 'Thursday';
+            anotherFitnessArray[4].day = 'Friday';
+            anotherFitnessArray[5].day = 'Saturday';
+            anotherFitnessArray[6].day = 'Sunday';
+            setAnotherWeek(anotherFitnessArray)
+        })
+    })
+
 
     return (
         <div className="fitness">
@@ -211,6 +255,27 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
             <ExerciseCard
                 results={thisWeek}
             />
+
+
+        <div className='anotherWeekSection'> 
+            <h2>View another week's fitness reporting:</h2>
+            <form className='chooseDate'>
+                <label htmlFor='anotherDate'>Date</label>
+                <input
+                    value={anotherDate}
+                    type="date"
+                    name="anotherDate"
+                    onChange={(e) => setAnotherDate(e.target.value)}
+                />
+                <button className="fitnessBtn" type="button" onClick={reqAnotherWeek}>Submit</button>
+            </form>
+            { anotherWeek ? (
+            <ExerciseCard
+                results={anotherWeek} />
+            ) : (
+                <></>
+                )}
+            </div> 
             </>
             )}
         </div>

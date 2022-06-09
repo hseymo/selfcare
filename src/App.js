@@ -59,7 +59,7 @@ const [errorMessage, setErrorMessage] = useState('');
         setToken(data.token);
         localStorage.setItem("token", data.token);
         window.location.href = "/dashboard"
-      } else if (data.msg) {
+      } else {
         setErrorMessage('Login failed; please try again.')
       }
     })
@@ -84,7 +84,6 @@ const [errorMessage, setErrorMessage] = useState('');
   
   useEffect(() => {
     API.getUserGoals(token).then((userData)=>{
-    console.log(userData)
     const { fitness_time, fitness_frequency, sleep_time, hydration_oz, id } = userData[0];
     setGoalObj({
         id,

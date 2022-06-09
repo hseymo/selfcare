@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './hydration.css';
 import { Link } from 'react-router-dom';
-import API from "../../../utils/API.js"
+import API from "../../../utils/API.js";
 import HydrationCard from './HydrationCard';
+import moment from 'moment'
 import Progress from './Progress';
 import utilToday from '../../../utils/today.js';
 
@@ -15,6 +16,8 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
     })
     const [updateReq, setUpdateReq] = useState('');
     const [existingItem, setExistingItem] = useState('');
+    const [anotherDate, setAnotherDate] = useState('');
+    const [anotherWeek, setAnotherWeek] = useState('');
 
     useEffect(() => {
         API.getUserHydration(token).then((userData) => {
@@ -22,10 +25,10 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
             const hydrationArray = [];
             weekArray.map(entry => {
                 var response = userData.find(data => data.date === entry);
-
+                let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
                 console.log(response)
 
-                let newObj = { date: entry }
+                let newObj = { date: dateFormat }
 
                 if (response === undefined) {
                     newObj.status = 'Not Reported';
@@ -110,6 +113,46 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
         setUpdateReq(false)
     })
 
+    const reqAnotherWeek = useCallback( async(e) => {
+        e.preventDefault();
+        await API.getUserHydration(token).then((userData) => {
+            console.log('changed')
+            let anotherWeek = [];
+            for (let i = 1; i < 8; i++) {
+                let thisDay = moment(anotherDate).day(i).format("YYYY-MM-DD");
+                anotherWeek.push(thisDay)
+              }
+            console.log(anotherWeek)
+
+            const anotherHydrationArray = [];
+            anotherWeek.map(entry => {
+                var response = userData.find(data => data.date === entry);
+                let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
+
+                let newObj = { date: dateFormat }
+
+                if (response === undefined) {
+                    newObj.status = 'Not Reported';
+                } else {
+                    const { id, date, water_oz } = response;
+                    newObj.id = id;
+                    newObj.water_oz = water_oz
+                }
+                anotherHydrationArray.push(newObj);
+            })
+            console.log(anotherHydrationArray)
+            anotherHydrationArray[0].day = 'Monday';
+            anotherHydrationArray[1].day = 'Tuesday';
+            anotherHydrationArray[2].day = 'Wednesday';
+            anotherHydrationArray[3].day = 'Thursday';
+            anotherHydrationArray[4].day = 'Friday';
+            anotherHydrationArray[5].day = 'Saturday';
+            anotherHydrationArray[6].day = 'Sunday';
+            setAnotherWeek(anotherHydrationArray)
+        })
+    })
+
+
     return (
     <div className="hydration">
         {!isLoggedIn ? (
@@ -165,6 +208,26 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
                 results={thisWeek}
                 goal={goalObj.hydration_oz}
             />
+
+            <div className='anotherWeekSection'> 
+            <h2>View another week's hydration reporting:</h2>
+            <form className='chooseDate'>
+                <label htmlFor='anotherDate'>Date</label>
+                <input
+                    value={anotherDate}
+                    type="date"
+                    name="anotherDate"
+                    onChange={(e) => setAnotherDate(e.target.value)}
+                />
+                <button className="hydroBtn" type="button" onClick={reqAnotherWeek}>Submit</button>
+            </form>
+            { anotherWeek ? (
+            <HydrationCard
+                results={anotherWeek} />
+            ) : (
+                <></>
+                )}
+            </div>  
         </>
             )}
     </div>
