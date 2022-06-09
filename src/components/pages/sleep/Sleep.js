@@ -75,6 +75,13 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
                 })
                 setExistingItem(true);
             } else {
+                setSleepFormObject({
+                    date: sleepFormObject.date,
+                    time_asleep: '',
+                    diff_falling_asleep: '',
+                    diff_staying_asleep: '',
+                    mood_upon_wake: ''
+                })
                 setExistingItem(false);
             }
         })
@@ -197,7 +204,7 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
                     name="formDate"
                     onChange={(e) => setSleepFormObject({ ...sleepFormObject, date: e.target.value })}
                 />
-                <label htmlFor='formTime'>How long did you sleep?</label>
+                <label htmlFor='formTime'>How long did you sleep? If left blank, will report '0 hours'.</label>
                 <input
                     className='sleepInput'
                     value={sleepFormObject.time_asleep}

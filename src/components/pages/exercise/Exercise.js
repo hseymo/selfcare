@@ -55,7 +55,9 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
 
     useEffect(() => {
         API.getOneUserFitness(token, exerciseFormObject.date).then((res) => {
+            console.log(res)
             if (res.id) {
+                console.log('1')
                 setExerciseFormObject({
                     date: res.date,
                     activity_type: res.activity_type,
@@ -65,6 +67,14 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
                 })
                 setExistingItem(true);
             } else {
+                console.log('2')
+                setExerciseFormObject({
+                    date: exerciseFormObject.date,
+                    activity_type: '',
+                    activity_duration: '',
+                    RPE: '',
+                    notes: ''
+                })
                 setExistingItem(false);
             }
         })
@@ -197,7 +207,7 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
                         onChange={(e) => setExerciseFormObject({ ...exerciseFormObject, activity_type: e.target.value })}
                     />
                     <label className='fitnessLabel' htmlFor="formDuration">
-                        How long did you exercise for (in minutes)? Note: if you did not exercise, report '0'.
+                        How many minutes did you exercise for? Note: if left blank will report '0 minutes'. If you took a rest day, please leave blank or enter '0'.
                     </label>
                     <input
                         className='fitnessInput'
