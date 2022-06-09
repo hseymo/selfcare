@@ -49,9 +49,10 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
             console.log(hydrationArray)
             setThisWeek(hydrationArray)
             var todaysResponse = userData.find(data => data.date === utilToday)
-            setToday(todaysResponse);
+            setToday(todaysResponse.water_oz);
             console.log(today);
             console.log('-----------------------------', todaysResponse);
+            console.log('-----------------------------',goalObj)
         })
     }, [token, updateReq])
 
@@ -152,7 +153,6 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
         })
     })
 
-
     return (
     <div className="hydration">
         {!isLoggedIn ? (
@@ -200,7 +200,10 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
                             <button className="hydroBtn" type="button" onClick={sendCreate}>Submit</button>
                         )}
                 </form>
-<Progress goal={goalObj.hydration_oz} amount={hydrationFormObject?.water_oz} />
+
+<Progress goal={goalObj.hydration_oz} amount={today}>
+    <p>{(moment().format('YYYY-MM-DD')===weekArray)? `${console.log('so close')}`: `${console.log(weekArray)}`}</p>
+</Progress>
 
             <h2>This week's hydration reporting: </h2>
             <HydrationCard
