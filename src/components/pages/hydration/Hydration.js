@@ -10,7 +10,6 @@ import utilToday from '../../../utils/today.js';
 export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
     const [Data, setData] = useState({});
     const [today, setToday] = useState();
-    const [todayPercentage, setTodayPercentage] = useState();
     const [thisWeek, setThisWeek] = useState([]);
     const [hydrationFormObject, setHydrationFormObject] = useState({
         date: '',
@@ -53,9 +52,6 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
             var todaysResponse = userData.find(data => data.date === utilToday)
             setToday(todaysResponse);
             console.log('-----------------------------', todaysResponse);
-            console.log(todaysResponse.water_oz)
-            console.log(goalObj.hydration_oz)
-            setTodayPercentage((todaysResponse.water_oz)/(goalObj.hydration_oz)*100)
         })
     }, [token, updateReq])
 
@@ -196,18 +192,6 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
                             <button className="hydroBtn" type="button" onClick={sendCreate}>Submit</button>
                         )}
                 </form>
-                <div>
-                    {today ? (
-                        <>
-                    <h2>Today's Glass</h2>
-                    <div className='outerDiv'>
-                        <div className='innerDiv' style={{height:`${todayPercentage}px`}}></div>
-                    </div>
-                    </>
-                    ) : (
-                        <></>
-                    )}
-                </div>
 <Progress goal={goalObj.hydration_oz} amount={hydrationFormObject.water_oz} />
 
             <h2>This week's hydration reporting: </h2>

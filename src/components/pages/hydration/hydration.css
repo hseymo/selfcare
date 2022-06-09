@@ -51,21 +51,3 @@
     width:100%;
     background-color: blue;
 }
-
-.outerDiv {
-    border: 3px solid black;
-    width: 200px;
-    height: 100px;
-    display: flex;
-    justify-content: flex-end;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.innerDiv {
-    border: 5px solid blue;
-    background-color: blue;
-    width: 100%;
-    /* height: 150px; */
-    align-self: flex-end
-}
