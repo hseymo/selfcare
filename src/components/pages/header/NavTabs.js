@@ -5,9 +5,9 @@ import './navtabs.css'
 function NavTabs({isLoggedIn, userId, logout}) {
     return (
         
-        <nav class="navbar navbar-expand-lg navbar-dark">
+        <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" >
             <Link class="link-light " to='/dashboard'>Dashboard</Link>
             <div></div>
             <Link class="link-light " to='/' onClick={logout}>Logout</Link> 
