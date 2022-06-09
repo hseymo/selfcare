@@ -40,3 +40,7 @@
 .hydration.card {
     background: #a39779;
 }
+
+.progressBox {
+    display: flex;
+}
