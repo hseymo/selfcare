@@ -12,7 +12,7 @@ export default function MindfulCard(props) {
         <h4>{result.date}</h4>
         <Card.Text>
         { result.status ? (
-            <li> No mindfulness practce reported </li>
+            <li> No mindfulness practice reported </li>
         ) : (
             <>
             { result.activities_completed ? (

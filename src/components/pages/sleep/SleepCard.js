@@ -20,7 +20,7 @@ return (
         <Card.Body className='sleepBody'>
         <h4>{result.day}</h4>
         <h4>{result.date}</h4>
-        <ul className="sleepResults">
+        <ul>
         { result.status ? (
             <li> No sleep reported </li>
         ) : (

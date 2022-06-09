@@ -39,6 +39,10 @@ textarea {
     color: white;
 }
 
+.mindfulLabel {
+    margin-top: 10px;
+}
+
 .mindfulInput {
     width: 100%;
     height: 36px;
