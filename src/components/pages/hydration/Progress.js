@@ -10,21 +10,30 @@ export default function Progress(props) {
     //     amount: props.amount,
     // });
 
-    // const anim = useSpring({ width: progress, config: config.slow });
+    // const anim = useSpring({ height: progress, config: config.slow });
     // const [open, toggle] = useState(false);
-    
     console.log(props.goal)
     console.log(props.amount)
-    const [ref, {width}] = useMeasure();
-    const anima = useSpring({ width: (props.amount/props.goal)*width || 0 })
-    // console.log()
-    // console.log(anima.width)
+
+    const doMath =(water) =>  {
+        if (props.goal != 0) {
+            let percentage = (water / props.goal)*100;
+            let fixedPercentage = percentage.toFixed(0)
+            return fixedPercentage + '% of daily goal'
+        } else {
+            return `${props.amount} oz  - no goal set`
+        }
+    }
+
+    const [ref, {height}] = useMeasure();
+    
+    const anima = useSpring({ height: (props.amount/props.goal)*height || 0 })
     return (
         <div className="contained">
             <div ref={ref} className="main">
                 <animated.div className='fill' style={anima}/>
                 <animated.div className='content'>
-                    {anima.width.to(x=>props.amount)}
+                    {anima.height.to(x=>doMath(props.amount))}
                 </animated.div>
             </div>
         </div>

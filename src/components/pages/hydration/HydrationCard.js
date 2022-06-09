@@ -9,7 +9,7 @@ export default function HydrationCard(props) {
     const doMath =(water) =>  {
         if (props.goal != 0) {
             let percentage = (water / props.goal)*100;
-            let fixedPercentage = percentage.toFixed(2)
+            let fixedPercentage = percentage.toFixed(0)
             return fixedPercentage + '% of daily goal'
         }
     }

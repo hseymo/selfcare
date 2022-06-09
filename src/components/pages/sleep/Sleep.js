@@ -281,7 +281,8 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
             { anotherWeek ? (
             <SleepCard
                 name='anotherSleep'
-                results={anotherWeek} />
+                results={anotherWeek}
+                goal={goalObj.sleep_time} />
             ) : (
                 <></>
                 )}

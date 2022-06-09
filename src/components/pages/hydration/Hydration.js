@@ -201,7 +201,8 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
                             <button className="hydroBtn" type="button" onClick={sendCreate}>Submit</button>
                         )}
                     </form>
-                    <h2>Today's Progress:</h2>
+                    <h2>Today's progress:</h2>
+
                     <Progress className='progressBox' goal={goalObj.hydration_oz} amount={todayOz} />
 
                     <h2>This week's hydration reporting: </h2>
@@ -230,7 +231,9 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
                         </form>
                         {anotherWeek ? (
                             <HydrationCard
-                                results={anotherWeek} />
+                                results={anotherWeek} 
+                                goal={goalObj.hydration_oz}
+                                />
                         ) : (
                             <></>
                         )}
