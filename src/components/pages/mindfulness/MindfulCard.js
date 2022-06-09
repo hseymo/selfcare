@@ -15,12 +15,12 @@ export default function MindfulCard(props) {
             <li> No mindfulness practce reported </li>
         ) : (
             <>
-            { result.activites_completed ? (
+            { result.activities_completed ? (
                 <li>Activities Completed: {result.activities_completed}</li>
             ) : (
                 <></>
             )}
-            { result.journal > 0 ? (
+            { result.journal ? (
                 <li>Journal Entry: {result.journal}</li>
             ) : (
                 <></>
