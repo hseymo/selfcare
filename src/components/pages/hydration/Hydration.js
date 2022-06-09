@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './hydration.css';
 import { Link } from 'react-router-dom';
-import API from "../../../utils/API.js";
+import API from "../../../utils/API.js"
 import HydrationCard from './HydrationCard';
 import moment from 'moment'
 import Progress from './Progress';
@@ -17,7 +17,7 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
     })
     const [updateReq, setUpdateReq] = useState('');
     const [existingItem, setExistingItem] = useState('');
-    const [anotherDate, setAnotherDate] = useState('');
+        const [anotherDate, setAnotherDate] = useState('');
     const [anotherWeek, setAnotherWeek] = useState('');
     const [error, setError] = useState('');
 
@@ -28,9 +28,12 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
             const hydrationArray = [];
             weekArray.map(entry => {
                 var response = userData.find(data => data.date === entry);
-                let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
-
+let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
+                
                 let newObj = { date: dateFormat }
+                console.log(response)
+
+                let newObj = { date: entry }
 
                 if (response === undefined) {
                     newObj.status = 'Not Reported';
@@ -48,6 +51,7 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
             hydrationArray[4].day = 'Friday';
             hydrationArray[5].day = 'Saturday';
             hydrationArray[6].day = 'Sunday';
+            console.log(hydrationArray)
             setThisWeek(hydrationArray)
             var todaysResponse = userData.find(data => data.date === utilToday)
             setToday(todaysResponse);
@@ -55,8 +59,11 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
         })
     }, [token, updateReq])
 
+    
+
     useEffect(() => {
         API.getOneUserHydration(token, hydrationFormObject.date).then((response) => {
+            console.log(response)
             if (response.id) {
                 setHydrationFormObject({
                     date: response.date,
@@ -105,7 +112,7 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
         setUpdateReq(false)
     })
 
-    const reqAnotherWeek = useCallback( async(e) => {
+        const reqAnotherWeek = useCallback( async(e) => {
         e.preventDefault();
             if (anotherDate) {
             let anotherWeek = [];
@@ -143,8 +150,7 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
             setError('Please choose a valid date.')
         }
     })
-
-
+    
     return (
     <div className="hydration">
         {!isLoggedIn ? (
@@ -192,7 +198,7 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
                             <button className="hydroBtn" type="button" onClick={sendCreate}>Submit</button>
                         )}
                 </form>
-<Progress goal={goalObj.hydration_oz} amount={hydrationFormObject.water_oz} />
+<Progress className='progressBox' goal={goalObj.hydration_oz} amount={hydrationFormObject.water_oz}/>
 
             <h2>This week's hydration reporting: </h2>
             <HydrationCard
@@ -200,8 +206,7 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
                 results={thisWeek}
                 goal={goalObj.hydration_oz}
             />
-
-            <div className='anotherWeekSection'> 
+                      <div className='anotherWeekSection'> 
             <h2>View another week's hydration reporting:</h2>
             <form className='chooseDate'>
                 <label htmlFor='anotherDate'>Date</label>

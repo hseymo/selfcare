@@ -1,5 +1,5 @@
 .hydrationCardHolder {
-    display:flex;
+    display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
@@ -34,27 +34,3 @@ li {
     width: fit-content;
     text-align: left;
 }
-
-.fill {
-    position: absolute;
-    top: 90;
-    left: 10;
-    width: 10%;
-    height: 10%;
-    background: hotpink;
-    opacity: .5;
-  }
-
-  .content {
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: bold;
-    font-size: 20px;
-  }
