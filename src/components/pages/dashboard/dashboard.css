@@ -60,7 +60,7 @@ th {
     color: white;
 }
 
-.fitnessdashboard, .sleepdashboard, .hydrationdashboard {
+.fitnessdashboard, .sleepdashboard, .hydrationdashboard, .mindfulnessdashboard {
     border: 2px solid black;
     border-radius: 10px;
     padding: 10px;
@@ -79,11 +79,15 @@ th {
     background-color: #a39779;
 }
 
+.mindfulnessdashboard {
+    background-color: #b5965c;
+}
+
 .dayTable {
     display:block;
     height: fit-content;
     width: 140px;
-    overflow-x: auto;
+    overflow: auto;
 }
 
 @media screen and (max-width: 700px) {

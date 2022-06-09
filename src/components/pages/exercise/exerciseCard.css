@@ -20,8 +20,13 @@ h4 {
     justify-content: center;
 }
 
+ul {
+    padding: 0px;
+}
+
 li {
     font-weight: normal;
     width: fit-content;
     text-align: left;
+    list-style-type: none;
 }

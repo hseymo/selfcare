@@ -19,19 +19,3 @@
     background: #cfbd8f;
     overflow: auto;
 }
-
-
-h4 {
-    display: flex;
-    justify-content: center;
-}
-
-ul {
-    padding: 0px;
-}
-
-li {
-    font-weight: normal;
-    width: fit-content;
-    text-align: left;
-}

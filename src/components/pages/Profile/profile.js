@@ -8,19 +8,21 @@ export default function Profile({token}) {
         fitness_time:'',
         fitness_frequency:'',
         sleep_time: '',
-        hydration_oz: ''
+        hydration_oz: '',
+        mindfulness_frequency: ''
     });
 
     useEffect(() => {
         API.getUserGoals(token).then((userData)=>{
         console.log(userData)
-        const { fitness_time, fitness_frequency, sleep_time, hydration_oz, id } = userData[0];
+        const { fitness_time, fitness_frequency, sleep_time, hydration_oz, mindfulness_frequency, id } = userData[0];
         setGoalObj({
             id,
             fitness_time,
             fitness_frequency,
             sleep_time,
-            hydration_oz
+            hydration_oz,
+            mindfulness_frequency
         })
         })
     }, [token])
@@ -91,6 +93,19 @@ export default function Profile({token}) {
                         onChange={(e) => setGoalObj({...goalObj, hydration_oz: e.target.value})}
                     />
                     <label> ounces of water per day! 💧</label>
+                </div>
+                <div className='formGroup'>
+                    <label>I want to practice mindfulness </label>
+                    <input
+                        className='profileinput'
+                        value={goalObj.mindfulness_frequency}
+                        name="mindfulGoal"
+                        type="number"
+                        min="0"
+                        max="7"
+                        onChange={(e) => setGoalObj({...goalObj, mindfulness_frequency: e.target.value})}
+                    />
+                    <label> days per week! 🧘</label>
                 </div>
                 <button className='proBtn' type="submit"
                 >Submit</button>

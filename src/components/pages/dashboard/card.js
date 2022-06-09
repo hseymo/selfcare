@@ -6,10 +6,16 @@ export default function DashboardRow(props) {
     return (
         <tr>
             <td className="rowHeader">
-                    { props.name === 'fitness' ? (
+                    { props.name === 'fitness' && (
                         "Did you workout today?"
-                    ) : (
+                    )}
+                    { props.name === 'mindful' && (
+                        "Did you practice mindfulness today?"
+                    )}
+                    { props.name != 'fitness' && props.name != 'mindful' ? (
                     `Did you meet your ${props.name} goal today?`
+                    ) : (
+                        <></>
                     )
                 }
             </td>

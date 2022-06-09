@@ -36,7 +36,7 @@ export default function Home({isLoggedIn}) {
     })
     // useEffect(() => void setInterval(() => set(state => (state + 1) % 4), 2000), [])
     return (
-        <div>      
+        <div className="animation">      
             {transitions((style, i) => (
                 <animated.div
                     className="backgroundImage"
