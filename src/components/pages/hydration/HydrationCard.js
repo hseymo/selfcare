@@ -1,4 +1,5 @@
 import React from 'react'
+import Progress from './Progress'
 import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './hydrationCard.css';
@@ -17,6 +18,7 @@ return (
         ) : (
             <>
             <li>{result.water_oz} ounces</li>
+            <li>goal: {props.goal} ounces</li>
             </>
         )}
         </ul>
