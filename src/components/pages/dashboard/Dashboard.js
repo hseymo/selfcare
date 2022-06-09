@@ -299,7 +299,7 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
       <Link to='/mindfulness/' className='pageLink'>
         <div className='mindfulnessdashboard'>
       <h2>Mindfulness</h2>
-      <p>Key: 🧘 indicates you reported mindfulness practice this day while 😐 indicates you did not report mindfulness practice this day! </p>
+      <p>Key: 🧘 indicates you have a mindfulness entry for this day while 😐 indicates you do not have a mindfulness entry this day! </p>
         <table className="dayTable">
         <tr className="dayHeaders">
           <th></th>
