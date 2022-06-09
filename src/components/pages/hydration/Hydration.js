@@ -9,7 +9,7 @@ import utilToday from '../../../utils/today.js';
 
 export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
     const [Data, setData] = useState({});
-    const [today, setToday] = useState();
+    const [todayOz, setTodayOz] = useState(0);
     const [thisWeek, setThisWeek] = useState([]);
     const [hydrationFormObject, setHydrationFormObject] = useState({
         date: '',
@@ -49,11 +49,16 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
             hydrationArray[4].day = 'Friday';
             hydrationArray[5].day = 'Saturday';
             hydrationArray[6].day = 'Sunday';
-            console.log(hydrationArray)
             setThisWeek(hydrationArray)
+
             var todaysResponse = userData.find(data => data.date === utilToday)
-            setToday(todaysResponse);
+            if (todaysResponse != undefined) {
+                setTodayOz(todaysResponse.water_oz)
+            } else {
+                setTodayOz(0)
+            }
             console.log('-----------------------------', todaysResponse);
+
         })
     }, [token, updateReq])
 
@@ -196,7 +201,9 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
                             <button className="hydroBtn" type="button" onClick={sendCreate}>Submit</button>
                         )}
                     </form>
-                    <Progress className='progressBox' goal={goalObj.hydration_oz} amount={hydrationFormObject.water_oz} />
+                    <h2>Today's progress:</h2>
+
+                    <Progress className='progressBox' goal={goalObj.hydration_oz} amount={todayOz} />
 
                     <h2>This week's hydration reporting: </h2>
                     <HydrationCard
@@ -224,7 +231,9 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
                         </form>
                         {anotherWeek ? (
                             <HydrationCard
-                                results={anotherWeek} />
+                                results={anotherWeek} 
+                                goal={goalObj.hydration_oz}
+                                />
                         ) : (
                             <></>
                         )}

@@ -256,7 +256,8 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
             <h2> This week's sleep reporting:</h2>
             <SleepCard
                 name='sleep'
-                results={thisWeek} />
+                results={thisWeek} 
+                goal={goalObj.sleep_time} />
 
             <div className='anotherWeekSection'> 
             <h2>View another week's sleep reporting:</h2>
@@ -280,7 +281,8 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
             { anotherWeek ? (
             <SleepCard
                 name='anotherSleep'
-                results={anotherWeek} />
+                results={anotherWeek}
+                goal={goalObj.sleep_time} />
             ) : (
                 <></>
                 )}
