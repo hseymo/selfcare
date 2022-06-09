@@ -6,6 +6,7 @@ import SleepCard from "./SleepCard";
 import moment from 'moment'
 
 export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
+    const [Data, setData] = useState({});
     const [thisWeek, setThisWeek] = useState([]);
     const [sleepFormObject, setSleepFormObject] = useState({
         date: '',
@@ -22,12 +23,11 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
     
     useEffect(() => {
         API.getUserSleep(token).then((userData) => {
-            // console.log(userData)
+            setData(userData)
             const sleepArray = [];
             weekArray.map(entry => {
                 var response = userData.find(data => data.date === entry);
                 let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
-                // console.log(response)
 
                 let newObj = { date: dateFormat }
 
@@ -49,11 +49,9 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
                     } else {
                         newObj.diff_staying_asleep = 'N'
                     }
-                    // console.log(newObj)
                 }
                 sleepArray.push(newObj);
             })
-            // console.log(sleepArray)
             sleepArray[0].day = 'Monday';
             sleepArray[1].day = 'Tuesday';
             sleepArray[2].day = 'Wednesday';
@@ -67,7 +65,6 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
 
     useEffect(() => {
         API.getOneUserSleep(token, sleepFormObject.date).then((res) => {
-            // console.log(res)
             if (res.id) {
                 setSleepFormObject({
                     date: res.date,
@@ -86,8 +83,6 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
     const sendUpdate = useCallback(async (e) => {
         e.preventDefault();
         await API.updateSleepEntry(token, sleepFormObject).then((res) => {
-            console.log(res);
-            console.log('Sleep entry updated')
             setUpdateReq(true)
         })
         setSleepFormObject({
@@ -103,8 +98,6 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
     const sendCreate = useCallback(async (e) => {
         e.preventDefault();
         await API.postSleepEntry(token, sleepFormObject).then((res) => {
-            console.log(res);
-            console.log('Sleep entry created')
             setUpdateReq(true)
         })
         setSleepFormObject({
@@ -120,7 +113,6 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
     const sendDelete = useCallback(async (e) => {
         e.preventDefault();
         await API.deleteSleepEntry(token, sleepFormObject.date).then((response) => {
-            console.log(response)
             setUpdateReq(true)
         })
         setSleepFormObject({
@@ -135,19 +127,16 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
 
     const reqAnotherWeek = useCallback( async(e) => {
         e.preventDefault();
-        await API.getUserSleep(token).then((userData) => {
-            console.log('changed')
-            if (anotherDate) {
+        if (anotherDate) {
             let anotherWeek = [];
             for (let i = 1; i < 8; i++) {
                 let thisDay = moment(anotherDate).day(i).format("YYYY-MM-DD");
                 anotherWeek.push(thisDay)
-              }
-            console.log(anotherWeek)
+            }
 
             const anotherSleepArray = [];
             anotherWeek.map(entry => {
-                var response = userData.find(data => data.date === entry);
+                var response = Data.find(data => data.date === entry);
                 let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
 
                 let newObj = { date: dateFormat }
@@ -170,11 +159,9 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
                     } else {
                         newObj.diff_staying_asleep = 'N'
                     }
-                    // console.log(newObj)
                 }
                 anotherSleepArray.push(newObj);
             })
-            console.log(anotherSleepArray)
             anotherSleepArray[0].day = 'Monday';
             anotherSleepArray[1].day = 'Tuesday';
             anotherSleepArray[2].day = 'Wednesday';
@@ -184,10 +171,9 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
             anotherSleepArray[6].day = 'Sunday';
             setAnotherWeek(anotherSleepArray)
             setError('')
-        } else {
+            } else {
             setError('Please choose a valid date.')
         }
-        })
     })
 
     return (

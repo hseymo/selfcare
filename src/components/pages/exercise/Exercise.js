@@ -6,6 +6,7 @@ import ExerciseCard from "./ExerciseCard";
 import moment from 'moment';
 
 export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
+    const [Data, setData] = useState({});
     const [thisWeek, setThisWeek] = useState([]);
     const [exerciseFormObject, setExerciseFormObject] = useState({
         date: '',
@@ -22,12 +23,10 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
     
     useEffect(() => {
         API.getUserFitness(token).then((userData) => {
-            // console.log(userData)
+            setData(userData)
             const fitnessArray = [];
-            console.log(weekArray)
             weekArray.map(entry => {
                 var response = userData.find(data => data.date === entry);
-                console.log(response)
                 let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
                 let newObj = { date: dateFormat }
 
@@ -43,7 +42,6 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
                 }
                 fitnessArray.push(newObj)
             })
-            console.log(fitnessArray);
             fitnessArray[0].day = 'Monday';
             fitnessArray[1].day = 'Tuesday';
             fitnessArray[2].day = 'Wednesday';
@@ -57,7 +55,6 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
 
     useEffect(() => {
         API.getOneUserFitness(token, exerciseFormObject.date).then((res) => {
-            console.log(res)
             if (res.id) {
                 setExerciseFormObject({
                     date: res.date,
@@ -76,8 +73,6 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
     const sendUpdate = useCallback(async (e) => {
         e.preventDefault();
         await API.updateFitnessEntry(token, exerciseFormObject).then((res) => {
-            console.log(res);
-            console.log('Fitness entry updated')
             setUpdateReq(true)
         })
         setExerciseFormObject({
@@ -93,8 +88,6 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
     const sendCreate = useCallback(async (e) => {
         e.preventDefault();
         await API.postFitnessEntry(token, exerciseFormObject).then((res) => {
-            console.log(res);
-            console.log('New fitness entry created')
             setUpdateReq(true)
         })
         setExerciseFormObject({
@@ -110,7 +103,6 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
     const sendDelete = useCallback(async (e) => {
         e.preventDefault();
         API.deleteFitnessEntry(token, exerciseFormObject.date).then((response) => {
-            console.log(response)
             setUpdateReq(true)
         })
         setExerciseFormObject({
@@ -125,19 +117,16 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
 
     const reqAnotherWeek = useCallback( async(e) => {
         e.preventDefault();
-        await API.getUserFitness(token).then((userData) => {
-            console.log('changed')
             if (anotherDate) {
             let anotherWeek = [];
             for (let i = 1; i < 8; i++) {
                 let thisDay = moment(anotherDate).day(i).format("YYYY-MM-DD");
                 anotherWeek.push(thisDay)
               }
-            console.log(anotherWeek)
 
             const anotherFitnessArray = [];
             anotherWeek.map(entry => {
-                var response = userData.find(data => data.date === entry);
+                var response = Data.find(data => data.date === entry);
                 let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
 
                 let newObj = { date: dateFormat }
@@ -154,7 +143,6 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
                 }
                 anotherFitnessArray.push(newObj)
             })
-            console.log(anotherFitnessArray)
             anotherFitnessArray[0].day = 'Monday';
             anotherFitnessArray[1].day = 'Tuesday';
             anotherFitnessArray[2].day = 'Wednesday';
@@ -167,7 +155,6 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
         } else {
             setError('Please choose a valid date.')
         }
-        })
     })
 
 
