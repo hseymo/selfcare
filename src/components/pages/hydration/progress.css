@@ -2,10 +2,13 @@
     position: relative;
     width: 175px;
     height: 225px;
-    border: 2px solid black;
+    border-left: 3px solid black;
+    border-right: 3px solid black;
+    border-bottom: 3px solid black;
+    border-top: 1px groove white;
     overflow: hidden;
     display: flex;
-    border-radius: 5px 5px 10px 10px;
+    border-radius: 0px 0px 45px 45px;
 }
 
 .fill {

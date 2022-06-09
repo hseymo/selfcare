@@ -20,14 +20,14 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
     const [anotherDate, setAnotherDate] = useState('');
     const [anotherWeek, setAnotherWeek] = useState('');
     const [error, setError] = useState('');
-    
+
     useEffect(() => {
         API.getUserFitness(token).then((userData) => {
             setData(userData)
             const fitnessArray = [];
             weekArray.map(entry => {
                 var response = userData.find(data => data.date === entry);
-                let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
+                let dateFormat = entry.slice(5) + "-" + entry.slice(0, 4);
                 let newObj = { date: dateFormat }
 
                 if (response === undefined) {
@@ -125,19 +125,19 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
         setUpdateReq(false)
     })
 
-    const reqAnotherWeek = useCallback( async(e) => {
+    const reqAnotherWeek = useCallback(async (e) => {
         e.preventDefault();
-            if (anotherDate) {
+        if (anotherDate) {
             let anotherWeek = [];
             for (let i = 1; i < 8; i++) {
                 let thisDay = moment(anotherDate).day(i).format("YYYY-MM-DD");
                 anotherWeek.push(thisDay)
-              }
+            }
 
             const anotherFitnessArray = [];
             anotherWeek.map(entry => {
                 var response = Data.find(data => data.date === entry);
-                let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
+                let dateFormat = entry.slice(5) + "-" + entry.slice(0, 4);
 
                 let newObj = { date: dateFormat }
 
@@ -252,40 +252,40 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
                     ) : (
                         <button className="fitnessBtn" type="button" onClick={sendCreate}>Submit</button>
                     )}
-            </form>
-            <br />
-            <h2>This week's fitness reporting: </h2>
-            <ExerciseCard
-                results={thisWeek}
-            />
+                    </form>
+                    <br />
+                    <h2>This week's fitness reporting: </h2>
+                    <ExerciseCard
+                        results={thisWeek}
+                    />
 
 
-        <div className='anotherWeekSection'> 
-            <h2>View another week's fitness reporting:</h2>
-            <form className='chooseDate'>
-                <label htmlFor='anotherDate'>Date</label>
-                <input
-                    value={anotherDate}
-                    type="date"
-                    name="anotherDate"
-                    onChange={(e) => setAnotherDate(e.target.value)}
-                />
-        {error && (
-            <div>
-              <p className="error">{error}
-              </p>
-            </div>
-          )}
-                <button className="fitnessBtn" type="button" onClick={reqAnotherWeek}>Submit</button>
-            </form>
-            { anotherWeek ? (
-            <ExerciseCard
-                results={anotherWeek} />
-            ) : (
-                <></>
-                )}
-            </div> 
-            </>
+                    <div className='anotherWeekSection'>
+                        <h2>View another week's fitness reporting:</h2>
+                        <form className='chooseDate'>
+                            <label htmlFor='anotherDate'>Date</label>
+                            <input
+                                value={anotherDate}
+                                type="date"
+                                name="anotherDate"
+                                onChange={(e) => setAnotherDate(e.target.value)}
+                            />
+                            {error && (
+                                <div>
+                                    <p className="error">{error}
+                                    </p>
+                                </div>
+                            )}
+                            <button className="fitnessBtn" type="button" onClick={reqAnotherWeek}>Submit</button>
+                        </form>
+                        {anotherWeek ? (
+                            <ExerciseCard
+                                results={anotherWeek} />
+                        ) : (
+                            <></>
+                        )}
+                    </div>
+                </>
             )}
         </div>
     );
