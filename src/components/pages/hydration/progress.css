@@ -1,5 +1,7 @@
-.main {
+#main {
     position: relative;
+    display: flex;
+    align-items: center;
     width: 200px;
     height: 50px;
     cursor: pointer;
@@ -8,16 +10,11 @@
     overflow: hidden;
 }
 
-.fill {
-    position: absolute;
-    top: 0;
-    left: 0;
-    /* width: 100%; */
-    height: 100%;
-    background: hotpink;
+#fill {
+background-color: aqua;
 }
 
-.container {
+#container {
     display: flex;
     align-items: center;
     height: fit-content;
@@ -26,14 +23,14 @@
     padding: 0px;
 }
 
-.content {
+#content {
     position: absolute;
-    /* top: 0;
-    left: 0; */
-    width: 50%;
+    width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #272727;
+    font-weight:900;
+    background-color: aqua;
 }
