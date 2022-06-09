@@ -18,6 +18,7 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
     const [existingItem, setExistingItem] = useState('');
     const [anotherDate, setAnotherDate] = useState('');
     const [anotherWeek, setAnotherWeek] = useState('');
+    const [error, setError] = useState('');
 
     useEffect(() => {
         API.getUserHydration(token).then((userData) => {
@@ -116,6 +117,8 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
         e.preventDefault();
         await API.getUserHydration(token).then((userData) => {
             console.log('changed')
+            console.log(anotherDate)
+            if (anotherDate) {
             let anotherWeek = [];
             for (let i = 1; i < 8; i++) {
                 let thisDay = moment(anotherDate).day(i).format("YYYY-MM-DD");
@@ -148,6 +151,10 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
             anotherHydrationArray[5].day = 'Saturday';
             anotherHydrationArray[6].day = 'Sunday';
             setAnotherWeek(anotherHydrationArray)
+            setError('')
+        } else {
+            setError('Please choose a valid date.')
+        }
         })
     })
 
@@ -218,6 +225,12 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
                     name="anotherDate"
                     onChange={(e) => setAnotherDate(e.target.value)}
                 />
+        {error && (
+            <div>
+              <p className="error">{error}
+              </p>
+            </div>
+          )}
                 <button className="hydroBtn" type="button" onClick={reqAnotherWeek}>Submit</button>
             </form>
             { anotherWeek ? (
