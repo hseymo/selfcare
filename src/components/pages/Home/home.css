@@ -1,4 +1,4 @@
-div {
+.animation {
     max-height: fit-content;
     background-size: 100%;
     background-repeat: no-repeat;
@@ -12,7 +12,7 @@ div {
     top: 0;
     left: 0;
     max-width: 99%;
-    height: 600px;
+    height: 700px;
     background-size: cover;
     background-position: center;
 }
@@ -35,17 +35,20 @@ div {
     border: 3px solid rgb(26, 17, 5);
     color: rgb(255, 255, 255);
     text-align: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 5px 10px;
+    text-decoration: none;
 }
 
 #root {
     background-color: #916f3da6;
 }
 
-
 .container {
     background-color: #916f3da6;
     position: absolute;
-    margin-top: -300px;
+    margin-top: -350px;
     z-index: 1;
     text-align: center;
     padding: 15px;

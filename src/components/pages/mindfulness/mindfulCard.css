@@ -1,10 +1,10 @@
-.cardHolder {
+.mindfulCardHolder {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.sleepCards {
+.mindfulnessCards {
     display: flex;
     justify-content: center;    
     padding: 15px;
@@ -15,4 +15,8 @@
     max-height: fit-content;
     justify-content: center;
     flex-direction: row;
+}
+
+.mindfulnessResults {
+    padding: 0px;
 }

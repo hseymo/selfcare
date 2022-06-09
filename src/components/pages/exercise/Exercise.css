@@ -1,6 +1,7 @@
 .fitness {
     background: #baa587;
     text-align: center;
+    padding: 10px;
 }
 
 .fitness h1 {
@@ -19,13 +20,16 @@
     margin-right: auto;
     padding: 10px;
     text-align: center;
-    border: 5px solid black;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 }
 
-.form-check-input {
+.fitnessLabel {
+    padding-top: 10px;
+}
+
+.fitnessInput {
     padding: 10px;
     width: 100%;
     color: black;
@@ -39,6 +43,10 @@
     border-radius: 5px;
     border: 3px solid rgb(26, 17, 5);
     color: white;
+}
+
+.fitnessBtn:hover {
+    background-color: black;
 }
 
 /* weekly cards */

@@ -15,7 +15,7 @@ const slides = [
     'https://images.unsplash.com/photo-1602192509154-0b900ee1f851?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'
 ]
 
-export default function Home() {
+export default function Home({isLoggedIn}) {
 
     const [index, set] = useState(0)
     const item = slides[index]
@@ -36,8 +36,7 @@ export default function Home() {
     })
     // useEffect(() => void setInterval(() => set(state => (state + 1) % 4), 2000), [])
     return (
-        <>
-                    
+        <div className="animation">      
             {transitions((style, i) => (
                 <animated.div
                     className="backgroundImage"
@@ -49,27 +48,18 @@ export default function Home() {
                     </div>
                 </animated.div>
             ))}
-                    <div className="container">
-                        <h3>Welcome to your one stop shop for all things lifestyle!</h3>
-                        <h3>Let us take care of you!</h3>
-                        <h3>Check out our fitness, sleep and hydration trackers as well as our meditation hub.</h3>
-                        <h3>Enjoy and love yourself!</h3>
-                        <p> 💛 Chris, Jaden, Kalif and Haley (your website creators)</p>
-                        {/* dashboard redirect if logged in */}
-                        <a className='enter' href='/login'>Enter</a>
-                    </div>
-
-            {/* <Container>
-                <Card>
-                    <Card.Body>
-                        <Card.Title>
-                            <h3>Welcome to your one stop shop for all things lifestyle!</h3>
-                        </Card.Title>
-
-                        This is the body of the card
-                    </Card.Body>
-                </Card>
-            </Container> */}
-        </>
+            <div className="container">
+                <h3>Welcome to your one stop shop for all things lifestyle!</h3>
+                <h3>Let us take care of you!</h3>
+                <h3>Check out our fitness, sleep and hydration trackers as well as our meditation hub.</h3>
+                <h3>Enjoy and love yourself!</h3>
+                <p> 💛 Chris, Jaden, Kalif and Haley (your website creators)</p>
+            {!isLoggedIn ? (
+                <button className='enter' onClick={(e) => {window.location.href = "/login"}}>Login</button>
+            ) : (
+                <button className='enter' onClick={(e) => {window.location.href = "/dashboard"}}>Dashboard</button>
+            )}
+            </div>
+        </div>
     );
 }
