@@ -1,6 +1,7 @@
 .fitness {
     background: #baa587;
     text-align: center;
+    padding: 10px;
 }
 
 .fitness h1 {
@@ -24,13 +25,13 @@
     justify-content: space-around;
 }
 
-.form-label {
+.fitnessLabel {
     padding-top: 10px;
 }
 
-.form-check-input {
+.fitnessInput {
     padding: 10px;
-    width: 80%;
+    width: 100%;
     color: black;
 }
 

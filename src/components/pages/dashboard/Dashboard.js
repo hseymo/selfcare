@@ -47,9 +47,9 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
       let weeklyFitnessTime = 0;
       let weeklyFitnessCount = 0;
       weekArray.map(entry => {
-        // let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
-        // console.log(dateFormat)
-        let newObj = { date: entry }
+        let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
+        console.log(dateFormat)
+        let newObj = { date: dateFormat }
         var response = userData.fitnesses.find(data => data.date === entry);
         if (response === undefined) {
           newObj.status = 'Not reported'
@@ -66,7 +66,15 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
         }
         fitnessArray.push(newObj);
       })
+      fitnessArray[0].day = 'Monday';
+      fitnessArray[1].day = 'Tuesday';
+      fitnessArray[2].day = 'Wednesday';
+      fitnessArray[3].day = 'Thursday';
+      fitnessArray[4].day = 'Friday';
+      fitnessArray[5].day = 'Saturday';
+      fitnessArray[6].day = 'Sunday';
       console.log(fitnessArray)
+
       setFitnessEmoji(fitnessArray)
       setFitnessTime(weeklyFitnessTime)
       setFitnessCount(weeklyFitnessCount)
@@ -81,8 +89,8 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
       let sleepCount = 0;
       weekArray.map(entry => {
         var response = userData.sleep.find(data => data.date === entry);
-        // let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
-        let newObj = { date: entry }
+        let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
+        let newObj = { date: dateFormat }
         if (response === undefined) {
           newObj.status = 'Not reported';
           newObj.emoji = '⁇';
@@ -97,6 +105,13 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
         }
         sleepArray.push(newObj)
       })
+      sleepArray[0].day = 'Monday';
+      sleepArray[1].day = 'Tuesday';
+      sleepArray[2].day = 'Wednesday';
+      sleepArray[3].day = 'Thursday';
+      sleepArray[4].day = 'Friday';
+      sleepArray[5].day = 'Saturday';
+      sleepArray[6].day = 'Sunday';
       setSleepWins(sleepCount)
       setSleepEmoji(sleepArray)
       // console.log('sleepArray: ', sleepArray)
@@ -109,8 +124,8 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
       let dailyHydration = 0;
       weekArray.map(entry => {
         var response = userData.hydrations.find(data => data.date === entry);
-        // let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
-        let newObj = { date: entry }
+        let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
+        let newObj = { date: dateFormat }
         if (response === undefined) {
           newObj.status = 'Not reported'
           newObj.emoji = '⁇'
@@ -126,6 +141,13 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
         }
         hydrationArray.push(newObj)
       })
+      hydrationArray[0].day = 'Monday';
+      hydrationArray[1].day = 'Tuesday';
+      hydrationArray[2].day = 'Wednesday';
+      hydrationArray[3].day = 'Thursday';
+      hydrationArray[4].day = 'Friday';
+      hydrationArray[5].day = 'Saturday';
+      hydrationArray[6].day = 'Sunday';
       setHydrationEmoji(hydrationArray)
       setHydrationWins(hydrationCount);
       // console.log('hydrationArray: ', hydrationArray)
@@ -177,13 +199,8 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
         <table className="dayTable">
         <tr className="dayHeaders">
           <th></th>
-          <th>Monday <br/> {weekArray[0].slice(5) + "-" + weekArray[0].slice(0,4)}</th>
-          <th>Tuesday <br/> {weekArray[1].slice(5) + "-" + weekArray[1].slice(0,4)}</th>
-          <th>Wednesday <br/> {weekArray[2].slice(5) + "-" + weekArray[2].slice(0,4)} </th>
-          <th>Thursday <br/> {weekArray[3].slice(5) + "-" + weekArray[3].slice(0,4)}</th>
-          <th>Friday <br/> {weekArray[4].slice(5) + "-" + weekArray[4].slice(0,4)}</th>
-          <th>Saturday <br/> {weekArray[5].slice(5) + "-" + weekArray[5].slice(0,4)}</th>
-          <th>Sunday <br/> {weekArray[6].slice(5) + "-" + weekArray[0].slice(0,4)}</th>
+          {fitnessEmoji.map((result) => 
+          <th>{result.day} <br/> {result.date}</th>)}
         </tr>
         <DashboardRow 
             name='fitness' 
@@ -208,13 +225,8 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
       <table className='dayTable'>
         <tr className="dayHeaders">
           <th></th>
-          <th>Monday <br/> {weekArray[0].slice(5) + "-" + weekArray[0].slice(0,4)}</th>
-          <th>Tuesday <br/> {weekArray[1].slice(5) + "-" + weekArray[1].slice(0,4)}</th>
-          <th>Wednesday <br/> {weekArray[2].slice(5) + "-" + weekArray[2].slice(0,4)} </th>
-          <th>Thursday <br/> {weekArray[3].slice(5) + "-" + weekArray[3].slice(0,4)}</th>
-          <th>Friday <br/> {weekArray[4].slice(5) + "-" + weekArray[4].slice(0,4)}</th>
-          <th>Saturday <br/> {weekArray[5].slice(5) + "-" + weekArray[5].slice(0,4)}</th>
-          <th>Sunday <br/> {weekArray[6].slice(5) + "-" + weekArray[0].slice(0,4)}</th>
+          {sleepEmoji.map((result) => 
+          <th>{result.day} <br/> {result.date}</th>)}
         </tr>
           <DashboardRow 
             name='sleep' 
@@ -240,13 +252,8 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
         <table className="dayTable">
         <tr className="dayHeaders">
           <th></th>
-          <th>Monday <br/> {weekArray[0].slice(5) + "-" + weekArray[0].slice(0,4)}</th>
-          <th>Tuesday <br/> {weekArray[1].slice(5) + "-" + weekArray[1].slice(0,4)}</th>
-          <th>Wednesday <br/> {weekArray[2].slice(5) + "-" + weekArray[2].slice(0,4)} </th>
-          <th>Thursday <br/> {weekArray[3].slice(5) + "-" + weekArray[3].slice(0,4)}</th>
-          <th>Friday <br/> {weekArray[4].slice(5) + "-" + weekArray[4].slice(0,4)}</th>
-          <th>Saturday <br/> {weekArray[5].slice(5) + "-" + weekArray[5].slice(0,4)}</th>
-          <th>Sunday <br/> {weekArray[6].slice(5) + "-" + weekArray[0].slice(0,4)}</th>
+          {hydrationEmoji.map((result) => 
+          <th>{result.day} <br/> {result.date}</th>)}
         </tr>
           <DashboardRow 
             name='hydration'  

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './hydration.css';
-import { Card, Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import API from "../../../utils/API.js"
+import API from "../../../utils/API.js";
 import HydrationCard from './HydrationCard';
+import moment from 'moment'
 
 export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
     const [thisWeek, setThisWeek] = useState([]);
@@ -13,6 +13,8 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
     })
     const [updateReq, setUpdateReq] = useState('');
     const [existingItem, setExistingItem] = useState('');
+    const [anotherDate, setAnotherDate] = useState('');
+    const [anotherWeek, setAnotherWeek] = useState('');
 
     useEffect(() => {
         API.getUserHydration(token).then((userData) => {
@@ -102,8 +104,48 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
         setUpdateReq(false)
     })
 
+    const reqAnotherWeek = useCallback( async(e) => {
+        e.preventDefault();
+        await API.getUserHydration(token).then((userData) => {
+            console.log('changed')
+            let anotherWeek = [];
+            for (let i = 1; i < 8; i++) {
+                let thisDay = moment(anotherDate).day(i).format("YYYY-MM-DD");
+                anotherWeek.push(thisDay)
+              }
+            console.log(anotherWeek)
+
+            const anotherHydrationArray = [];
+            anotherWeek.map(entry => {
+                var response = userData.find(data => data.date === entry);
+                let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
+
+                let newObj = { date: dateFormat }
+
+                if (response === undefined) {
+                    newObj.status = 'Not Reported';
+                } else {
+                    const { id, date, water_oz } = response;
+                    newObj.id = id;
+                    newObj.water_oz = water_oz
+                }
+                anotherHydrationArray.push(newObj);
+            })
+            console.log(anotherHydrationArray)
+            anotherHydrationArray[0].day = 'Monday';
+            anotherHydrationArray[1].day = 'Tuesday';
+            anotherHydrationArray[2].day = 'Wednesday';
+            anotherHydrationArray[3].day = 'Thursday';
+            anotherHydrationArray[4].day = 'Friday';
+            anotherHydrationArray[5].day = 'Saturday';
+            anotherHydrationArray[6].day = 'Sunday';
+            setAnotherWeek(anotherHydrationArray)
+        })
+    })
+
+
     return (
-    <Card className="hydration">
+    <div className="hydration">
         {!isLoggedIn ? (
             <h2><Link class="link-light" to='/login'>Login</Link></h2>
             ) : (
@@ -114,21 +156,21 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
                     <h4 className=''>Your daily water intake goal is {goalObj.hydration_oz} oz.</h4>
                 )}
                 <h2>Report Water Intake</h2>
-                <Form className="waterForm">
-                    <Form.Label htmlFor="waterDate">
+                <form className="waterForm">
+                    <label htmlFor="waterDate">
                         Choose date:
-                    </Form.Label>
-                    <Form.Check
+                    </label>
+                    <input
                         value={hydrationFormObject.date}
                         type="date"
                         id="waterDate"
                         name="waterDate"
                         onChange={(e) => setHydrationFormObject({ ...hydrationFormObject, date: e.target.value })}
                     />
-                    <Form.Label htmlFor="waterAmount">
+                    <label htmlFor="waterAmount">
                         How many ounces did you drink?
-                    </Form.Label>
-                    <Form.Check
+                    </label>
+                    <input
                         value={hydrationFormObject.water_oz}
                         min="0"
                         max="1000"
@@ -140,22 +182,42 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
                     <br />
                     {(existingItem == true) ? (
                         <>
-                            <Button type="button" className="hydroBtn"
-                                onClick={sendUpdate}>Update</Button>
-                            <Button type="button" className="hydroBtn"
-                            onClick={sendDelete}>Delete</Button>
+                            <button type="button" className="hydroBtn"
+                                onClick={sendUpdate}>Update</button>
+                            <button type="button" className="hydroBtn"
+                            onClick={sendDelete}>Delete</button>
                         </>
                         ) : (
-                            <Button className="hydroBtn" type="button" onClick={sendCreate}>Submit</Button>
+                            <button className="hydroBtn" type="button" onClick={sendCreate}>Submit</button>
                         )}
-                </Form>
+                </form>
             <h2>This week's hydration reporting: </h2>
             <HydrationCard
                 name='hydrationCard'
                 results={thisWeek}
             />
+
+            <div className='anotherWeekSection'> 
+            <h2>View another week's hydration reporting:</h2>
+            <form className='chooseDate'>
+                <label htmlFor='anotherDate'>Date</label>
+                <input
+                    value={anotherDate}
+                    type="date"
+                    name="anotherDate"
+                    onChange={(e) => setAnotherDate(e.target.value)}
+                />
+                <button className="hydroBtn" type="button" onClick={reqAnotherWeek}>Submit</button>
+            </form>
+            { anotherWeek ? (
+            <HydrationCard
+                results={anotherWeek} />
+            ) : (
+                <></>
+                )}
+            </div>  
         </>
             )}
-    </Card>
+    </div>
     );
 }

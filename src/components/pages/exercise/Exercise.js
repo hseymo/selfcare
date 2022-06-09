@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './Exercise.css'
-import { Card, Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import API from "../../../utils/API.js"
-import ExerciseCard from "./ExerciseCard"
+import API from "../../../utils/API.js";
+import ExerciseCard from "./ExerciseCard";
+import moment from 'moment';
 
 export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
     const [thisWeek, setThisWeek] = useState([]);
@@ -16,6 +16,8 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
     })
     const [updateReq, setUpdateReq] = useState('');
     const [existingItem, setExistingItem] = useState('');
+    const [anotherDate, setAnotherDate] = useState('');
+    const [anotherWeek, setAnotherWeek] = useState('');
     
     useEffect(() => {
         API.getUserFitness(token).then((userData) => {
@@ -120,10 +122,51 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
         setUpdateReq(false)
     })
 
-    const sendNull = useCallback
+    const reqAnotherWeek = useCallback( async(e) => {
+        e.preventDefault();
+        await API.getUserFitness(token).then((userData) => {
+            console.log('changed')
+            let anotherWeek = [];
+            for (let i = 1; i < 8; i++) {
+                let thisDay = moment(anotherDate).day(i).format("YYYY-MM-DD");
+                anotherWeek.push(thisDay)
+              }
+            console.log(anotherWeek)
+
+            const anotherFitnessArray = [];
+            anotherWeek.map(entry => {
+                var response = userData.find(data => data.date === entry);
+                let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
+
+                let newObj = { date: dateFormat }
+
+                if (response === undefined) {
+                    newObj.status = 'Not Reported';
+                } else {
+                    const { id, date, activity_type, activity_duration, RPE, notes } = response;
+                    newObj.id = id
+                    newObj.activity_type = activity_type;
+                    newObj.activity_duration = activity_duration;
+                    newObj.RPE = RPE;
+                    newObj.notes = notes;
+                }
+                anotherFitnessArray.push(newObj)
+            })
+            console.log(anotherFitnessArray)
+            anotherFitnessArray[0].day = 'Monday';
+            anotherFitnessArray[1].day = 'Tuesday';
+            anotherFitnessArray[2].day = 'Wednesday';
+            anotherFitnessArray[3].day = 'Thursday';
+            anotherFitnessArray[4].day = 'Friday';
+            anotherFitnessArray[5].day = 'Saturday';
+            anotherFitnessArray[6].day = 'Sunday';
+            setAnotherWeek(anotherFitnessArray)
+        })
+    })
+
 
     return (
-        <Card className="fitness">
+        <div className="fitness">
             {!isLoggedIn ? (
                 <h2><Link class="link-light" to='/login'>Login</Link></h2>
             ) : (
@@ -137,11 +180,11 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
                 <h4 className=''>Your exercise frequency goal is {goalObj.fitness_frequency} days per week. </h4>
             )}
             <h2>Report Fitness Data</h2>
-            <Form className="fitnessForm">
-                    <Form.Label htmlFor="formDate">
+            <form className="fitnessForm">
+                    <label className='fitnessLabel' htmlFor="formDate">
                         Choose date:
-                    </Form.Label>
-                    <Form.Check 
+                    </label>
+                    <input 
                         className='fitnessInput'
                         value={exerciseFormObject.date}
                         type="date"
@@ -149,10 +192,10 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
                         name="formDate"
                         onChange={(e) => setExerciseFormObject({ ...exerciseFormObject, date: e.target.value })}
                     />
-                    <Form.Label htmlFor="formType">
+                    <label className='fitnessLabel' htmlFor="formType">
                         What type of exercise did you complete?
-                    </Form.Label>
-                    <Form.Check
+                    </label>
+                    <input
                         className='fitnessInput'
                         value={exerciseFormObject.activity_type}
                         type="text"
@@ -160,10 +203,10 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
                         name="formType"
                         onChange={(e) => setExerciseFormObject({ ...exerciseFormObject, activity_type: e.target.value })}
                     />
-                    <Form.Label htmlFor="formDuration">
+                    <label className='fitnessLabel' htmlFor="formDuration">
                         How long did you exercise for (in minutes)? Note: if you did not exercise, report '0'.
-                    </Form.Label>
-                    <Form.Check
+                    </label>
+                    <input
                         className='fitnessInput'
                         value={exerciseFormObject.activity_duration}
                         type="number"
@@ -172,10 +215,10 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
                         name="formDuration"
                         onChange={(e) => setExerciseFormObject({ ...exerciseFormObject, activity_duration: e.target.value })}
                     />
-                    <Form.Label htmlFor="formRPE">
+                    <label className='fitnessLabel' htmlFor="formRPE">
                         On an Rate of Perceived Exertion Scale (RPE) from 0 (easy) to 10 (extremely difficult), how hard did you work?
-                    </Form.Label>
-                    <Form.Check
+                    </label>
+                    <input
                         className='fitnessInput'
                         value={exerciseFormObject.RPE}
                         type="number"
@@ -184,10 +227,10 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
                         id="formRPE"
                         name="formRPE"
                         onChange={(e) => setExerciseFormObject({ ...exerciseFormObject, RPE: e.target.value })} />
-                    <Form.Label htmlFor="formNotes">
+                    <label className='fitnessLabel' htmlFor="formNotes">
                         Notes from your workout:
-                    </Form.Label>
-                    <Form.Check
+                    </label>
+                    <input
                         className='fitnessInput'
                         value={exerciseFormObject.notes}
                         type="text"
@@ -198,23 +241,44 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
                     <br />
                     {(existingItem == true) ? (
                         <>
-                            <Button type="button" className="fitnessBtn" 
-                                onClick={sendUpdate}>Update</Button>
-                            <Button type="button" className="fitnessBtn" 
-                                onClick={sendDelete}>Delete</Button>
+                            <button type="button" className="fitnessBtn" 
+                                onClick={sendUpdate}>Update</button>
+                            <button type="button" className="fitnessBtn" 
+                                onClick={sendDelete}>Delete</button>
                         </>
                     ) : (
-                        <Button className="fitnessBtn" type="button" onClick={sendCreate}>Submit</Button>
+                        <button className="fitnessBtn" type="button" onClick={sendCreate}>Submit</button>
                     )}
-            </Form>
+            </form>
 
             <br />
             <h2>This week's fitness reporting: </h2>
             <ExerciseCard
                 results={thisWeek}
             />
+
+
+        <div className='anotherWeekSection'> 
+            <h2>View another week's fitness reporting:</h2>
+            <form className='chooseDate'>
+                <label htmlFor='anotherDate'>Date</label>
+                <input
+                    value={anotherDate}
+                    type="date"
+                    name="anotherDate"
+                    onChange={(e) => setAnotherDate(e.target.value)}
+                />
+                <button className="fitnessBtn" type="button" onClick={reqAnotherWeek}>Submit</button>
+            </form>
+            { anotherWeek ? (
+            <ExerciseCard
+                results={anotherWeek} />
+            ) : (
+                <></>
+                )}
+            </div> 
             </>
             )}
-        </Card>
+        </div>
     );
 }

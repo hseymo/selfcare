@@ -1,6 +1,7 @@
 .hydration {
     background: #a39779;
     text-align: center;
+    padding: 10px;
 }
 
 .hydration h1 {
@@ -34,16 +35,6 @@
 
 .hydroBtn:hover {
     background-color: black;
-}
-
-.hydrateWeek {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.card-body {
-    background: #cfbd8f;
 }
 
 .hydration.card {
