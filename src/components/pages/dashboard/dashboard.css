@@ -91,7 +91,7 @@ th {
 }
 
 @media screen and (max-width: 700px) {
-    .fitnessdashboard, .sleepdashboard, .hydrationdashboard {
+    .fitnessdashboard, .sleepdashboard, .hydrationdashboard, .mindfulnessdashboard {
         margin: 10px 30px;
     }
 }

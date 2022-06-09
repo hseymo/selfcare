@@ -19,3 +19,7 @@
     background: #cfbd8f;
     overflow: auto;
 }
+
+.card-body::-webkit-scrollbar {
+    display: none;
+}
