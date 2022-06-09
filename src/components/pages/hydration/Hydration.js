@@ -7,7 +7,7 @@ import Progress from './Progress';
 import utilToday from '../../../utils/today.js';
 
 export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
-    const [today, setToday] = useState();
+    const [today, setToday] = useState(utilToday);
     const [thisWeek, setThisWeek] = useState([]);
     const [hydrationFormObject, setHydrationFormObject] = useState({
         date: '',
@@ -47,6 +47,7 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
             setThisWeek(hydrationArray)
             var todaysResponse = userData.find(data => data.date === utilToday)
             setToday(todaysResponse);
+            console.log(today);
             console.log('-----------------------------', todaysResponse);
         })
     }, [token, updateReq])
@@ -156,7 +157,7 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
                             <button className="hydroBtn" type="button" onClick={sendCreate}>Submit</button>
                         )}
                 </form>
-<Progress goal={goalObj.hydration_oz} amount={hydrationFormObject.water_oz} />
+<Progress goal={goalObj.hydration_oz} amount={hydrationFormObject?.water_oz} />
 
             <h2>This week's hydration reporting: </h2>
             <HydrationCard

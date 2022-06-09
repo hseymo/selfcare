@@ -206,7 +206,6 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
                         <button className="fitnessBtn" type="button" onClick={sendCreate}>Submit</button>
                     )}
             </form>
-
             <br />
             <h2>This week's fitness reporting: </h2>
             <ExerciseCard
