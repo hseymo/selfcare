@@ -16,6 +16,7 @@ export default function ExerciseCard(props) {
             <li> No activity reported </li>
         ) : (
             <>
+            {/* conditional statements = if that data was included in the entry, show here. otherwise dont display. */}
             { result.activity_type ? (
                 <li>Activity Type: {result.activity_type}</li>
             ) : (

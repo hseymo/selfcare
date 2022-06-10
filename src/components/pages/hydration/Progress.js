@@ -4,7 +4,7 @@ import useMeasure from 'react-use-measure';
 import './progress.css'
 
 export default function Progress(props) {
-
+// if goal exists, display percentage; otherwise show second block
     const doMath = (water) => {
         if (props.goal != 0) {
             let percentage = (water / props.goal) * 100;

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import './hydrationCard.css';
 
 export default function HydrationCard(props) {
-
+// if goal exists, return percentage of goal 
     const doMath =(water) =>  {
         if (props.goal != 0) {
             let percentage = (water / props.goal)*100;

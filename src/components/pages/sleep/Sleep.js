@@ -21,6 +21,7 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
     const [anotherWeek, setAnotherWeek] = useState('');
     const [error, setError] = useState('');
 
+    // same logic as exercise page. different keys in objects.
     useEffect(() => {
         API.getUserSleep(token).then((userData) => {
             setData(userData)

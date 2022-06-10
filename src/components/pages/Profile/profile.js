@@ -13,10 +13,12 @@ export default function Profile({token, isLoggedIn}) {
         mindfulness_frequency: ''
     });
 
+    // get goals for user
     useEffect(() => {
         API.getUserGoals(token)
         .then((userData)=>{
         const { fitness_time, fitness_frequency, sleep_time, hydration_oz, mindfulness_frequency, id } = userData[0];
+        // set goal object with response to show on page in form 
         setGoalObj({
             id,
             fitness_time,
@@ -29,11 +31,13 @@ export default function Profile({token, isLoggedIn}) {
         .catch((err) => console.log(err))
     }, [token])
 
+    // redirect to dashboard once goals are updated/submitted
     const handleFormSubmit = (e) => {
         e.preventDefault();
         window.location.href = "/dashboard"
     }
 
+    // when the goal object is changed, send an update request with the changes
     useEffect(() => {
         API.updateGoals(token, goalObj)
         .then((res) => {
