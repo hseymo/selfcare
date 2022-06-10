@@ -17,20 +17,9 @@
     background-position: center;
 }
 
-.homePage.card {
-    background: transparent;
-    color: white;
-    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px purple;
-    text-align: center;
-}
-
-.homePage p {
-    margin-bottom: 30px;
-}
-
 .enter {
     padding: 5px;
-    background: #416655;
+    background: #284055;
     border-radius: 5px;
     border: 3px solid rgb(26, 17, 5);
     color: rgb(255, 255, 255);
@@ -42,11 +31,11 @@
 }
 
 #root {
-    background-color: #916f3da6;
+    background-color: #535c64a6;
 }
 
 .container {
-    background-color: #916f3da6;
+    background-color: #535c64a6;
     position: absolute;
     margin-top: -350px;
     z-index: 1;

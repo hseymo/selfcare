@@ -18,6 +18,7 @@
 .card-body {
     background: #cfbd8f;
     overflow: auto;
+    padding: 10px;
 }
 
 .card-body::-webkit-scrollbar {
