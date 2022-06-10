@@ -18,7 +18,7 @@ return (
     <div className="hydrationCardHolder">
         {props.results.map((result) =>  
     <Card className="hydrationCards" key={result.id}>
-        <Card.Body>
+        <Card.Body className ='hydrationBody'>
         <h4>{result.day}</h4>
         <h4>{result.date}</h4>
         <ul>
