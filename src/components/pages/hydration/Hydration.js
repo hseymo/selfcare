@@ -21,6 +21,11 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
     const [anotherWeek, setAnotherWeek] = useState('');
     const [error, setError] = useState('');
 
+    const [todayObj, setTodayObj] = useState({
+        date: '',
+        water_oz: ''
+    })
+
     // same logic as the fitness page, with different keys in objects
     useEffect(() => {
         API.getUserHydration(token)
@@ -161,6 +166,28 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
         }
     })
 
+    // ADD WATER TO TODAY/FILL UP GLASS
+    const todayChange = (e) => {
+        e.preventDefault();
+        // add existing value for todays water with the incoming addition
+        const newAmount = parseFloat(todayOz) + parseFloat(e.target.value);
+        // create object
+        setTodayObj({
+            date: utilToday,
+            water_oz: newAmount
+        })
+    }
+    // send update request with today object to update todays value 
+    const sendToday = useCallback(async (e) => {
+        console.log(todayObj)
+        await API.updateHydrationEntry(token, todayObj)
+        .then((res) => {
+            setUpdateReq(true)
+        })
+        .catch((err) => console.log(err))
+        setUpdateReq(false)
+    });
+
     return (
         <div className="hydration">
             {!isLoggedIn ? (
@@ -212,7 +239,21 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
                     <h2>Today's progress:</h2>
 {/* fill water glass based on goal hydration oz and today's reported hydration oz */}
                     <Progress className='progressBox' goal={goalObj.hydration_oz} amount={todayOz} />
-
+                    <div className='todayFormDiv'>
+                            <form className='todayForm'>
+                                <label>Add</label>
+                                <input
+                                    min="0"
+                                    type="number"
+                                    id="waterAmount"
+                                    name="waterAmount"
+                                    placeholder="12"
+                                    onChange={todayChange}
+                                    />
+                                <label>Ounces</label>
+                                <button className="todayBtn" type="button" onClick={sendToday}>Submit</button>
+                            </form>
+                    </div>
                     <h2>This week's hydration reporting: </h2>
                     <HydrationCard
                         name='hydrationCard'
