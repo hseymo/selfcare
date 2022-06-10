@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, htmlFor } from 'react';
 import "./login.css";
 import { Link } from 'react-router-dom';
-// import { validateEmail, checkPassword } from '../../../utils/helpers';
 
 export default function Login(props) {
   const [signupData, setSignupData] = useState({
@@ -18,6 +17,7 @@ export default function Login(props) {
 
   const [error, setError] = useState('');
 
+  // on submitting the login form, send props with the data.  send error messages if left blank.
   const loginSubmit = e => {
     e.preventDefault();
     if (loginData.email == '' || loginData.password == '') {
@@ -32,6 +32,7 @@ export default function Login(props) {
     }
   }
 
+    // on submitting the signup form, send props with the data. send error messages if invalid data is entered. 
   const signupSubmit = e => {
     e.preventDefault();
     if (!signupData.email) {
@@ -60,7 +61,7 @@ export default function Login(props) {
             <h1>Sign Up</h1>
             <form className="signup" onSubmit={signupSubmit}>
               <div className='formGroup'>
-                <label forHtml="signupEmail">Email: </label>
+                <label htmlFor="signupEmail">Email: </label>
                 <input
                   value={signupData.email}
                   name="signupEmail"
@@ -70,7 +71,7 @@ export default function Login(props) {
                 />
               </div>
               <div className='formGroup'>
-                <label forHtml="signupFirstName">First Name: </label>
+                <label htmlFor="signupFirstName">First Name: </label>
                 <input
                   value={signupData.first_name}
                   name="signupFirstName"
@@ -80,7 +81,7 @@ export default function Login(props) {
                 />
               </div>
               <div className='formGroup'>
-                <label forHtml="signupLastName">Last Name: </label>
+                <label htmlFor="signupLastName">Last Name: </label>
                 <input
                   value={signupData.last_name}
                   name="signupLastName"
@@ -90,10 +91,10 @@ export default function Login(props) {
                 />
               </div>
               <div className='formGroup'>
-                <label forHtml="signppPassword">Password: </label>
+                <label htmlFor="signupPassword">Password: </label>
                 <input
                   value={signupData.password}
-                  name="signppPassword"
+                  name="signupPassword"
                   type="password"
                   placeholder="password"
                   onChange={(e) => setSignupData({ ...signupData, password: e.target.value })}
@@ -107,7 +108,7 @@ export default function Login(props) {
             <h1>Login</h1>
             <form className="login" onSubmit={loginSubmit}>
               <div className='formGroup'>
-                <label forHtml="loginEmail">Email: </label>
+                <label htmlFor="loginEmail">Email: </label>
                 <input
                   value={loginData.email}
                   name="loginEmail"
@@ -117,7 +118,7 @@ export default function Login(props) {
                 />
               </div>
               <div className='formGroup'>
-                <label forHtml="loginPassword">Password: </label>
+                <label htmlFor="loginPassword">Password: </label>
                 <input
                   value={loginData.password}
                   name="loginPassword"
@@ -143,7 +144,7 @@ export default function Login(props) {
           )}
         </>
       ) : (
-        <h2>You are already logged in! Please visit your <Link class="link-light" to='/dashboard'>Dashboard</Link>.</h2>
+        <h2>You are already logged in! Please visit your <Link className='pageLink' to='/dashboard'>Dashboard</Link>.</h2>
       )}
     </div>
   );

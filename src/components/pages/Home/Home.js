@@ -1,8 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Card, Container } from 'react-bootstrap';
-import { CardHeader } from 'react-bootstrap/esm/CardHeader';
+import React, { useState } from 'react';
 import { useTransition, animated, config } from 'react-spring';
-import { useInterval } from 'usehooks-ts'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -18,9 +15,7 @@ const slides = [
 export default function Home({isLoggedIn}) {
 
     const [index, set] = useState(0)
-    const item = slides[index]
-    // const increment = () => set(state => (state + 1) % slides.length)
-    // useInterval(increment, 2000)
+
     const transitions = useTransition(index, {
         key: index,
         from: { opacity: 0, transform: 'scale(1.02)' },
@@ -34,7 +29,7 @@ export default function Home({isLoggedIn}) {
         },
         exitBeforeEnter: true,
     })
-    // useEffect(() => void setInterval(() => set(state => (state + 1) % 4), 2000), [])
+
     return (
         <div className="animation">      
             {transitions((style, i) => (

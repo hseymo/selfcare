@@ -28,6 +28,7 @@ function App() {
 })
 const [errorMessage, setErrorMessage] = useState('');
 
+// check local storage for token on page load
   useEffect(()=>{
     const storedToken = localStorage.getItem("token")
     if (storedToken) {
@@ -35,9 +36,11 @@ const [errorMessage, setErrorMessage] = useState('');
     }
   }, [])
 
+  // if there is a token, verify it using API route. set isloggedin to true and set user id. 
   useEffect(()=> {
     if(token) {
-      API.verify(token).then(userData => {
+      API.verify(token)
+      .then(userData => {
         if (userData.userId){
           setIsLoggedIn(true);
           setUserId(userData.userId)
@@ -45,15 +48,17 @@ const [errorMessage, setErrorMessage] = useState('');
           setIsLoggedIn(false);
           setUserId(null)
         }
-      })
+      }).catch((err) => console.log(err))
     } else {
       setIsLoggedIn(false);
       setUserId(null)
     }
   }, [token])
 
+  // on log in, set token in local storage 
   const handleLoginSubmit = (loginData) => {
-    API.login(loginData).then(data => {
+    API.login(loginData)
+    .then(data => {
       console.log(data)
       if (data.token) {
         setToken(data.token);
@@ -63,10 +68,13 @@ const [errorMessage, setErrorMessage] = useState('');
         setErrorMessage('Login failed; please try again.')
       }
     })
+    .catch ((err) => console.log(err))
   }
 
+  // on sign up, set token in local storage
   const handleSignupSubmit = (signupData) => {
-    API.signup(signupData).then(data => {
+    API.signup(signupData)
+    .then(data => {
       if (data.token) {
         setToken(data.token)
         localStorage.setItem("token", data.token);
@@ -75,15 +83,19 @@ const [errorMessage, setErrorMessage] = useState('');
         setErrorMessage('Signup failed; please try again.')
       }
     })
+    .catch((err) => console.log(err))
   }
 
+  // logout by removing the token
   const logout = () => {
     setToken(null);
     localStorage.removeItem('token');
   }
   
+  // goals are used across all pages. get user goals here to hand as props to other pages. 
   useEffect(() => {
-    API.getUserGoals(token).then((userData)=>{
+    API.getUserGoals(token)
+    .then((userData)=>{
     const { fitness_time, fitness_frequency, sleep_time, hydration_oz, mindfulness_frequency, id } = userData[0];
     setGoalObj({
         id,
@@ -94,6 +106,7 @@ const [errorMessage, setErrorMessage] = useState('');
         mindfulness_frequency
     })
     })
+    .catch((err) => console.log(err))
 }, [token])
 
   return (

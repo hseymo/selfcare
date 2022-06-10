@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import "./profile.css"
 import API from "../../../utils/API.js"
+import { Link } from 'react-router-dom';
 
-export default function Profile({token}) {
+export default function Profile({token, isLoggedIn}) {
     const [goalObj, setGoalObj] = useState({
         id: '',
         fitness_time:'',
@@ -12,10 +13,12 @@ export default function Profile({token}) {
         mindfulness_frequency: ''
     });
 
+    // get goals for user
     useEffect(() => {
-        API.getUserGoals(token).then((userData)=>{
-        console.log(userData)
+        API.getUserGoals(token)
+        .then((userData)=>{
         const { fitness_time, fitness_frequency, sleep_time, hydration_oz, mindfulness_frequency, id } = userData[0];
+        // set goal object with response to show on page in form 
         setGoalObj({
             id,
             fitness_time,
@@ -25,21 +28,29 @@ export default function Profile({token}) {
             mindfulness_frequency
         })
         })
+        .catch((err) => console.log(err))
     }, [token])
 
+    // redirect to dashboard once goals are updated/submitted
     const handleFormSubmit = (e) => {
         e.preventDefault();
         window.location.href = "/dashboard"
     }
 
+    // when the goal object is changed, send an update request with the changes
     useEffect(() => {
-        API.updateGoals(token, goalObj).then((res) => {
-        console.log(res)
-    })
+        API.updateGoals(token, goalObj)
+        .then((res) => {
+        })
+        .catch((err) => console.log(err))
     }, [goalObj])
 
     return (
         <div className='profile'>
+            {!isLoggedIn ? (
+                <h2><Link className="pageLink" to='/login'>Click here to login</Link></h2>
+            ) : (
+                <>
             <h1>Tell Us About Your Goals</h1>
             <form className="profileForm" onSubmit={handleFormSubmit}>
                 <div className='formGroup'>
@@ -110,6 +121,8 @@ export default function Profile({token}) {
                 <button className='proBtn' type="submit"
                 >Submit</button>
             </form>
+            </>
+            )}
         </div>
     );
 }
