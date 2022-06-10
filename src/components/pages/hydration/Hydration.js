@@ -194,6 +194,7 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
                             type="number"
                             id="waterAmount"
                             name="waterAmount"
+                            placeholder="32"
                             onChange={(e) => setHydrationFormObject({ ...hydrationFormObject, water_oz: e.target.value })}
                         />
                         <br />

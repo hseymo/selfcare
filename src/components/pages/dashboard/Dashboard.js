@@ -203,7 +203,7 @@ export default function Dashboard({ token, weekArray, isLoggedIn }) {
       ) : (
         // LOADING??
         <>
-          <h1>{name}'s Dashboard for the Week</h1>
+          <h1>My Dashboard for the Week</h1>
           <div className='yourGoals'>
             <h2>Your Goals</h2>
             {/* if goals exist */}

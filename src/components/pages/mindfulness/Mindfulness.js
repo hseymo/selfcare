@@ -217,6 +217,7 @@ export default function Mindfulness({ token, weekArray, goalObj, isLoggedIn }) {
                             value={mindObj.activities_completed}
                             type="text"
                             name="mindfulActivities"
+                            placeholder='i.e. yoga, meditation, breathing, body scan, etc.'
                             onChange={(e) => setMindObj({ ...mindObj, activities_completed: e.target.value })}
                         />
                         <label className='mindfulLabel' htmlFor="mindfulJournal">
@@ -226,6 +227,7 @@ export default function Mindfulness({ token, weekArray, goalObj, isLoggedIn }) {
                             type='text'
                             name='mindfulJournal'
                             rows='8'
+                            placeholder='use this space as your journal to write about whatever you want!'
                             value={mindObj.journal}
                             onChange={(e) => setMindObj({ ...mindObj, journal: e.target.value })}
                         />
@@ -237,6 +239,7 @@ export default function Mindfulness({ token, weekArray, goalObj, isLoggedIn }) {
                             value={mindObj.overall_mood}
                             type="text"
                             name='mindfulMood'
+                            placeholder='anxious'
                             onChange={(e) => setMindObj({ ...mindObj, overall_mood: e.target.value })}
                         />
                         <label className='mindfulLabel' htmlFor="mindfulQuote">
@@ -247,6 +250,7 @@ export default function Mindfulness({ token, weekArray, goalObj, isLoggedIn }) {
                             value={mindObj.quote_of_the_day}
                             type="text"
                             name="mindfulQuote"
+                            placeholder='"Realize deeply that the present moment is all you ever have." -Eckhart Tolle'
                             onChange={(e) => setMindObj({ ...mindObj, quote_of_the_day: e.target.value })}
                         />
                         {incomplete && (
