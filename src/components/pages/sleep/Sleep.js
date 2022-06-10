@@ -40,18 +40,15 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
                     newObj.id = id;
                     newObj.time_asleep = time_asleep;
                     newObj.mood_upon_wake = mood_upon_wake;
-                    if (diff_falling_asleep === true) {
+                    if (diff_falling_asleep === "true") {
                         newObj.diff_falling_asleep = 'Y'
-                    } else {
+                    } else if (diff_falling_asleep === "false") {
                         newObj.diff_falling_asleep = 'N'
                     }
-                    if (diff_staying_asleep === true) {
+                    if (diff_staying_asleep === "true") {
                         newObj.diff_staying_asleep = 'Y'
-                    } else if (diff_staying_asleep === false) {
+                    } else if (diff_staying_asleep === "false") {
                         newObj.diff_staying_asleep = 'N'
-                    } else {
-                        // change sleep model to have strings here instead of booleans
-                        newObj.diff_staying_asleep = ''
                     }
                 }
                 sleepArray.push(newObj);
@@ -165,14 +162,14 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
                     newObj.id = id;
                     newObj.time_asleep = time_asleep;
                     newObj.mood_upon_wake = mood_upon_wake;
-                    if (diff_falling_asleep === true) {
+                    if (diff_falling_asleep === "true") {
                         newObj.diff_falling_asleep = 'Y'
-                    } else {
+                    } else if (diff_falling_asleep === "false") {
                         newObj.diff_falling_asleep = 'N'
                     }
-                    if (diff_staying_asleep === true) {
+                    if (diff_staying_asleep === "true") {
                         newObj.diff_staying_asleep = 'Y'
-                    } else {
+                    } else if (diff_staying_asleep === "false") {
                         newObj.diff_staying_asleep = 'N'
                     }
                 }
@@ -231,7 +228,7 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
                             name="formDiffFall"
                             onChange={(e) => setSleepFormObject({ ...sleepFormObject, diff_falling_asleep: e.target.value })}
                             placeholder="true/false"
-                            defaultValue='null'
+                            defaultValue=''
                         >
                             <option selected disabled={true} value=''>Select an option</option>
                             <option className="sleepOption" value={true}>Yes</option>
