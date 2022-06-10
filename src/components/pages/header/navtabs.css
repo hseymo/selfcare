@@ -1,3 +1,27 @@
 a {
     color: white;
 }
+
+@media screen and (max-width: 992px) {
+    .navbar-toggler {
+        align-self: auto;
+        display:grid;
+        box-sizing: border-box;
+        position: center;
+        padding: 0% 0% 0% 0%;
+    }
+  }
+  
+  @media screen and (max-width: 320px) {
+    .navbar-toggler {
+        align-self: auto;
+        display:grid;
+        box-sizing: border-box;
+        position: relative;
+        padding: 0% 0% 0% 0%;
+        margin-left: 45px;
+    }
+  }
+  
+
+
