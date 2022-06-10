@@ -162,14 +162,14 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
                     newObj.id = id;
                     newObj.time_asleep = time_asleep;
                     newObj.mood_upon_wake = mood_upon_wake;
-                    if (diff_falling_asleep === true) {
+                    if (diff_falling_asleep === "true") {
                         newObj.diff_falling_asleep = 'Y'
-                    } else {
+                    } else if (diff_falling_asleep === "false") {
                         newObj.diff_falling_asleep = 'N'
                     }
-                    if (diff_staying_asleep === true) {
+                    if (diff_staying_asleep === "true") {
                         newObj.diff_staying_asleep = 'Y'
-                    } else {
+                    } else if (diff_staying_asleep === "false") {
                         newObj.diff_staying_asleep = 'N'
                     }
                 }
