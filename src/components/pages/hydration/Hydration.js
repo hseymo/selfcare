@@ -21,6 +21,7 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
     const [anotherWeek, setAnotherWeek] = useState('');
     const [error, setError] = useState('');
 
+    // same logic as the fitness page, with different keys in objects
     useEffect(() => {
         API.getUserHydration(token)
         .then((userData) => {
@@ -58,8 +59,6 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
         })
         .catch((err) => console.log(err))
     }, [token, updateReq])
-
-
 
     useEffect(() => {
         API.getOneUserHydration(token, hydrationFormObject.date)
@@ -210,7 +209,7 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
                         )}
                     </form>
                     <h2>Today's progress:</h2>
-
+{/* fill water glass based on goal hydration oz and today's reported hydration oz */}
                     <Progress className='progressBox' goal={goalObj.hydration_oz} amount={todayOz} />
 
                     <h2>This week's hydration reporting: </h2>

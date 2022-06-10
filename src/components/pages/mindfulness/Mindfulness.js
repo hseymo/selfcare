@@ -21,7 +21,7 @@ export default function Mindfulness({ token, weekArray, goalObj, isLoggedIn }) {
     const [anotherWeek, setAnotherWeek] = useState('');
     const [error, setError] = useState('');
     const [incomplete, setIncomplete] = useState('')
-
+// same logic as exercise page. different keys in objects.
     useEffect(() => {
         API.getUserMindfulness(token)
             .then((userData) => {

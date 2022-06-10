@@ -17,6 +17,7 @@ export default function Login(props) {
 
   const [error, setError] = useState('');
 
+  // on submitting the login form, send props with the data.  send error messages if left blank.
   const loginSubmit = e => {
     e.preventDefault();
     if (loginData.email == '' || loginData.password == '') {
@@ -31,6 +32,7 @@ export default function Login(props) {
     }
   }
 
+    // on submitting the signup form, send props with the data. send error messages if invalid data is entered. 
   const signupSubmit = e => {
     e.preventDefault();
     if (!signupData.email) {

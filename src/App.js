@@ -28,6 +28,7 @@ function App() {
 })
 const [errorMessage, setErrorMessage] = useState('');
 
+// check local storage for token on page load
   useEffect(()=>{
     const storedToken = localStorage.getItem("token")
     if (storedToken) {
@@ -35,6 +36,7 @@ const [errorMessage, setErrorMessage] = useState('');
     }
   }, [])
 
+  // if there is a token, verify it using API route. set isloggedin to true and set user id. 
   useEffect(()=> {
     if(token) {
       API.verify(token)
@@ -53,6 +55,7 @@ const [errorMessage, setErrorMessage] = useState('');
     }
   }, [token])
 
+  // on log in, set token in local storage 
   const handleLoginSubmit = (loginData) => {
     API.login(loginData)
     .then(data => {
@@ -68,6 +71,7 @@ const [errorMessage, setErrorMessage] = useState('');
     .catch ((err) => console.log(err))
   }
 
+  // on sign up, set token in local storage
   const handleSignupSubmit = (signupData) => {
     API.signup(signupData)
     .then(data => {
@@ -82,11 +86,13 @@ const [errorMessage, setErrorMessage] = useState('');
     .catch((err) => console.log(err))
   }
 
+  // logout by removing the token
   const logout = () => {
     setToken(null);
     localStorage.removeItem('token');
   }
   
+  // goals are used across all pages. get user goals here to hand as props to other pages. 
   useEffect(() => {
     API.getUserGoals(token)
     .then((userData)=>{
