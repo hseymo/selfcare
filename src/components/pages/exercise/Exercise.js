@@ -22,7 +22,8 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
     const [error, setError] = useState('');
 
     useEffect(() => {
-        API.getUserFitness(token).then((userData) => {
+        API.getUserFitness(token)
+        .then((userData) => {
             setData(userData)
             const fitnessArray = [];
             weekArray.map(entry => {
@@ -51,13 +52,13 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
             fitnessArray[6].day = 'Sunday';
             setThisWeek(fitnessArray)
         })
+        .catch((err) => console.log(err))
     }, [token, updateReq])
 
     useEffect(() => {
-        API.getOneUserFitness(token, exerciseFormObject.date).then((res) => {
-            console.log(res)
+        API.getOneUserFitness(token, exerciseFormObject.date)
+        .then((res) => {
             if (res.id) {
-                console.log('1')
                 setExerciseFormObject({
                     date: res.date,
                     activity_type: res.activity_type,
@@ -67,7 +68,6 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
                 })
                 setExistingItem(true);
             } else {
-                console.log('2')
                 setExerciseFormObject({
                     date: exerciseFormObject.date,
                     activity_type: '',
@@ -78,13 +78,16 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
                 setExistingItem(false);
             }
         })
+        .catch((err) => console.log(err))
     }, [exerciseFormObject.date])
 
     const sendUpdate = useCallback(async (e) => {
         e.preventDefault();
-        await API.updateFitnessEntry(token, exerciseFormObject).then((res) => {
+        await API.updateFitnessEntry(token, exerciseFormObject)
+        .then((res) => {
             setUpdateReq(true)
         })
+        .catch((err) => console.log(err))
         setExerciseFormObject({
             date: '',
             activity_type: '',
@@ -97,9 +100,11 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
 
     const sendCreate = useCallback(async (e) => {
         e.preventDefault();
-        await API.postFitnessEntry(token, exerciseFormObject).then((res) => {
+        await API.postFitnessEntry(token, exerciseFormObject)
+        .then((res) => {
             setUpdateReq(true)
         })
+        .catch((err) => console.log(err))
         setExerciseFormObject({
             date: '',
             activity_type: '',
@@ -112,9 +117,11 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
 
     const sendDelete = useCallback(async (e) => {
         e.preventDefault();
-        API.deleteFitnessEntry(token, exerciseFormObject.date).then((response) => {
+        API.deleteFitnessEntry(token, exerciseFormObject.date)
+        .then((response) => {
             setUpdateReq(true)
         })
+        .catch((err) => console.log(err))
         setExerciseFormObject({
             date: '',
             activity_type: '',
@@ -171,7 +178,7 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
     return (
         <div className="fitness">
             {!isLoggedIn ? (
-                <h2><Link class="link-light" to='/login'>Login</Link></h2>
+                <h2><Link className="pageLink" to='/login'>Click here to login</Link></h2>
             ) : (
             <>
             <h1>Fitness</h1>

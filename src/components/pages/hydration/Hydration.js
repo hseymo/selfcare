@@ -22,16 +22,14 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
     const [error, setError] = useState('');
 
     useEffect(() => {
-        API.getUserHydration(token).then((userData) => {
+        API.getUserHydration(token)
+        .then((userData) => {
             setData(userData)
-            console.log(userData)
             const hydrationArray = [];
             weekArray.map(entry => {
                 var response = userData.find(data => data.date === entry);
                 let dateFormat = entry.slice(5) + "-" + entry.slice(0, 4);
-
                 let newObj = { date: dateFormat }
-                console.log(response)
 
                 if (response === undefined) {
                     newObj.status = 'Not Reported';
@@ -57,16 +55,15 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
             } else {
                 setTodayOz(0)
             }
-            console.log('-----------------------------', todaysResponse);
-
         })
+        .catch((err) => console.log(err))
     }, [token, updateReq])
 
 
 
     useEffect(() => {
-        API.getOneUserHydration(token, hydrationFormObject.date).then((response) => {
-            console.log(response)
+        API.getOneUserHydration(token, hydrationFormObject.date)
+        .then((response) => {
             if (response.id) {
                 setHydrationFormObject({
                     date: response.date,
@@ -81,13 +78,16 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
                 setExistingItem(false);
             }
         })
+        .catch((err) => console.log(err))
     }, [hydrationFormObject.date])
 
     const sendUpdate = useCallback(async (e) => {
         e.preventDefault();
-        await API.updateHydrationEntry(token, hydrationFormObject).then((res) => {
+        await API.updateHydrationEntry(token, hydrationFormObject)
+        .then((res) => {
             setUpdateReq(true)
         })
+        .catch((err) => console.log(err))
         setHydrationFormObject({
             date: '',
             water_oz: ''
@@ -97,9 +97,11 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
 
     const sendCreate = useCallback(async (e) => {
         e.preventDefault();
-        API.postHydrationEntry(token, hydrationFormObject).then((res) => {
+        API.postHydrationEntry(token, hydrationFormObject)
+        .then((res) => {
             setUpdateReq(true)
         })
+        .catch((err) => console.log(err))
         setHydrationFormObject({
             date: '',
             water_oz: ''
@@ -109,9 +111,11 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
 
     const sendDelete = useCallback(async (e) => {
         e.preventDefault();
-        API.deleteHydrationEntry(token, hydrationFormObject.date).then((response) => {
+        API.deleteHydrationEntry(token, hydrationFormObject.date)
+        .then((response) => {
             setUpdateReq(true)
         })
+        .catch((err) => console.log(err))
         setHydrationFormObject({
             date: '',
             water_oz: ''
@@ -161,7 +165,7 @@ export default function Hydration({ token, weekArray, goalObj, isLoggedIn }) {
     return (
         <div className="hydration">
             {!isLoggedIn ? (
-                <h2><Link class="link-light" to='/login'>Login</Link></h2>
+                <h2><Link className="pageLink" to='/login'>Click here to login</Link></h2>
             ) : (
                 <>
                     <h1>Hydration</h1>

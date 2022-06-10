@@ -37,7 +37,8 @@ const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(()=> {
     if(token) {
-      API.verify(token).then(userData => {
+      API.verify(token)
+      .then(userData => {
         if (userData.userId){
           setIsLoggedIn(true);
           setUserId(userData.userId)
@@ -45,7 +46,7 @@ const [errorMessage, setErrorMessage] = useState('');
           setIsLoggedIn(false);
           setUserId(null)
         }
-      })
+      }).catch((err) => console.log(err))
     } else {
       setIsLoggedIn(false);
       setUserId(null)
@@ -53,7 +54,8 @@ const [errorMessage, setErrorMessage] = useState('');
   }, [token])
 
   const handleLoginSubmit = (loginData) => {
-    API.login(loginData).then(data => {
+    API.login(loginData)
+    .then(data => {
       console.log(data)
       if (data.token) {
         setToken(data.token);
@@ -63,10 +65,12 @@ const [errorMessage, setErrorMessage] = useState('');
         setErrorMessage('Login failed; please try again.')
       }
     })
+    .catch ((err) => console.log(err))
   }
 
   const handleSignupSubmit = (signupData) => {
-    API.signup(signupData).then(data => {
+    API.signup(signupData)
+    .then(data => {
       if (data.token) {
         setToken(data.token)
         localStorage.setItem("token", data.token);
@@ -75,6 +79,7 @@ const [errorMessage, setErrorMessage] = useState('');
         setErrorMessage('Signup failed; please try again.')
       }
     })
+    .catch((err) => console.log(err))
   }
 
   const logout = () => {
@@ -83,7 +88,8 @@ const [errorMessage, setErrorMessage] = useState('');
   }
   
   useEffect(() => {
-    API.getUserGoals(token).then((userData)=>{
+    API.getUserGoals(token)
+    .then((userData)=>{
     const { fitness_time, fitness_frequency, sleep_time, hydration_oz, mindfulness_frequency, id } = userData[0];
     setGoalObj({
         id,
@@ -94,6 +100,7 @@ const [errorMessage, setErrorMessage] = useState('');
         mindfulness_frequency
     })
     })
+    .catch((err) => console.log(err))
 }, [token])
 
   return (
