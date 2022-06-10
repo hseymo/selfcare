@@ -1,25 +1,30 @@
 .Header {
-    padding: 50px 0px 30px 0px;
-    background-color: #535c64;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
+  padding: 50px 0px 30px 0px;
+  background-color: #535c64;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .Header h1 {
-    padding-left: 30px;
-    color: lightgray;
+  padding-left: 30px;
+  color: lightgray;
 }
 
 nav {
-    margin-right: 30px;
-  }
-  
+  margin-right: 30px;
+}
+
 nav li {
-    display: inline-block;
-    padding: 5px;
-    margin: 10px;
-    text-align: center;
+  display: inline-block;
+  padding: 5px;
+  margin: 10px;
+  text-align: center;
+}
+
+@media screen and (max-width: 280px) {
+  .navBar button {
+    padding-left: 120px;
   }
-  
+}
