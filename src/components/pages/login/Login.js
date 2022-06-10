@@ -1,7 +1,6 @@
 import React, { useState, htmlFor } from 'react';
 import "./login.css";
 import { Link } from 'react-router-dom';
-// import { validateEmail, checkPassword } from '../../../utils/helpers';
 
 export default function Login(props) {
   const [signupData, setSignupData] = useState({

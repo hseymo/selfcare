@@ -13,6 +13,7 @@
     height: 18rem;
 }
 
+/* using this css for these tags for every js that has them for uniformity */
 h4 {
     font-size: large;
     font-weight: bolder;
