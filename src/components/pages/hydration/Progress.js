@@ -1,19 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Spring, useSpring, animated, config } from 'react-spring'
 import useMeasure from 'react-use-measure';
 import './progress.css'
 
 export default function Progress(props) {
-    // const [progress, setProgress] = useState({});
-    // setProgress({
-    //     goal: props.goal,
-    //     amount: props.amount,
-    // });
-
-    // const anim = useSpring({ height: progress, config: config.slow });
-    // const [open, toggle] = useState(false);
-    console.log(props.goal)
-    console.log(props.amount)
 
     const doMath = (water) => {
         if (props.goal != 0) {

@@ -28,10 +28,11 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
   const [mindfulWins, setMindfulWins] = useState(0)
 
   useEffect(() => {
-    API.getOneUser(token).then((userData)=>{
+    API.getOneUser(token)
+    .then((userData)=>{
       setName(userData.first_name);
       setUser(userData)
-// USERS GOALS_______________________________________________
+      // USERS GOALS_______________________________________________
       
       const { fitness_time, fitness_frequency, sleep_time, hydration_oz, mindfulness_frequency } = userData.goal;
       setGoalsData({
@@ -146,41 +147,41 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
       setHydrationWins(hydrationCount);
 
 
-  // MINDFULNESS LOGIC
-  const mindfulArray = [];
-  let mindfulCount = 0;
-  weekArray.map(entry => {
-    var response = userData.mindfulnesses.find(data => data.date === entry);
-    let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
-    let newObj = { date: dateFormat }
-    if (response === undefined) {
-      newObj.status = 'Not reported'
-      newObj.emoji = '😐'
-    } else {
-      newObj.status= 'Reported';
-      newObj.emoji = '🧘'
-      mindfulCount++;
-    }
-    mindfulArray.push(newObj)
-  })
-  console.log(mindfulArray)
-  mindfulArray[0].day = 'Monday';
-  mindfulArray[1].day = 'Tuesday';
-  mindfulArray[2].day = 'Wednesday';
-  mindfulArray[3].day = 'Thursday';
-  mindfulArray[4].day = 'Friday';
-  mindfulArray[5].day = 'Saturday';
-  mindfulArray[6].day = 'Sunday';
-  setMindfulEmoji(mindfulArray)
-  setMindfulWins(mindfulCount);
+      // MINDFULNESS LOGIC
+      const mindfulArray = [];
+      let mindfulCount = 0;
+      weekArray.map(entry => {
+        var response = userData.mindfulnesses.find(data => data.date === entry);
+        let dateFormat = entry.slice(5) + "-" + entry.slice(0,4);
+        let newObj = { date: dateFormat }
+        if (response === undefined) {
+          newObj.status = 'Not reported'
+          newObj.emoji = '😐'
+        } else {
+          newObj.status= 'Reported';
+          newObj.emoji = '🧘'
+          mindfulCount++;
+        }
+        mindfulArray.push(newObj)
+      })
+      mindfulArray[0].day = 'Monday';
+      mindfulArray[1].day = 'Tuesday';
+      mindfulArray[2].day = 'Wednesday';
+      mindfulArray[3].day = 'Thursday';
+      mindfulArray[4].day = 'Friday';
+      mindfulArray[5].day = 'Saturday';
+      mindfulArray[6].day = 'Sunday';
+      setMindfulEmoji(mindfulArray)
+      setMindfulWins(mindfulCount);
 })
+.catch((err) => console.log(err))
     
   }, [token])
 
     return (
         <div className="Dashboard">
             {!isLoggedIn ? (
-                <h2><Link class="link-light" to='/login'>Login</Link></h2>
+                <h2><Link className="pageLink" to='/login'>Click here to login</Link></h2>
             ) : (
               // LOADING
                 <>
@@ -247,14 +248,18 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
         <div className='sleepdashboard'>
       <h2>Sleep</h2>
       <table className='dayTable'>
+        <thead>
         <tr className="dayHeaders">
           <th></th>
           {sleepEmoji.map((result) => 
           <th>{result.day} <br/> {result.date}</th>)}
         </tr>
+        </thead>
+        <tbody>
           <DashboardRow 
             name='sleep' 
             results={sleepEmoji}/>
+        </tbody>
         </table>
 
         <ul>
@@ -274,14 +279,18 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
         <div className='hydrationdashboard'>
       <h2>Hydration</h2>
         <table className="dayTable">
+          <thead>
         <tr className="dayHeaders">
           <th></th>
           {hydrationEmoji.map((result) => 
           <th>{result.day} <br/> {result.date}</th>)}
         </tr>
+        </thead>
+        <tbody>
           <DashboardRow 
             name='hydration'  
             results={hydrationEmoji}/>
+        </tbody>
         </table>
       <ul>
       { goalsData.hydration_oz != 0 ? (
@@ -301,14 +310,18 @@ export default function Dashboard({token, weekArray, isLoggedIn}) {
       <h2>Mindfulness</h2>
       <p>Key: 🧘 indicates you have a mindfulness entry for this day while 😐 indicates you do not have a mindfulness entry this day! </p>
         <table className="dayTable">
+          <thead>
         <tr className="dayHeaders">
           <th></th>
           {mindfulEmoji.map((result) => 
           <th>{result.day} <br/> {result.date}</th>)}
         </tr>
+        </thead>
+        <tbody>
           <DashboardRow 
             name='mindful'  
             results={mindfulEmoji}/>
+        </tbody>
         </table>
       <ul>
       { goalsData.mindfulness_frequency != 0 ? (

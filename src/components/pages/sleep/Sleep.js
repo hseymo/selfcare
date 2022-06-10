@@ -36,7 +36,6 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
                 } else {
                     const { id, date, time_asleep, diff_falling_asleep, diff_staying_asleep, mood_upon_wake } = response;
                     // falsey values will always default to false
-                    console.log('--------------------------', diff_staying_asleep)
                     newObj.id = id;
                     newObj.time_asleep = time_asleep;
                     newObj.mood_upon_wake = mood_upon_wake;
@@ -65,6 +64,7 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
             sleepArray[6].day = 'Sunday';
             setThisWeek(sleepArray)
         })
+        .catch((err) => console.log(err))
     }, [token, updateReq])
 
     useEffect(() => {
@@ -89,6 +89,7 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
                 setExistingItem(false);
             }
         })
+        .catch((err) => console.log(err))
     }, [sleepFormObject.date])
 
     const sendUpdate = useCallback(async (e) => {
@@ -96,6 +97,7 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
         await API.updateSleepEntry(token, sleepFormObject).then((res) => {
             setUpdateReq(true)
         })
+        .catch((err) => console.log(err))
         setSleepFormObject({
             date: '',
             time_asleep: '',
@@ -111,6 +113,7 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
         await API.postSleepEntry(token, sleepFormObject).then((res) => {
             setUpdateReq(true)
         })
+        .catch((err) => console.log(err))
         setSleepFormObject({
             date: '',
             time_asleep: '',
@@ -126,6 +129,7 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
         await API.deleteSleepEntry(token, sleepFormObject.date).then((response) => {
             setUpdateReq(true)
         })
+        .catch((err) => console.log(err))
         setSleepFormObject({
             date: '',
             time_asleep: '',
@@ -190,7 +194,7 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
     return (
         <div className="sleep">
             {!isLoggedIn ? (
-                <h2><Link class="link-light" to='/login'>Login</Link></h2>
+                <h2><Link className="pageLink" to='/login'>Click here to login</Link></h2>
             ) : (
                 <>
             <h1>Sleep</h1>
@@ -226,6 +230,7 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
                     name="formDiffFall"
                     onChange={(e) => setSleepFormObject({ ...sleepFormObject, diff_falling_asleep: e.target.value })}
                     placeholder="true/false"
+                    defaultValue='null'
                 >
                     <option selected disabled={true} value=''>Select an option</option>
                     <option className="sleepOption" value={true}>Yes</option>
@@ -239,6 +244,7 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
                     name="formDiffStay"
                     onChange={(e) => setSleepFormObject({ ...sleepFormObject, diff_staying_asleep: e.target.value })}
                     placeholder="true/false"
+                    defaultValue=''
                 >
                     <option selected disabled={true} value=''>Select an option</option>
                     <option className="sleepOption" value={true}>Yes</option>

@@ -23,7 +23,8 @@ export default function Mindfulness({ token, weekArray, goalObj, isLoggedIn }) {
     const [incomplete, setIncomplete] = useState('')
 
     useEffect(() => {
-        API.getUserMindfulness(token).then((userData) => {
+        API.getUserMindfulness(token)
+        .then((userData) => {
             setData(userData)
             const mindfulnessArray = [];
             weekArray.map(entry => {
@@ -53,10 +54,12 @@ export default function Mindfulness({ token, weekArray, goalObj, isLoggedIn }) {
             mindfulnessArray[6].day = 'Sunday';
             setThisWeek(mindfulnessArray)
         })
+        .catch((err) => console.log(err))
     }, [token, updateReq])
 
     useEffect(() => {
-        API.getOneUserMindfulness(token, mindObj.date).then((res) => {
+        API.getOneUserMindfulness(token, mindObj.date)
+        .then((res) => {
             if (res.id) {
                 setMindObj({
                     date: res.date,
@@ -77,6 +80,7 @@ export default function Mindfulness({ token, weekArray, goalObj, isLoggedIn }) {
                 setExistingItem(false);
             }
         })
+        .catch((err) => console.log(err))
     }, [mindObj.date])
 
     const sendUpdate = useCallback(async (e) => {
@@ -84,9 +88,12 @@ export default function Mindfulness({ token, weekArray, goalObj, isLoggedIn }) {
         if (mindObj.activities_completed == '') {
             setIncomplete('Please enter data');
         } else {
-        await API.updateMindfulnessEntry(token, mindObj).then((res) => {
+        await API.updateMindfulnessEntry(token, mindObj)
+        .then((res) => {
             setUpdateReq(true)
         })
+        .catch((err) => console.log(err))
+
         setMindObj({
             date: '',
             activities_completed: '',
@@ -104,10 +111,11 @@ export default function Mindfulness({ token, weekArray, goalObj, isLoggedIn }) {
         if (mindObj.activities_completed == '' && mindObj.journal == '' && mindObj.overall_mood == '' && mindObj.quote_of_the_day == '') {
             setIncomplete('Please enter data');
         } else {
-        await API.postMindfulnessEntry(token, mindObj).then((res) => {
-            console.log(mindObj)
+        await API.postMindfulnessEntry(token, mindObj)
+        .then((res) => {
             setUpdateReq(true)
         })
+        .catch((err) => console.log(err))
         setMindObj({
             date: '',
             activities_completed: '',
@@ -122,9 +130,11 @@ export default function Mindfulness({ token, weekArray, goalObj, isLoggedIn }) {
 
     const sendDelete = useCallback(async (e) => {
         e.preventDefault();
-        API.deleteMindfulnessEntry(token, mindObj.date).then((response) => {
+        API.deleteMindfulnessEntry(token, mindObj.date)
+        .then((response) => {
             setUpdateReq(true)
         })
+        .catch((err) => console.log(err))
         setMindObj({
             date: '',
             activities_completed: '',
@@ -180,7 +190,7 @@ export default function Mindfulness({ token, weekArray, goalObj, isLoggedIn }) {
     return (
         <div className="mindful">
             {!isLoggedIn ? (
-                <h2><Link class="link-light" to='/login'>Login</Link></h2>
+                <h2><Link className="pageLink" to='/login'>Click here to login</Link></h2>
             ) : (
                 <>
                     <h1>Mindfulness</h1>
