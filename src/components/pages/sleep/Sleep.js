@@ -218,7 +218,7 @@ export default function Sleep({ token, weekArray, goalObj, isLoggedIn }) {
                             min='0'
                             max='24'
                             onChange={(e) => setSleepFormObject({ ...sleepFormObject, time_asleep: e.target.value })}
-                            placeholder="8 hours"
+                            placeholder="8"
                         />
                         <label htmlFor='formDiffFall'>Did you have difficulty falling asleep?</label>
                         <select

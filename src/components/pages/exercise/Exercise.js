@@ -247,6 +247,7 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
                         type="text"
                         id="formType"
                         name="formType"
+                        placeholder="i.e. running, lifting, HIIT, tai chi, pilates, etc."
                         onChange={(e) => setExerciseFormObject({ ...exerciseFormObject, activity_type: e.target.value })}
                     />
                     <label className='fitnessLabel' htmlFor="formDuration">
@@ -259,10 +260,11 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
                         id="formDuration"
                         min='0'
                         name="formDuration"
+                        placeholder="45"
                         onChange={(e) => setExerciseFormObject({ ...exerciseFormObject, activity_duration: e.target.value })}
                     />
                     <label className='fitnessLabel' htmlFor="formRPE">
-                        On an Rate of Perceived Exertion Scale (RPE) from 0 (easy) to 10 (extremely difficult), how hard did you work?
+                        On the scale of Rate of Perceived Exertion (RPE), from 0 (easy) to 10 (extremely difficult), how hard did you work?
                     </label>
                     <input
                         className='fitnessInput'
@@ -272,6 +274,7 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
                         max='10'
                         id="formRPE"
                         name="formRPE"
+                        placeholder='7'
                         onChange={(e) => setExerciseFormObject({ ...exerciseFormObject, RPE: e.target.value })} />
                     <label className='fitnessLabel' htmlFor="formNotes">
                         Notes from your workout:
@@ -282,6 +285,7 @@ export default function Fitness({ token, weekArray, goalObj, isLoggedIn }) {
                         type="text"
                         id="formNotes"
                         name="formNotes"
+                        placeholder='pyramid HIIT workout for total of 800 bodyweight reps'
                         onChange={(e) => setExerciseFormObject({ ...exerciseFormObject, notes: e.target.value })}
                     />
                     <br />
