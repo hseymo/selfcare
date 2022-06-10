@@ -18,7 +18,6 @@
     margin-right: auto;
     padding: 10px;
     text-align: center;
-    /* border: 5px solid black; */
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -62,16 +61,4 @@ textarea {
 
 .form-check-input {
     height: 30px;
-}
-
-.chooseDate {
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 10px;
-    text-align: center;
-    /* border: 5px solid black; */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
 }

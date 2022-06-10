@@ -24,63 +24,63 @@ export default function Mindfulness({ token, weekArray, goalObj, isLoggedIn }) {
 
     useEffect(() => {
         API.getUserMindfulness(token)
-        .then((userData) => {
-            setData(userData)
-            const mindfulnessArray = [];
-            weekArray.map(entry => {
-                var response = userData.find(data => data.date === entry);
-                let dateFormat = entry.slice(5) + "-" + entry.slice(0, 4);
-                let newObj = { date: dateFormat };
-                newObj.rawDate = entry;
+            .then((userData) => {
+                setData(userData)
+                const mindfulnessArray = [];
+                weekArray.map(entry => {
+                    var response = userData.find(data => data.date === entry);
+                    let dateFormat = entry.slice(5) + "-" + entry.slice(0, 4);
+                    let newObj = { date: dateFormat };
+                    newObj.rawDate = entry;
 
-                if (response === undefined) {
-                    newObj.status = 'Not Reported';
-                } else {
-                    const { id, date, activities_completed, journal, overall_mood, quote_of_the_day } = response;
-                    newObj.id = id;
-                    newObj.activities_completed = activities_completed;
-                    newObj.journal = journal;
-                    newObj.overall_mood = overall_mood;
-                    newObj.quote_of_the_day = quote_of_the_day;
-                }
-                mindfulnessArray.push(newObj)
+                    if (response === undefined) {
+                        newObj.status = 'Not Reported';
+                    } else {
+                        const { id, date, activities_completed, journal, overall_mood, quote_of_the_day } = response;
+                        newObj.id = id;
+                        newObj.activities_completed = activities_completed;
+                        newObj.journal = journal;
+                        newObj.overall_mood = overall_mood;
+                        newObj.quote_of_the_day = quote_of_the_day;
+                    }
+                    mindfulnessArray.push(newObj)
+                })
+                mindfulnessArray[0].day = 'Monday';
+                mindfulnessArray[1].day = 'Tuesday';
+                mindfulnessArray[2].day = 'Wednesday';
+                mindfulnessArray[3].day = 'Thursday';
+                mindfulnessArray[4].day = 'Friday';
+                mindfulnessArray[5].day = 'Saturday';
+                mindfulnessArray[6].day = 'Sunday';
+                setThisWeek(mindfulnessArray)
             })
-            mindfulnessArray[0].day = 'Monday';
-            mindfulnessArray[1].day = 'Tuesday';
-            mindfulnessArray[2].day = 'Wednesday';
-            mindfulnessArray[3].day = 'Thursday';
-            mindfulnessArray[4].day = 'Friday';
-            mindfulnessArray[5].day = 'Saturday';
-            mindfulnessArray[6].day = 'Sunday';
-            setThisWeek(mindfulnessArray)
-        })
-        .catch((err) => console.log(err))
+            .catch((err) => console.log(err))
     }, [token, updateReq])
 
     useEffect(() => {
         API.getOneUserMindfulness(token, mindObj.date)
-        .then((res) => {
-            if (res.id) {
-                setMindObj({
-                    date: res.date,
-                    activities_completed: res.activities_completed,
-                    journal: res.journal,
-                    overall_mood: res.overall_mood,
-                    quote_of_the_day: res.quote_of_the_day,
-                })
-                setExistingItem(true);
-            } else {
-                setMindObj({
-                    date: mindObj.date,
-                    activities_completed: '',
-                    journal: '',
-                    overall_mood: '',
-                    quote_of_the_day: '',
-                })
-                setExistingItem(false);
-            }
-        })
-        .catch((err) => console.log(err))
+            .then((res) => {
+                if (res.id) {
+                    setMindObj({
+                        date: res.date,
+                        activities_completed: res.activities_completed,
+                        journal: res.journal,
+                        overall_mood: res.overall_mood,
+                        quote_of_the_day: res.quote_of_the_day,
+                    })
+                    setExistingItem(true);
+                } else {
+                    setMindObj({
+                        date: mindObj.date,
+                        activities_completed: '',
+                        journal: '',
+                        overall_mood: '',
+                        quote_of_the_day: '',
+                    })
+                    setExistingItem(false);
+                }
+            })
+            .catch((err) => console.log(err))
     }, [mindObj.date])
 
     const sendUpdate = useCallback(async (e) => {
@@ -88,22 +88,22 @@ export default function Mindfulness({ token, weekArray, goalObj, isLoggedIn }) {
         if (mindObj.activities_completed == '') {
             setIncomplete('Please enter data');
         } else {
-        await API.updateMindfulnessEntry(token, mindObj)
-        .then((res) => {
-            setUpdateReq(true)
-        })
-        .catch((err) => console.log(err))
+            await API.updateMindfulnessEntry(token, mindObj)
+                .then((res) => {
+                    setUpdateReq(true)
+                })
+                .catch((err) => console.log(err))
 
-        setMindObj({
-            date: '',
-            activities_completed: '',
-            journal: '',
-            overall_mood: '',
-            quote_of_the_day: '',
-        })
-        setUpdateReq(false)
-        setIncomplete('')
-    }
+            setMindObj({
+                date: '',
+                activities_completed: '',
+                journal: '',
+                overall_mood: '',
+                quote_of_the_day: '',
+            })
+            setUpdateReq(false)
+            setIncomplete('')
+        }
     })
 
     const sendCreate = useCallback(async (e) => {
@@ -111,30 +111,30 @@ export default function Mindfulness({ token, weekArray, goalObj, isLoggedIn }) {
         if (mindObj.activities_completed == '' && mindObj.journal == '' && mindObj.overall_mood == '' && mindObj.quote_of_the_day == '') {
             setIncomplete('Please enter data');
         } else {
-        await API.postMindfulnessEntry(token, mindObj)
-        .then((res) => {
-            setUpdateReq(true)
-        })
-        .catch((err) => console.log(err))
-        setMindObj({
-            date: '',
-            activities_completed: '',
-            journal: '',
-            overall_mood: '',
-            quote_of_the_day: '',
-        })
-        setUpdateReq(false)
-        setIncomplete('')
-    }
+            await API.postMindfulnessEntry(token, mindObj)
+                .then((res) => {
+                    setUpdateReq(true)
+                })
+                .catch((err) => console.log(err))
+            setMindObj({
+                date: '',
+                activities_completed: '',
+                journal: '',
+                overall_mood: '',
+                quote_of_the_day: '',
+            })
+            setUpdateReq(false)
+            setIncomplete('')
+        }
     })
 
     const sendDelete = useCallback(async (e) => {
         e.preventDefault();
         API.deleteMindfulnessEntry(token, mindObj.date)
-        .then((response) => {
-            setUpdateReq(true)
-        })
-        .catch((err) => console.log(err))
+            .then((response) => {
+                setUpdateReq(true)
+            })
+            .catch((err) => console.log(err))
         setMindObj({
             date: '',
             activities_completed: '',
@@ -249,12 +249,12 @@ export default function Mindfulness({ token, weekArray, goalObj, isLoggedIn }) {
                             name="mindfulQuote"
                             onChange={(e) => setMindObj({ ...mindObj, quote_of_the_day: e.target.value })}
                         />
-                                                          {incomplete && (
-            <div>
-              <p className="error">{incomplete}
-              </p>
-            </div>
-          )}
+                        {incomplete && (
+                            <div>
+                                <p className="error">{incomplete}
+                                </p>
+                            </div>
+                        )}
                         {(existingItem == true) ? (
                             <>
                                 <button type="button" className="mindfulBtn"
